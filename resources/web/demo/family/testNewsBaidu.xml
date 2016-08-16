@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<?xml-stylesheet type="text/xsl" href="newsBaidu.xsl"?>
+<person name="万咸丰" sex="male" age="60">
+	<person name="万雨清" sex="male" age="35">
+		<person name="万秀丽" sex="female" age="12" />
+		<person name="万正刚" sex="male" age="12" />
+	</person>
+	<person name="万玉林" sex="male" age="34">
+		<person name="万正东" sex="male" birthday="1985/06/13" />
+		<person name="万正阳" sex="male" age="12" />
+	</person>
+	<person name="万冬清" sex="male" age="36">
+		<person name="万正鑫" sex="male" age="18" />
+		<person name="万翠" sex="male" age="18" />
+	</person>
+	<person name="万金泉" sex="male" age="36">
+		<person name="万正豪" sex="male" age="18" />
+	</person>
+	<person name="万腊英" sex="female" age="30">
+		<person name="张文艳" sex="male" age="6" />
+		<person name="张文奇" sex="female" age="13" />
+	</person>
+</person> 

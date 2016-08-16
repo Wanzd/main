@@ -1,58 +1,35 @@
 package com.pd.common.util;
 
-import java.util.logging.Logger;
-
 public class LogUtil
 {
-    private static boolean debugMode = false;
+    private static boolean detailMode;
     
-    private static boolean detailMode = false;
+    private static boolean debugMode;
     
-    public static void setDebug(boolean flag)
+    public static boolean isDetailMode()
     {
-        debugMode = flag;
+        return detailMode;
     }
     
-    public static void setDetail(boolean flag)
+    public static void setDetailMode(boolean _detailMode)
     {
-        detailMode = flag;
+        detailMode = _detailMode;
     }
     
-    private static void log(String type, Object msg)
+    public static boolean isDebugMode()
     {
-        String msg2 = String.format("[ %s ]%s", type, DateUtil.getNow(), msg);
-        // switch (type)
-        // {
-        // case "info":
-        //                
-        // case "error":
-        // case "debug":
-        // case "detail":
-        // case "warning":
-        // default:
-        // }
-        System.out.println(msg);
+        return debugMode;
     }
     
-    public static void debug(Object msg)
+    public static void setDebugMode(boolean _debugMode)
     {
-        if (debugMode)
-        {
-            log("debug", msg);
-        }
+        debugMode = _debugMode;
     }
     
-    public static void detail(Object msg)
+    public static LogService getService(String name, Class<?> class1)
     {
-        if (detailMode)
-        {
-            log("detail", msg);
-        }
+        
+        return new LogService(name, class1);
     }
     
-    public static Logger getLogger(Class<?> class1)
-    {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

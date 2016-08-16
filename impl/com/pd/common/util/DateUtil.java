@@ -30,4 +30,13 @@ public class DateUtil
     {
         return new NDate(date);
     }
+    
+    public static long timeDiff(Date startDate, Date endDate)
+    {
+        if (startDate == null || endDate == null)
+        {
+            return -1;
+        }
+        return endDate.getTime() - startDate.getTime();
+    }
 }
