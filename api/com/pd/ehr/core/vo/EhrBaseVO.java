@@ -4,6 +4,8 @@ public class EhrBaseVO
 {
     private long idxId, flowId;
     
+    private String name;
+    
     public void setFlowId(long flowId)
     {
         this.flowId = flowId;
@@ -22,5 +24,15 @@ public class EhrBaseVO
     public long getIdxId()
     {
         return idxId;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }
