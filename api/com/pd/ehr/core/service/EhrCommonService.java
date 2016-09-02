@@ -1,6 +1,8 @@
-package com.pd.common.service;
+package com.pd.ehr.core.service;
 
-public class EhrBaseService
+import com.pd.ehr.core.itf.IEhrCommonService;
+
+public abstract class EhrCommonService implements IEhrCommonService
 {
     private String name;
     

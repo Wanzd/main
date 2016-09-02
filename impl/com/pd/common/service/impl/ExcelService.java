@@ -18,13 +18,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.pd.common.exception.CommonException;
-import com.pd.common.service.EhrBaseService;
 import com.pd.common.util.ExceptionUtil;
 import com.pd.common.util.LogService;
 import com.pd.common.util.LogUtil;
 import com.pd.common.vo.api.IBaseVO;
 
-public class ExcelService extends EhrBaseService
+public class ExcelService
 {
     private LogService logService = LogUtil.getService("excelService", ExcelService.class);
     

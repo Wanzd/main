@@ -1,15 +1,26 @@
 package com.pd.common.util;
 
 import com.pd.common.exception.CommonException;
-import com.pd.common.service.EhrBaseService;
 
-public class LogService extends EhrBaseService
+public class LogService
 {
+    private String name;
+    
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     private Class<?> cla = null;
     
     public LogService(String name, Class<?> cla)
     {
-        setName(name);
+        this.name = name;
         this.cla = cla;
     }
     

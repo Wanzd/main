@@ -1,6 +1,8 @@
 package com.pd.common.vo;
 
-public class EhrLookUpVO
+import com.pd.ehr.core.vo.EhrBaseVO;
+
+public class EhrLookUpVO extends EhrBaseVO
 {
     private EhrLookUpVO parent;
     
