@@ -1,4 +1,4 @@
-package com.pd.common.service.impl;
+package com.pd.ehr.core.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.pd.ehr.user.service;
+package com.pd.ehr.base.service;
 
 import com.pd.ehr.core.collection.PagedList;
 import com.pd.ehr.core.itf.IEhrDatabaseService;
