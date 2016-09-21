@@ -3,7 +3,7 @@ import java.util.Date;
 
 import com.pd.common.service.ITimerCountService;
 import com.pd.common.util.DateUtil;
-import com.pd.ehr.core.vo.AreaVO;
+import com.pd.ehr.vo.AreaVO;
 
 public class TimerCountService implements ITimerCountService
 {
