@@ -1,7 +1,5 @@
 package com.pd.api;
 
-import com.pd.ehr.vo.DatabaseVO;
-
 @SuppressWarnings("hiding")
 public interface IDatabaseService<VO extends DatabaseVO, FO extends IFilterVO, Dao extends IDao<VO, FO>>
 {

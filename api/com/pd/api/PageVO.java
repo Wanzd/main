@@ -1,6 +1,6 @@
-package com.pd.ehr.vo;
+package com.pd.api;
 
-public class EhrPageVO
+public class PageVO
 {
     private int totalCount;
     

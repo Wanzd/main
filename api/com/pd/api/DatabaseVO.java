@@ -1,6 +1,4 @@
-package com.pd.ehr.vo;
-
-import com.pd.api.VO;
+package com.pd.api;
 
 public class DatabaseVO extends VO
 {

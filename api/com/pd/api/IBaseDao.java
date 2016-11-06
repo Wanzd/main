@@ -2,13 +2,11 @@ package com.pd.api;
 
 import java.util.List;
 
-import com.pd.ehr.vo.BatchVO;
-import com.pd.ehr.vo.DatabaseVO;
-import com.pd.ehr.vo.EhrPageVO;
-
 public interface IBaseDao<VO extends DatabaseVO, FO extends IFilterVO>
 {
-    public List<VO> pagedList(FO filterVO, EhrPageVO page);
+    public PagedList<VO> pagedList(FO filterVO, PageVO page);
+    
+    public List<VO> pagedList(FO filterVO);
     
     public VO get(VO vo);
     

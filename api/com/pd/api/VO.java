@@ -1,29 +1,29 @@
 package com.pd.api;
 
-public class VO
+public class VO implements IValueObject
 {
-    private long idxId, flowId;
+    private Long idxId, flowId;
     
     private String name;
     
-    public void setFlowId(long flowId)
+    public Long getIdxId()
     {
-        this.flowId = flowId;
+        return idxId;
     }
     
-    public long getFlowId()
-    {
-        return flowId;
-    }
-    
-    public void setIdxId(long idxId)
+    public void setIdxId(Long idxId)
     {
         this.idxId = idxId;
     }
     
-    public long getIdxId()
+    public Long getFlowId()
     {
-        return idxId;
+        return flowId;
+    }
+    
+    public void setFlowId(Long flowId)
+    {
+        this.flowId = flowId;
     }
     
     public String getName()
@@ -35,4 +35,5 @@ public class VO
     {
         this.name = name;
     }
+    
 }

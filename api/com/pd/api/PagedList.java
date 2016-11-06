@@ -1,4 +1,4 @@
-package com.pd.ehr.vo;
+package com.pd.api;
 
 import java.util.Collection;
 import java.util.Iterator;

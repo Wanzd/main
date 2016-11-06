@@ -1,4 +1,4 @@
-package com.pd.ehr.vo;
+package com.pd.api.lookup;
 
 import com.pd.api.VO;
 
