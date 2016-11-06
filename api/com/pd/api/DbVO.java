@@ -1,8 +1,7 @@
 package com.pd.api;
 
-public class DatabaseVO extends VO
+public class DbVO extends VO
 {
-    
     private String createrId, createTime, lastModifyTime, lastModifyId;
     
     public String getCreaterId()

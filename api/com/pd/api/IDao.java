@@ -1,6 +1,6 @@
 package com.pd.api;
 
-public interface IDao<VO extends DatabaseVO, FilterVO extends IFilterVO>
+public interface IDao<VO extends DbVO, FilterVO extends IFo>
 {
     int add(VO vo);
     

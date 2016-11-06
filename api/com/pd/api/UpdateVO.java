@@ -1,28 +1,30 @@
 package com.pd.api;
 
-public class UpdateVO<VO>
+public class UpdateVO<_VO>
 {
-    private VO oldVO;
+    private _VO oldVO;
     
-    private VO newVO;
-    
-    public VO getOldVO()
+    private _VO newVO;
+
+    public _VO getOldVO()
     {
         return oldVO;
     }
-    
-    public void setOldVO(VO oldVO)
+
+    public void setOldVO(_VO oldVO)
     {
         this.oldVO = oldVO;
     }
-    
-    public VO getNewVO()
+
+    public _VO getNewVO()
     {
         return newVO;
     }
-    
-    public void setNewVO(VO newVO)
+
+    public void setNewVO(_VO newVO)
     {
         this.newVO = newVO;
     }
+
+    
 }

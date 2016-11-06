@@ -2,7 +2,7 @@ package com.pd.api;
 
 import java.util.List;
 
-public interface IBaseDao<Vo extends DatabaseVO, Fo extends IFilterVO>
+public interface IBaseDao<Vo extends DbVO, Fo extends IFo>
 {
     public PagedList<Vo> pagedList(Fo filterVO, PageVO page);
     

@@ -2,7 +2,7 @@ package com.pd.api;
 
 import java.util.List;
 
-public interface IBaseService<Vo extends DatabaseVO, Fo extends IFilterVO, Dao extends IBaseDao<Vo, Fo>>
+public interface IBaseService<Vo extends DbVO, Fo extends IFo, Dao extends IBaseDao<Vo, Fo>>
 {
     IBaseDao<Vo, Fo> getDao();
     
