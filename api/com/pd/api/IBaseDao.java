@@ -2,27 +2,29 @@ package com.pd.api;
 
 import java.util.List;
 
-public interface IBaseDao<VO extends DatabaseVO, FO extends IFilterVO>
+public interface IBaseDao<Vo extends DatabaseVO, Fo extends IFilterVO>
 {
-    public PagedList<VO> pagedList(FO filterVO, PageVO page);
+    public PagedList<Vo> pagedList(Fo filterVO, PageVO page);
     
-    public List<VO> pagedList(FO filterVO);
+    public List<Vo> listAll(Fo filterVO);
+    public List<Vo> listValid(Fo filterVO);
+    public List<Vo> listActived(Fo filterVO);
     
-    public VO get(VO vo);
+    public Vo get(Vo vo);
     
     public long getNextSeq();
     
-    public int add(VO vo);
+    public int add(Vo vo);
     
-    public int adds(List<VO> list);
+    public int adds(List<Vo> list);
     
-    public int batchUpdate(BatchVO<VO> batchVO);
+    public int batchUpdate(BatchVO<Vo> batchVO);
     
-    public int update(VO vo);
+    public int update(Vo vo);
     
-    public int updates(List<VO> list);
+    public int updates(List<Vo> list);
     
-    public int delete(VO vo);
+    public int delete(Vo vo);
     
-    public int deletes(List<VO> list);
+    public int deletes(List<Vo> list);
 }

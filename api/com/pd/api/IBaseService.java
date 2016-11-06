@@ -2,12 +2,17 @@ package com.pd.api;
 
 import java.util.List;
 
-public interface IBaseService<VO extends DatabaseVO, FilterVO extends IFilterVO>
+public interface IBaseService<Vo extends DatabaseVO, Fo extends IFilterVO, Dao extends IBaseDao<Vo, Fo>>
 {
-    IBaseDao getDao();
+    IBaseDao<Vo, Fo> getDao();
     
-    default List<VO> list(FilterVO filterVO, PageVO pageVO)
+    default PagedList<Vo> pagedList(Fo filterVO, PageVO pageVO)
     {
         return getDao().pagedList(filterVO, pageVO);
+    };
+    
+    default List<Vo> listAll(Fo filterVO)
+    {
+        return getDao().listAll(filterVO);
     };
 }

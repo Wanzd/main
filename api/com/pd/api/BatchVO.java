@@ -2,40 +2,40 @@ package com.pd.api;
 
 import java.util.List;
 
-public class BatchVO<VO extends DatabaseVO>
+public class BatchVO<Vo extends DatabaseVO>
 {
-    private List<VO> addList;
+    private List<Vo> addList;
     
-    private List<VO> updateList;
+    private List<Vo> updateList;
     
-    private List<VO> delList;
+    private List<Vo> delList;
     
-    public List<VO> getAddList()
+    public List<Vo> getAddList()
     {
         return addList;
     }
     
-    public void setAddList(List<VO> addList)
+    public void setAddList(List<Vo> addList)
     {
         this.addList = addList;
     }
     
-    public List<VO> getUpdateList()
+    public List<Vo> getUpdateList()
     {
         return updateList;
     }
     
-    public void setUpdateList(List<VO> updateList)
+    public void setUpdateList(List<Vo> updateList)
     {
         this.updateList = updateList;
     }
     
-    public List<VO> getDelList()
+    public List<Vo> getDelList()
     {
         return delList;
     }
     
-    public void setDelList(List<VO> delList)
+    public void setDelList(List<Vo> delList)
     {
         this.delList = delList;
     }
