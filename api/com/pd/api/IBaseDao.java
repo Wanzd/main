@@ -5,9 +5,8 @@ import java.util.List;
 import com.pd.ehr.vo.BatchVO;
 import com.pd.ehr.vo.DatabaseVO;
 import com.pd.ehr.vo.EhrPageVO;
-import com.pd.ehr.vo.IEhrFilterVO;
 
-public interface IBaseDao<VO extends DatabaseVO, FO extends IEhrFilterVO>
+public interface IBaseDao<VO extends DatabaseVO, FO extends IFilterVO>
 {
     public List<VO> pagedList(FO filterVO, EhrPageVO page);
     

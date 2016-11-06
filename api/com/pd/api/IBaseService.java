@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.pd.ehr.vo.DatabaseVO;
 import com.pd.ehr.vo.EhrPageVO;
-import com.pd.ehr.vo.IEhrFilterVO;
 
-public interface IBaseService<VO extends DatabaseVO, FilterVO extends IEhrFilterVO>
+public interface IBaseService<VO extends DatabaseVO, FilterVO extends IFilterVO>
 {
     IBaseDao getDao();
     
