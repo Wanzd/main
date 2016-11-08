@@ -2,29 +2,30 @@ package com.pd.api;
 
 import java.util.List;
 
-public class PagedList<T> 
+public class PageList<T>
 {
     private List<T> list;
     
-    private PageVO pageVo;
-
+    private PageV pageV;
+    
     public List<T> getList()
     {
         return list;
     }
-
+    
     public void setList(List<T> list)
     {
         this.list = list;
     }
-
-    public PageVO getPageVo()
+    
+    public PageV getPageV()
     {
-        return pageVo;
+        return pageV;
     }
-
-    public void setPageVo(PageVO pageVo)
+    
+    public void setPageV(PageV pageV)
     {
-        this.pageVo = pageVo;
+        this.pageV = pageV;
     }
+    
 }

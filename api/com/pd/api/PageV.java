@@ -1,6 +1,6 @@
 package com.pd.api;
 
-public class PageVO
+public class PageV
 {
     private int totalCount;
     

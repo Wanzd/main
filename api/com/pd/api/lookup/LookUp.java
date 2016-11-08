@@ -1,8 +1,8 @@
 package com.pd.api.lookup;
 
-import com.pd.api.VO;
+import com.pd.api.V;
 
-public class LookUp extends VO
+public class LookUp extends V
 {
     private LookUp parent;
     

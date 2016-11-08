@@ -1,11 +1,16 @@
 package com.pd.api;
 
-public interface IDbService<_Vo extends DbVO, _Fo extends IFo, _Dao extends IDao<_Vo, _Fo>>
+public interface IDbService<_V extends DbV, _F extends IFilter, _Dao extends IDa<_V, _F>>
 {
     _Dao getDao();
     
-    default int add(_Vo vo)
+    default int c(_V value)
     {
-        return getDao().add(vo);
+        return getDao().c(value);
+    }
+    
+    default _V r(_F filter)
+    {
+        return getDao().r(filter);
     }
 }

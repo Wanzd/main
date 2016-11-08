@@ -2,7 +2,7 @@ package com.pd.api;
 
 import java.util.List;
 
-public class BatchVO<_VO extends DbVO>
+public class BatchVO<_VO extends DbV>
 {
     private List<_VO> addList;
 

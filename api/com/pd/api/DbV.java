@@ -1,6 +1,6 @@
 package com.pd.api;
 
-public class DbVO extends VO
+public class DbV extends V
 {
     private String createrId, createTime, lastModifyTime, lastModifyId;
     

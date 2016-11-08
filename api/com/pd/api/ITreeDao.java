@@ -2,8 +2,14 @@ package com.pd.api;
 
 import java.util.List;
 
-public interface ITreeDao<_Vo extends DbVO, _Fo extends IFo> extends IBaseDao<_Vo, _Fo>
+import com.pd.api.annotation.Dao;
+
+@Dao
+public interface ITreeDao<_V extends DbV, _F extends IFilter> 
 {
-    List<_Vo> root();
-    List<_Vo> sub(_Fo fo);
+    @DaoApi
+    List<_V> root();
+    
+    @DaoApi
+    List<_V> sub(_F fo);
 }
