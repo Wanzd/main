@@ -1,6 +1,7 @@
 package com.pd.common.util;
 
 import com.pd.common.exception.CommonException;
+import com.pd.ehr.base.atom.EhrDate;
 
 public class LogService
 {
@@ -26,7 +27,7 @@ public class LogService
     
     private void log(String type, Object msg)
     {
-        String msg2 = String.format("[ %s %s ]%s", type, DateUtil.getNow(), msg);
+        String msg2 = String.format("[ %s %s ]%s", type, EhrDate.getNow(), msg);
         System.out.println(msg2);
     }
     
