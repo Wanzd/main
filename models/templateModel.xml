@@ -1,0 +1,9 @@
+<model name="template">
+	<pages>
+		<page type="list" />
+	</pages>
+	<services>
+	<service name="TemplateService" /></services>
+	<dao name="TemplateDao" />
+	<vo name="TemplateVO" filter="TemplateVO" />
+</model>
