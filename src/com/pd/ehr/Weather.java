@@ -8,128 +8,140 @@ import com.pd.Base.EhrDataBaseVO;
 import com.pd.Base.IEhrFilterVO;
 import com.pd.EhrApi.Builder.IBuilder;
 import com.pd.EhrApi.Db.IDao;
-import com.pd.EhrApi.Db.IDbService;
-import com.pd.EhrLocation;
-import com.pd.ehr.EhrCollection.Valid.NotEmpty;
-import com.pd.ehr.EhrStructure.DbAtom;
-import com.pd.ehr.EhrValid.NotNull;
-import com.pd.ehr.Weather.Dao;
-import com.pd.ehr.Weather.Dto.Fo;
-import com.pd.ehr.Weather.Dto.Vo;
-import com.pd.ehr.Weather.Service.DbService;
-import com.pd.ehr.Weather.Service.WebService;
+import com.pd.EhrLocation.Dto.LocationVo;
+import com.pd.EhrLocation.LocationUtil;
+import com.pd.ehr.Json.JsonUtil;
+import com.pd.ehr.Weather.Builder.FromBaidu;
+import com.pd.ehr.Weather.Dto.WeatherFo;
+import com.pd.ehr.Weather.Dto.WeatherVo;
 
-public class Weather extends DbAtom<Vo, Fo, Dao, DbService>
+import net.sf.json.JSONObject;
+
+public class Weather
 {
-    public static class Service
+    public static enum WeatherChannel implements IBuilder<WeatherFo, WeatherVo>
     {
-        public static class WebService
+        Baidu("baidu", new FromBaidu());
+        
+        private String name;
+        
+        private IBuilder<WeatherFo, WeatherVo> builder;
+        
+        public String getName()
         {
-            public List<Vo> list(Fo fo)
-            {
-                return new Weather.Action.ListWeatherAction().list(fo);
-            }
+            return name;
         }
         
-        public static class DbService implements IDbService<Vo, Fo, Dao>
+        public IBuilder<WeatherFo, WeatherVo> getBuilder()
         {
-            
+            return builder;
+        }
+        
+        private WeatherChannel(String _name, IBuilder<WeatherFo, WeatherVo> _builder)
+        {
+            name = _name;
+            builder = _builder;
+        }
+        
+        @Override
+        public WeatherVo build(WeatherFo _in)
+        {
+            return builder.build(_in);
+        }
+        
+        public static WeatherVo builds(WeatherFo _in)
+        {
+            for (WeatherChannel evenChannel : WeatherChannel.values())
+            {
+                WeatherVo curVo = evenChannel.build(_in);
+                if (curVo != null)
+                {
+                    return curVo;
+                }
+            }
+            return null;
         }
     }
     
+    public static class WeatherUtil
+    {
+        public static WeatherVo r(WeatherFo _fo)
+        {
+            return WeatherChannel.builds(_fo);
+        }
+    }
+    
+    
     public static class Dto
     {
-        public static class Vo extends EhrDataBaseVO
+        public static class WeatherVo extends EhrDataBaseVO
         {
             protected String title;
             
             protected EhrObject author;
         }
         
-        public static class Fo extends Vo implements IEhrFilterVO
+        public static class WeatherFo extends WeatherVo implements IEhrFilterVO
         {
             private Date date;
             
-            private EhrLocation.Vo location;
+            private LocationVo location;
             
             public Date getDate()
             {
                 return date;
             }
             
-            public void setDate(Date date)
+            public WeatherFo setDate(Date date)
             {
                 this.date = date;
+                return this;
             }
             
-            public EhrLocation.Vo getLocation()
+            public LocationVo getLocation()
             {
                 return location;
             }
             
-            public void setLocation(EhrLocation.Vo location)
+            public WeatherFo setLocation(LocationVo location)
             {
                 this.location = location;
+                return this;
             }
         }
     }
     
-    public static interface Dao extends IDao<Vo, Fo>
+    public static interface Dao extends IDao<WeatherVo, WeatherFo>
     {
         
     }
     
-    
     public static class Channel
     {
-        private static List<IBuilder<Fo, Vo>> list;
+        private static List<IBuilder<WeatherFo, WeatherVo>> list;
         {
-            list = new ArrayList<IBuilder<Fo, Vo>>();
+            list = new ArrayList<IBuilder<WeatherFo, WeatherVo>>();
             list.add(new Builder.FromBaidu());
         }
         
-        public static List<IBuilder<Fo, Vo>> getChannelList()
+        public static List<IBuilder<WeatherFo, WeatherVo>> getChannelList()
         {
             return list;
         }
     }
     
-    public static class Action
-    {
-        public static class ListWeatherAction
-        {
-            public List<Vo> list(Fo fo)
-            {
-                List<Vo> resultList = new ArrayList<Vo>();
-                List<IBuilder<Fo, Vo>> channelList = Channel.getChannelList();
-                if (NotEmpty.valid(channelList))
-                {
-                    for (IBuilder<Fo, Vo> evenBuilder : channelList)
-                    {
-                        Vo buildVo = evenBuilder.build(fo);
-                        if (NotNull.valid(buildVo))
-                        {
-                            resultList.add(buildVo);
-                        }
-                    }
-                }
-                return resultList;
-            }
-        }
-    }
     
     public static class Builder
     {
-        public static class FromBaidu implements IBuilder<Fo, Vo>
+        public static class FromBaidu implements IBuilder<WeatherFo, WeatherVo>
         {
             
             @Override
-            public Vo build(Fo _in)
+            public WeatherVo build(WeatherFo _in)
             {
-                String baiduUrl = "http://apis.baidu.com/heweather/weather/free?city=wuhan";
-                Json.Dto.Fo jsonFo = new Json.Dto.Fo();
-                jsonFo.setUrl(baiduUrl);
-                String json = new Json.Service.WebService().jsonStr(jsonFo);
+                String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=武汉&output=json&ak=W69oaDTCfuGwzNwmtVvgWfGH";
+                Json.Dto.Fo jsonFo = new Json.Dto.Fo().setUrl(baiduUrl);
+                JSONObject json = JsonUtil.json(jsonFo);
                 Show.ln(json);
                 return null;
             }
@@ -141,12 +153,9 @@ public class Weather extends DbAtom<Vo, Fo, Dao, DbService>
     {
         public void testLocalTodayWeather()
         {
-            WebService webService = new Weather.Service.WebService();
-            Fo fo = new Fo();
-            fo.setDate(new Date());
-            fo.setLocation(new EhrLocation.Service.WebService().getCurLocation());
-            List<Vo> list = webService.list(fo);
-            Show.ln(list);
+            WeatherFo fo = new WeatherFo().setDate(new Date()).setLocation(LocationUtil.getCurLocation());
+            WeatherVo weatherVo = WeatherUtil.r(fo);
+            Show.ln(weatherVo);
         }
     }
 }

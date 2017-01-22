@@ -1,100 +1,150 @@
 package com.pd.ehr;
 
-import java.util.List;
-
 import com.pd.Base.EhrDataBaseVO;
 import com.pd.Base.IEhrFilterVO;
 import com.pd.EhrApi.Builder.IBuilder;
 import com.pd.EhrApi.Db.IDao;
-import com.pd.EhrApi.Db.IDbService;
-import com.pd.ehr.EhrStructure.DbAtom;
-import com.pd.ehr.Ip.Dao;
-import com.pd.ehr.Ip.Dto.FO;
-import com.pd.ehr.Ip.Dto.VO;
-import com.pd.ehr.Ip.Service.DbService;
-import com.pd.ehr.Ip.Service.WebService;
+import com.pd.ehr.Ip.Dto.IpFO;
+import com.pd.ehr.Ip.Dto.IpVo;
+import com.pd.ehr.Ip.IpBuilder.FromIp138;
+import com.pd.ehr.Json.JsonUtil;
 
-public class Ip extends DbAtom<VO, FO, Dao,  DbService>
+public class Ip
 {
-    public static class Service
+    public static enum IpChannel implements IBuilder<String, IpVo>
     {
-        public static class WebService
+        Ip138("ip138", new FromIp138());
+        
+        private String name;
+        
+        public String getName()
+        {
+            return name;
+        }
+
+        public IBuilder<String, IpVo> getBuilder()
+        {
+            return builder;
+        }
+
+        private IBuilder<String, IpVo> builder;
+        
+        private IpChannel(String _name, IBuilder<String, IpVo> _builder)
+        {
+            name = _name;
+            builder = _builder;
+        }
+        
+        @Override
+        public IpVo build(String _in)
+        {
+            return builder.build(_in);
+        }
+        
+        public static IpVo builds(String _in)
+        {
+            for (IpChannel evenChannel : IpChannel.values())
+            {
+                IpVo curVo = evenChannel.build(_in);
+                if (curVo != null)
+                {
+                    return curVo;
+                }
+            }
+            return null;
+        }
+    }
+    
+    public static class IpUtil
+    {
+        public static String getCurW3Ip()
+        {
+            return IpChannel.builds(null).getIp();
+        }
+    }
+    
+    public static class IpService
+    {
+        
+    }
+    
+    public static class Single
+    {
+        
+        private static IpVo singleton = new IpVo();
+        
+        public static IpVo getSingleton()
+        {
+            return singleton;
+        }
+    }
+    
+    public static IpVo getCurIp()
+    {
+        return Single.getSingleton();
+    }
+    
+    public static class IpBuilder
+    {
+        public static class FromIp138 implements IBuilder<String, IpVo>
         {
             
-            public String getCurW3Ip()
+            @Override
+            public IpVo build(String _in)
             {
-                Json.Dto.Fo fo = new Json.Dto.Fo();
-                fo.setUrl("http://1212.ip138.com/ic.asp");
-                String json = new Json.Service.WebService().jsonStr(fo);
-                Show.ln(json);
-                return new Builder.IpStrBuilder.ByJsonStr().build(json);
+                Json.Dto.Fo fo = new Json.Dto.Fo().setUrl("http://1212.ip138.com/ic.asp");
+                String json = JsonUtil.html(fo);
+                int startIndex = json.indexOf("[");
+                int endIndex = json.indexOf("]");
+                String ip = json.substring(startIndex + 1, endIndex);
+                return new IpVo().setIp(ip);
             }
             
         }
         
-        public static class DbService implements IDbService<VO, FO, Dao>
-        {
-            
-        }
-    }
-    
-    public static class Builder
-    {
-        public static class IpStrBuilder
-        {
-            public static class ByJsonStr implements IBuilder<String, String>
-            {
-
-                @Override
-                public String build(String _in)
-                {
-                    int startIndex= _in.indexOf("[");
-                    int endIndex= _in.indexOf("]");
-                    return _in.substring(startIndex+1,endIndex);
-                }
-                
-            }
-        }
     }
     
     public static class Dto
     {
-        public static class VO extends EhrDataBaseVO
+        public static class IpVo extends EhrDataBaseVO
         {
-            protected String ip;
+            private String ip;
             
-        }
-        
-        public static class FO extends VO implements IEhrFilterVO
-        {
-            
-        }
-    }
-    
-    public static interface Dao extends IDao<VO, FO>
-    {
-        
-    }
-    
-    
-    public static class Action
-    {
-        public static class ListNewsAction
-        {
-            public List<VO> list(FO fo)
+            private IpVo()
             {
-                return null;
+                
             }
+            
+            public String getIp()
+            {
+                return ip;
+            }
+            
+            public IpVo setIp(String ip)
+            {
+                this.ip = ip;
+                return this;
+            }
+            
         }
+        
+        public static class IpFO extends IpVo implements IEhrFilterVO
+        {
+            
+        }
+    }
+    
+    public static interface Dao extends IDao<IpVo, IpFO>
+    {
+        
     }
     
     public static class Test extends EhrTestCase
     {
         public void testGetSelfPublicIp()
         {
-            WebService webService = new Ip.Service.WebService();
-            String result = webService.getCurW3Ip();
-            Show.ln(result);
+            String curW3Ip = IpUtil.getCurW3Ip();
+            Show.ln(curW3Ip);
         }
     }
 }

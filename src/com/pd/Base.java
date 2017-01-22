@@ -139,9 +139,10 @@ public class Base
             return name;
         }
         
-        public void setName(String name)
+        public EhrDataBaseVO setName(String name)
         {
             this.name = name;
+            return this;
         }
         
         public String getNumber()

@@ -8,6 +8,7 @@ import com.pd.Base.PageList;
 
 public class EhrApi
 {
+    
     public static class Builder
     {
         public static interface IFactory<_Out>

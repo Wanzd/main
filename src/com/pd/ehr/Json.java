@@ -12,51 +12,58 @@ import com.pd.Base.EhrDataBaseVO;
 import com.pd.Base.IEhrFilterVO;
 import com.pd.EhrApi.Db.IDao;
 import com.pd.EhrApi.Db.IDbService;
-import com.pd.ehr.EhrStructure.DbAtom;
-import com.pd.ehr.Json.Dao;
 import com.pd.ehr.Json.Dto.Fo;
 import com.pd.ehr.Json.Dto.Vo;
-import com.pd.ehr.Json.Service.DbService;
 
 import net.sf.json.JSONObject;
 
-public class Json extends DbAtom<Vo, Fo, Dao, DbService>
+public class Json 
 {
-    public static class Service
+    public static class JsonUtil
     {
-        public static class WebService
+        public static String html(Fo fo)
         {
-            public String jsonStr(Fo fo)
+            return JsonHelper.jsonStr(fo);
+        }
+        
+        public static JSONObject json(Fo fo)
+        {
+            String jsonStr = JsonHelper.jsonStr(fo);
+            return JSONObject.fromString(jsonStr);
+        }
+    }
+    
+    public static class JsonHelper
+    {
+        private static String jsonStr(Fo fo)
+        {
+            StringBuffer strBuf = new StringBuffer();
+            
+            try
             {
-                StringBuffer strBuf = new StringBuffer();
-                
-                try
-                {
-                    URL url = new URL(fo.url);
-                    URLConnection conn = url.openConnection();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));// 转码。
-                    String line = null;
-                    while ((line = reader.readLine()) != null)
-                        strBuf.append(line + " ");
-                    reader.close();
-                }
-                catch (MalformedURLException e)
-                {
-                    e.printStackTrace();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-                
-                return strBuf.toString();
+                URL url = new URL(fo.url);
+                URLConnection conn = url.openConnection();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));// 转码。
+                String line = null;
+                while ((line = reader.readLine()) != null)
+                    strBuf.append(line + " ");
+                reader.close();
+            }
+            catch (MalformedURLException e)
+            {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
             
-            public JSONObject json(Fo fo)
-            {
-                String jsonStr = jsonStr(fo);
-                return JSONObject.fromString(jsonStr);
-            }
+            return strBuf.toString();
+        }
+        
+        public static class WebService
+        {
+            
         }
         
         public static class DbService implements IDbService<Vo, Fo, Dao>
@@ -83,9 +90,10 @@ public class Json extends DbAtom<Vo, Fo, Dao, DbService>
                 return url;
             }
             
-            public void setUrl(String url)
+            public Fo setUrl(String url)
             {
                 this.url = url;
+                return this;
             }
         }
     }

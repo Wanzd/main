@@ -1,12 +1,15 @@
 package com.pd.ehr;
 
 import junit.framework.TestCase;
-import net.sf.json.JSONObject;
 
 public class Show
 {
     public static String str(Object obj)
     {
+        if (null == obj)
+        {
+            return "null";
+        }
         if (obj instanceof Object[])
         {
             StringBuilder sBuilder = new StringBuilder();

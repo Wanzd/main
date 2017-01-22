@@ -5,7 +5,7 @@ tree.icons["css"] = "collection.gif";
 tree.icons["event"] = "collection.gif";
 tree.icons["book"]  = "book.gif";
 tree.iconsExpand["book"] = "bookopen.gif";
-tree.setIconPath("../js/mzTree/"); //展开时对应的图片的存放路径
+tree.setIconPath("mzTree/"); //展开时对应的图片的存放路径
 
 tree.nodes["0_1"] = "text:中国;url:#";
 
