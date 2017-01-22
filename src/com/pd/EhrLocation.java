@@ -78,9 +78,9 @@ public class EhrLocation extends DbAtom<Vo, Fo, Dao, DbService>
         {
             public EhrLocation.Vo getCurLocation()
             {
-                Json.Dto.FO fo = new Json.Dto.FO();
+                Json.Dto.Fo fo = new Json.Dto.Fo();
                 fo.setUrl("http://api.map.baidu.com/location/ip?ak=F454f8a5efe5e577997931cc01de3974&ip=" + new Ip.Service.WebService().getCurW3Ip());
-                String jsonResult = new Json.Service.WebService().json(fo);
+                String jsonResult = new Json.Service.WebService().jsonHtml(fo);
                 return new Builder.ByJsonString().build(jsonResult);
             }
         }

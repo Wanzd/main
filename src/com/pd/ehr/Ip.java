@@ -23,9 +23,9 @@ public class Ip extends DbAtom<VO, FO, Dao,  DbService>
             
             public String getCurW3Ip()
             {
-                Json.Dto.FO fo = new Json.Dto.FO();
+                Json.Dto.Fo fo = new Json.Dto.Fo();
                 fo.setUrl("http://1212.ip138.com/ic.asp");
-                String json = new Json.Service.WebService().json(fo);
+                String json = new Json.Service.WebService().jsonStr(fo);
                 Show.ln(json);
                 return new Builder.IpStrBuilder.ByJsonStr().build(json);
             }

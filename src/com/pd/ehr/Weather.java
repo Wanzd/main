@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.pd.Base.EhrBaseModule.IValidator;
 import com.pd.Base.EhrDataBaseVO;
 import com.pd.Base.IEhrFilterVO;
 import com.pd.EhrApi.Builder.IBuilder;
@@ -15,24 +14,24 @@ import com.pd.ehr.EhrCollection.Valid.NotEmpty;
 import com.pd.ehr.EhrStructure.DbAtom;
 import com.pd.ehr.EhrValid.NotNull;
 import com.pd.ehr.Weather.Dao;
-import com.pd.ehr.Weather.Dto.FO;
-import com.pd.ehr.Weather.Dto.VO;
+import com.pd.ehr.Weather.Dto.Fo;
+import com.pd.ehr.Weather.Dto.Vo;
 import com.pd.ehr.Weather.Service.DbService;
 import com.pd.ehr.Weather.Service.WebService;
 
-public class Weather extends DbAtom<VO, FO, Dao, DbService>
+public class Weather extends DbAtom<Vo, Fo, Dao, DbService>
 {
     public static class Service
     {
         public static class WebService
         {
-            public List<VO> list(FO fo)
+            public List<Vo> list(Fo fo)
             {
                 return new Weather.Action.ListWeatherAction().list(fo);
             }
         }
         
-        public static class DbService implements IDbService<VO, FO, Dao>
+        public static class DbService implements IDbService<Vo, Fo, Dao>
         {
             
         }
@@ -40,14 +39,14 @@ public class Weather extends DbAtom<VO, FO, Dao, DbService>
     
     public static class Dto
     {
-        public static class VO extends EhrDataBaseVO
+        public static class Vo extends EhrDataBaseVO
         {
             protected String title;
             
             protected EhrObject author;
         }
         
-        public static class FO extends VO implements IEhrFilterVO
+        public static class Fo extends Vo implements IEhrFilterVO
         {
             private Date date;
             
@@ -75,25 +74,21 @@ public class Weather extends DbAtom<VO, FO, Dao, DbService>
         }
     }
     
-    public static interface Dao extends IDao<VO, FO>
+    public static interface Dao extends IDao<Vo, Fo>
     {
         
     }
     
-    public static class Validator implements IValidator<VO, FO, Dao>
-    {
-        
-    }
     
     public static class Channel
     {
-        private static List<IBuilder<FO, VO>> list;
+        private static List<IBuilder<Fo, Vo>> list;
         {
-            list = new ArrayList<IBuilder<FO, VO>>();
+            list = new ArrayList<IBuilder<Fo, Vo>>();
             list.add(new Builder.FromBaidu());
         }
         
-        public static List<IBuilder<FO, VO>> getChannelList()
+        public static List<IBuilder<Fo, Vo>> getChannelList()
         {
             return list;
         }
@@ -103,15 +98,15 @@ public class Weather extends DbAtom<VO, FO, Dao, DbService>
     {
         public static class ListWeatherAction
         {
-            public List<VO> list(FO fo)
+            public List<Vo> list(Fo fo)
             {
-                List<VO> resultList = new ArrayList<VO>();
-                List<IBuilder<FO, VO>> channelList = Channel.getChannelList();
+                List<Vo> resultList = new ArrayList<Vo>();
+                List<IBuilder<Fo, Vo>> channelList = Channel.getChannelList();
                 if (NotEmpty.valid(channelList))
                 {
-                    for (IBuilder<FO, VO> evenBuilder : channelList)
+                    for (IBuilder<Fo, Vo> evenBuilder : channelList)
                     {
-                        VO buildVo = evenBuilder.build(fo);
+                        Vo buildVo = evenBuilder.build(fo);
                         if (NotNull.valid(buildVo))
                         {
                             resultList.add(buildVo);
@@ -125,16 +120,16 @@ public class Weather extends DbAtom<VO, FO, Dao, DbService>
     
     public static class Builder
     {
-        public static class FromBaidu implements IBuilder<FO, VO>
+        public static class FromBaidu implements IBuilder<Fo, Vo>
         {
             
             @Override
-            public VO build(FO _in)
+            public Vo build(Fo _in)
             {
                 String baiduUrl = "http://apis.baidu.com/heweather/weather/free?city=wuhan";
-                Json.Dto.FO jsonFo = new Json.Dto.FO();
+                Json.Dto.Fo jsonFo = new Json.Dto.Fo();
                 jsonFo.setUrl(baiduUrl);
-                String json = new Json.Service.WebService().json(jsonFo);
+                String json = new Json.Service.WebService().jsonStr(jsonFo);
                 Show.ln(json);
                 return null;
             }
@@ -147,10 +142,10 @@ public class Weather extends DbAtom<VO, FO, Dao, DbService>
         public void testLocalTodayWeather()
         {
             WebService webService = new Weather.Service.WebService();
-            FO fo = new FO();
+            Fo fo = new Fo();
             fo.setDate(new Date());
             fo.setLocation(new EhrLocation.Service.WebService().getCurLocation());
-            List<VO> list = webService.list(fo);
+            List<Vo> list = webService.list(fo);
             Show.ln(list);
         }
     }

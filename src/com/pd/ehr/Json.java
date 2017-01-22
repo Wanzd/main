@@ -14,17 +14,19 @@ import com.pd.EhrApi.Db.IDao;
 import com.pd.EhrApi.Db.IDbService;
 import com.pd.ehr.EhrStructure.DbAtom;
 import com.pd.ehr.Json.Dao;
-import com.pd.ehr.Json.Dto.FO;
-import com.pd.ehr.Json.Dto.VO;
+import com.pd.ehr.Json.Dto.Fo;
+import com.pd.ehr.Json.Dto.Vo;
 import com.pd.ehr.Json.Service.DbService;
 
-public class Json extends DbAtom<VO, FO, Dao,  DbService>
+import net.sf.json.JSONObject;
+
+public class Json extends DbAtom<Vo, Fo, Dao, DbService>
 {
     public static class Service
     {
         public static class WebService
         {
-            public String json(FO fo)
+            public String jsonStr(Fo fo)
             {
                 StringBuffer strBuf = new StringBuffer();
                 
@@ -49,9 +51,15 @@ public class Json extends DbAtom<VO, FO, Dao,  DbService>
                 
                 return strBuf.toString();
             }
+            
+            public JSONObject json(Fo fo)
+            {
+                String jsonStr = jsonStr(fo);
+                return JSONObject.fromString(jsonStr);
+            }
         }
         
-        public static class DbService implements IDbService<VO, FO, Dao>
+        public static class DbService implements IDbService<Vo, Fo, Dao>
         {
             
         }
@@ -59,22 +67,22 @@ public class Json extends DbAtom<VO, FO, Dao,  DbService>
     
     public static class Dto
     {
-        public static class VO extends EhrDataBaseVO
+        public static class Vo extends EhrDataBaseVO
         {
             protected String title;
             
             protected EhrObject author;
         }
         
-        public static class FO extends VO implements IEhrFilterVO
+        public static class Fo extends Vo implements IEhrFilterVO
         {
             private String url;
-
+            
             public String getUrl()
             {
                 return url;
             }
-
+            
             public void setUrl(String url)
             {
                 this.url = url;
@@ -82,17 +90,16 @@ public class Json extends DbAtom<VO, FO, Dao,  DbService>
         }
     }
     
-    public static interface Dao extends IDao<VO, FO>
+    public static interface Dao extends IDao<Vo, Fo>
     {
         
     }
-    
     
     public static class Action
     {
         public static class ListNewsAction
         {
-            public List<VO> list(FO fo)
+            public List<Vo> list(Fo fo)
             {
                 return null;
             }
