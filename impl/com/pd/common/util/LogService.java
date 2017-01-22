@@ -1,7 +1,7 @@
 package com.pd.common.util;
 
 import com.pd.common.exception.CommonException;
-import com.pd.ehr.base.atom.EhrDate;
+import com.pd.ehr.EhrDate;
 
 public class LogService
 {
