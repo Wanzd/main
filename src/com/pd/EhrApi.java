@@ -8,6 +8,18 @@ import com.pd.Base.PageList;
 
 public class EhrApi
 {
+    public static class Agent
+    {
+        public static interface ISender<_Msg>
+        {
+            void send(_Msg _msg);
+        }
+        
+        public static interface ITask
+        {
+            void execute(Object _in);
+        }
+    }
     
     public static class Builder
     {

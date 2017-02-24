@@ -71,28 +71,32 @@ public class Weather
         }
     }
     
-    
     public static class Dto
     {
         public static class WeatherVo extends EhrDataBaseVO
         {
             protected String title;
             
-            protected EhrObject author;
-        }
-        
-        public static class WeatherFo extends WeatherVo implements IEhrFilterVO
-        {
-            private Date date;
+            public String getTitle()
+            {
+                return title;
+            }
             
-            private LocationVo location;
+            public void setTitle(String title)
+            {
+                this.title = title;
+            }
+            
+            protected Date date;
+            
+            protected LocationVo location;
             
             public Date getDate()
             {
                 return date;
             }
             
-            public WeatherFo setDate(Date date)
+            public WeatherVo setDate(Date date)
             {
                 this.date = date;
                 return this;
@@ -103,11 +107,22 @@ public class Weather
                 return location;
             }
             
-            public WeatherFo setLocation(LocationVo location)
+            public WeatherVo setLocation(LocationVo location)
             {
                 this.location = location;
                 return this;
             }
+            
+            @Override
+            public String toString()
+            {
+                return String.format("city:%s,date:%s,title:%s", location.getName(), EhrDate.getDate(date), title);
+            }
+        }
+        
+        public static class WeatherFo extends WeatherVo implements IEhrFilterVO
+        {
+            
         }
     }
     
@@ -130,7 +145,6 @@ public class Weather
         }
     }
     
-    
     public static class Builder
     {
         public static class FromBaidu implements IBuilder<WeatherFo, WeatherVo>
@@ -139,11 +153,12 @@ public class Weather
             @Override
             public WeatherVo build(WeatherFo _in)
             {
-                String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=武汉&output=json&ak=W69oaDTCfuGwzNwmtVvgWfGH";
+                String locationName = _in.getLocation().getName();
+                String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?output=json&ak=W69oaDTCfuGwzNwmtVvgWfGH&location=" + locationName;
                 Json.Dto.Fo jsonFo = new Json.Dto.Fo().setUrl(baiduUrl);
                 JSONObject json = JsonUtil.json(jsonFo);
                 Show.ln(json);
-                return null;
+                return new WeatherVo();
             }
             
         }
@@ -153,7 +168,9 @@ public class Weather
     {
         public void testLocalTodayWeather()
         {
-            WeatherFo fo = new WeatherFo().setDate(new Date()).setLocation(LocationUtil.getCurLocation());
+            WeatherFo fo = new WeatherFo();
+            fo.setDate(new Date());
+            fo.setLocation(LocationUtil.getCurLocation());
             WeatherVo weatherVo = WeatherUtil.r(fo);
             Show.ln(weatherVo);
         }
