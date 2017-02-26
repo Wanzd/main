@@ -1,4 +1,4 @@
-package com.pd.ehr.app.weather.dto;
+package com.pd.ehr.atom.weather.dto;
 
 import com.pd.base.EhrApi.Builder.IBuilder;
 
