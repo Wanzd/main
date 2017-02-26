@@ -10,6 +10,7 @@ import com.pd.EhrApi.Builder.IBuilder;
 import com.pd.EhrApi.Db.IDao;
 import com.pd.EhrLocation.Dto.LocationVo;
 import com.pd.EhrLocation.LocationUtil;
+import com.pd.ehr.EhrDateImpl.DateSdf;
 import com.pd.ehr.Json.JsonUtil;
 import com.pd.ehr.Weather.Builder.FromBaidu;
 import com.pd.ehr.Weather.Dto.WeatherFo;
@@ -116,7 +117,7 @@ public class Weather
             @Override
             public String toString()
             {
-                return String.format("city:%s,date:%s,title:%s", location.getName(), EhrDate.getDate(date), title);
+                return String.format("city:%s,date:%s,title:%s", location.getName(), DateSdf.Date.format(date), title);
             }
         }
         

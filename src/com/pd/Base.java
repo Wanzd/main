@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.pd.Base.EhrBaseModule.IDao;
-import com.pd.Base.EhrBaseModule.IDatabaseService;
-import com.pd.ehr.EhrTestCase;
-
 public class Base
 {
+    
     public static class PageList<T>
     {
         private List<T> list;
@@ -341,64 +338,6 @@ public class Base
         public void setNewV(_VO newV)
         {
             this.newV = newV;
-        }
-        
-    }
-    
-    @Deprecated
-    public static class EhrBaseModule<_VO extends EhrDataBaseVO, _FO extends IEhrFilterVO, _Dao extends IDao<_VO, _FO>, _Service extends IDatabaseService<_VO, _FO, _Dao>, _Test extends EhrTestCase>
-    {
-        public static interface IDao<_VO extends EhrDataBaseVO, _FO extends IEhrFilterVO>
-        {
-            long nextSeq();
-            
-            _VO r(_FO vo);
-            
-            int c(_VO vo);
-            
-            int u(_VO vo);
-            
-            int d(_VO vo);
-            
-            PageList<_VO> p(_FO fo);
-        }
-        
-        public interface IValidator<_VO, _FO, _Dao>
-        {
-            
-        }
-        
-        public interface IDatabaseService<_VO extends EhrDataBaseVO, _FO extends IEhrFilterVO, _Dao extends IDao<_VO, _FO>>
-        {
-            default _Dao getDao()
-            {
-                return null;
-            };
-            
-            default _VO r(_FO vo)
-            {
-                return getDao().r(vo);
-            };
-            
-            default int c(_VO vo)
-            {
-                return getDao().c(vo);
-            };
-            
-            default int u(_VO vo)
-            {
-                return getDao().u(vo);
-            };
-            
-            default int d(_VO vo)
-            {
-                return getDao().d(vo);
-            };
-            
-            default PageList<_VO> p(_FO fo)
-            {
-                return getDao().p(fo);
-            };
         }
         
     }

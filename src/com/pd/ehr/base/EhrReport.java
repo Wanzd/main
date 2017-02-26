@@ -1,53 +1,61 @@
 package com.pd.ehr.base;
 
+import com.pd.EhrApi.Builder.IBuilder;
+import com.pd.ehr.base.EhrReport.Dto.EhrReportVo;
+
 public class EhrReport
 {
-    public static class VO
+    
+    public static enum ReportChannel implements IBuilder<Object, Dto.EhrReportVo>
     {
-        private String name;
-        
-        private String rule;
-        
-        private String xml;
-        
-        private String xsl;
-        
-        public String getName()
+        DailyCommon();
+        @Override
+        public EhrReportVo build(Object _in)
         {
-            return name;
+            // TODO Auto-generated method stub
+            return null;
         }
         
-        public String getRule()
-        {
-            return rule;
-        }
-        
-        public String getXml()
-        {
-            return xml;
-        }
-        
-        public String getXsl()
-        {
-            return xsl;
-        }
-        
-        public VO(String name, String rule, String xml, String xsl)
-        {
-            this.name = name;
-            this.rule = rule;
-            this.xml = xml;
-            this.xsl = xsl;
-        }
     }
     
-    public static class Service
+    public static class Dto
     {
-        public static class EhrReportService
+        public static class EhrReportVo
         {
-            public static String report(VO vo)
+            private String name;
+            
+            private String rule;
+            
+            private String xml;
+            
+            private String xsl;
+            
+            public String getName()
             {
-                return vo.getXml();
+                return name;
+            }
+            
+            public String getRule()
+            {
+                return rule;
+            }
+            
+            public String getXml()
+            {
+                return xml;
+            }
+            
+            public String getXsl()
+            {
+                return xsl;
+            }
+            
+            public EhrReportVo(String name, String rule, String xml, String xsl)
+            {
+                this.name = name;
+                this.rule = rule;
+                this.xml = xml;
+                this.xsl = xsl;
             }
         }
     }

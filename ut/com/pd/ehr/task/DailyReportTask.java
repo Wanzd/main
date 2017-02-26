@@ -2,6 +2,8 @@ package com.pd.ehr.task;
 
 import com.pd.EhrApi.Agent.ITask;
 import com.pd.ehr.EhrLog;
+import com.pd.ehr.EhrMail;
+import com.pd.ehr.base.EhrReport;
 
 /**
  * 
@@ -20,6 +22,7 @@ public class DailyReportTask implements ITask
     {
         EhrLog.start();
     }
+    
     public static void main(String[] args)
     {
         new DailyReportTask().execute(null);

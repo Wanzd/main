@@ -14,16 +14,7 @@ public class EhrLog
     
     public static void start()
     {
-        debug("start:" + Helper.location());
+        debug("start:" + EhrLogImpl.location());
     }
     
-    static class Helper
-    {
-        public static String location()
-        {
-            Exception exception = new Exception();
-            StackTraceElement stackTraceElement = exception.getStackTrace()[2];
-            return String.format("%s.%s", stackTraceElement.getClassName(), stackTraceElement.getMethodName());
-        }
-    }
 }
