@@ -1,9 +1,9 @@
 package com.pd.ehr.task;
 
-import com.pd.EhrApi.Agent.ITask;
-import com.pd.ehr.EhrLog;
-import com.pd.ehr.EhrMail;
-import com.pd.ehr.base.EhrReport;
+import com.pd.base.EhrApi.Agent.ITask;
+import com.pd.ehr.util.EhrLog;
+import com.pd.ehr.util.EhrMail;
+import com.pd.ehr.util.EhrReport;
 
 /**
  * 
