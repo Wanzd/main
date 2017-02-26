@@ -1,10 +1,9 @@
-package com.pd.ehr.base.date.impl;
+package com.pd.ehr.quark.location.impl;
 
 import com.pd.base.EhrApi.Builder.IBuilder;
-import com.pd.base.location.EhrLocation.Dto.LocationFo;
-import com.pd.base.location.EhrLocation.LocationType;
-import com.pd.base.location.dto.LocationVo;
-import com.pd.ehr.util.Ip.IpUtil;
+import com.pd.ehr.ip.util.IpUtil;
+import com.pd.ehr.quark.location.vo.LocationFo;
+import com.pd.ehr.quark.location.vo.LocationVo;
 import com.pd.ehr.util.Json;
 import com.pd.ehr.util.Json.JsonUtil;
 import com.pd.ehr.util.Unicode;
@@ -29,7 +28,6 @@ class LocationFromBaiduBuilder implements IBuilder<LocationFo, LocationVo>
         JSONObject jsonObject = JSONObject.fromObject(cnStr);
         String[] addressArr = jsonObject.getString("address").split("\\|");
         LocationVo locationVo = new LocationVo();
-        locationVo.setType(LocationType.City);
         locationVo.setName(addressArr[2]);
         return locationVo;
     }

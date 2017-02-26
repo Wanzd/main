@@ -3,8 +3,8 @@ package com.pd.ehr.atom.weather.dto;
 import java.util.Date;
 
 import com.pd.base.Base.EhrDataBaseVO;
-import com.pd.base.location.dto.LocationVo;
 import com.pd.ehr.base.date.impl.EhrDateImpl.DateSdf;
+import com.pd.ehr.quark.location.vo.LocationVo;
 
 public class WeatherVo extends EhrDataBaseVO
 {
