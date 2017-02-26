@@ -1,9 +1,6 @@
 package com.pd.ehr.task;
 
 import com.pd.base.EhrApi.Agent.ITask;
-import com.pd.ehr.util.EhrLog;
-import com.pd.ehr.util.EhrMail;
-import com.pd.ehr.util.EhrReport;
 
 /**
  * 
@@ -20,7 +17,6 @@ public class DailyReportTask implements ITask
     @Override
     public void execute(Object _in)
     {
-        EhrLog.start();
     }
     
     public static void main(String[] args)

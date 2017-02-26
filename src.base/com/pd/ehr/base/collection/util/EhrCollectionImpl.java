@@ -1,4 +1,4 @@
-package com.pd.ehr.util.collection;
+package com.pd.ehr.base.collection.util;
 
 import java.util.Collection;
 

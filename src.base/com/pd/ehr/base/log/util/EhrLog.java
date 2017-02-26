@@ -1,4 +1,4 @@
-package com.pd.ehr.util;
+package com.pd.ehr.base.log.util;
 
 public class EhrLog
 {
