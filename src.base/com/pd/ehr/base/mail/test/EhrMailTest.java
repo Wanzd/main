@@ -4,7 +4,7 @@ import org.apache.commons.mail.EmailException;
 import org.junit.Test;
 
 import com.pd.ehr.base.mail.dto.EhrMailVo;
-import com.pd.ehr.base.mail.util.EhrMailUtil;
+import com.pd.ehr.base.mail.impl.MailChannel;
 
 public class EhrMailTest
 {
@@ -14,8 +14,9 @@ public class EhrMailTest
     {
         EhrMailVo ehrMailVo = new EhrMailVo();
         ehrMailVo.addTo("8363800@163.com");
-        ehrMailVo.setSubject("testAtomEhrMail");
-        ehrMailVo.setMsg("test");
-        EhrMailUtil.send(ehrMailVo);
+        ehrMailVo.setSubject("wzd测试邮件");
+        ehrMailVo.setMsg("今天天气不错");
+//        MailChannel.NetEaseByApache.send(ehrMailVo);
+        MailChannel.NetEaseBySession.send(ehrMailVo);
     }
 }

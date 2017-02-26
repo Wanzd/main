@@ -1,4 +1,4 @@
-package com.pd.ehr.user.util;
+package com.pd.ehr.quark.user.util;
 
 public class UserUtil
 {

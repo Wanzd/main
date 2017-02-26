@@ -43,7 +43,6 @@ class MailFromNetEaseSessionSender implements ISender<EhrMailVo>
             msg.setFrom(new InternetAddress(senderVo.getFrom()));
             msg.setSubject(_mailVo.getSubject());
             msg.setContent("test", "text/html;charset=utf-8");
-            ;
             Transport.send(msg);
         }
         catch (MessagingException e)
