@@ -1,8 +1,8 @@
 package com.pd.ehr.atom.weather.util;
 
-import com.pd.ehr.atom.weather.dto.WeatherChannel;
 import com.pd.ehr.atom.weather.dto.WeatherFo;
 import com.pd.ehr.atom.weather.dto.WeatherVo;
+import com.pd.ehr.atom.weather.impl.WeatherChannel;
 
 public class WeatherUtil
 {

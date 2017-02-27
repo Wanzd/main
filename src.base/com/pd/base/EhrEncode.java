@@ -11,7 +11,6 @@ public class EhrEncode
             public static class ToCn implements IBuilder<String, String>
             {
                 
-                @Override
                 public String build(String _in)
                 {
                     // TODO Auto-generated method stub

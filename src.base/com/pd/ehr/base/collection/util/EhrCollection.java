@@ -16,7 +16,6 @@ public class EhrCollection
             validRule = _validRule;
         }
         
-        @Override
         public boolean valid(_In _in)
         {
             // TODO Auto-generated method stub

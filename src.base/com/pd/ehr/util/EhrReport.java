@@ -8,8 +8,9 @@ public class EhrReport
     
     public static enum ReportChannel implements IBuilder<Object, Dto.EhrReportVo>
     {
-        DailyCommon();
-        @Override
+        DailyCommon(){
+            
+        };
         public EhrReportVo build(Object _in)
         {
             // TODO Auto-generated method stub
