@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.pd.base.Base.EhrDataBaseVO;
 import com.pd.ehr.base.date.impl.EhrDateImpl.DateSdf;
-import com.pd.ehr.quark.location.vo.LocationVo;
+import com.pd.ehr.quark.location.LocationVo;
 
 public class WeatherFo extends EhrDataBaseVO
 {

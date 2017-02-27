@@ -5,7 +5,7 @@ import java.util.Date;
 import com.pd.ehr.atom.weather.dto.WeatherFo;
 import com.pd.ehr.atom.weather.dto.WeatherVo;
 import com.pd.ehr.atom.weather.util.WeatherUtil;
-import com.pd.ehr.quark.location.util.LocationUtil;
+import com.pd.ehr.quark.location.LocationUtil;
 import com.pd.ehr.util.EhrTestCase;
 import com.pd.ehr.util.Show;
 

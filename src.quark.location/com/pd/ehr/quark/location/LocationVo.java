@@ -1,4 +1,4 @@
-package com.pd.ehr.quark.location.vo;
+package com.pd.ehr.quark.location;
 
 import com.pd.base.Base.EhrDataBaseVO;
 
