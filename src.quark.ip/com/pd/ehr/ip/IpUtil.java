@@ -1,6 +1,4 @@
-package com.pd.ehr.ip.util;
-
-import com.pd.ehr.ip.impl.IpChannel;
+package com.pd.ehr.ip;
 
 public class IpUtil
 {

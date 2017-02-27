@@ -1,7 +1,7 @@
 package com.pd.ehr.quark.location;
 
 import com.pd.base.EhrApi.Builder.IBuilder;
-import com.pd.ehr.ip.util.IpUtil;
+import com.pd.ehr.ip.IpUtil;
 import com.pd.ehr.util.Json;
 import com.pd.ehr.util.Unicode;
 import com.pd.ehr.util.Json.JsonUtil;

@@ -1,11 +1,10 @@
-package com.pd.ehr.ip.impl;
+package com.pd.ehr.ip;
 
 import com.pd.base.EhrApi.Builder.IBuilder;
-import com.pd.ehr.ip.vo.IpVo;
 import com.pd.ehr.util.Json;
 import com.pd.ehr.util.Json.JsonUtil;
 
-public enum IpChannel implements IBuilder<String, IpVo>
+enum IpChannel implements IBuilder<String, IpVo>
 {
     Ip138
     {

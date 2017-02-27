@@ -1,4 +1,4 @@
-package com.pd.ehr.ip.vo;
+package com.pd.ehr.ip;
 
 import com.pd.base.Base.EhrDataBaseVO;
 
