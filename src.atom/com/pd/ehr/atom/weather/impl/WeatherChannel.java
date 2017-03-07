@@ -1,8 +1,8 @@
 package com.pd.ehr.atom.weather.impl;
 
 import com.pd.base.EhrApi.Builder.IBuilder;
-import com.pd.ehr.atom.weather.dto.WeatherFo;
-import com.pd.ehr.atom.weather.dto.WeatherVo;
+import com.pd.ehr.atom.weather.WeatherFo;
+import com.pd.ehr.atom.weather.WeatherVo;
 import com.pd.ehr.util.Json;
 import com.pd.ehr.util.Json.JsonUtil;
 import com.pd.ehr.util.Show;

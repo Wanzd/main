@@ -1,10 +1,7 @@
-package com.pd.ehr.atom.weather.test;
+package com.pd.ehr.atom.weather;
 
 import java.util.Date;
 
-import com.pd.ehr.atom.weather.dto.WeatherFo;
-import com.pd.ehr.atom.weather.dto.WeatherVo;
-import com.pd.ehr.atom.weather.util.WeatherUtil;
 import com.pd.ehr.quark.location.LocationUtil;
 import com.pd.ehr.util.EhrTestCase;
 import com.pd.ehr.util.Show;
@@ -16,7 +13,7 @@ public class WeatherTest extends EhrTestCase
         WeatherFo fo = new WeatherFo();
         fo.setDate(new Date());
         fo.setLocation(LocationUtil.getCurLocation());
-        WeatherVo weatherVo = WeatherUtil.r(fo);
+        WeatherVo weatherVo = Weather.r(fo);
         Show.ln(weatherVo);
     }
 }

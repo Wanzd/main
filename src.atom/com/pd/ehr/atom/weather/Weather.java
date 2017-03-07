@@ -1,10 +1,8 @@
-package com.pd.ehr.atom.weather.util;
+package com.pd.ehr.atom.weather;
 
-import com.pd.ehr.atom.weather.dto.WeatherFo;
-import com.pd.ehr.atom.weather.dto.WeatherVo;
 import com.pd.ehr.atom.weather.impl.WeatherChannel;
 
-public class WeatherUtil
+public class Weather
 {
     public static WeatherVo r(WeatherFo _fo)
     {

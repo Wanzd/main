@@ -1,4 +1,4 @@
-package com.pd.ehr.atom.weather.dto;
+package com.pd.ehr.atom.weather;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import com.pd.base.Base.EhrDataBaseVO;
 import com.pd.ehr.base.date.impl.EhrDateImpl.DateSdf;
 import com.pd.ehr.quark.location.LocationVo;
 
-public class WeatherFo extends EhrDataBaseVO
+public class WeatherVo extends EhrDataBaseVO
 {
     protected String title;
     
@@ -29,7 +29,7 @@ public class WeatherFo extends EhrDataBaseVO
         return date;
     }
     
-    public WeatherFo setDate(Date date)
+    public WeatherVo setDate(Date date)
     {
         this.date = date;
         return this;
@@ -40,7 +40,7 @@ public class WeatherFo extends EhrDataBaseVO
         return location;
     }
     
-    public WeatherFo setLocation(LocationVo location)
+    public WeatherVo setLocation(LocationVo location)
     {
         this.location = location;
         return this;
