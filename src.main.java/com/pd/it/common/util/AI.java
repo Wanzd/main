@@ -53,14 +53,16 @@ public class AI
         return inOut;
     }
     
-    public static <In, Out> Out build(In in, Class<Out> outClass, IBuilder<In,Out> builder)
+    public static <In, Out> Out build(In in, Class<Out> outClass, IBuilder<In, Out> builder)
     {
         return BuildUtil.build(in, outClass, builder);
     }
+    
     public static <In, Out> Out build(In in, Class<Out> outClass, String builderBean)
     {
         return BuildUtil.build(in, outClass, builderBean);
     }
+    
     public static <In> boolean valid(In in, Class<In> inClass, String beansStr)
     {
         return ValidUtil.valid(in, inClass, beansStr);
@@ -88,5 +90,10 @@ public class AI
             outMap.put(in[i].toString(), in[i + 1]);
         }
         return outMap;
+    }
+    
+    public static Object js(String string)
+    {
+        return JsUtil.js(string);
     }
 }

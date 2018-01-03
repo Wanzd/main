@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src.base"/>
 	<classpathentry kind="src" path="src.quark"/>
-	<classpathentry kind="src" path="src.atom"/>
 	<classpathentry kind="src" path="ut"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="src.main.java"/>
