@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src.base"/>
-	<classpathentry kind="src" path="src.quark"/>
-	<classpathentry kind="src" path="src.atom"/>
+	<classpathentry kind="src" path="api"/>
 	<classpathentry kind="src" path="ut"/>
+	<classpathentry kind="src" path="atom"/>
+	<classpathentry kind="src" path="impl"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="src" path="src.main.java"/>
-	<classpathentry kind="src" path="src.main.resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/common.lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/common-lib"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/db"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mybatis"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/pd.lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring.security"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tomcat"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

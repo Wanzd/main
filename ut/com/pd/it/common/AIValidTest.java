@@ -6,31 +6,31 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import validRule.java.lang.String.Mail;
-
 import com.pd.it.common.util.AI;
+
+import validRule.java.lang.String.Mail;
 
 public class AIValidTest
 {
     @Test
     public void testValidStringNotNull()
     {
-        assertEquals(true, AI.valid("test", String.class, "!Null"));
-        assertEquals(false, AI.valid(null, String.class, "!Null"));
+        assertEquals(true, AI.valid(String.class, "test", "!Null"));
+        assertEquals(false, AI.valid(String.class, null, "!Null"));
     }
     
     @Test
     public void testValidStringIsMail()
     {
-        assertEquals(false, AI.valid("11", String.class, "Mail"));
-        assertEquals(true, AI.valid("1@1", String.class, "Mail"));
+        assertEquals(false, AI.valid(String.class, "11", "Mail"));
+        assertEquals(true, AI.valid(String.class, "1@1", "Mail"));
     }
     
     @Test
     public void testValidStringIsNull()
     {
-        assertEquals(false, AI.valid("1@1", String.class, "Null"));
-        assertEquals(true, AI.valid(null, String.class, "Null"));
+        assertEquals(false, AI.valid(String.class, "1@1", "Null"));
+        assertEquals(true, AI.valid(String.class, null, "Null"));
     }
     
     @Test
@@ -38,33 +38,36 @@ public class AIValidTest
     {
         for (int i = 0; i < 1000000; i++)
         {
-            assertEquals(true, AI.valid("1@1", String.class, "Mail"));
-            assertEquals(false, AI.valid("111", String.class, "Mail"));
+            assertEquals(true, AI.valid(String.class, "1@1", "Mail"));
+            assertEquals(false, AI.valid(String.class, "111", "Mail"));
         }
     }
+    
     @Test
     public void testValidStringMail2()
     {
         for (int i = 0; i < 1000000; i++)
         {
-            assertEquals(true, AI.valid("1@1", String.class, new Mail()));
-            assertEquals(false, AI.valid("111", String.class, new Mail()));
+            assertEquals(true, AI.<String> valid(String.class, "1@1", new Mail()));
+            assertEquals(false, AI.valid(String.class, "111", new Mail()));
         }
     }
+    
     @Test
     public void testValidStringMail3()
     {
         Mail rule = new Mail();
         for (int i = 0; i < 1000000; i++)
         {
-            assertEquals(true, AI.valid("1@1", String.class, rule));
-            assertEquals(false, AI.valid("111", String.class, rule));
+            assertEquals(true, AI.valid(String.class, "1@1", rule));
+            assertEquals(false, AI.valid(String.class, "111", rule));
         }
     }
+    
     @Test
     public void testValidStringComplex()
     {
-        assertEquals(true, AI.valid("1@1", String.class, "!Null,Mail"));
+        assertEquals(true, AI.valid(String.class, "1@1", "!Null,Mail"));
     }
     
     @Test
