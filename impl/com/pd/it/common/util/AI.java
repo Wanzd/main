@@ -1,5 +1,6 @@
 package com.pd.it.common.util;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,9 +24,14 @@ public class AI
         return ObjectUtil.u(inOut, in);
     }
     
+    public static BigInteger bigInt(String expression, Map<Object, Object> map)
+    {
+        return BigMathUtil.bigInt(expression, map);
+    }
+    
     public static <InOut, Attr> InOut s(InOut inOut, String k, Attr v)
     {
-       return ObjectUtil.s(inOut, k, v);
+        return ObjectUtil.s(inOut, k, v);
     }
     
     public static <MsgVO, Sender> String send(MsgVO msgVO, ISender<MsgVO> sender)
@@ -33,19 +39,19 @@ public class AI
         return sender.send(msgVO);
     }
     
-    /** ¶ÔÈë²Îin½øÐÐbuildersµÄ±éÀú´¦ÀíµÃµ½out */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½inï¿½ï¿½ï¿½ï¿½buildersï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½out */
     public static <In, Out> Out bridge(In in, IBuilder<?, ?>... builders)
     {
         return BuildUtil.bridge(in, builders);
     }
     
-    /** ¶ÔÈë²Îin ½øÐÐbridge´¦ÀíµÃµ½out */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½in ï¿½ï¿½ï¿½ï¿½bridgeï¿½ï¿½ï¿½ï¿½Ãµï¿½out */
     public static <In, Out> Out bridge(In in, IBridge<In, Out> bridge)
     {
         return BuildUtil.bridge(in, bridge);
     }
     
-    public static <In, Out> Out build(In in, Class<Out> outClass, IBuilder<In, Out> builder)
+    public static <In, Out> Out build(Class<Out> outClass, IBuilder<In, Out> builder, In in)
     {
         return BuildUtil.build(in, outClass, builder);
     }
@@ -70,18 +76,27 @@ public class AI
         return in != null ? in : defaultValue;
     }
     
-    public static Map<String, Object> map(Object... in)
+    public static <K, V> Map<K, V> map(Map<K, V> map, Object... in)
     {
-        Map<String, Object> outMap = new HashMap<String, Object>();
+        if (map == null)
+        {
+            map = new HashMap<K, V>();
+        }
         if (in.length % 2 != 0)
         {
-            return outMap;
+            return map;
         }
         for (int i = 0; i < in.length; i += 2)
         {
-            outMap.put(in[i].toString(), in[i + 1]);
+            map.put((K)in[i], (V)in[i + 1]);
         }
-        return outMap;
+        return map;
+    }
+    
+    public static <K, V> Map<K, V> map(Object... in)
+    {
+        
+        return map(new HashMap<K, V>(), in);
     }
     
     public static Object js(String string)

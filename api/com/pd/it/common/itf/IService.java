@@ -1,13 +1,16 @@
+
 package com.pd.it.common.itf;
 
-public interface IService<Vo, Fo extends Vo>
+public interface IService<VO>
 {
-    int c(Vo vo);
+    String c(VO vo);
     
-    Vo r(Fo fo);
+    VO r(VO fo);
     
-    int d(Vo vo);
+    String d(VO vo);
     
-    int u(Vo vo);
+    String u(VO vo);
+    
+    String p(VO fo);
     
 }

@@ -2,15 +2,20 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
-public interface IBatchService<Vo, Fo extends Vo>
+import com.pd.it.common.vo.BatchList;
+
+public interface IBatchService<VO>
 {
     
-    int cs(List<Vo> list);
+    String cs(List<VO> list);
     
-    List<Vo> rs(Fo fo);
+    String ra();
     
-    int ds(List<Vo> list);
+    String rs(VO fo);
     
-    int us(List<Vo> list);
+    String ds(List<VO> list);
     
+    String us(List<VO> list);
+    
+    String batch(BatchList<VO> vo);
 }

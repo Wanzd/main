@@ -1,9 +1,21 @@
 package com.pd.it.common.util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ObjectUtil
 {
+    private static Map<Class, Class> sClassKV = initShortClassKV();
+    
+    private static Map<Class, Class> initShortClassKV()
+    {
+        Map<Class, Class> map = null;
+        map = AI.<Class, Class> map(Integer.class, int.class, Long.class, long.class);
+        return map;
+    }
+    
     public static <Out> Out c(Class<Out> outClass, Object... in)
     {
         Out rsVO = null;
@@ -43,7 +55,16 @@ public class ObjectUtil
         }
         catch (Exception e)
         {
-            LogUtil.err(e);
+            Method method;
+            try
+            {
+                method = class1.getMethod("set" + StringUtil.cap(k), sClassKV.get(v.getClass()));
+                method.invoke(inOut, v);
+            }
+            catch (Exception e1)
+            {
+                e1.printStackTrace();
+            }
         }
         return inOut;
     }

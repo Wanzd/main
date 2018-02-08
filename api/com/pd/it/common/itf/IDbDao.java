@@ -2,22 +2,32 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
-public interface IDbDao<VO, FO extends VO>
+import com.pd.it.common.vo.PageList;
+import com.pd.it.common.vo.PageVO;
+import com.pd.it.db.DbVO;
+
+public interface IDbDao
 {
     // @SelectProvider(method = "c", type = AiSqlProvider.class)
-    Integer c(VO vo);
+    int c(DbVO vo);
     
-    VO r(FO fo);
+    int cs(List<DbVO> vo);
     
-    int u(VO vo);
+    DbVO r(DbVO fo);
+    
+    int u(DbVO vo);
     
     // @SelectProvider(method = "d", type = AiSqlProvider.class)
-    int d(VO vo);
+    int d(DbVO vo);
     
-    int ds(List<VO> vo);
+    int ds(List<DbVO> vo);
     
-    List<VO> ra();
+    List<DbVO> ra();
     
-    List<VO> rs(FO fo);
+    List<DbVO> rs(DbVO fo);
+    
+    int pCount(DbVO fo, PageVO page);
+    
+    PageList<DbVO> p(DbVO fo);
     
 }
