@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="api"/>
+=======
+	<classpathentry kind="src" path="src.quark"/>
+>>>>>>> branch 'master' of https://github.com/wanzhengdong/ehr.git
 	<classpathentry kind="src" path="ut"/>
 	<classpathentry kind="src" path="atom"/>
 	<classpathentry kind="src" path="impl"/>
