@@ -50,8 +50,6 @@ public class AIValidTest
     @Test
     public void testBuild()
     {
-        String build = AI.build("test", String.class, "Cap");
-        assertEquals("Test", build);
     }
     
     @Test

@@ -11,6 +11,5 @@ public class AIBuildTest
     @Test
     public void testBuildStringCap()
     {
-        assertEquals("Test", AI.build("test", String.class, "Cap"));
     }
 }

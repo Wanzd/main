@@ -2,12 +2,12 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
-import com.pd.it.db.DbVO;
+import com.pd.it.common.vo.VO;
 
 public interface IDbTreeDao
 {
-    List<DbVO> root(DbVO fo);
+    List<VO> root(VO fo);
     
-    List<DbVO> sub(DbVO fo);
+    List<VO> sub(VO fo);
     
 }

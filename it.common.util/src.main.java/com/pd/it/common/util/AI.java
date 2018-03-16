@@ -2,6 +2,7 @@ package com.pd.it.common.util;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
@@ -10,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.pd.it.common.itf.IBridge;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.itf.ISender;
+import com.pd.it.common.itf.ITask;
 import com.pd.it.common.itf.IValidRule;
 
 public class AI
@@ -49,14 +51,9 @@ public class AI
         return BuildUtil.bridge(in, bridge);
     }
     
-    public static <In, Out> Out build(Class<Out> outClass, IBuilder<In, Out> builder, In in)
+    public static <In, Out> Out build(In in, IBuilder<In, Out> builder)
     {
-        return BuildUtil.build(in, outClass, builder);
-    }
-    
-    public static <In, Out> Out build(In in, Class<Out> outClass, String builderBean)
-    {
-        return BuildUtil.build(in, outClass, builderBean);
+        return BuildUtil.build(in, builder);
     }
     
     public static <In> boolean valid(Class<In> inClass, In in, String beansStr)
@@ -112,5 +109,21 @@ public class AI
         }
         In bean = (In)ctx.getBean(beanName);
         return bean;
+    }
+    
+    public static void execute(ITask task)
+    {
+        List<ITask> subList = task.sub();
+        if (subList != null)
+        {
+            for (ITask itTask : subList)
+            {
+                itTask.execute();
+            }
+        }
+        else
+        {
+            task.execute();
+        }
     }
 }

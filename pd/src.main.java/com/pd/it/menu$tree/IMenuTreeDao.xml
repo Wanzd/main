@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.menu$tree.IMenuTreeDao">
+
+	<select id="root" resultType="VO">
+		SELECT id as "id",
+		parent_id as
+		"parentId",
+		parent_id as "pid",
+		cn as "cn",
+		en as "en",
+		cn as "text",
+		index_id as "indexId",
+		url as "url",
+		detail as "detail"
+		FROM Menu_t
+		where parent_id is null
+		or parent_id =''
+	</select>
+	<select id="sub" resultType="VO">
+		SELECT id as "id",
+		parent_id as
+		"parentId",
+		parent_id as "pid",
+		cn as "cn",
+		en as "en",
+		cn as "text",
+		index_id as "indexId",
+		url as "url",
+		detail as "detail"
+		FROM Menu_t
+		where
+		parent_id =#{id}
+	</select>
+</mapper>  

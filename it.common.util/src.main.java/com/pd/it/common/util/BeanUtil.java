@@ -6,7 +6,7 @@ import com.pd.it.common.itf.IValidRule;
 public class BeanUtil
 {
     
-    /** Í¨¹ý·´ÉäÕÒµ½Ö¸¶¨ÀàÐÍµÄbuilder */
+    /** Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½builder */
     public static <In, Out> IBuilder<In, Out> getBuilder(Class<Out> outClass, String builderBean)
     {
         String className = "builder." + outClass.getName() + "." + builderBean;
@@ -19,15 +19,7 @@ public class BeanUtil
                 return (IBuilder<In, Out>)newInstance;
             }
         }
-        catch (ClassNotFoundException e)
-        {
-            LogUtil.err(e);
-        }
-        catch (InstantiationException e)
-        {
-            LogUtil.err(e);
-        }
-        catch (IllegalAccessException e)
+        catch (Exception e)
         {
             LogUtil.err(e);
         }
@@ -46,15 +38,7 @@ public class BeanUtil
                 return (IValidRule<In>)newInstance;
             }
         }
-        catch (ClassNotFoundException e)
-        {
-            LogUtil.err(e);
-        }
-        catch (InstantiationException e)
-        {
-            LogUtil.err(e);
-        }
-        catch (IllegalAccessException e)
+        catch (Exception e)
         {
             LogUtil.err(e);
         }
