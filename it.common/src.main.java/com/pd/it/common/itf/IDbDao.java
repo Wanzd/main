@@ -4,30 +4,30 @@ import java.util.List;
 
 import com.pd.it.common.vo.PageList;
 import com.pd.it.common.vo.PageVO;
-import com.pd.it.db.DbVO;
+import com.pd.it.common.vo.VO;
 
 public interface IDbDao
 {
     // @SelectProvider(method = "c", type = AiSqlProvider.class)
-    int c(DbVO vo);
+    int c(VO vo);
     
-    int cs(List<DbVO> vo);
+    int cs(List<VO> vo);
     
-    DbVO r(DbVO fo);
+    VO r(VO fo);
     
-    int u(DbVO vo);
+    int u(VO vo);
     
     // @SelectProvider(method = "d", type = AiSqlProvider.class)
-    int d(DbVO vo);
+    int d(VO vo);
     
-    int ds(List<DbVO> vo);
+    int ds(List<VO> vo);
     
-    List<DbVO> ra();
+    List<VO> ra();
     
-    List<DbVO> rs(DbVO fo);
+    List<VO> rs(VO fo);
     
-    int pCount(DbVO fo, PageVO page);
+    int pCount(VO fo, PageVO page);
     
-    PageList<DbVO> p(DbVO fo);
+    PageList<VO> p(VO fo);
     
 }

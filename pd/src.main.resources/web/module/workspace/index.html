@@ -1,0 +1,60 @@
+<script type="text/javascript" src="module/user/index.js"
+	charset="utf-8"></script>
+<table id="dg"></table>
+<div id="dlg" class="easyui-dialog" style="padding: 10px 20px"
+	closed="true" buttons="#dlg-buttons">
+	<div class="ftitle">详细信息</div>
+	<form id="fm" method="post" novalidate>
+		<div class="fitem">
+			<label>Id:</label> <input name="id" class="easyui-textbox"
+				required="true" >
+		</div>
+		<div class="fitem">
+			<label>姓名:</label> <input name="name" class="easyui-textbox"
+				required="true">
+		</div>
+		<div class="fitem">
+			<label>性别:</label> <input name="sex" class="easyui-textbox"
+				required="true">
+		</div>
+		<div class="fitem">
+			<label>电话:</label> <input name="phoneNumber" class="easyui-textbox">
+		</div>
+	</form>
+</div>
+<div id="dlg-buttons">
+	<a href="javascript:void(0)" class="easyui-linkbutton c6"
+		iconCls="icon-ok" onclick="$build('db.s')" style="width: 90px">保存</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton"
+		iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+		style="width: 90px">取消</a>
+</div>
+<style type="text/css">
+#fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+
+.fitem input {
+	width: 160px;
+}
+</style>
+</body>
+</html>

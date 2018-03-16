@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.user.IUserDao">
+
+	<select id="ra" parameterType="VO" resultType="VO">
+		SELECT
+		id,
+		name,sex
+		FROM User_base_t
+	</select>
+	<select id="r" parameterType="VO" resultType="VO">
+		SELECT id,
+		name,
+		sex,
+		phone_Number
+		FROM User_t
+		WHERE id=#{id}
+	</select>
+	<select id="pCount" resultType="int">
+		select count(0)
+		from user_t
+		<include refid="sql$p$filter" />
+	</select>
+	<select id="p" resultType="VO">
+		select id as "id",
+		name as "name",sex
+		as "sex",phone_Number as "phoneNumber",rownum rn
+		from
+		user_t
+	</select>
+	<select id="p$b" resultType="VO">
+		select t2.* from(
+		select t1.* from (
+		select id,
+		name,sex,phone_Number as
+		phoneNumber,rownum rn
+		from
+		user_t
+		<include refid="sql$p$filter" />
+		)t1
+		where #{end} >= t1.rn
+		)t2
+		where t2.rn >=#{start}
+	</select>
+	<update id="c" parameterType="VO" flushCache="true">
+		INSERT into
+		user_t(id,name,sex,phone_Number)
+		values(user_s.nextVal,#{name},#{sex},#{phoneNumber})
+	</update>
+	<update id="u" parameterType="VO">
+		UPDATE user_t
+		SET name=#{name},
+		sex=#{sex},
+		phone_Number=#{phoneNumber}
+		WHERE id=#{id}
+	</update>
+
+	<delete id="d" parameterType="VO">
+		DELETE
+		FROM
+		User_t
+		WHERE id=#{id}
+	</delete>
+
+	<sql id="sql$p$filter">
+		<where>
+			<if test='id != null'>
+				id=#{id}
+			</if>
+		</where>
+	</sql>
+</mapper>  

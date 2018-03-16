@@ -23,5 +23,10 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>maven</groupId>
+			<artifactId>maven-simian-plugin</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 	</dependencies>
 </project>
