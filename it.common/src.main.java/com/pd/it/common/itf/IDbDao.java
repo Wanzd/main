@@ -22,7 +22,7 @@ public interface IDbDao
     
     int ds(List<VO> vo);
     
-    List<VO> ra();
+    List<VO> ra(VO vo);
     
     List<VO> rs(VO fo);
     

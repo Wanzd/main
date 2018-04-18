@@ -5,7 +5,7 @@
 	<select id="rs" parameterType="VO" resultType="VO">
 		SELECT
 		field,
-		title,width
+		title,editor,width,align
 		FROM sys_grid_schema_t
 		where mid=#{gid}
 	</select>

@@ -6,13 +6,34 @@
 <link rel="stylesheet" type="text/css"
 	href="jquery-easyui-1.4.1/themes/icon.css" />
 <script data-main="grid" src="require.js" charset="utf-8"></script>
-<table id="dg"></table>
 
+
+<div id="searchBar">
+	<div id="tb" style="padding: 3px">
+		<span>Item ID:</span> <input id="itemid"
+			style="line-height: 26px; border: 1px solid #ccc"> <span>Product
+			ID:</span> <input id="productid"
+			style="line-height: 26px; border: 1px solid #ccc"> <a
+			href="#" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search</a>
+	</div>
+	<input class="easyui-searchbox"
+		data-options="prompt:'Please Input Value',menu:'#mm',searcher:doSearch"
+		style="width: 300px"></input>
+	<div id="mm">
+		<div data-options="name:'all',iconCls:'icon-ok'">All News</div>
+		<div data-options="name:'sports'">Sports News</div>
+	</div>
+	<script>
+		function doSearch(value, name) {
+
+		}
+	</script>
+</div>
 <table id="dg" class="easyui-datagrid" style="height: 100%;"
 	toolbar="#toolbar" pagination="true" rownumbers="true"
 	fitColumns="true" singleSelect="true"
 	data-options="fit:false,border:false,pageSize:5,pageList:[5,10,15,20]">
-	
+
 </table>
 <div id="toolbar">
 	<a href="javascript:void(0)" class="easyui-linkbutton"

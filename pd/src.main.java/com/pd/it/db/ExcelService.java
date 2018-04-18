@@ -19,14 +19,15 @@ import com.pd.it.db.dbvo.builder.Map2VO;
 public class ExcelService
 {
     @Autowired
-    private DbService dbService;
+    private RestService dbService;
     
     @ResponseBody
     @RequestMapping(value = "/import", method = {RequestMethod.GET,
         RequestMethod.POST}, produces = "text/html;charset=utf-8")
     public String in(@RequestParam List<VO> list)
     {
-        return dbService.us(list);
+        // return dbService.us(list);
+        return null;
     }
     
     @ResponseBody
@@ -36,6 +37,7 @@ public class ExcelService
     {
         
         VO vo = AI.build(in, new Map2VO());
-        return dbService.p(vo);
+        // return dbService.p(vo);
+        return null;
     }
 }

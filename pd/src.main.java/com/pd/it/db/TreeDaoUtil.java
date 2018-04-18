@@ -1,6 +1,7 @@
 package com.pd.it.db;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,11 +26,21 @@ public class TreeDaoUtil
     {
         try
         {
-            daoKV = new HashMap<String, IDbTreeDao>();
+            daoKV.clear();
             WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
             SqlSessionFactory sqlFactory = (SqlSessionFactory)ctx.getBean("sqlSessionFactory");
             sqlSession = sqlFactory.openSession();
-            daoKV.put("menu", (IDbTreeDao)sqlSession.getMapper(Class.forName("com.pd.it.menu$tree.IMenuTreeDao")));
+            IDbDao daoKvDao = (IDbDao)sqlSession.getMapper(Class.forName("com.pd.it.system.daoKv.IDaoKvDao"));
+            List<VO> ra = daoKvDao.ra(null);
+            for (VO eachVO : ra)
+            {
+                Object mapper = sqlSession.getMapper(Class.forName(eachVO.get("value").toString()));
+                if (mapper instanceof IDbTreeDao)
+                {
+                    daoKV.put(eachVO.get("id").toString(),
+                        (IDbTreeDao)sqlSession.getMapper(Class.forName(eachVO.get("value").toString())));
+                }
+            }
         }
         catch (ClassNotFoundException e)
         {

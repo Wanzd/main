@@ -1,4 +1,4 @@
-package com.pd.it.db;
+package com.pd.web.util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.pd.it.common.itf.IDbDao;
-import com.pd.it.common.itf.IDbTreeDao;
 import com.pd.it.common.vo.VO;
 
 public class DaoUtil
@@ -31,11 +30,15 @@ public class DaoUtil
             SqlSessionFactory sqlFactory = (SqlSessionFactory)ctx.getBean("sqlSessionFactory");
             sqlSession = sqlFactory.openSession();
             IDbDao daoKvDao = (IDbDao)sqlSession.getMapper(Class.forName("com.pd.it.system.daoKv.IDaoKvDao"));
-            List<VO> ra = daoKvDao.ra();
+            List<VO> ra = daoKvDao.ra(null);
             for (VO eachVO : ra)
             {
-                daoKV.put(eachVO.get("id").toString(),
-                    (IDbDao)sqlSession.getMapper(Class.forName(eachVO.get("value").toString())));
+                Object mapper = sqlSession.getMapper(Class.forName(eachVO.get("value").toString()));
+                if (mapper instanceof IDbDao)
+                {
+                    daoKV.put(eachVO.get("id").toString(),
+                        (IDbDao)sqlSession.getMapper(Class.forName(eachVO.get("value").toString())));
+                }
             }
         }
         catch (ClassNotFoundException e)

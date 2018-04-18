@@ -5,15 +5,14 @@
 	<select id="ra" parameterType="VO" resultType="VO">
 		SELECT
 		id,
-		name,sex
+		name,sex,birthday,father_id,mother_id
 		FROM User_base_t
 	</select>
 	<select id="r" parameterType="VO" resultType="VO">
 		SELECT id,
 		name,
-		sex,
-		phone_Number
-		FROM User_t
+		sex
+		FROM User_base_t
 		WHERE id=#{id}
 	</select>
 	<select id="pCount" resultType="int">

@@ -7,12 +7,18 @@
 		id,
 		en,cn
 		FROM Lookup_t
+		where
+		1=1
+		<if test="type!=null">
+			and type_id = #{type}
+		</if>
 	</select>
 	<select id="r" parameterType="VO" resultType="VO">
 		SELECT
 		id,
 		en,cn
-		FROM Lookup_t
+		FROM
+		Lookup_t
 		WHERE id=#{id}
 	</select>
 	<select id="pCount" resultType="int">

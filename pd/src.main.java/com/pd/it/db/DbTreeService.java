@@ -49,7 +49,8 @@ public class DbTreeService implements ITreeService
     @Override
     public String root(VO vo)
     {
-        List<VO> rsList = getDao(vo).root(vo);
+        IDbTreeDao dao = getDao(vo);
+        List<VO> rsList = dao.root(vo);
         String rsStr = JSON.toJSONString(rsList);
         return rsStr;
     }

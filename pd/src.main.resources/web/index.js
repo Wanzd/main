@@ -22,7 +22,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				id : "id",
 				text : "cn",
 				pIdKey : "parentId",
-				url : "dbTree/root?mid=menu",
+				url : "dbTree/root?mid=menuTree",
 				onClick : main.tabMenu
 			});
 		},
@@ -42,7 +42,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 			$.ajax({
 				type : "POST",
-				url : "dbTree/sub?mid=menu&id=" + treeItem.id,
+				url : "dbTree/sub?mid=menuTree&id=" + treeItem.id,
 				dataType : "JSON",
 				success : function(data) {
 					tree.refresh({
@@ -82,7 +82,8 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			if (treeItem.url == null || treeItem.url == "") {
 				return;
 			}
-			$('#moduleFrame')[0].src = "grid.html?m=" + treeItem.id;
+			debugger;
+			$('#moduleFrame')[0].src = treeItem.url;
 		}
 	}
 	main.init();

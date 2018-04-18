@@ -12,7 +12,6 @@ require.config({
 });
 require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		easyui, common, tree, db) {
-	debugger;
 	var curParams = common.parseUrl(location.href);
 	var $pageCfg = {
 		id : "lookupType"
@@ -20,6 +19,20 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 	var $pageAtom = {
 		init : function() {
 			$('#dg').datagrid($pageCfg.datagrid.cfg)
+		},
+		action : {
+			search : function() {
+				$('#tt').datagrid('load', {
+					itemid : $('#itemid').val(),
+					productid : $('#productid').val()
+				});
+			},
+			update : function(index) {
+				$('#dg').datagrid('updateRow', {
+					index : index,
+					row : {}
+				});
+			}
 		}
 	};
 	var colSchema = common.ajax("../db/rs?mid=gridSchema&gid=" + curParams.m);
@@ -28,14 +41,15 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		field : 'ck',
 		checkbox : true
 	} ].concat(colSchema);
-	debugger;
 	var $pageCfg = {
 		datagrid : {
 			cfg : { // 定位到Table标签，Table标签的ID是grid
+				title : "Editable Datagrid",
 				width : '100%',
 				height : '100%',
+				singleSelect : true,
 				url : '../db/ra?mid=' + curParams.m, // 指向后台的Action来获取当前菜单的信息的Json格式的数据
-				iconCls : 'icon-view',
+				iconCls : 'icon-edit',
 				nowrap : true,
 				autoRowHeight : true,
 				striped : true,
@@ -47,9 +61,25 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				// sortName: 'ID', //根据某个字段给easyUI排序
 				sortOrder : 'asc',
 				remoteSort : false,
-				idField : 'ID',
+				idField : 'id',
 				// queryParams : queryData, // 异步查询的参数
 				columns : [ columns ],
+
+				onBeforeEdit : function(index, row) {
+					debugger;
+					row.editing = true;
+					$pageAtom.action.update(index);
+				},
+				onAfterEdit : function(index, row) {
+					debugger;
+					row.editing = false;
+					$pageAtom.action.update(index);
+				},
+				onCancelEdit : function(index, row) {
+					debugger;
+					row.editing = false;
+					$pageAtom.action.update(index);
+				},
 				toolbar : [ {
 					id : 'btnAdd',
 					text : '添加',
@@ -88,9 +118,10 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 					}
 				} ],
 				onClickRow : function(rowIndex, rowData) {
-					$('#grid').datagrid('uncheckAll');
-					$('#grid').datagrid('checkRow', rowIndex);
-					$build("db.u$open");
+					$('#dg').datagrid('uncheckAll');
+					$('#dg').datagrid('checkRow', rowIndex);
+					$("#dg").datagrid("beginEdit", rowIndex); // 这句如果注释掉下一行的ed就获取不到值
+					// $build("db.u$open");
 				}
 			}
 		}

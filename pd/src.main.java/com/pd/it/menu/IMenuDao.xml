@@ -12,7 +12,7 @@
 			index_id,
 			url,
 			detail
-		FROM Menu_t
+		FROM sys_Menu_t
 		WHERE id=#{id}
 		order by index_id
 	</select>
@@ -26,11 +26,11 @@
 		index_id,
 		url,
 		detail
-		FROM Menu_t
+		FROM sys_Menu_t
 	</select>
 	<select id="pCount" resultType="int">
 		select count(0)
-		from Menu_t
+		from sys_Menu_t
 		<include refid="sql$p$filter" />
 	</select>
 	<select id="p" resultType="VO">
@@ -44,7 +44,7 @@
 		index_id as "indexId",
 		url as "url",
 		detail as "detail",rownum rn
-		from Menu_t
+		from sys_Menu_t
 		<include refid="sql$p$filter" />
 		)t1
 		where #{end} >= t1.rn
@@ -53,11 +53,11 @@
 	</select>
 	<update id="c" parameterType="VO" flushCache="true">
 		INSERT into
-		Menu_t(id,parent_id,cn,en,index_id,url,detail)
+		sys_Menu_t(id,parent_id,cn,en,index_id,url,detail)
 		values(#{id},#{parentId},#{cn},#{en},#{indexId},#{url},#{detail})
 	</update>
 	<update id="u" parameterType="VO">
-		UPDATE Menu_t
+		UPDATE sys_Menu_t
 		SET
 		parent_id=#{parentId},
 		cn=#{cn},
@@ -71,7 +71,7 @@
 	<delete id="d" parameterType="VO">
 		DELETE
 		FROM
-		Menu_t
+		sys_Menu_t
 		WHERE
 		id=#{id}
 	</delete>

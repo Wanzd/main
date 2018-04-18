@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.menu$tree.IMenuTreeDao">
+<mapper namespace="com.pd.it.menu.IMenuTreeDao">
 
 	<select id="root" resultType="VO">
 		SELECT id as "id",
@@ -13,9 +13,11 @@
 		index_id as "indexId",
 		url as "url",
 		detail as "detail"
-		FROM Menu_t
-		where parent_id is null
+		FROM sys_Menu_t
+		where
+		parent_id is null
 		or parent_id =''
+		order by index_id
 	</select>
 	<select id="sub" resultType="VO">
 		SELECT id as "id",
@@ -28,8 +30,9 @@
 		index_id as "indexId",
 		url as "url",
 		detail as "detail"
-		FROM Menu_t
+		FROM sys_Menu_t
 		where
 		parent_id =#{id}
+		order by index_id
 	</select>
 </mapper>  
