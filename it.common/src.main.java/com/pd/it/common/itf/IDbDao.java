@@ -15,6 +15,8 @@ public interface IDbDao
     
     VO r(VO fo);
     
+    VO detail(VO fo);
+    
     int u(VO vo);
     
     // @SelectProvider(method = "d", type = AiSqlProvider.class)

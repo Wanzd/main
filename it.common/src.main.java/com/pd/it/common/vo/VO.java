@@ -24,4 +24,19 @@ public class VO extends HashMap<String, Object>
             put(eachKey, map.get(eachKey));
         }
     }
+    
+    public Object obj(String key)
+    {
+        return get(key);
+    }
+    
+    public Object v(String key)
+    {
+        Object obj = obj(key);
+        if (obj == null)
+        {
+            return "";
+        }
+        return obj.toString();
+    }
 }

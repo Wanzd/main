@@ -2,8 +2,8 @@ package com.pd.it.db;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,26 +12,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.pd.it.common.itf.IDbDao;
-import com.pd.it.common.util.AI;
-import com.pd.it.common.vo.PageList;
+import com.pd.db.sqlprovider.CommonSqlProvider;
+import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
-import com.pd.it.db.dbvo.builder.Map2VO;
+import com.pd.it.dao.ICommonDao;
 import com.pd.web.util.Db;
 
 @RestController
-@RequestMapping("rest/{mid}/{dimension}/{action}")
+@RequestMapping("rest")
 public class RestService
 {
+    @Autowired
+    private ICommonDao dao;
     
     @ResponseBody
-    @RequestMapping(value = "", method = {RequestMethod.GET, RequestMethod.POST}, produces = "text/html;charset=utf-8")
-    public String rest(@PathVariable("") LinkedHashMap<String, Object> path,
+    @RequestMapping(value = "r/{module}/{demension}/{id}", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "text/html;charset=utf-8")
+    public String r(@PathVariable("") LinkedHashMap<String, String> path,
         @RequestParam LinkedHashMap<String, Object> in)
     {
-        return Db.action(new VO(in), new VO(path));
+        path.put("action", "r");
+        VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
+        sqlCfg.put("vo", in);
+        VO rsVO = Db.r(dao, sqlCfg);
+        return JSON.toJSONString(rsVO);
     }
     
-    
-   
+    @ResponseBody
+    @RequestMapping(value = "ra/{module}/{demension}/{id}", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "text/html;charset=utf-8")
+    public String ra(@PathVariable("") LinkedHashMap<String, String> path,
+        @RequestParam LinkedHashMap<String, Object> in)
+    {
+        VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
+        sqlCfg.put("vo", in);
+        List<VO> rsList = Db.ra(dao, sqlCfg);
+        return JSON.toJSONString(rsList);
+    }
 }

@@ -1,11 +1,11 @@
-package com.pd.it.lookup;
+package com.pd.it.dao;
 
 import org.springframework.stereotype.Repository;
 
 import com.pd.it.common.itf.IDbDao;
 
 @Repository
-public interface ILookupDao extends IDbDao
+public interface ICommonDao extends IDbDao
 {
     
 }

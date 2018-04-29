@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.user.IUserDao">
+<mapper namespace="com.pd.it.dao.User$IUserDao">
 
 	<select id="ra" parameterType="VO" resultType="VO">
 		SELECT
 		id,
-		name,sex,birthday,father_id,mother_id
-		FROM User_base_t
+		name,sex,date_format(birthday,'%Y-%m-%d')
+		'birthday',father_id,mother_id
+		FROM
+		User_base_t
 	</select>
 	<select id="r" parameterType="VO" resultType="VO">
 		SELECT id,
 		name,
 		sex
+		FROM User_base_t
+		WHERE id=#{id}
+	</select>
+	<select id="detail" parameterType="VO" resultType="VO">
+		SELECT id,
+		'test' detail
 		FROM User_base_t
 		WHERE id=#{id}
 	</select>

@@ -29,10 +29,10 @@ public class VirtualFilter implements Filter
     {
         HttpServletRequest request = (HttpServletRequest)arg0;
         String url = request.getRequestURI();
-        if (url.matches("/pd/.+[.](html|js|png|css|gif)"))
+        if (url.matches("/.+[.](html|js|png|css|gif)"))
         {
             InputStream in =
-                this.getClass().getClassLoader().getResourceAsStream("/web/" + url.substring("/pd/".length()));
+                this.getClass().getClassLoader().getResourceAsStream("/web/" + url.substring("/".length()));
             try
             {
                 IOUtils.copy(in, arg1.getOutputStream());
