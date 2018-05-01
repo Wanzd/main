@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.pd.db.sqlprovider.CommonSqlProvider;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
 import com.pd.it.dao.ICommonDao;

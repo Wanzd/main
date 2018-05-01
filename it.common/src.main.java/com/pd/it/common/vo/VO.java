@@ -37,6 +37,22 @@ public class VO extends HashMap<String, Object>
         {
             return "";
         }
+        return obj;
+    }
+    
+    public String str(String key)
+    {
+        Object obj = obj(key);
+        if (obj == null)
+        {
+            return "";
+        }
         return obj.toString();
+    }
+    
+    public static VO newInstance()
+    {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

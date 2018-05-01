@@ -1,12 +1,19 @@
-package com.pd.db.sqlprovider;
+package com.pd.it.db;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.pd.it.common.util.AI;
+import org.apache.ibatis.session.SqlSession;
+
+import com.pd.db.sqlprovider.ISqlProvider;
+import com.pd.it.common.itf.IDbDao;
+import com.pd.it.common.util.BeanUtil;
+import com.pd.it.common.util.LookupUtil;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
+import com.pd.it.common.vo.VOFactory;
 import com.pd.it.util.string.FreeMarkerUtil;
 
 import freemarker.cache.StringTemplateLoader;
@@ -16,6 +23,8 @@ import freemarker.template.Template;
 public class CommonSqlProvider implements ISqlProvider
 {
     private static Configuration cfg = new Configuration();
+    
+    private static SqlSession sqlSession;
     
     private static Map<String, KV> sqlTemplateMap = new HashMap<String, KV>();
     
@@ -31,16 +40,21 @@ public class CommonSqlProvider implements ISqlProvider
             cfg = new Configuration();
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
+            
+            VO lookupFilterVO = VOFactory.build("type", "daoKV");
+            List<VO> raItem = LookupUtil.raItem(lookupFilterVO);
+            
             StringTemplateLoader loader = new StringTemplateLoader();
-            loader.putTemplate("user.r", "select * from user_base_t where id=1");
-            loader.putTemplate("lookup.r", "select * from lookup_t where type_id=${typeId} and id=${id}");
+            for(VO eachItem:raItem) {
+                loader.putTemplate(eachItem.str("id"), eachItem.str("value"));
+            }
             cfg.setTemplateLoader(loader);
         }
     }
     
     public static VO cfg(KV path, VO vo)
     {
-
+        
         VO rsVO = new VO();
         KV vo2Kv = new KV(vo);
         Template template = getTemplate(path);
@@ -54,7 +68,7 @@ public class CommonSqlProvider implements ISqlProvider
         Template template = null;
         try
         {
-            template = cfg.getTemplate(path.v("module")+"."+path.v("action"));
+            template = cfg.getTemplate(path.v("module") + "." + path.v("action"));
         }
         catch (IOException e)
         {
