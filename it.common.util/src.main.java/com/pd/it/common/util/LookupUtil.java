@@ -15,7 +15,8 @@ public class LookupUtil
     
     public static List<VO> raItem(VO vo)
     {
-        IDbDao lookupDao = BeanUtil.<IDbDao> getBean("com.pd.it.dao.System$ILookupDao");
-        return lookupDao.ra(vo);
+        IDbDao commonDao = BeanUtil.<IDbDao> getBean("com.pd.it.dao.ICommonDao");
+        vo.put("vo", vo);
+        return DbUtil.ra(commonDao, vo);
     }
 }

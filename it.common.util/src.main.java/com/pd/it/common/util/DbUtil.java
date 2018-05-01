@@ -1,4 +1,4 @@
-package com.pd.web.util;
+package com.pd.it.common.util;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.pd.it.common.itf.IDbDao;
 import com.pd.it.common.vo.VO;
 
-public class Db
+public class DbUtil
 {
     public static List<VO> ra(IDbDao dao, VO vo)
     {
@@ -16,6 +16,7 @@ public class Db
         }
         return dao.ra(vo);
     }
+    
     public static VO r(IDbDao dao, VO vo)
     {
         if (dao == null)
@@ -25,48 +26,35 @@ public class Db
         return dao.r(vo);
     }
     
-    public static VO detail(VO path, VO vo)
+    public static List<VO> rs(IDbDao dao, VO vo)
     {
-        IDbDao rsDao = DaoUtil.get(path);
-        if (rsDao == null)
+        if (dao == null)
         {
             return null;
         }
-        return rsDao.detail(vo);
+        return dao.rs(vo);
     }
     
-    public static List<VO> rs(VO path, VO vo)
-    {
-        IDbDao rsDao = DaoUtil.get(path);
-        if (rsDao == null)
-        {
-            return null;
-        }
-        return rsDao.rs(vo);
-    }
-    
-    public static String batch(VO path, VO vo)
+    public static String batch(IDbDao dao, VO vo)
     {
         int rsInt = -1;
-        IDbDao rsDao = DaoUtil.get(path);
         List<VO> createList = (List<VO>)vo.get("createList");
         if (createList != null)
         {
-            rsInt += rsDao.cs(createList);
+            rsInt += dao.cs(createList);
         }
         List<VO> deleteList = (List<VO>)vo.get("deleteList");
         if (deleteList != null)
         {
-            rsInt += rsDao.ds(deleteList);
+            rsInt += dao.ds(deleteList);
         }
         List<VO> updateList = (List<VO>)vo.get("updateList");
         if (updateList != null)
         {
-            rsInt += rsDao.cs(updateList);
+            rsInt += dao.cs(updateList);
         }
         
         return JSON.toJSONString(rsInt);
     }
-
     
 }

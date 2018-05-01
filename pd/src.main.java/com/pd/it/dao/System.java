@@ -6,11 +6,6 @@ import com.pd.it.common.itf.IDbDao;
 
 public class System
 {
-    @Repository
-    public static interface ICommonDao extends IDbDao
-    {
-        
-    }
     
     @Repository
     public static interface ILookupDao extends IDbDao

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.pd.it.common.util.DbUtil;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
 import com.pd.it.dao.ICommonDao;
-import com.pd.web.util.Db;
 
 @RestController
 @RequestMapping("rest")
@@ -33,7 +33,7 @@ public class RestService
         path.put("action", "r");
         VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
         sqlCfg.put("vo", in);
-        VO rsVO = Db.r(dao, sqlCfg);
+        VO rsVO = DbUtil.r(dao, sqlCfg);
         return JSON.toJSONString(rsVO);
     }
     
@@ -45,7 +45,7 @@ public class RestService
     {
         VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
         sqlCfg.put("vo", in);
-        List<VO> rsList = Db.ra(dao, sqlCfg);
+        List<VO> rsList = DbUtil.ra(dao, sqlCfg);
         return JSON.toJSONString(rsList);
     }
 }
