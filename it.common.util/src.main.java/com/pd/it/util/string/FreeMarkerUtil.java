@@ -13,7 +13,10 @@ public class FreeMarkerUtil
     
     public static String cal(Template template, KV vo)
     {
-        
+        if (template == null)
+        {
+            return null;
+        }
         StringWriter sw = new StringWriter();
         try
         {

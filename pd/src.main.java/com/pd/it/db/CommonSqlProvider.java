@@ -41,11 +41,12 @@ public class CommonSqlProvider implements ISqlProvider
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
             
-            VO lookupFilterVO = VOFactory.build("type", "daoKV");
+            VO lookupFilterVO = VOFactory.build("typeId", "daoKV");
             List<VO> raItem = LookupUtil.raItem(lookupFilterVO);
             
             StringTemplateLoader loader = new StringTemplateLoader();
-            for(VO eachItem:raItem) {
+            for (VO eachItem : raItem)
+            {
                 loader.putTemplate(eachItem.str("id"), eachItem.str("value"));
             }
             cfg.setTemplateLoader(loader);

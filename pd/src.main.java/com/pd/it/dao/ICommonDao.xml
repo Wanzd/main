@@ -5,4 +5,7 @@
 	<select id="r" parameterType="VO" resultType="VO">
 		${sql}
 	</select>
+	<select id="ra" parameterType="VO" resultType="VO">
+		${sql}
+	</select>
 </mapper>  

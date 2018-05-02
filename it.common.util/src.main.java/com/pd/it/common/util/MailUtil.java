@@ -17,38 +17,39 @@ public class MailUtil
     public static void send(MailVO vo)
     {
         LogUtil.debug("send to:", vo.getTo());
-        Properties props = new Properties(); // ¿ÉÒÔ¼ÓÔØÒ»¸öÅäÖÃÎÄ¼ş
-        // Ê¹ÓÃsmtp£º¼òµ¥ÓÊ¼ş´«ÊäĞ­Òé
-        props.put("mail.smtp.host", "smtp.163.com");// ´æ´¢·¢ËÍÓÊ¼ş·şÎñÆ÷µÄĞÅÏ¢
-        props.put("mail.smtp.auth", "true");// Í¬Ê±Í¨¹ıÑéÖ¤
+        Properties props = new Properties(); // ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+        // Ê¹ï¿½ï¿½smtpï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ğ­ï¿½ï¿½
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.host", "smtp.163.com");// ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+        props.put("mail.smtp.auth", "true");// Í¬Ê±Í¨ï¿½ï¿½ï¿½ï¿½Ö¤
         
-        Session session = Session.getInstance(props);// ¸ù¾İÊôĞÔĞÂ½¨Ò»¸öÓÊ¼ş»á»°
-        // session.setDebug(true); //ÓĞËû»á´òÓ¡Ò»Ğ©µ÷ÊÔĞÅÏ¢¡£
+        Session session = Session.getInstance(props);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½Ò»ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½á»°
+        // session.setDebug(true); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡Ò»Ğ©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
         
-        MimeMessage message = new MimeMessage(session);// ÓÉÓÊ¼ş»á»°ĞÂ½¨Ò»¸öÏûÏ¢¶ÔÏó
+        MimeMessage message = new MimeMessage(session);// ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½á»°ï¿½Â½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
         try
         {
             message.setFrom(new InternetAddress(vo.getFrom()));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(vo.getTo()));// ÉèÖÃÊÕ¼şÈË,²¢ÉèÖÃÆä½ÓÊÕÀàĞÍÎªTO
-            message.setSubject(vo.getTitle());// ÉèÖÃ±êÌâ
-            // ÉèÖÃĞÅ¼şÄÚÈİ
-            // message.setText(mailContent); //·¢ËÍ ´¿ÎÄ±¾ ÓÊ¼ş todo
-            message.setContent(vo.getContent(), "text/html;charset=gbk"); // ·¢ËÍHTMLÓÊ¼ş£¬ÄÚÈİÑùÊ½±È½Ï·á¸»
-            message.setSentDate(new Date());// ÉèÖÃ·¢ĞÅÊ±¼ä
-            message.saveChanges();// ´æ´¢ÓÊ¼şĞÅÏ¢
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(vo.getTo()));// ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªTO
+            message.setSubject(vo.getTitle());// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½ï¿½
+            // message.setText(mailContent); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä±ï¿½ ï¿½Ê¼ï¿½ todo
+            message.setContent(vo.getContent(), "text/html;charset=UTF-8"); // ï¿½ï¿½ï¿½ï¿½HTMLï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½È½Ï·á¸»
+            message.setSentDate(new Date());// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+            message.saveChanges();// ï¿½æ´¢ï¿½Ê¼ï¿½ï¿½ï¿½Ï¢
             
-            // ·¢ËÍÓÊ¼ş
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
             // Transport transport = session.getTransport("smtp");
             Transport transport = session.getTransport();
-            transport.connect("user", "password");
-            transport.sendMessage(message, message.getAllRecipients());// ·¢ËÍÓÊ¼ş,ÆäÖĞµÚ¶ş¸ö²ÎÊıÊÇËùÓĞÒÑÉèºÃµÄÊÕ¼şÈËµØÖ·
+            transport.connect("user", "pass");
+            transport.sendMessage(message, message.getAllRecipients());// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½,ï¿½ï¿½ï¿½ĞµÚ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Õ¼ï¿½ï¿½Ëµï¿½Ö·
             transport.close();
         }
         catch (MessagingException e)
         {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } // ÉèÖÃ·¢¼şÈËµÄµØÖ·
+        } // ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ËµÄµï¿½Ö·
         
     }
     

@@ -36,7 +36,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		}
 	};
 	debugger;
-	var colSchema = common.ajax("rest/gridSchema/base/rs?gid=" + curParams.m);
+	var colSchema = common.ajax("rest/ra/gridSchema/base?gid=" + curParams.m);
 	var columns = [ {
 		width : 80,
 		field : 'ck',
@@ -50,7 +50,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				width : '100%',
 				height : '100%',
 				singleSelect : true,
-				url : 'rest/' + curParams.m + '/base/ra', // 指向后台的Action来获取当前菜单的信息的Json格式的数据
+				url : 'rest/ra/' + curParams.m + '/base', // 指向后台的Action来获取当前菜单的信息的Json格式的数据
 				iconCls : 'icon-edit',
 				nowrap : true,
 				autoRowHeight : true,
