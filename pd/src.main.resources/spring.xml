@@ -8,38 +8,12 @@
 
 	<!-- bean annotation driven -->
 	<context:annotation-config />
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:property-placeholder location="classpath:rootCfg.properties" />
 	<context:component-scan base-package="com.pd" />
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:rootCfg.properties" />
+	</bean>
 	
-	<bean id="autoLogJob" class="com.pd.it.job.AutoLogJob" />
-
-	<!-- 定时任务1 -->
-	<bean id="autoLogJobDetail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<!-- 指定任务类 -->
-		<property name="targetObject" ref="autoLogJob" />
-		<!-- 指定任务方法 -->
-		<property name="targetMethod" value="run" />
-		<property name="concurrent" value="false" />
-	</bean>
-	<!-- 定义时间间隔触发器 -->
-	<bean id="autoLogJobDetailCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail">
-			<ref bean="autoLogJobDetail" />
-		</property>
-		<property name="cronExpression">
-			<value>*/10 * * * * ?</value>
-		</property>
-	</bean>
-
-	<!-- 启动定时器 -->
-	<bean id="ssschedulerFactory"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
-		lazy-init="false">
-		<property name="triggers">
-			<list>
-				<ref local="autoLogJobDetailCronTrigger" />
-			</list>
-		</property>
-	</bean>
 </beans>

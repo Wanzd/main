@@ -41,9 +41,7 @@ define([ "db" ], function() {
 				d : function() {
 					var row = $("#dg").datagrid("getSelected");
 					if (row) {
-						debugger;
 						$.messager.confirm("Confirm", "确定要删除吗?", function(r) {
-							debugger;
 							if (r) {
 								var rs = $r("ajax.post.json", {
 									url : "db/d?mid=" + $r("page.id"),
@@ -51,7 +49,6 @@ define([ "db" ], function() {
 										id : row.id
 									}
 								});
-								debugger;
 								if (rs.status == "SUCCESS") {
 									$("#dg").datagrid("reload"); // reload
 																	// the

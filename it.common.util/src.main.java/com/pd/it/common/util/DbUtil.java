@@ -8,6 +8,12 @@ import com.pd.it.common.vo.VO;
 
 public class DbUtil
 {
+    private static IDbDao commonDao = null;
+    static
+    {
+        commonDao = BeanUtil.getBean("com.pd.it.dao.ICommonDao");
+    }
+    
     public static List<VO> ra(IDbDao dao, VO vo)
     {
         if (dao == null)
@@ -15,6 +21,17 @@ public class DbUtil
             return null;
         }
         return dao.ra(vo);
+    }
+    
+    public static List<VO> raCommon(VO vo)
+    {
+        return ra(commonDao, vo);
+    }
+    
+    public static VO rCommon(VO vo)
+    {
+        
+        return r(commonDao, vo);
     }
     
     public static VO r(IDbDao dao, VO vo)

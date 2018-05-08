@@ -49,4 +49,10 @@ public class KV extends HashMap<String, String>
         String value = get(key);
         return value == null ? "" : value;
     }
+    
+    public KV p(String key, String value)
+    {
+        put(key, value);
+        return this;
+    }
 }

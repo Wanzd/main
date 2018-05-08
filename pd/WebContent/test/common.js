@@ -15,7 +15,6 @@ $indexDbU = {
 	conn : null,
 	/** 打开数据库 */
 	openDb : function(_vo) {
-		debugger;
 		var version = _vo.version || 1;
 		var request = window.indexedDB.open(_vo.name, version);
 		request.onerror = function(e) {
@@ -29,7 +28,6 @@ $indexDbU = {
 		};
 	},
 	createTable : function(_vo) {
-		debugger;
 		$indexDbU.conn.createObjectStore(_vo.id, {
 			keyPath : _vo.cols.key
 		});
@@ -43,7 +41,6 @@ $indexDbU = {
 		indexedDB.deleteDatabase(_vo.name);
 	},
 	addData : function(_vo) {
-		debugger;
 		var transaction = $indexDbU.conn.transaction(_vo.name, "readwrite");
 		var table = transation.objectStore(_vo.name);
 		for (var i = 0; i < _vo.data.length; i++) {

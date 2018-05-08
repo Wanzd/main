@@ -6,7 +6,7 @@ import com.pd.it.common.itf.IBuilder;
 public class BuildUtil
 {
     
-    public static <In, Out> Out build(In in, IBuilder<In, Out> builder)
+    public static <In, Out> Out build(IBuilder<In, Out> builder, In... in)
     {
         if (builder == null)
         {

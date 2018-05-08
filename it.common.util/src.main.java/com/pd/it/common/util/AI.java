@@ -1,6 +1,7 @@
 package com.pd.it.common.util;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.pd.it.common.itf.ISender;
 import com.pd.it.common.itf.ITask;
 import com.pd.it.common.itf.IValidRule;
 import com.pd.it.common.vo.KV;
+import com.pd.it.common.vo.VO;
 
 public class AI
 {
@@ -52,9 +54,9 @@ public class AI
         return BuildUtil.bridge(in, bridge);
     }
     
-    public static <In, Out> Out build(In in, IBuilder<In, Out> builder)
+    public static <In, Out> Out build(IBuilder<In, Out> builder, In... in)
     {
-        return BuildUtil.build(in, builder);
+        return BuildUtil.build(builder, in);
     }
     
     public static <In> boolean valid(Class<In> inClass, In in, String beansStr)
@@ -136,5 +138,15 @@ public class AI
             kv.put(kvStr[i], kvStr[i + 1]);
         }
         return kv;
+    }
+    
+    public static <In> List<In> list(In... in)
+    {
+        List<In> rsList = new ArrayList<In>();
+        for (In eachIn : in)
+        {
+            rsList.add(eachIn);
+        }
+        return rsList;
     }
 }

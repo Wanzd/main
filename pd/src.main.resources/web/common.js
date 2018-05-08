@@ -1,7 +1,6 @@
 define([ 'common' ], function() {
 	return {
 		ajax : function(url, data) {
-			debugger;
 			var rs = $.ajax({
 				url : url,
 				async : false

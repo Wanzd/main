@@ -35,14 +35,12 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 		}
 	};
-	debugger;
 	var colSchema = common.ajax("rest/ra/gridSchema/base?gid=" + curParams.m);
 	var columns = [ {
 		width : 80,
 		field : 'ck',
 		checkbox : true
 	} ].concat(colSchema);
-	debugger;
 	var $pageCfg = {
 		datagrid : {
 			cfg : { // 定位到Table标签，Table标签的ID是grid
@@ -50,14 +48,14 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				width : '100%',
 				height : '100%',
 				singleSelect : true,
-				url : 'rest/ra/' + curParams.m + '/base', // 指向后台的Action来获取当前菜单的信息的Json格式的数据
+				url : 'rest/' + curParams.m + '.ra', // 指向后台的Action来获取当前菜单的信息的Json格式的数据
 				iconCls : 'icon-edit',
 				nowrap : true,
 				autoRowHeight : true,
 				striped : true,
 				collapsible : true,
 				pagination : true,
-				pageSize : 100,
+				pageSize : 20,
 				pageList : [ 50, 100, 200 ],
 				rownumbers : true,
 				// sortName: 'ID', //根据某个字段给easyUI排序
@@ -68,17 +66,14 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				columns : [ columns ],
 
 				onBeforeEdit : function(index, row) {
-					debugger;
 					row.editing = true;
 					$pageAtom.action.update(index);
 				},
 				onAfterEdit : function(index, row) {
-					debugger;
 					row.editing = false;
 					$pageAtom.action.update(index);
 				},
 				onCancelEdit : function(index, row) {
-					debugger;
 					row.editing = false;
 					$pageAtom.action.update(index);
 				},
@@ -115,11 +110,10 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 							text : '查看',
 							iconCls : 'icon-table',
 							handler : function() {
-								debugger;
 								var selectRow = $('#dg')
 										.datagrid('getSelected');
 								var detailObj = common.ajax("rest/"
-										+ curParams.m + "/base/detail?id="
+										+ curParams.m + ".detail?id="
 										+ selectRow.id);
 								console.debug(detailObj);
 							}

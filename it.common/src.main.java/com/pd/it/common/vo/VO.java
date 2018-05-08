@@ -3,6 +3,9 @@ package com.pd.it.common.vo;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class VO extends HashMap<String, Object>
 {
     private static final long serialVersionUID = 8344639996353937629L;
@@ -25,9 +28,24 @@ public class VO extends HashMap<String, Object>
         }
     }
     
+    public VO(String jsonStr)
+    {
+        super();
+        JSONObject jsonObject = JSON.parseObject(jsonStr);
+        for (String eachKey : jsonObject.keySet())
+        {
+            put(eachKey, jsonObject.get(eachKey));
+        }
+    }
+    
     public Object obj(String key)
     {
         return get(key);
+    }
+    
+    public VO vo(String key)
+    {
+        return (VO)get(key);
     }
     
     public Object v(String key)
@@ -54,5 +72,10 @@ public class VO extends HashMap<String, Object>
     {
         // TODO Auto-generated method stub
         return null;
+    }
+    
+    public Map<String, Object> toMap()
+    {
+        return (Map<String, Object>)this;
     }
 }
