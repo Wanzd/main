@@ -19,6 +19,25 @@ define([ 'common' ], function() {
 				result[key] = value;
 			});
 			return result;
+		},
+		addTab:function(vo){
+			if ($('#'+vo.divId).tabs('exists', vo.title)){
+				$('#'+vo.divId).tabs('select', vo.title);
+			} else {
+				var content = '<iframe scrolling="auto" frameborder="0"  src="'+vo.url+'" style="width:100%;height:100%;"></iframe>';
+				$('#tt').tabs('add',{
+					title:vo.title,
+					content:content,
+					closable:true
+				});
+			}
+		},
+		attrArray:function(data,attrName){
+			var result=[];
+			for(var i=0,total=data.length;i<total;i++){
+				result.push(data[i][attrName]);
+			}
+			return result;
 		}
 	};
 });

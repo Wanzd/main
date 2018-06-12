@@ -17,6 +17,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSON;
+import com.pd.it.common.provider.CommonSqlProvider;
 import com.pd.it.common.util.DbUtil;
 import com.pd.it.common.util.MailUtil;
 import com.pd.it.common.vo.KV;
@@ -26,7 +27,7 @@ import com.pd.it.web.PermissionUtil;
 import com.pd.it.web.vo.NoPermissionVO;
 
 @RestController
-@RequestMapping("rest")
+@RequestMapping("")
 public class RestService
 {
     @Autowired
@@ -36,7 +37,7 @@ public class RestService
     private HttpServletRequest request;
     
     @ResponseBody
-    @RequestMapping(value = "{module}/{action}", method = {RequestMethod.GET,
+    @RequestMapping(value = "rest/{action}_{module}", method = {RequestMethod.GET,
         RequestMethod.POST}, produces = "application/json;charset=utf-8")
     public String r(@PathVariable("") LinkedHashMap<String, String> path,
         @RequestParam LinkedHashMap<String, Object> in, LinkedHashMap<String, String> json)
@@ -54,8 +55,12 @@ public class RestService
                 VO rsVO = DbUtil.r(dao, sqlCfg);
                 return JSON.toJSONString(rsVO);
             case "ra":
-                List<VO> rsList = DbUtil.ra(dao, sqlCfg);
+            case "querys":
+                    List<VO> rsList = DbUtil.ra(dao, sqlCfg);
                 return JSON.toJSONString(rsList);
+            case "jsonData":
+                String jsonData = DbUtil.jsonData(dao, sqlCfg);
+                return jsonData;
         }
         return "";
     }
@@ -85,16 +90,4 @@ public class RestService
         VO rsVO = DbUtil.r(dao, sqlCfg);
         return JSON.toJSONString(rsVO);
     }
-    
-    @ResponseBody
-    @RequestMapping(value = "test", method = {RequestMethod.GET,
-        RequestMethod.POST}, produces = "application/json;charset=utf-8")
-    public String test(@RequestBody String jsonStr)
-    {
-        WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
-        VO vo = new VO(jsonStr);
-        MailUtil.send("daily", vo);
-        return "send success";
-    }
-    
 }

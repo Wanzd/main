@@ -17,14 +17,14 @@ public class LookupUtil
     {
         IDbDao commonDao = BeanUtil.<IDbDao> getBean("com.pd.it.dao.ICommonDao");
         VO dbVO = new VO();
-        dbVO.put("sql", String.format("select * from lookup_t where type_id='%s' and id='%s'", type, key));
+        dbVO.put("sql", String.format("select * from sys_lookupitem_t where type_id='%s' and id='%s'", type, key));
         return DbUtil.r(commonDao, dbVO);
     }
     
     public static List<VO> raItem(VO vo)
     {
         IDbDao commonDao = BeanUtil.<IDbDao> getBean("com.pd.it.dao.ICommonDao");
-        vo.put("sql", String.format("select * from lookup_t where type_id='%s'", vo.v("typeId")));
+        vo.put("sql", String.format("select * from sys_lookupitem_t where type_id='%s'", vo.v("typeId")));
         return DbUtil.ra(commonDao, vo);
     }
     

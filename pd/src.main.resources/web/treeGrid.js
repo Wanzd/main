@@ -13,7 +13,7 @@ require.config({
 require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		easyui, common, tree, db) {
 	var curParams = common.parseUrl(location.href);
-	var colSchema = common.ajax("rest/gridSchema.ra?gid=" + curParams.m);
+	var colSchema = common.ajax("rest/gridSchema/ra?gid=" + curParams.m);
 	$('#td').treegrid({
 		url : 'dbTree/root?mid=' + curParams.m,
 		idField : 'id',

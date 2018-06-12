@@ -22,7 +22,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				id : "id",
 				text : "cn",
 				pIdKey : "parentId",
-				url : "rest/menuTree/ra",
+				url : "rest/querys_menuTree",
 				onClick : main.tabMenu
 			});
 		},
@@ -42,7 +42,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 			$.ajax({
 				type : "POST",
-				url : "rest/menuTree/ra?id=" + treeItem.id,
+				url : "rest/querys_menuTree?id=" + treeItem.id,
 				dataType : "JSON",
 				success : function(data) {
 					tree.refresh({

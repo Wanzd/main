@@ -23,6 +23,15 @@ public class DbUtil
         return dao.ra(vo);
     }
     
+    public static String jsonData(IDbDao dao, VO vo)
+    {
+        if (dao == null)
+        {
+            return null;
+        }
+        return dao.jsonData(vo);
+    }
+    
     public static List<VO> raCommon(VO vo)
     {
         return ra(commonDao, vo);

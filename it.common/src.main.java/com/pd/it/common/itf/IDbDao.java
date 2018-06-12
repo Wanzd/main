@@ -15,6 +15,8 @@ public interface IDbDao
     
     VO r(VO fo);
     
+    String jsonData(VO fo);
+    
     VO detail(VO fo);
     
     int u(VO vo);

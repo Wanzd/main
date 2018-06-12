@@ -78,4 +78,13 @@ public class VO extends HashMap<String, Object>
     {
         return (Map<String, Object>)this;
     }
+    
+    public VO nvl(String key, Object value)
+    {
+        if (get(key) == null)
+        {
+            put(key, value);
+        }
+        return this;
+    }
 }

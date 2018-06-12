@@ -38,7 +38,7 @@ public class CommonSqlProvider
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
             
-            VO lookupFilterVO = VOFactory.build("typeId", "daoKV");
+            VO lookupFilterVO = VOFactory.build("typeId", "dao");
             List<VO> raItem = LookupUtil.raItem(lookupFilterVO);
             
             StringTemplateLoader loader = new StringTemplateLoader();
