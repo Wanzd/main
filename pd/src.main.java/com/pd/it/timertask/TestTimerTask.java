@@ -1,16 +1,19 @@
 package com.pd.it.timertask;
 
-import java.util.Date;
-
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+
+import com.pd.it.common.util.AI;
+import com.pd.it.task.heat.HouseLocationHeatTask;
 
 @Controller
 public class TestTimerTask
 {
-    @Scheduled(cron = "0 0/5 * * * ?")
-    public void refreshIoTable()
+    @Scheduled(cron = "0 0/30 * * * ?")
+    public void refreshJobData()
     {
-        System.out.println("test:refreshIoTable" + new Date());
+        // AI.execute(new Job51Task());
+        AI.execute(new HouseLocationHeatTask());
     }
+    
 }

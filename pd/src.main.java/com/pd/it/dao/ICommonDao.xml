@@ -5,10 +5,19 @@
 	<select id="r" parameterType="VO" resultType="VO">
 		${sql}
 	</select>
-	<select id="jsonData" parameterType="VO" resultType="String">
+	<select id="strs" parameterType="VO" resultType="String">
+		${sql}
+	</select>
+	<select id="str" parameterType="VO" resultType="String">
 		${sql}
 	</select>
 	<select id="ra" parameterType="VO" resultType="VO">
 		${sql}
 	</select>
+	<update id="u">
+		${sql}
+	</update>
+	<update id="us">
+		${sql}
+	</update>
 </mapper>  

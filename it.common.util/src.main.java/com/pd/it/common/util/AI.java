@@ -54,6 +54,7 @@ public class AI
         return BuildUtil.bridge(in, bridge);
     }
     
+    @SafeVarargs
     public static <In, Out> Out build(IBuilder<In, Out> builder, In... in)
     {
         return BuildUtil.build(builder, in);
@@ -148,5 +149,22 @@ public class AI
             rsList.add(eachIn);
         }
         return rsList;
+    }
+    
+    public static double num(String v)
+    {
+        try
+        {
+            return Double.valueOf(v.toString());
+        }
+        catch (Exception e)
+        {
+        }
+        return 0;
+    }
+    
+    public static VO vo(String key, Object value)
+    {
+        return new VO(key, value);
     }
 }

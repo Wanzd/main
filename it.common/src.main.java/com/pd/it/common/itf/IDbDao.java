@@ -15,11 +15,15 @@ public interface IDbDao
     
     VO r(VO fo);
     
-    String jsonData(VO fo);
+    String str(VO fo);
+    
+    List<String> strs(VO fo);
     
     VO detail(VO fo);
     
     int u(VO vo);
+    
+    int us(List<VO> vo);
     
     // @SelectProvider(method = "d", type = AiSqlProvider.class)
     int d(VO vo);

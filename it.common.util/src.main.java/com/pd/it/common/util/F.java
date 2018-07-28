@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.pd.it.common.vo.VO;
 
-public class X
+public class F
 {
     public static String v(VO in, String key)
     {
@@ -23,5 +23,10 @@ public class X
             rsList.add(new VO(keyAttrName, eachKey).nvl(valueAttrName, rsMap.get(eachKey)));
         }
         return rsList;
+    }
+    
+    public static String str(String string, Object... params)
+    {
+        return String.format(string, params);
     }
 }

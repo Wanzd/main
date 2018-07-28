@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.pd.it.common.util.Db;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
@@ -17,11 +15,10 @@ import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-public class CommonSqlProvider
+public class CommonRestProvider
 {
     private static Configuration cfg = new Configuration();
     
-    private static SqlSession sqlSession;
     
     private static Map<String, KV> sqlTemplateMap = new HashMap<String, KV>();
     

@@ -35,7 +35,8 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 		}
 	};
-	var colSchema = common.ajax("rest/gridSchema/jsonData?gid=" + curParams.mid);
+	debugger;
+	var colSchema = common.ajax("rest/strs_gridSchema/?gid=" + curParams.m);
 	var columns = [ {
 		width : 80,
 		field : 'ck',

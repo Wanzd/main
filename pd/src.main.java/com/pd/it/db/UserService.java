@@ -16,17 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.provider.CommonSqlProvider;
-import com.pd.it.common.util.DbUtil;
-import com.pd.it.common.vo.KV;
+import com.pd.it.common.util.Db;
 import com.pd.it.common.vo.VO;
-import com.pd.it.dao.ICommonDao;
 
 @RestController
 @RequestMapping("user")
 public class UserService
 {
-    @Autowired
-    private ICommonDao dao;
     
     @Autowired
     private HttpServletRequest request;
@@ -41,8 +37,8 @@ public class UserService
         /** 校验用户合法性 */
         session.setAttribute("user", in.get("user"));
         
-        VO sqlCfg = CommonSqlProvider.cfg(new KV().p("module", "permission").p("action", "ra"), new VO(in));
-        List<VO> rsList = DbUtil.ra(dao, sqlCfg);
+        VO sqlCfg = CommonSqlProvider.cfg("permission.ra", new VO(in));
+        List<VO> rsList = Db.ra(sqlCfg);
         session.setAttribute("role", in.get("role"));
         Set<String> permission = new HashSet<String>();
         

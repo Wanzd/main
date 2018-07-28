@@ -50,7 +50,7 @@ public class FreeMarkerUtil
         return sw.toString();
     }
     
-    public static String cal(Template template, KV vo)
+    public static String cal(Template template, Object vo)
     {
         if (template == null)
         {

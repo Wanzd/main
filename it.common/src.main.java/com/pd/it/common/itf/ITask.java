@@ -6,5 +6,8 @@ public interface ITask
 {
     void execute();
     
-    List<ITask> sub();
+    default List<ITask> sub()
+    {
+        return null;
+    };
 }

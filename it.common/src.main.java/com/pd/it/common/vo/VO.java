@@ -28,6 +28,12 @@ public class VO extends HashMap<String, Object>
         }
     }
     
+    public VO(String key, Object value)
+    {
+        super();
+        put(key, value);
+    }
+    
     public VO(String jsonStr)
     {
         super();
@@ -86,5 +92,39 @@ public class VO extends HashMap<String, Object>
             put(key, value);
         }
         return this;
+    }
+    
+    public double num(String key)
+    {
+        Object v = get(key);
+        if (v != null)
+        {
+            try
+            {
+                return Double.valueOf(v.toString());
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
+        return 0;
+    }
+    
+    @Override
+    public String toString()
+    {
+        StringBuffer sBuffer = new StringBuffer();
+        
+        sBuffer.append("{");
+        for (String eachKey : keySet())
+        {
+            Object object = get(eachKey);
+            String valueStr = object instanceof String ? "'" + object.toString() + "'" : object.toString();
+            sBuffer.append("," + eachKey + ":" + valueStr);
+        }
+        sBuffer.delete(1, 2);
+        sBuffer.append("}");
+        return sBuffer.toString();
     }
 }

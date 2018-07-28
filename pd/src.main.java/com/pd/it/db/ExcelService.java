@@ -10,7 +10,6 @@ import java.util.List;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -26,9 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.pd.it.common.provider.CommonSqlProvider;
-import com.pd.it.common.util.DbUtil;
+import com.pd.it.common.util.Db;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.MatrixVO;
 import com.pd.it.common.vo.VO;
@@ -53,9 +51,9 @@ public class ExcelService
     {
         KV pathKV = new KV(path);
         String action = "ra";
-        VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
-        List<VO> rsList = DbUtil.ra(dao, sqlCfg);
-        JSONArray cols = JSON.parseArray("[{\"col\":\"year\",\"name\":\"年份\"},{\"col\":\"demand\",\"name\":\"需求\"}]");
+        VO sqlCfg = CommonSqlProvider.cfg(path.get("module") + path.get("action"), new VO(in));
+        List<VO> rsList = Db.ra(sqlCfg);
+        JSONArray cols = JSON.parseArray(sqlCfg.str("schema"));
         MatrixVO matrix = new MatrixVO(cols, rsList);
         try
         {
@@ -123,8 +121,7 @@ public class ExcelService
     {
         path.put("action", "import");
         in.put("id", path.get("id"));
-        VO sqlCfg = CommonSqlProvider.cfg(new KV(path), new VO(in));
-        VO rsVO = DbUtil.r(dao, sqlCfg);
+        VO rsVO = Db.r(path.get("module") + path.get("action"), new VO(in));
         return JSON.toJSONString(rsVO);
     }
     
