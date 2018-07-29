@@ -43,7 +43,7 @@ public class Db
     
     public static List<VO> raDao(VO vo)
     {
-        return DbCmd.ra("select id,value,json_data as \"jsonData\" from sys_dao_t");
+        return DbCmd.ra("select module ,demension,action,value,json_data as \"jsonData\" from sys_dao_t");
     }
     
     public static List<VO> ra(String key)

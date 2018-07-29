@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.AI;
 import com.pd.it.task.dig.HouseFangtianxiaDigTask;
+import com.pd.it.task.dig.PhoneTaobaoDigTask;
 import com.pd.it.task.heat.HouseLocationHeatTask;
 import com.pd.it.task.heat.JobSkillHeatTask;
 
@@ -50,6 +51,15 @@ public class TestService
     public String house$heat(LinkedHashMap<String, String> json)
     {
         AI.execute(new HouseLocationHeatTask());
+        return "[{result:'success'}]";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "phone$taobao", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    public String phone$taobao(LinkedHashMap<String, String> json)
+    {
+        AI.execute(new PhoneTaobaoDigTask());
         return "[{result:'success'}]";
     }
 }

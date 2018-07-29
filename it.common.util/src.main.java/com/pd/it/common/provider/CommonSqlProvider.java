@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.xerces.parsers.CachingParserPool.ShadowedGrammarPool;
 
 import com.pd.it.common.util.Db;
+import com.pd.it.common.util.LogUtil;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
 import com.pd.it.common.vo.VOFactory;
@@ -34,6 +36,7 @@ public class CommonSqlProvider
     {
         synchronized (cfg)
         {
+            LogUtil.function();
             cfg = new Configuration();
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
@@ -44,8 +47,19 @@ public class CommonSqlProvider
             StringTemplateLoader loader = new StringTemplateLoader();
             for (VO eachItem : raItem)
             {
-                loader.putTemplate(eachItem.str("id"), eachItem.str("value"));
-                loader.putTemplate(eachItem.str("id") + "_jsonData", eachItem.str("jsonData"));
+                String key = null;
+                if (eachItem.str("demension").length() > 0)
+                {
+                    key = String
+                        .format("%s$%s.%s", eachItem.str("module"), eachItem.str("demension"), eachItem.str("action"));
+                }
+                else
+                {
+                    key = String.format("%s.%s", eachItem.str("module"), eachItem.str("action"));
+                }
+                LogUtil.log(String.format("DaoKey:%s", key));
+                loader.putTemplate(key, eachItem.str("value"));
+                loader.putTemplate(key + "_jsonData", eachItem.str("jsonData"));
             }
             cfg.setTemplateLoader(loader);
         }

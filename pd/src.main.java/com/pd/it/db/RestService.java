@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.pd.it.common.provider.CommonSqlProvider;
 import com.pd.it.common.util.Db;
 import com.pd.it.common.vo.KV;
 import com.pd.it.common.vo.VO;
-import com.pd.it.dao.ICommonDao;
 import com.pd.it.web.PermissionUtil;
 import com.pd.it.web.vo.NoPermissionVO;
 
@@ -26,9 +24,6 @@ import com.pd.it.web.vo.NoPermissionVO;
 @RequestMapping("")
 public class RestService
 {
-    @Autowired
-    private ICommonDao dao;
-    
     @Autowired
     private HttpServletRequest request;
     
