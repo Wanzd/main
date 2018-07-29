@@ -2,11 +2,13 @@ package com.pd.it.db;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,6 @@ public class VirtualFilter implements Filter
     @Override
     public void destroy()
     {
-        // TODO Auto-generated method stub
         
     }
     
@@ -37,6 +38,12 @@ public class VirtualFilter implements Filter
             {
                 IOUtils.copy(in, arg1.getOutputStream());
             }
+            catch (Exception e)
+            {
+                ServletOutputStream os = arg1.getOutputStream();
+                os.println("404");
+                os.flush();
+            }
             finally
             {
                 IOUtils.closeQuietly(in);
@@ -52,7 +59,6 @@ public class VirtualFilter implements Filter
     public void init(FilterConfig arg0)
         throws ServletException
     {
-        // TODO Auto-generated method stub
         
     }
 }
