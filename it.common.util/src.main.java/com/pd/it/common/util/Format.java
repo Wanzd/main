@@ -37,8 +37,4 @@ public class Format
         return String.format(string, params);
     }
     
-    public static void main(String[] args)
-    {
-        LogUtil.log(freeMark("${a}_${b}", new VO().nvl("a", "a1").nvl("b", "b1")));
-    }
 }
