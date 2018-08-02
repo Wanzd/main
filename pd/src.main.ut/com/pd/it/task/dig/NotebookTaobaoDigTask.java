@@ -18,28 +18,29 @@ import com.pd.it.common.util.X;
 import com.pd.it.common.util.XmlUtil;
 import com.pd.it.common.vo.VO;
 
-public class PhoneTaobaoDigTask implements ITask
+public class NotebookTaobaoDigTask implements ITask
 {
     
     @Override
     public void execute()
     {
         // 清除旧数据
-        Db.u("phone$taobao.truncate");
+        Db.u("notebook$taobao.truncate");
         
         // 获取新数据
         VO vo = new VO();
         boolean flag = true;
-        List<VO> companyList = AI.build(new PhoneCompanyParseBuilder());
+        List<VO> companyList = AI.build(new NotebookCompanyParseBuilder());
         
         for (VO companyVO : companyList)
         {
-            List<VO> phoneList = AI.build(new PhoneParseBuilder(), companyVO);
-            Db.u("phone$taobao.us", new VO("list", phoneList));
+            List<VO> phoneList = AI.build(new NotebookParseBuilder(), companyVO);
+            Db.u("notebook$taobao.us", new VO("list", phoneList));
+            Db.u("log.us", new VO("list", phoneList));
         }
     }
     
-    private class PhoneCompanyParseBuilder implements IBuilder<VO, List<VO>>
+    private class NotebookCompanyParseBuilder implements IBuilder<VO, List<VO>>
     {
         
         @Override
@@ -47,7 +48,7 @@ public class PhoneTaobaoDigTask implements ITask
         {
             VO vo = new VO();
             String url =
-                "https://s.taobao.com/search?q=%E6%89%8B%E6%9C%BA&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306&cps=yes&ppath=";
+                "https://s.taobao.com/search?spm=a230r.1.0.0.76587985CRPDiK&q=笔记本&app=vproduct&vlist=1&from_combo=true&cps=yes&ppath=";
             vo.put("url", url);
             VO rest = NetUtil.jsoup(vo);
             
@@ -56,7 +57,6 @@ public class PhoneTaobaoDigTask implements ITask
             int endIndex = str.indexOf("g_srp_loadCss");
             str = str.substring(startIndex + 15, endIndex);
             str = str.substring(0, str.lastIndexOf(";")).trim();
-            System.out.println(str);
             JSONObject parseObject = JSON.parseObject(str);
             Map map = parseObject;
             VO jsonVO = new VO(map);
@@ -67,7 +67,7 @@ public class PhoneTaobaoDigTask implements ITask
         
     }
     
-    private class PhoneParseBuilder implements IBuilder<VO, List<VO>>
+    private class NotebookParseBuilder implements IBuilder<VO, List<VO>>
     {
         
         @Override
@@ -76,11 +76,10 @@ public class PhoneTaobaoDigTask implements ITask
             String companyName = in.str("text");
             String value = in.str("value");
             String url =
-                "https://s.taobao.com/search?q=%E6%89%8B%E6%9C%BA&imgfile=&commend=all&ssid=s5-e&search_type=item&sourceId=tb.index&spm=a21bo.2017.201856-taobao-item.1&ie=utf8&initiative_id=tbindexz_20170306&cps=yes&ppath="
+                "https://s.taobao.com/search?spm=a230r.1.0.0.76587985CRPDiK&q=笔记本&app=vproduct&vlist=1&from_combo=true&cps=yes&ppath="
                     + value;
             VO rest = NetUtil.jsoup(new VO("url", url));
             String msg = rest.str("msg");
-            System.out.println(msg);
             msg = Find.str$between(msg, "g_page_config =", "g_srp_loadCss");
             msg = Find.str$trim(msg, ";");
             msg = msg.substring(0, msg.length() - 1);

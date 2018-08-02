@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.pd.it.common.util.Db;
 import com.pd.it.common.vo.KV;
+import com.pd.it.common.vo.ResultVO;
 import com.pd.it.common.vo.VO;
 import com.pd.it.web.PermissionUtil;
 import com.pd.it.web.vo.NoPermissionVO;
@@ -56,11 +57,17 @@ public class RestService
                 List<String> jsonDatas = Db.strs(key, new VO(in));
                 return JSON.toJSONString(jsonDatas);
             case "u":
-                int rs = Db.u(key, new VO(in));
+            case "us":
+            case "ds":
+                VO vo = new VO(in);
+                String object = vo.str("list");
+                object = object.replaceAll("'", "''");
+                List<VO> list = VO.list$str(object);
+                int rs = Db.u(key, new VO("list", list));
                 
-                return "success";
+                return JSON.toJSONString(ResultVO.success(null));
         }
-        return "";
+        return "{}";
     }
     
     @ResponseBody

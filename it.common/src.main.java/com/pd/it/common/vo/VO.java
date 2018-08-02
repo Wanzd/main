@@ -1,9 +1,12 @@
 package com.pd.it.common.vo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class VO extends HashMap<String, Object>
@@ -44,6 +47,17 @@ public class VO extends HashMap<String, Object>
         }
     }
     
+    public static List<VO> list$str(String jsonStr)
+    {
+        List<VO> rsList = new ArrayList<VO>();
+        JSONArray parseArray = JSON.parseArray(jsonStr);
+        for (int i = 0; i < parseArray.size(); i++)
+        {
+            rsList.add(new VO(parseArray.get(i).toString()));
+        }
+        return rsList;
+    }
+    
     public Object obj(String key)
     {
         return get(key);
@@ -51,7 +65,27 @@ public class VO extends HashMap<String, Object>
     
     public VO vo(String key)
     {
-        return (VO)get(key);
+        Object object = get(key);
+        if (object instanceof Map)
+        {
+            return new VO((Map)object);
+        }
+        return (VO)object;
+    }
+    
+    public List<VO> list(String key)
+    {
+        Object object = get(key);
+        if (object instanceof List)
+        {
+            List<VO> rsList = new ArrayList<VO>();
+            for (Object eachObj : (List)object)
+            {
+                rsList.add(new VO((Map)eachObj));
+            }
+            return rsList;
+        }
+        return (List<VO>)object;
     }
     
     public Object v(String key)

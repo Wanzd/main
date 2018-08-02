@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.AI;
 import com.pd.it.task.dig.HouseFangtianxiaDigTask;
+import com.pd.it.task.dig.Job51DigTask;
+import com.pd.it.task.dig.JokeQiushibaikeDigTask;
+import com.pd.it.task.dig.NotebookTaobaoDigTask;
 import com.pd.it.task.dig.PhoneTaobaoDigTask;
 import com.pd.it.task.heat.HouseLocationHeatTask;
 import com.pd.it.task.heat.JobSkillHeatTask;
+import com.pd.it.task.heat.JokeQiushibaikeHeatTask;
 
 @RestController
 @RequestMapping("test")
@@ -31,7 +35,7 @@ public class TestService
         RequestMethod.POST}, produces = "application/json;charset=utf-8")
     public String job$51(LinkedHashMap<String, String> json)
     {
-        // AI.execute(new Job51Task());
+        // AI.execute(new Job51DigTask());
         AI.execute(new JobSkillHeatTask());
         return "[{result:'success'}]";
     }
@@ -59,7 +63,33 @@ public class TestService
         RequestMethod.POST}, produces = "application/json;charset=utf-8")
     public String phone$taobao(LinkedHashMap<String, String> json)
     {
-        AI.execute(new PhoneTaobaoDigTask());
+        AI.task(new PhoneTaobaoDigTask());
+        return "[{result:'success'}]";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "notebook$taobao", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    public String notebook$taobao(LinkedHashMap<String, String> json)
+    {
+        AI.task(new NotebookTaobaoDigTask());
+        return "[{result:'success'}]";
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "joke$qiushibaike", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    public String joke$qiushibaike(LinkedHashMap<String, String> json)
+    {
+        AI.task(new JokeQiushibaikeDigTask());
+        return "[{result:'success'}]";
+    }
+    @ResponseBody
+    @RequestMapping(value = "joke$heat", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    public String joke$heat(LinkedHashMap<String, String> json)
+    {
+        AI.task(new JokeQiushibaikeHeatTask());
         return "[{result:'success'}]";
     }
 }

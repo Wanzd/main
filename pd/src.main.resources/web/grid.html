@@ -9,68 +9,13 @@
 
 
 <div id="tt" class="easyui-tabs">
-	<div id="toolbar" title="mainDiv" style="height: 100%;">
+	<div id="main" title="main" style="height: 100%;">
 		<table id="dg" class="easyui-datagrid" style="height: 100%;"
 			toolbar="#toolbar" pagination="true" rownumbers="true"
 			fitColumns="true" singleSelect="true"
 			data-options="fit:false,border:false,pageSize:5,pageList:[5,10,15,20]">
 
 		</table>
-	</div>
-	<div id="toolbar" title="编辑" style="height: 100%;">
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-add" plain="true" onclick="$build('db.c$open')">新增</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-edit" plain="true" onclick="$build('db.u$open')">编辑</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-remove" plain="true" onclick="$build('db.d')">删除</a>
-	</div>
-	<div title="test" style="height: 100%;">
-		<div id="dlg" class="easyui-dialog" style="padding: 10px 20px"
-			closed="true" buttons="#dlg-buttons">
-			<div class="ftitle">详细信息</div>
-			<form id="fm" method="post" novalidate>
-				<div class="fitem">
-					<label>编码:</label> <input name="id" class="easyui-textbox"
-						required="true">
-				</div>
-				<div class="fitem">
-					<label>中文名称:</label> <input name="cn" class="easyui-textbox"
-						required="true">
-				</div>
-				<div class="fitem">
-					<label>英文名称:</label> <input name="en" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>详情:</label> <input name="detail" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性1:</label> <input name="attr1" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性2:</label> <input name="attr2" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性3:</label> <input name="attr3" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性4:</label> <input name="attr4" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性5:</label> <input name="attr5" class="easyui-textbox">
-				</div>
-				<div class="fitem">
-					<label>属性6:</label> <input name="attr6" class="easyui-textbox">
-				</div>
-			</form>
-		</div>
-	</div>
-	<div title="test2" id="dlg-buttons" style="height: 100%;">
-		<a href="javascript:void(0)" class="easyui-linkbutton c6"
-			iconCls="icon-ok" onclick="$build('db.s')" style="width: 90px">保存</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton"
-			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
-			style="width: 90px">取消</a>
 	</div>
 </div>
 <style type="text/css">

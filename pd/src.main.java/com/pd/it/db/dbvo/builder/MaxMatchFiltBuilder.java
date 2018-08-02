@@ -5,13 +5,13 @@ import java.util.Map;
 
 import com.pd.it.common.itf.IBuilder;
 
-public class MaxMatchFiltBuilder implements IBuilder<Map<String, Integer>, Map<String, Integer>>
+public class MaxMatchFiltBuilder implements IBuilder<Map<String, Double>, Map<String, Double>>
 {
     
     @Override
-    public Map<String, Integer> build(Map<String, Integer> in)
+    public Map<String, Double> build(Map<String, Double> in)
     {
-        Map<String, Integer> rsMap = new HashMap<String, Integer>();
+        Map<String, Double> rsMap = new HashMap<String, Double>();
         l1: for (String eachKey : in.keySet())
         {
             
@@ -22,7 +22,7 @@ public class MaxMatchFiltBuilder implements IBuilder<Map<String, Integer>, Map<S
                     continue l2;
                 }
                 if ((eachKey2.startsWith(eachKey) || eachKey2.endsWith(eachKey) || eachKey2.contains(eachKey))
-                    && (in.get(eachKey2) >= in.get(eachKey) * 0.001))
+                    && (in.get(eachKey2) >= in.get(eachKey) * 0.4))
                 {
                     continue l1;
                 }

@@ -61,15 +61,23 @@ public class NetUtil
         return rsVO;
     }
     
-    public static VO jsoup(VO vo)
+    public static VO jsoup(VO vo, int miniSec)
     {
         
+        try
+        {
+            Thread.sleep(miniSec);
+        }
+        catch (InterruptedException e1)
+        {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         Document document;
         try
         {
             document = Jsoup.connect(vo.str("url")).get();
-            Elements select = document.select("dl[class=clearfix]");
-            return AI.vo("msg", select.toString());
+            return AI.vo("msg", document.toString());
         }
         catch (IOException e)
         {
@@ -77,6 +85,12 @@ public class NetUtil
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public static VO jsoup(VO vo)
+    {
+        
+        return jsoup(vo, 700);
     }
     
     public static void testJsoup()

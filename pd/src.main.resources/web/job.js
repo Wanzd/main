@@ -3,7 +3,8 @@ require.config({
 	paths : {
 		jquery : "jquery.min",
 		easyui : "jquery.easyui.min",
-		echarts : "echarts.min"
+		echarts : "echarts.min",
+		wordcloud : "echarts-wordcloud.min"
 	},
 	shim : {
 		"easyui" : {
@@ -12,16 +13,14 @@ require.config({
 	}
 });
 require(
-		[ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
-		function(jquery, easyui, common, echarts, ai$echart) {
+		[ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
+		function(jquery, easyui, common, echarts, wordcloud, ai$echart) {
 			var impl = {
 				init$company : function() {
 					var data = common.ajax("rest/ra_51Job$company");
-					debugger;
 					var companyArr = common.attrArray(data, "company");
 					var salaryAvgArr = common.attrArray(data, "salaryAvg");
 					var salaryMaxArr = common.attrArray(data, "salaryMax");
-					debugger;
 					option = {
 						title : {
 							text : '公司工资统计'
@@ -69,10 +68,8 @@ require(
 				},
 				init$salary : function() {
 					var data = common.ajax("rest/ra_51Job");
-					debugger;
 					var salaryData = common.attrArray(data,
 							"salaryStart,salaryEnd,company,job,location");
-					debugger;
 
 					option = {
 						xAxis : {
@@ -116,10 +113,8 @@ require(
 				},
 				init$skill : function() {
 					var data = common.ajax("rest/ra_51Job$skillHeat$max");
-					debugger;
 					var salaryData = common.attrArray(data,
 							"salaryStart,salaryEnd,text");
-					debugger;
 
 					option = {
 						xAxis : {
@@ -158,7 +153,7 @@ require(
 				},
 				init$skill$heat : function() {
 					var data = common.ajax("rest/ra_51Job$skillHeat");
-					var groupArr = common.groupArray(data, "category");
+					var groupArr = common.attrArray(data, "category");
 					var treeMapVO = ai$echart.x$TreeMapVO(groupArr);
 					option = {
 						tooltip : {
@@ -177,6 +172,65 @@ require(
 					// 初始化echarts实例
 					var myChart = echarts.init(document
 							.getElementById('chartSkillHeat'));
+
+					// 使用制定的配置项和数据显示图表
+					myChart.setOption(option);
+				},
+				init$skill$heat$cloud : function() {
+					var jsonData = common.ajax("rest/ra_51Job$skillHeat");
+					var keywords = common.attrArray(jsonData, "text,c");
+					var data = [];
+					for (var i = 0, total = keywords.length; i < total; i++) {
+						var keyword = keywords[i];
+						data.push({
+							name : keyword[0],
+							value : Math.sqrt(keyword[1])
+						})
+					}
+					var maskImage = new Image();
+					maskImage.src = 'images/word-cloud.png';
+					var option = {
+						title : {
+							text : 'echarts3云图展示'
+						},
+						tooltip : {},
+						series : [ {
+							type : 'wordCloud', // 类型为字符云
+							shape : 'smooth', // 平滑
+							gridSize : 2, // 网格尺寸
+							size : [ '80%', '80%' ],
+							// sizeRange : [ 50, 100 ],
+							rotationRange : [ 46, 80 ], // 旋转范围
+							textStyle : {
+								normal : {
+									fontFamily : 'sans-serif',
+									color : function() {
+										return 'rgb('
+												+ [
+														Math
+																.round(Math
+																		.random() * 160),
+														Math
+																.round(Math
+																		.random() * 160),
+														Math
+																.round(Math
+																		.random() * 160) ]
+														.join(',') + ')';
+									}
+								},
+								emphasis : {
+									shadowBlur : 5, // 阴影距离
+									shadowColor : '#333' // 阴影颜色
+								}
+							},
+							data : data
+						} ]
+					};
+					debugger;
+					// 初始化echarts实例
+					var myChart = echarts.init(document
+							.getElementById('chartSkillHeatCloud'));
 
 					// 使用制定的配置项和数据显示图表
 					myChart.setOption(option);
@@ -242,7 +296,8 @@ require(
 					this.init$company();
 					this.init$salary();
 					this.init$skill();
-					this.init$skill$heat();
+					//this.init$skill$heat();
+					this.init$skill$heat$cloud();
 					this.init$skill$sort();
 				}
 			}

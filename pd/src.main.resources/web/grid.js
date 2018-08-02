@@ -10,8 +10,9 @@ require.config({
 		}
 	}
 });
-require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
-		easyui, common, tree, db) {
+require([ 'jquery', 'easyui', 'ai', 'common', 'tree', 'db' ], function(jquery,
+		easyui, ai, common, tree, db) {
+	var editIndex = undefined;
 	var curParams = common.parseUrl(location.href);
 	var $pageCfg = {
 		id : "lookupType"
@@ -35,8 +36,7 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 		}
 	};
-	debugger;
-	var colSchema = common.ajax("rest/strs_gridSchema/?gid=" + curParams.m);
+	var colSchema = common.ajax("rest/str_gridSchema/?gid=" + curParams.m);
 	var columns = [ {
 		width : 80,
 		field : 'ck',
@@ -48,8 +48,8 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				title : "Editable Datagrid",
 				width : '100%',
 				height : '100%',
-				singleSelect : true,
-				url : 'rest/' + curParams.mid + '/ra', // 指向后台的Action来获取当前菜单的信息的Json格式的数据
+				singleSelect : false,
+				url : 'rest/ra_' + curParams.m, // 指向后台的Action来获取当前菜单的信息的Json格式的数据
 				iconCls : 'icon-edit',
 				nowrap : true,
 				autoRowHeight : true,
@@ -89,11 +89,26 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 						},
 						'-',
 						{
-							id : 'btnEdit',
+							id : 'btnSave',
 							text : '修改',
-							iconCls : 'icon-edit',
+							iconCls : 'icon-save',
 							handler : function() {
-								$build('db.u$open');// 实现修改记录的方法
+								$('#dg').datagrid('endEdit', editIndex);
+								var rows = $("#dg").datagrid("getChanges");
+
+								var url = "rest/us_" + curParams.m;
+								var data = {
+									list : JSON.stringify(rows)
+								};
+								var rs = common.ajax(url, data);
+								if (rs) {
+									alert("保存成功");
+									$("#dg").datagrid("reload");
+									$('#dg').datagrid('uncheckAll');
+								} else {
+									alert("保存失败");
+								}
+
 							}
 						},
 						'-',
@@ -102,7 +117,20 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 							text : '删除',
 							iconCls : 'icon-remove',
 							handler : function() {
-								$build('db.d');// 实现直接删除数据的方法
+								debugger;
+								var rows = $("#dg").datagrid("getSelections");
+								var url = "rest/ds_" + curParams.m;
+								var data = {
+									list : JSON.stringify(rows)
+								};
+								var rs = common.ajax(url, data);
+								if (rs) {
+									alert("删除成功");
+									$("#dg").datagrid("reload");
+									$('#dg').datagrid('uncheckAll');
+								} else {
+									alert("删除失败");
+								}
 							}
 						},
 						'-',
@@ -130,6 +158,8 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				onClickRow : function(rowIndex, rowData) {
 					$('#dg').datagrid('uncheckAll');
 					$('#dg').datagrid('checkRow', rowIndex);
+					$('#dg').datagrid('endEdit', editIndex);
+					editIndex = rowIndex;
 					$("#dg").datagrid("beginEdit", rowIndex); // 这句如果注释掉下一行的ed就获取不到值
 					// $build("db.u$open");
 				}

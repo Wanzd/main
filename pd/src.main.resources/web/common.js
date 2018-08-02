@@ -1,9 +1,14 @@
 define([ 'common' ], function() {
+	String.prototype.replaceAll = function(s1, s2) {
+		return this.replace(new RegExp(s1, "gm"), s2);
+	}
 	return {
 		ajax : function(url, data) {
 			var rs = $.ajax({
 				url : url,
-				async : false
+				data : data,
+				async : false,
+				type : "POST"
 			});
 			var rsJson = eval("(" + rs.responseText + ")");
 			return rsJson;
@@ -68,6 +73,16 @@ define([ 'common' ], function() {
 				}
 			}
 			return splitGroup;
+		},
+		split$line : function(str, lineLength) {
+			var tmpArr = [];
+			var length = str.length;
+			var index = 0;
+
+			while (index < length) {
+				tmpArr.push(str.slice(index, (index += lineLength)));
+			}
+			return tmpArr.join("<br/>");
 		}
 	};
 });

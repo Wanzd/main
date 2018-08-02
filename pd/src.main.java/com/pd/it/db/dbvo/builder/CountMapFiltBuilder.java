@@ -5,22 +5,22 @@ import java.util.Map;
 
 import com.pd.it.common.itf.IBuilder;
 
-public class CountMapFiltBuilder implements IBuilder<Map<String, Integer>, Map<String, Integer>>
+public class CountMapFiltBuilder implements IBuilder<Map<String, Double>, Map<String, Double>>
 {
-    private int count = 0;
+    private double count = 0;
     
-    public CountMapFiltBuilder(int count)
+    public CountMapFiltBuilder(double count)
     {
         this.count = count;
     }
     
     @Override
-    public Map<String, Integer> build(Map<String, Integer> in)
+    public Map<String, Double> build(Map<String, Double> in)
     {
-        Map<String, Integer> rsMap = new HashMap<String, Integer>();
+        Map<String, Double> rsMap = new HashMap<String, Double>();
         for (String eachKey : in.keySet())
         {
-            int curCount = in.get(eachKey);
+            double curCount = in.get(eachKey);
             if (curCount < count)
             {
                 continue;
