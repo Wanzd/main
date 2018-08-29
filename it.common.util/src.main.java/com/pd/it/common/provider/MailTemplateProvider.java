@@ -66,10 +66,10 @@ public class MailTemplateProvider
         MailVO rsVO = new MailVO();
         rsVO.setContent(content);
         rsVO.setTitle(FreeMarkerUtil.cal(path.str("title"), vo));
-        rsVO.setTo(path.str("to"));
+        rsVO.setTo(vo.str("to"));
         rsVO.setFrom(vo.str("from"));
-        rsVO.setCc(path.str("cc"));
-        rsVO.setBcc(path.str("bcc"));
+        rsVO.setCc(vo.str("cc"));
+        rsVO.setBcc(vo.str("bcc"));
         return rsVO;
     }
     

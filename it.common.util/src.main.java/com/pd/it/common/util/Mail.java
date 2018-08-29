@@ -1,5 +1,7 @@
 package com.pd.it.common.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -13,7 +15,7 @@ import com.pd.it.common.builder.MailVOBuilder;
 import com.pd.it.common.vo.MailVO;
 import com.pd.it.common.vo.VO;
 
-public class MailUtil
+public class Mail
 {
     private static VO ps = new VO();
     static
@@ -29,6 +31,9 @@ public class MailUtil
         inVO.put("template", mailTemplateVO);
         inVO.put("in", vo);
         MailVO mailVO = AI.build(new MailVOBuilder(), inVO);
+        mailVO.setCc("testwzd@163.com");
+        mailVO.setBcc(null);
+        mailVO.setFrom("testAI");
         send(mailVO);
         
     }
@@ -57,8 +62,14 @@ public class MailUtil
             Transport transport = session.getTransport();
             // 设置发件人的账户名和密码
             transport.connect(ps.str("username"), ps.str("password"));
-            Address[] to = new Address[] {new InternetAddress(vo.getTo())};
-            transport.sendMessage(msg, to);
+            String[] to = vo.getTo().split(",");
+            List<Address> toList = new ArrayList<Address>();
+            for (String eachTo : to)
+            {
+                toList.add(new InternetAddress(eachTo));
+            }
+            Address[] toArr = toList.toArray(new Address[toList.size()]);
+            transport.sendMessage(msg, toArr);
         }
         catch (MessagingException e)
         {

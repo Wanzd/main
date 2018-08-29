@@ -21,6 +21,9 @@ require(
 					var salaryData = common.attrArray(data,
 							"thumbs,comments,contents,id");
 					option = {
+						title : {
+							text : '糗事百科数据'
+						},
 						xAxis : {
 							scale : true,
 							name : "面积"

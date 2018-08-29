@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.common.util.MailUtil;
+import com.pd.it.common.util.Mail;
 import com.pd.it.common.vo.MailVO;
 
 @RestController
@@ -29,7 +29,7 @@ public class TimerTaskService
         mailVO.setContent(content);
         mailVO.setFrom("panda_zdwan@hotmail.com");
         mailVO.setTo("panda_zdwan@hotmail.com");
-        MailUtil.send(mailVO);
+        Mail.send(mailVO);
         return content;
     }
     

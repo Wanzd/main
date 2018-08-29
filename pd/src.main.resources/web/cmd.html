@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AI系统</title>
+
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.4.1/themes/icon.css">
+<script data-main="cmd" src="require.js" charset="utf-8"></script>
+</head>
+
+<body class="easyui-layout">
+	<div id="cc" class="easyui-layout" style="width: 100%; height: 100%;">
+		<div data-options="region:'west',title:'命令行',split:false"
+			style="width: 200px;">
+			<input class="easyui-textbox" style="width: 100%; height: 32px">
+			Module:<input id="cbModule" name="cbModule" value=""> Action:<input
+				id="cbAction" name="cbAction" value="">
+		</div>
+
+		<div data-options="region:'center',border:false,plain:true"
+			style="width: 200px;">
+			<iframe id="moduleFrame" src="welcome.html"
+				style="width: 100%; height: 100%"></iframe>
+		</div>
+	</div>
+
+
+</body>
+</html>

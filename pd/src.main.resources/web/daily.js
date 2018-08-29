@@ -13,103 +13,175 @@ require.config({
 });
 require([ 'jquery', 'easyui', 'common', 'echarts' ], function(jquery, easyui,
 		common, echarts) {
+	var curCfg = {
+		div : {
+			id : "chartTodoYear"
+		}
+	}
 	var impl = {
-		init$todo$month : function() {
-			var graphData = [ [new Date("2018/08/05").getTime(),110] ];
-
-			var links = graphData.map(function(item, idx) {
-				return {
-					source : idx,
-					target : idx + 1
-				};
-			});
-			links.pop();
-
-			function getVirtulData(year) {
-				year = year || '2017';
-				var date = +echarts.number.parseDate(year + '-01-01');
-				var end = +echarts.number.parseDate((+year + 1) + '-01-01');
-				var dayTime = 3600 * 24 * 1000;
-				var data = [];
-				for (var time = date; time < end; time += dayTime) {
-					data.push([ echarts.format.formatTime('yyyy-MM-dd', time),
-							Math.floor(Math.random() * 10000) ]);
+		init$todo$year : function() {
+			var data = common.ajax("rest/json_health$weight");
+			var data = [ {
+				name : '1月',
+				value : 31,
+				itemStyle : {
+					color : 'red'
+				},
+				children : [ {
+					name : '1日',
+					value : 1,
+					itemStyle : {
+						color : 'green'
+					}
+				}, {
+					name : '',
+					value : 10,
+					itemStyle : {
+						color : 'gray'
+					}
+				}, {
+					name : '12日',
+					value : 1,
+					itemStyle : {
+						color : '#e0719c'
+					},
+					children : [ {
+						name : 'test1',
+						value : 0.1,
+						itemStyle : {
+							color : 'green'
+						}
+					}, {
+						name : 'test2',
+						value : 0.2,
+						itemStyle : {
+							color : 'blue'
+						}
+					}, {
+						name : 'test3',
+						value : 0.3,
+						itemStyle : {
+							color : 'red'
+						}
+					} ]
+				} ]
+			}, {
+				name : '2月',
+				value : 28,
+				itemStyle : {
+					color : 'gray'
 				}
-				return data;
-			}
+			}, {
+				name : '3月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			}, {
+				name : '4月',
+				value : 30,
+				itemStyle : {
+					color : 'gray'
+				}
+			}, {
+				name : '5月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			}, {
+				name : '6月',
+				value : 30,
+				itemStyle : {
+					color : 'gray'
+				}
+			}, {
+				name : '7月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			}, {
+				name : '8月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			} , {
+				name : '9月',
+				value : 30,
+				itemStyle : {
+					color : 'gray'
+				}
+			} , {
+				name : '10月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			} , {
+				name : '11月',
+				value : 30,
+				itemStyle : {
+					color : 'gray'
+				}
+			} , {
+				name : '12月',
+				value : 31,
+				itemStyle : {
+					color : 'gray'
+				}
+			} ];
 
 			option = {
-				tooltip : {},
-				calendar : {
-					top : 'middle',
-					left : 'center',
-					orient : 'vertical',
-					cellSize : 40,
-					yearLabel : {
-						margin : 50,
-						textStyle : {
-							fontSize : 30
-						}
+				title : {
+					text : '待办太阳图',
+					subtext : '',
+					textStyle : {
+						fontSize : 14,
+						align : 'center'
 					},
-					dayLabel : {
-						firstDay : 1,
-						nameMap : 'cn'
+					subtextStyle : {
+						align : 'center'
 					},
-					monthLabel : {
-						nameMap : 'cn',
-						margin : 15,
-						textStyle : {
-							fontSize : 20,
-							color : '#999'
-						}
-					},
-					range : [ '2018-08', '2018-10-31' ]
+					sublink : ''
 				},
-				visualMap : {
-					min : 0,
-					max : 10000,
-					type : 'piecewise',
-					left : 'center',
-					bottom : 20,
-					inRange : {
-						color : [ '#5291FF', '#C7DBFF' ]
-					},
-					seriesIndex : [ 1 ],
-					orient : 'horizontal'
-				},
-				series : [ {
-					type : 'graph',
-					edgeSymbol : [ 'none', 'arrow' ],
-					coordinateSystem : 'calendar',
-					links : links,
-					symbolSize : 15,
-					calendarIndex : 0,
-					itemStyle : {
-						normal : {
-							color : 'yellow',
-							shadowBlue : 9,
-							shadowOffsetX : 1.5,
-							shadowOffsetY : 3,
-							shadowColor : '#555'
+				series : {
+					type : 'sunburst',
+					highlightPolicy : 'ancestor',
+					data : data,
+					radius : [ 0, '95%' ],
+					sort : null,
+					levels : [ {}, {
+						r0 : '15%',
+						r : '35%',
+						itemStyle : {
+							borderWidth : 2
+						},
+						label : {
+							rotate : 'tangential'
 						}
-					},
-					lineStyle : {
-						normal : {
-							color : '#D10E00',
-							width : 1,
-							opacity : 1
+					}, {
+						r0 : '35%',
+						r : '70%',
+						label : {
+							align : 'right'
 						}
-					},
-					data : graphData,
-					z : 20
-				}, {
-					type : 'heatmap',
-					coordinateSystem : 'calendar',
-					data : getVirtulData(2018)
-				} ]
+					}, {
+						r0 : '70%',
+						r : '72%',
+						label : {
+							position : 'outside',
+							padding : 3,
+							silent : false
+						},
+						itemStyle : {
+							borderWidth : 3
+						}
+					} ]
+				}
 			};
-
-			echarts.init(document.getElementById('chartTodoMonth')).setOption(
+			echarts.init(document.getElementById(curCfg.div.id)).setOption(
 					option);
 
 		},
@@ -145,7 +217,7 @@ require([ 'jquery', 'easyui', 'common', 'echarts' ], function(jquery, easyui,
 			$("#divSummaryIO").html("收入指数：XXXXXX");
 		},
 		init : function() {
-			this.init$todo$month();
+			this.init$todo$year();
 			this.init$health();
 			this.init$summary();
 		}

@@ -12,6 +12,7 @@ import com.pd.it.common.util.Db;
 import com.pd.it.common.util.NetUtil;
 import com.pd.it.common.util.XmlUtil;
 import com.pd.it.common.vo.VO;
+import com.pd.it.task.heat.JobSkillHeatTask;
 
 public class Job51DigTask implements ITask
 {
@@ -43,6 +44,8 @@ public class Job51DigTask implements ITask
             Db.u("51job.us", new VO("list", rsList));
             curPage++;
         }
+        
+        AI.execute(new JobSkillHeatTask());
     }
     
     private static class Job51ParseBuilder implements IBuilder<VO, List<VO>>

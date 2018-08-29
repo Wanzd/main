@@ -20,8 +20,6 @@ public class JokeQiushibaikeDigTask implements ITask
         // Db.u("joke$qiushibaike.truncate");
         
         // 获取新数据
-        VO vo = new VO();
-        boolean flag = true;
         AI.build(new JokeQiushibaikeParseBuilder());
         
     }
