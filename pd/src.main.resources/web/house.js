@@ -57,7 +57,7 @@ require(
 				init$target : function() {
 					var data = common.ajax("rest/ra_house$target");
 					var salaryData = common.attrArray(data,
-							"area,cost,floor,floors,location,detail");
+							"area,cost,floor,floors,location,detail,url");
 
 					option = {
 						xAxis : {
@@ -88,8 +88,12 @@ require(
 							data : salaryData,
 						} ]
 					};
-					echarts.init(document.getElementById('chartTarget'))
-							.setOption(option);
+					var myChart=echarts.init(document.getElementById('chartTarget'))
+							;
+					myChart.on('click', function(params) {
+						window.open(params['data'][6]);
+					});
+					myChart.setOption(option);
 
 				},
 				init$location : function() {
