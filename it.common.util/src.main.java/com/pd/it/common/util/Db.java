@@ -33,7 +33,15 @@ public class Db
     
     public static int u(VO vo)
     {
-        return commonDao.u(vo);
+        try
+        {
+            return commonDao.u(vo);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return -1;
     }
     
     public static int us(List<VO> list)

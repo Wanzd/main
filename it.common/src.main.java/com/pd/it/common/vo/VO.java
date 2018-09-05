@@ -58,9 +58,16 @@ public class VO extends HashMap<String, Object>
         return rsList;
     }
     
-    public Object obj(String key)
+    public <Out> Out obj(String key, Class<Out> outClass)
     {
-        return get(key);
+        Object object = get(key);
+        if (object == null)
+        {
+            return null;
+        }
+        
+        String jsonString = JSON.toJSONString(object);
+        return JSON.parseObject(jsonString, outClass);
     }
     
     public VO vo(String key)
@@ -90,7 +97,7 @@ public class VO extends HashMap<String, Object>
     
     public Object v(String key)
     {
-        Object obj = obj(key);
+        Object obj = get(key);
         if (obj == null)
         {
             return "";
@@ -100,7 +107,7 @@ public class VO extends HashMap<String, Object>
     
     public String str(String key)
     {
-        Object obj = obj(key);
+        Object obj = get(key);
         if (obj == null)
         {
             return "";
