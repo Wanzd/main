@@ -1,6 +1,7 @@
 package com.pd.it.common.util;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +36,11 @@ public class Format
     public static String str(String string, Object... params)
     {
         return String.format(string, params);
+    }
+    
+    public static String date2Str(Date date, String pattern)
+    {
+        return DateUtil.format(date, pattern);
     }
     
 }

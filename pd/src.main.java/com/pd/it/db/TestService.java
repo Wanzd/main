@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pd.it.common.provider.CommonSqlProvider;
 import com.pd.it.common.util.AI;
+import com.pd.it.common.util.Db;
+import com.pd.it.common.vo.VO;
 import com.pd.it.task.dig.HouseFangtianxiaDigTask;
 import com.pd.it.task.dig.Job51DigTask;
 import com.pd.it.task.dig.JokeQiushibaikeDigDailyTask;
@@ -103,4 +106,16 @@ public class TestService
         return "[{result:'success'}]";
     }
     
+    @ResponseBody
+    @RequestMapping(value = "sync$dao", method = {RequestMethod.GET,
+        RequestMethod.POST}, produces = "application/json;charset=utf-8")
+    public String sync$dao()
+    {
+        CommonSqlProvider.refresh();
+        Db.u("log.u",
+            new VO().nvl("typeId", "refreshSysCfg").nvl("id", "Dao").nvl("cUser", "system").nvl("name", "start").nvl(
+                "detail",
+                ""));
+        return "[{result:'success'}]";
+    }
 }

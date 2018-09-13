@@ -3,16 +3,14 @@ package com.pd.it.task.dig;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dom4j.Element;
-
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.itf.ITask;
 import com.pd.it.common.util.AI;
 import com.pd.it.common.util.Db;
 import com.pd.it.common.util.F;
 import com.pd.it.common.util.Find;
+import com.pd.it.common.util.Mail;
 import com.pd.it.common.util.NetUtil;
-import com.pd.it.common.util.XmlUtil;
 import com.pd.it.common.vo.VO;
 
 public class HouseFangtianxiaDigTask implements ITask
@@ -44,6 +42,9 @@ public class HouseFangtianxiaDigTask implements ITask
             Db.u("house.us", new VO("list", rsList));
             curPage++;
         }
+        
+        // 邮件
+        AI.build(new MailHouseBuilder());
     }
     
     private static class House$fangtianxiaParseBuilder implements IBuilder<VO, List<VO>>
@@ -117,6 +118,24 @@ public class HouseFangtianxiaDigTask implements ITask
                 e.printStackTrace();
             }
             return rsList;
+        }
+        
+    }
+    
+    private class MailHouseBuilder implements IBuilder<VO, VO>
+    {
+        
+        @Override
+        public VO build(VO in)
+        {
+            // 查询糗事百科按赞数倒序排列
+            List<VO> topList = Db.ra("house$target.ra");
+            
+            VO vo = new VO().nvl("title", "testTitle");
+            vo.nvl("to", "379331690@qq.com,496019830@qq.com,panda_zdwan@hotmail.com,testwzd@163.com");
+            vo.nvl("list", topList);
+            Mail.send("dailyHouse", vo);
+            return null;
         }
         
     }

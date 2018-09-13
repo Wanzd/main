@@ -45,6 +45,7 @@ public class CommonSqlProvider
             List<VO> raItem = Db.raDao(lookupFilterVO);
             
             StringTemplateLoader loader = new StringTemplateLoader();
+            StringBuffer detailBuffer = new StringBuffer();
             for (VO eachItem : raItem)
             {
                 String key = null;
@@ -57,10 +58,12 @@ public class CommonSqlProvider
                 {
                     key = String.format("%s.%s", eachItem.str("module"), eachItem.str("action"));
                 }
-                LogUtil.log(String.format("DaoKey:%s", key));
+                detailBuffer.append(String.format("DaoKey:%s\n", key));
+                // LogUtil.log(String.format("DaoKey:%s", key));
                 loader.putTemplate(key, eachItem.str("value"));
                 loader.putTemplate(key + "_jsonData", eachItem.str("jsonData"));
             }
+            
             cfg.setTemplateLoader(loader);
         }
     }

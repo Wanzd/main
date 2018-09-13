@@ -1,6 +1,7 @@
 package com.pd.it.task.dig;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.pd.it.common.itf.IBuilder;
@@ -8,6 +9,7 @@ import com.pd.it.common.itf.ITask;
 import com.pd.it.common.util.AI;
 import com.pd.it.common.util.Db;
 import com.pd.it.common.util.Find;
+import com.pd.it.common.util.Format;
 import com.pd.it.common.util.Mail;
 import com.pd.it.common.util.NetUtil;
 import com.pd.it.common.vo.VO;
@@ -15,9 +17,15 @@ import com.pd.it.common.vo.VO;
 public class JokeQiushibaikeDigDailyTask implements ITask
 {
     
+    private final String taskId = "JokeQiushibaikeDigDailyTask" + Format.date2Str(new Date(), "yyyyMMddHHmmss");
+    
     @Override
     public void execute()
     {
+        Db.u("log.u",
+            new VO().nvl("typeId", "timerTask").nvl("id", taskId).nvl("cUser", "system").nvl("name", "start").nvl(
+                "detail",
+                "ok"));
         // 清除旧数据
         Db.u("joke$qiushibaike.truncate");
         
@@ -26,6 +34,12 @@ public class JokeQiushibaikeDigDailyTask implements ITask
         
         // 邮件
         AI.build(new MailQiushibaikeBuilder());
+        
+        Db.u("log.u",
+            new VO().nvl("typeId", "timerTask").nvl("id", taskId).nvl("cUser", "system").nvl("name", "end").nvl(
+                "detail",
+                "ok"));
+        
     }
     
     private class JokeQiushibaikeParseBuilder implements IBuilder<VO, List<VO>>
@@ -94,7 +108,13 @@ public class JokeQiushibaikeDigDailyTask implements ITask
                 catch (InterruptedException e)
                 {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    Db.u("log.u",
+                        new VO().nvl("typeId", "timerTask")
+                            .nvl("id", taskId)
+                            .nvl("cUser", "system")
+                            .nvl("name", "error")
+                            .nvl("detail", e.getStackTrace().toString()));
+                    
                 }
             }
             return null;
