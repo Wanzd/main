@@ -67,9 +67,9 @@ require(
 					myChart.setOption(option);
 				},
 				init$salary : function() {
-					var data = common.ajax("rest/ra_51Job");
+					var data = common.ajax("rest/ra_51Job$target");
 					var salaryData = common.attrArray(data,
-							"salaryStart,salaryEnd,company,job,location");
+							"salaryStart,salaryEnd,company,job,location,url");
 
 					option = {
 						xAxis : {
@@ -86,10 +86,10 @@ require(
 								type : "shadow"
 							},
 							formatter : function(params) {
-								debugger;
 								var curVO = params.data;
-								return "位置：" + curVO[4] + "<br/>公司：" + curVO[2]
-										+ "<br/>岗位：" + curVO[3];
+								var htmlStr = "位置：" + curVO[4] + "<br/>公司："
+										+ curVO[2] + "<br/>岗位：" + curVO[3];
+								return htmlStr;
 							},
 							position : function(point, params, dom, rect, size) {
 								return [ point[0], point[1] + 30 ];
@@ -107,7 +107,10 @@ require(
 					// 初始化echarts实例
 					var myChart = echarts.init(document
 							.getElementById('chartSalary'));
-
+					myChart.on('click', function(params) {
+						debugger;
+						window.open(params['data'][5]);
+					});
 					// 使用制定的配置项和数据显示图表
 					myChart.setOption(option);
 				},
@@ -296,7 +299,7 @@ require(
 					this.init$company();
 					this.init$salary();
 					this.init$skill();
-					//this.init$skill$heat();
+					// this.init$skill$heat();
 					this.init$skill$heat$cloud();
 					this.init$skill$sort();
 				}

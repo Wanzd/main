@@ -13,18 +13,10 @@
 
 <body class="easyui-layout">
 	<div id="cc" class="easyui-layout" style="width: 100%; height: 100%;">
-		<div data-options="region:'west',title:'命令行',split:false"
-			style="width: 200px;">
-			<input class="easyui-textbox" style="width: 100%; height: 32px">
-			Module:<input id="cbModule" name="cbModule" value=""> Action:<input
-				id="cbAction" name="cbAction" value="">
-		</div>
-
-		<div data-options="region:'center',border:false,plain:true"
-			style="width: 200px;">
-			<iframe id="moduleFrame" src="welcome.html"
-				style="width: 100%; height: 100%"></iframe>
-		</div>
+		<div id="output" class="easyui-layout"
+			style="width: 100%; height: 90%;"></div>
+		<input id="cmdInput" type="text" class="easyui-layout"
+			style="width: 80%; height: 10%;" onkeydown="keyup_submit(event)" />
 	</div>
 
 

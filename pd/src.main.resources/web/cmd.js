@@ -10,6 +10,18 @@ require.config({
 		}
 	}
 });
+function keyup_submit(e) {
+	var evt = window.event || e;
+	if (evt.keyCode != 13) {
+		return;
+	}
+	$("#cmdInput").attr("disabled", "disabled");
+	var rs = $("#cmdInput").val();
+	$("#output").html(rs);
+	$("#cmdInput").val("");
+	$("#cmdInput").removeAttr("disabled");
+	$("#cmdInput").focus();
+}
 require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		easyui, common, tree, db) {
 	main = {

@@ -34,6 +34,10 @@ public class XmlUtil
     public static List<Element> readStr(String str, String xpath)
     {
         Document doc = readStr(str);
+        if (doc == null)
+        {
+            return null;
+        }
         XPath x = doc.createXPath(xpath);
         List<Element> selectNodes = x.selectNodes(doc);
         return selectNodes;

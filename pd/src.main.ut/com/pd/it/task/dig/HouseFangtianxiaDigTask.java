@@ -102,6 +102,10 @@ public class HouseFangtianxiaDigTask implements ITask
                         + Find.str$between(locationStr, "<span>", "</span>"));
                 String p1 = Find.str$between(str, "<p class=\"tel_shop\">", "</span>");
                 String[] split = p1.split("\\|");
+                if (split.length < 5)
+                {
+                    return rsList;
+                }
                 rsVO.put("design", split[0].trim());
                 rsVO.put("area", AI.num(split[1].trim()));
                 rsVO.put("floor", split[2].substring(0, split[2].indexOf("层")));

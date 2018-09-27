@@ -1,9 +1,7 @@
 package com.pd.it.common.util;
 
 import java.util.List;
-import java.util.Map;
 
-import com.alibaba.fastjson.JSONObject;
 import com.pd.it.common.vo.VO;
 
 public class Find
@@ -66,19 +64,20 @@ public class Find
         List<String> rsList = AI.list();
         while (endIdx >= 0)
         {
-            startIdx = msg.indexOf(startStr, endIdx+1) ;
+            startIdx = msg.indexOf(startStr, endIdx + 1);
             if (startIdx == -1)
             {
                 break;
             }
-            startIdx+= startStr.length();
+            startIdx += startStr.length();
             endIdx = msg.indexOf(endStr, startIdx);
             if (endIdx == -1)
             {
                 break;
             }
             String id = msg.substring(startIdx, endIdx);
-            if(!rsList.contains(id)) {
+            if (!rsList.contains(id))
+            {
                 rsList.add(id);
             }
         }
@@ -89,6 +88,10 @@ public class Find
     {
         int startIdx = msg.indexOf(startStr) + startStr.length();
         int endIdx = msg.indexOf(endStr, startIdx);
+        if (startIdx < 0 || endIdx < 0 || startIdx > endIdx)
+        {
+            return "";
+        }
         msg = msg.substring(startIdx, endIdx);
         return msg;
     }
