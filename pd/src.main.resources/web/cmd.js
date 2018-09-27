@@ -16,8 +16,15 @@ function keyup_submit(e) {
 		return;
 	}
 	$("#cmdInput").attr("disabled", "disabled");
-	var rs = $("#cmdInput").val();
-	$("#output").html(rs);
+	var input = $("#cmdInput").val();
+	if (input == "clear") {
+		$("#output").html("");
+		$("#cmdInput").val("");
+		$("#cmdInput").removeAttr("disabled");
+		$("#cmdInput").focus();
+		return;
+	}
+	$("#output").html(input);
 	$("#cmdInput").val("");
 	$("#cmdInput").removeAttr("disabled");
 	$("#cmdInput").focus();
