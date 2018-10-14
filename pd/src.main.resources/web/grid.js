@@ -127,20 +127,25 @@ require(
 									text : '删除',
 									iconCls : 'icon-remove',
 									handler : function() {
-										debugger;
-										var rows = $("#dg").datagrid(
-												"getSelections");
-										var url = "rest/ds_" + curParams.m;
-										var data = {
-											list : JSON.stringify(rows)
-										};
-										var rs = common.ajax(url, data);
-										if (rs) {
-											$("#dg").datagrid("reload");
-											$('#dg').datagrid('uncheckAll');
-										} else {
-											alert("删除失败");
-										}
+										$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){
+										    if (r){
+										    	debugger;
+												var rows = $("#dg").datagrid(
+														"getSelections");
+												var url = "rest/ds_" + curParams.m;
+												var data = {
+													list : JSON.stringify(rows)
+												};
+												var rs = common.ajax(url, data);
+												if (rs) {
+													$("#dg").datagrid("reload");
+													$('#dg').datagrid('uncheckAll');
+												} else {
+													alert("删除失败");
+												}
+										    }
+										});
+										
 									}
 								},
 								'-',

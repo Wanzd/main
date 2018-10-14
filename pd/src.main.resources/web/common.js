@@ -4,7 +4,6 @@ define([ 'common' ], function() {
 	}
 	return {
 		ajax : function(url, data) {
-			debugger;
 			var rs = $.ajax({
 				url : url,
 				data : data,
@@ -65,10 +64,10 @@ define([ 'common' ], function() {
 			if (data.length > 0) {
 				for (var i = 0, total = data.length; i < total; i++) {
 					var curRow = data[i];
-					var curGroup = splitGroup[curRow.category];
+					var curGroup = splitGroup[curRow[groupBy]];
 					if (curGroup == null) {
 						curGroup = [];
-						splitGroup[curRow.category] = curGroup;
+						splitGroup[curRow[groupBy]] = curGroup;
 					}
 					curGroup.push(curRow);
 				}
