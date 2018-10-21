@@ -108,7 +108,6 @@ require(
 					var myChart = echarts.init(document
 							.getElementById('chartSalary'));
 					myChart.on('click', function(params) {
-						debugger;
 						window.open(params['data'][5]);
 					});
 					// 使用制定的配置项和数据显示图表
@@ -230,7 +229,6 @@ require(
 							data : data
 						} ]
 					};
-					debugger;
 					// 初始化echarts实例
 					var myChart = echarts.init(document
 							.getElementById('chartSkillHeatCloud'));
@@ -240,12 +238,10 @@ require(
 				},
 				init$skill$sort : function() {
 					var data = common.ajax("rest/ra_51Job$skillHeat");
-					debugger;
 					var textArr = common.attrArray(data, "text");
 					var salaryAvgArr = common.attrArray(data, "salaryAvg");
 					var salaryEndArr = common.attrArray(data, "salaryEnd");
 					var salaryStartArr = common.attrArray(data, "salaryStart");
-					debugger;
 					option = {
 						title : {
 							text : '公司工资统计'

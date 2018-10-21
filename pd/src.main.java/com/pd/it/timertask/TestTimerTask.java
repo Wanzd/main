@@ -8,9 +8,9 @@ import com.pd.it.task.heat.HouseLocationHeatTask;
 
 @Controller
 public class TestTimerTask {
-	@Scheduled(cron = "0 0/30 * * * ?")
+	@Scheduled(cron = "0 0/30 20 * * ?")
 	public void refreshJobData() {
-		// AI.execute(new Job51Task());
+		// AI.execute(new Job51Task());	
 		// AI.execute(new HouseLocationHeatTask());
 	}
 

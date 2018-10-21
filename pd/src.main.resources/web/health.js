@@ -19,7 +19,8 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
 				onSelect : function(title, index) {
 					var selectF = {
 						0 : $api.init$health$heat,
-						1 : $api.init$health$person
+						1 : $api.init$health$person,
+						2 : $api.init$health$weight
 					}
 					selectF[index]();
 				}
@@ -53,7 +54,6 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
 					myChart.setOption(option);
 				},
 				init$health$person : function() {
-					debugger;
 					var data = common.ajax("rest/ra_health$heat");
 					var groupArr = common.groupArray(data, "name");
 					var treeMapVO = ai$echart.x$sunBurstVO(groupArr);
@@ -100,8 +100,8 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
 								}
 							} ]
 						}
+
 					};
-					;
 					// 初始化echarts实例
 					var myChart = echarts.init(document
 							.getElementById('chartHealthPerson'));
@@ -109,11 +109,12 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
 					// 使用制定的配置项和数据显示图表
 					myChart.setOption(option);
 				},
+				
 				init : function() {
 					this.init$health$heat();
 					// this.init$health$person();
 				}
-			}
+			};
 
 			impl.init();
 			debugger;
