@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.module.economic.IEconomicDetailDao">
+
+	<select id="rs" parameterType="VO" resultType="VO">
+select 
+	flow_id as "flowId",
+	year as "year",
+	month as "month",
+	day as "day",
+	person as "person",
+	event_type as "eventType",
+	event_class as "eventClass",
+	qty as "qty",
+	detail as "detail"
+from economic_detail_t
+	</select>
+
+	<update id="us">
+replace into economic_detail_t(
+	flow_id,
+	year,
+	month,
+	day,
+	person,
+	event_type,
+	event_class,
+	qty,
+	detail
+)
+values
+		<foreach item="it" index="index" collection="list" 
+			separator=",">
+	(
+		#{it.flowId},
+		#{it.year,jdbcType=NUMERIC},
+		#{it.month,jdbcType=NUMERIC},
+		#{it.day,jdbcType=NUMERIC},
+		#{it.person},
+		#{it.eventType},
+		#{it.eventClass},
+		#{it.qty},
+		#{it.detail}
+	)
+		</foreach>
+
+	</update>
+	<delete id="ds">
+delete from economic_detail_t
+where (flow_id) in(
+		<foreach item="it" collection="list" 
+			separator=",">
+	(${it.flowId})
+		</foreach>
+)
+	</delete>
+	
+</mapper>  

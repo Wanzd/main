@@ -10,11 +10,11 @@ require.config({
 		}
 	}
 });
-var _common=null;
+var _common = null;
 require(
 		[ 'jquery', 'easyui', 'ai', 'common', 'tree', 'db' ],
 		function(jquery, easyui, ai, common, tree, db) {
-			_common=common;
+			_common = common;
 			var editIndex = undefined;
 			var curParams = common.parseUrl(location.href);
 			var $pageCfg = {
@@ -40,7 +40,7 @@ require(
 				}
 			};
 			var colSchema = common.ajax("rest/str_gridSchema/?gid="
-					+ curParams.m);
+					+ curParams.module + "$" + curParams.dimension);
 			var columns = [ {
 				width : 80,
 				field : 'ck',
@@ -49,12 +49,12 @@ require(
 			var $pageCfg = {
 				datagrid : {
 					cfg : { // 定位到Table标签，Table标签的ID是grid
-						border:1,
+						border : 1,
 						title : "DataSet",
 						width : '100%',
 						height : '100%',
 						singleSelect : false,
-						url : 'rest/ra_' + curParams.m, // 指向后台的Action来获取当前菜单的信息的Json格式的数据
+						url : curParams.module + "/rs/" + curParams.dimension, // 指向后台的Action来获取当前菜单的信息的Json格式的数据
 						iconCls : 'icon-edit',
 						nowrap : true,
 						autoRowHeight : true,
@@ -64,7 +64,7 @@ require(
 						pageSize : 20,
 						pageList : [ 50, 100, 200 ],
 						rownumbers : false,
-						fit:true,
+						fit : true,
 						// sortName: 'ID', //根据某个字段给easyUI排序
 						sortOrder : 'asc',
 						remoteSort : false,
@@ -109,7 +109,7 @@ require(
 										var rows = $("#dg").datagrid(
 												"getChanges");
 
-										var url = "rest/us_" + curParams.m;
+										var url =  curParams.module+"/us/" + curParams.dimension;
 										var data = {
 											list : JSON.stringify(rows)
 										};
@@ -129,25 +129,39 @@ require(
 									text : '删除',
 									iconCls : 'icon-remove',
 									handler : function() {
-										$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){
-										    if (r){
-										    	debugger;
-												var rows = $("#dg").datagrid(
-														"getSelections");
-												var url = "rest/ds_" + curParams.m;
-												var data = {
-													list : JSON.stringify(rows)
-												};
-												var rs = common.ajax(url, data);
-												if (rs) {
-													$("#dg").datagrid("reload");
-													$('#dg').datagrid('uncheckAll');
-												} else {
-													alert("删除失败");
-												}
-										    }
-										});
-										
+										$.messager
+												.confirm(
+														'Confirm',
+														'Are you sure you want to delete record?',
+														function(r) {
+															if (r) {
+																debugger;
+																var rows = $(
+																		"#dg")
+																		.datagrid(
+																				"getSelections");
+																var url = curParams.module+"/ds/" + curParams.dimension;
+																var data = {
+																	list : JSON
+																			.stringify(rows)
+																};
+																var rs = common
+																		.ajax(
+																				url,
+																				data);
+																if (rs) {
+																	$("#dg")
+																			.datagrid(
+																					"reload");
+																	$('#dg')
+																			.datagrid(
+																					'uncheckAll');
+																} else {
+																	alert("删除失败");
+																}
+															}
+														});
+
 									}
 								},
 								'-',

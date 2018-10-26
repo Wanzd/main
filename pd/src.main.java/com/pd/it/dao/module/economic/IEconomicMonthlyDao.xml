@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.module.economic.IEconomicMonthlyDao">
+
+	<select id="rs" parameterType="VO" resultType="VO">
+select * from 
+economic_month_person_rate_risk_v
+where month=DATE_FORMAT(now(),'%Y-%m')
+order by person desc
+	</select>
+	
+	<update id="us">
+replace into economic_month_t(
+	month,
+	person,
+	i1,
+	o1,
+	o2,
+	o3,
+	o4
+)
+values
+		<foreach item="it" collection="list" 
+			separator=",">
+(
+	#{it.month},
+	#{it.person},
+	#{it.monthly,jdbcType=NUMERIC},
+	#{it.using,jdbcType=NUMERIC},
+	#{it.eat,jdbcType=NUMERIC},
+	#{it.house,jdbcType=NUMERIC},
+	#{it.traffic,jdbcType=NUMERIC}
+)
+		</foreach>
+	</update>
+	
+	
+	<delete id="ds">
+delete from economic_month_t
+where (month,person) in(
+		<foreach item="it" collection="list" 
+			separator=",">
+	(#{it.month},${it.person})
+		</foreach>
+)
+	</delete>
+	
+</mapper>  

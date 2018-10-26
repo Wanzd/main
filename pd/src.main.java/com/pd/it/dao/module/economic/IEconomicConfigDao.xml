@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.module.economic.IEconomicConfigDao">
+
+	<select id="rs" parameterType="VO" resultType="VO">
+select * 
+from sys_lookupitem_t
+where type_id='moduleCfg.economicRate'
+	</select>
+
+	<update id="us">
+replace into sys_lookupitem_t(type_id,id,cn,en,value)
+values
+		<foreach item="it" collection="list" 
+			separator=",">
+( 	'moduleCfg.economicRate',
+	#{it.id},
+	#{it.cn},
+	#{it.en},
+	#{it.value}
+)
+		</foreach>
+
+	</update>
+	
+	<delete id="ds">
+delete from sys_lookupitem_t
+where (type_id,id) in(
+		<foreach item="it" collection="list" 
+			separator=",">
+	('moduleCfg.economicRate',${it.id})
+		</foreach>
+)
+	</delete>
+	
+</mapper>  
