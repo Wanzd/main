@@ -6,7 +6,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.pd.it.common.itf.IBuilder;
-import com.pd.it.common.itf.IDbDao;
+import com.pd.it.common.itf.IDao;
 import com.pd.it.common.itf.IValidRule;
 
 public class BeanUtil

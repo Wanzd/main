@@ -98,8 +98,9 @@ public class TestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String sync$dao() {
 		CommonSqlProvider.refresh();
-		Db.u("log.u", new VO().nvl("typeId", "refreshSysCfg").nvl("id", "Dao").nvl("cUser", "system")
-				.nvl("name", "start").nvl("detail", ""));
+		// Db.u("log.u", new VO().nvl("typeId", "refreshSysCfg").nvl("id",
+		// "Dao").nvl("cUser", "system")
+		// .nvl("name", "start").nvl("detail", ""));
 		return "[{result:'success'}]";
 	}
 }

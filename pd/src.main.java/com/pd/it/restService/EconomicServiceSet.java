@@ -3,68 +3,55 @@ package com.pd.it.restService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import com.pd.it.common.abs.AbsCommonDbService;
+import com.pd.it.common.vo.BatchList;
 import com.pd.it.common.vo.VO;
 import com.pd.it.dao.module.economic.IEconomicConfigDao;
 import com.pd.it.dao.module.economic.IEconomicDetailDao;
 import com.pd.it.dao.module.economic.IEconomicMonthlyDao;
 
 public class EconomicServiceSet {
-	@Repository
-	public static class EconomicDetailService {
+	@Service("economicDetailService")
+	public static class EconomicDetailService extends AbsCommonDbService<VO, VO, VO, IEconomicDetailDao> {
 
 		@Autowired
 		private IEconomicDetailDao dao;
 
-		public List<VO> rs() {
-			return dao.rs(null);
+		@Override
+		public IEconomicDetailDao getDao() {
+			return dao;
 		}
 
-		public int us(List<VO> list) {
-			return dao.us(list);
-		}
+		
 
-		public int ds(List<VO> list) {
-			return dao.ds(list);
-		}
 	}
 
-	@Repository
-	public static class EconomicConfigService {
+	@Service("economicConfigService")
+	public static class EconomicConfigService extends AbsCommonDbService<VO, VO, VO, IEconomicConfigDao> {
 
 		@Autowired
 		private IEconomicConfigDao dao;
 
-		public List<VO> rs() {
-			return dao.rs(null);
+		@Override
+		public IEconomicConfigDao getDao() {
+			// TODO Auto-generated method stub
+			return dao;
 		}
 
-		public int us(List<VO> list) {
-			return dao.us(list);
-		}
-
-		public int ds(List<VO> list) {
-			return dao.ds(list);
-		}
 	}
 
-	@Repository
-	public static class EconomicMonthlyService {
+	@Service("economicMonthlyService")
+	public static class EconomicMonthlyService  extends AbsCommonDbService<VO, VO, VO, IEconomicMonthlyDao>{
 
 		@Autowired
 		private IEconomicMonthlyDao dao;
 
-		public List<VO> rs() {
-			return dao.rs(null);
+		@Override
+		public IEconomicMonthlyDao getDao() {
+			return dao;
 		}
 
-		public int us(List<VO> list) {
-			return dao.us(list);
-		}
-
-		public int ds(List<VO> list) {
-			return dao.ds(list);
-		}
 	}
 }

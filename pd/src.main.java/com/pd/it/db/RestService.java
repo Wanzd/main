@@ -53,15 +53,12 @@ public class RestService {
 		case "strs":
 			List<String> jsonDatas = Db.strs(key, new VO(in));
 			return JSON.toJSONString(jsonDatas);
-		case "u":
-			Db.u(key, vo);
-			return JSON.toJSONString(ResultVO.success(null));
 		case "us":
 		case "ds":
 			String object = vo.str("list");
 			object = object.replaceAll("'", "''");
 			List<VO> list = VO.list$str(object);
-			Db.u(key, new VO("list", list));
+			Db.us(list);
 
 			return JSON.toJSONString(ResultVO.success(null));
 		}

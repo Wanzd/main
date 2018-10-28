@@ -16,8 +16,11 @@ public class ResultVO extends VO {
 	}
 
 	public static ResultVO success(Object msg) {
-		// TODO Auto-generated method stub
 		return new ResultVO(Status.Success, msg, "200");
+	}
+
+	public static ResultVO error(Object msg) {
+		return new ResultVO(Status.Error, msg, "500");
 	}
 
 }

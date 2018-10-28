@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.pd.it.common.itf.IDbDao;
+import com.pd.it.common.itf.IDao;
 import com.pd.it.common.itf.IDbTreeDao;
 import com.pd.it.common.vo.VO;
 
@@ -30,7 +30,7 @@ public class TreeDaoUtil
             WebApplicationContext ctx = ContextLoader.getCurrentWebApplicationContext();
             SqlSessionFactory sqlFactory = (SqlSessionFactory)ctx.getBean("sqlSessionFactory");
             sqlSession = sqlFactory.openSession();
-            IDbDao daoKvDao = (IDbDao)sqlSession.getMapper(Class.forName("com.pd.it.system.daoKv.IDaoKvDao"));
+            IDao daoKvDao = (IDao)sqlSession.getMapper(Class.forName("com.pd.it.system.daoKv.IDaoKvDao"));
             List<VO> ra = daoKvDao.ra(null);
             for (VO eachVO : ra)
             {

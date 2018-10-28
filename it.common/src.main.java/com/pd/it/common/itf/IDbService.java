@@ -1,8 +1,17 @@
 package com.pd.it.common.itf;
 
-import com.pd.it.common.vo.VO;
+import java.util.List;
 
-public interface IDbService extends IService<VO>, IBatchService<VO>
-{
-    
+import com.pd.it.common.vo.VO;
+import com.pd.it.common.vo.FO$page;
+
+public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>>
+		extends IService<VO>, IBatchService<_VO, _FO, _DTO> {
+	_Dao getDao();
+
+	_DTO r(_FO fo);
+
+	List<_DTO> rs(FO$page<_FO> fo);
+
+	List<_DTO> ra(_FO fo);
 }

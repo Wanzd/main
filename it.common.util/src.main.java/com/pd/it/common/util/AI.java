@@ -109,7 +109,7 @@ public class AI
     {
         if (ctx == null)
         {
-            ctx = new ClassPathXmlApplicationContext("cfg/spring-mybatis.xml");
+            ctx = new ClassPathXmlApplicationContext("src.main.resources/spring-mybatis.xml");
         }
         In bean = (In)ctx.getBean(beanName);
         return bean;

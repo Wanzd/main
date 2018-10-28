@@ -2,14 +2,14 @@ package com.pd.it.common.util;
 
 import java.util.List;
 
-import com.pd.it.common.itf.IDbDao;
+import com.pd.it.common.itf.IDao;
 import com.pd.it.common.vo.VO;
 
 public class LookupUtil
 {
     public static List<VO> raType(VO vo)
     {
-        IDbDao lookupTypeDao = BeanUtil.<IDbDao> getBean("com.pd.it.dao.System$ILookupTypeDao");
+        IDao lookupTypeDao = BeanUtil.<IDao> getBean("com.pd.it.dao.System$ILookupTypeDao");
         return lookupTypeDao.ra(vo);
     }
     
