@@ -1,4 +1,4 @@
-package com.pd.it.util.string;
+package com.pd.it.common.util;
 
 import java.io.IOException;
 import java.io.StringReader;

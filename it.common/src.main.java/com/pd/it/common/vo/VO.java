@@ -129,16 +129,6 @@ public class VO extends HashMap<String, Object> {
 
 	@Override
 	public String toString() {
-		StringBuffer sBuffer = new StringBuffer();
-
-		sBuffer.append("{");
-		for (String eachKey : keySet()) {
-			Object object = get(eachKey);
-			String valueStr = object instanceof String ? "'" + object.toString() + "'" : object.toString();
-			sBuffer.append("," + eachKey + ":" + valueStr);
-		}
-		sBuffer.delete(1, 2);
-		sBuffer.append("}");
-		return sBuffer.toString();
+		return JSON.toJSONString(this);
 	}
 }

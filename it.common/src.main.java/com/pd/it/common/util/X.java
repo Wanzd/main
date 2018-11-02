@@ -69,4 +69,27 @@ public class X {
 		return JSON.parseObject(jsonString, targetClass);
 	}
 
+	/**
+	 * 对字符串首字母转成大写字母
+	 * 
+	 * @param dimension
+	 * @return
+	 */
+	public static String str$cap(String dimension) {
+		if (dimension == null) {
+			return dimension;
+		}
+		if (dimension.length() > 0) {
+			return dimension.substring(0, 1).toUpperCase() + dimension.substring(1);
+		}
+		return "";
+	}
+
+	public static VO vo(Object vo) {
+		if (vo instanceof VO) {
+			return (VO) vo;
+		}
+		return null;
+	}
+
 }

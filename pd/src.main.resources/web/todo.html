@@ -7,7 +7,35 @@
 	href="jquery-easyui-1.4.1/themes/icon.css" />
 <script data-main="todo" src="require.js" charset="utf-8"></script>
 
-<div id="tt" class="easyui-tabs">
-	<div id="chartYearSun" title="本年太阳图" style="height: 100%; height: 700px;"></div>
+<div id="dTodo" class="easyui-tabs">
+	<div id="dTodoDescription" title="描述"
+		style="weight: 100%; height: 3000px;">
+		<table>
+			<tr>
+				<td bgcolor="lightgreen">0，需求标准</td>
+			</tr>
+			<tr>
+				<td>1，数据汇总</td>
+			</tr>
+			<tr>
+				<td>2，数据详情</td>
+			</tr>
+			<tr>
+				<td>3，参数配置</td>
+			</tr>
+			<tr>
+				<td>3，分析</td>
+			</tr>
+			<tr>
+				<td>4，数据预警</td>
+			</tr>
+		</table>
+	</div>
+	<div id="dTodoSummary" title="汇总" style="weight: 100%; height: 3000px;"></div>
+	<div id="dTodoDetail" title="详情" style="weight: 100%; height: 3000px;"></div>
+	<div id="dTodoConfig" title="配置" style="weight: 100%; height: 3000px;"></div>
+	<div id="dTodoAnalyse" title="分析" style="weight: 100%; height: 3000px;"></div>
+	<div id="chartYearSun" title="本年太阳图"
+		style="height: 100%; height: 700px;"></div>
 </div>
 </html>

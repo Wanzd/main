@@ -40,7 +40,10 @@ delete from economic_month_t
 where (month,person) in(
 		<foreach item="it" collection="list" 
 			separator=",">
-	(#{it.month},${it.person})
+	(
+		#{it.month,jdbcType=VARCHAR},
+		#{it.person,jdbcType=VARCHAR}
+	)
 		</foreach>
 )
 	</delete>

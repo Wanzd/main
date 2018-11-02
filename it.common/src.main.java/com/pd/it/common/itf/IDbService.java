@@ -14,4 +14,8 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>>
 	List<_DTO> rs(FO$page<_FO> fo);
 
 	List<_DTO> ra(_FO fo);
+
+	int us(List<_FO> list);
+
+	int ds(List<_FO> list);
 }

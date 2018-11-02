@@ -1,12 +1,9 @@
 package com.pd.it.restService;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pd.it.common.abs.AbsCommonDbService;
-import com.pd.it.common.vo.BatchList;
 import com.pd.it.common.vo.VO;
 import com.pd.it.dao.module.economic.IEconomicConfigDao;
 import com.pd.it.dao.module.economic.IEconomicDetailDao;
@@ -23,8 +20,6 @@ public class EconomicServiceSet {
 		public IEconomicDetailDao getDao() {
 			return dao;
 		}
-
-		
 
 	}
 
@@ -43,7 +38,7 @@ public class EconomicServiceSet {
 	}
 
 	@Service("economicMonthlyService")
-	public static class EconomicMonthlyService  extends AbsCommonDbService<VO, VO, VO, IEconomicMonthlyDao>{
+	public static class EconomicMonthlyService extends AbsCommonDbService<VO, VO, VO, IEconomicMonthlyDao> {
 
 		@Autowired
 		private IEconomicMonthlyDao dao;
