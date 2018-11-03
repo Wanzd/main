@@ -38,8 +38,8 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 			}
 		}
 	};
-	var colSchema = common.ajax("rest/str_gridSchema/?gid=" + curParams.module
-			+ "$" + curParams.dimension);
+	var colSchema = common.ajax("common/str/grid/schema/?gid="
+			+ curParams.module + "$" + curParams.dimension);
 	var columns = [{
 				width : 80,
 				field : 'ck',

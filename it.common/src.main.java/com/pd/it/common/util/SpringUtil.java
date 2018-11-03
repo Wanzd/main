@@ -39,6 +39,10 @@ public class SpringUtil implements ApplicationContextAware {
 		return ctx;
 	}
 
+	public static <Out> Out getBean(Class<Out> clazz) {
+		return getApplicationContext().getBean(clazz);
+	}
+
 	public static Object getBean(String name) {
 		return getApplicationContext().getBean(name);
 	}
@@ -50,10 +54,6 @@ public class SpringUtil implements ApplicationContextAware {
 		} catch (Exception e) {
 			return null;
 		}
-	}
-
-	public static <T> T getBean(Class<T> clazz) {
-		return getApplicationContext().getBean(clazz);
 	}
 
 	public static <In> Method getMethod(String action, Class<In> class1) {
@@ -89,8 +89,11 @@ public class SpringUtil implements ApplicationContextAware {
 			return list;
 		case "rs":
 			return new FO$page();
+		case "ra":
+			return in;
+		default:
+			return in;
 		}
-		return null;
 	}
 
 	/**

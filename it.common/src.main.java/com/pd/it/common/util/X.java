@@ -48,7 +48,7 @@ public class X {
 			} else if (end == start) {
 				end = start + 6;
 				charStr = dataStr.substring(start + 2, end);
-				char letter = (char) Integer.parseInt(charStr, 16); // 16杩涘埗parse鏁村舰瀛楃涓层��
+				char letter = (char) Integer.parseInt(charStr, 16); // 16鏉╂稑鍩梡arse閺佹潙鑸扮�涙顑佹稉灞傦拷锟�
 
 				buffer.append(new Character(letter).toString());
 			} else {
@@ -61,6 +61,9 @@ public class X {
 	}
 
 	public static String jsonStr(Object rs) {
+		if (rs instanceof String) {
+			return (String) rs;
+		}
 		return JSON.toJSONString(rs);
 	}
 
@@ -70,7 +73,7 @@ public class X {
 	}
 
 	/**
-	 * 对字符串首字母转成大写字母
+	 * 瀵瑰瓧绗︿覆棣栧瓧姣嶈浆鎴愬ぇ鍐欏瓧姣�
 	 * 
 	 * @param dimension
 	 * @return

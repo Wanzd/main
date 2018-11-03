@@ -1,4 +1,4 @@
-package com.pd.it.dao.module.economic;
+package com.pd.it.module.economic.config;
 
 import org.springframework.stereotype.Repository;
 

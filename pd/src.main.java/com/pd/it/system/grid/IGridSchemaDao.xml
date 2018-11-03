@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.grid.IGridSchemaDao">
+
+	<select id="str" resultType="java.lang.String">
+SELECT json_data
+FROM sys_lookupitem_t
+where type_id='grid'
+	and id=#{gid}
+	</select>
+
+</mapper>  
