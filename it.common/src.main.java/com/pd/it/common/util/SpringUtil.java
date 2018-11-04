@@ -88,7 +88,9 @@ public class SpringUtil implements ApplicationContextAware {
 			List<VO> list = VO.list$str(object);
 			return list;
 		case "rs":
-			return new FO$page();
+			FO$page fo$page = new FO$page();
+			fo$page.setFo(in);
+			return fo$page;
 		case "ra":
 			return in;
 		default:

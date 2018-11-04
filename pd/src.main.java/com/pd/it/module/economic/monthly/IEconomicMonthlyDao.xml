@@ -5,7 +5,7 @@
 	<select id="rs" parameterType="VO" resultType="VO">
 select * from 
 economic_month_person_rate_risk_v
-where month=DATE_FORMAT(now(),'%Y-%m')
+		<include refid="rs$filter"/>
 order by person desc
 	</select>
 	
@@ -48,4 +48,17 @@ where (month,person) in(
 )
 	</delete>
 	
+	<sql id="rs$filter">
+		<where>
+			and month=
+			<choose >
+				<when test="fo.month!=null and fo.month!=''">
+					#{fo.month}
+				</when>
+				<otherwise>
+					DATE_FORMAT(now(),'%Y-%m')
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
 </mapper>  

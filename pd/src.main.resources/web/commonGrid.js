@@ -168,7 +168,13 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 					iconCls : 'icon-reload',
 					handler : function() {
 						// 实现刷新栏目中的数据
-						$("#dg").datagrid("reload");
+						var id = curParams.module.cap()
+								+ (curParams.dimension == null
+										? ""
+										: curParams.dimension.cap());
+						var param = $("#form" + id, parent.document)
+								.serializeJson();
+						$("#dg").datagrid("load",param);
 						$('#dg').datagrid('uncheckAll');
 					}
 				}],

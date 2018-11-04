@@ -32,7 +32,7 @@ require(
 
 				},
 				init$report : function() {
-					$("#frmEconoicReport").attr("src",
+					$("#frmEconoicMonthly").attr("src",
 							"commonGrid.html?module=economic&dimension=monthly");
 				},
 				init$risk : function() {
