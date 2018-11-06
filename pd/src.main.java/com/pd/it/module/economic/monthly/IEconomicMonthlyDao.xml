@@ -3,60 +3,52 @@
 <mapper namespace="com.pd.it.module.economic.monthly.IEconomicMonthlyDao">
 
 	<select id="rs" parameterType="VO" resultType="VO">
-select * from 
-economic_month_person_rate_risk_v
+select t1.using/monthly as "usingRate",
+	t1.using/monthly/t2.using "usingRisk",
+	t1.eat/monthly as "eatRate",
+	t1.eat/monthly/t2.eat "eatRisk",
+	t1.house/monthly as "houseRate",
+	t1.house/monthly/t2.house "houseRisk",
+	t1.traffic/monthly as "trafficRate",
+	t1.traffic/monthly/t2.traffic "trafficRisk",
+	t1.person as "person",
+	t1.monthly as "monthly",
+	t1.using as "using" ,
+	t1.eat as "eat" ,
+	t1.house as "house" ,
+	t1.traffic as "traffic" 
+from(
+	SELECT person,
+		sum(if(event_class='monthly',qty,0)) AS "monthly",
+		sum(if(event_class='using',qty,0)) AS "using",
+		sum(if(event_class='eat',qty,0)) AS "eat",
+		sum(if(event_class='house',qty,0)) AS "house",
+		sum(if(event_class='traffic',qty,0)) AS "traffic"
+	FROM economic_detail_t
 		<include refid="rs$filter"/>
-order by person desc
+	group by person with rollup
+) t1
+left join (
+	select sum(if(id='using',value,0)) AS "using",
+		sum(if(id='eat',value,0)) AS "eat",
+		sum(if(id='house',value,0)) AS "house",
+		sum(if(id='traffic',value,0)) AS "traffic"
+	from sys_lookupitem_t
+	where type_id='moduleCfg.economicRate'
+	group by type_id
+) t2
+on 1=1
 	</select>
-	
-	<update id="us">
-replace into economic_month_t(
-	month,
-	person,
-	i1,
-	o1,
-	o2,
-	o3,
-	o4
-)
-values
-		<foreach item="it" collection="list" 
-			separator=",">
-(
-	#{it.month},
-	#{it.person},
-	#{it.monthly,jdbcType=NUMERIC},
-	#{it.using,jdbcType=NUMERIC},
-	#{it.eat,jdbcType=NUMERIC},
-	#{it.house,jdbcType=NUMERIC},
-	#{it.traffic,jdbcType=NUMERIC}
-)
-		</foreach>
-	</update>
-	
-	
-	<delete id="ds">
-delete from economic_month_t
-where (month,person) in(
-		<foreach item="it" collection="list" 
-			separator=",">
-	(
-		#{it.month,jdbcType=VARCHAR},
-		#{it.person,jdbcType=VARCHAR}
-	)
-		</foreach>
-)
-	</delete>
 	
 	<sql id="rs$filter">
 		<where>
-			and month=
-			<choose >
-				<when test="fo.month!=null and fo.month!=''">
-					#{fo.month}
+			<choose>
+				<when test="fo.month!=null and fo.month !=''">
+					year=left(#{fo.month},4)
+					and month=right(#{fo.month},2)
 				</when>
 				<otherwise>
-					DATE_FORMAT(now(),'%Y-%m')
+					1=0
 				</otherwise>
 			</choose>
 		</where>

@@ -21,6 +21,10 @@ require(
 
 				},
 				init$detail : function() {
+					common.init({
+						type : "date$month",
+						id : "economicDetailDateMonth"
+					});
 					$("#frmEconoicDetail").attr("src",
 							"commonGrid.html?module=economic&dimension=detail");
 				},
@@ -32,8 +36,13 @@ require(
 
 				},
 				init$report : function() {
-					$("#frmEconoicMonthly").attr("src",
-							"commonGrid.html?module=economic&dimension=monthly");
+					common.init({
+						type : "date$month",
+						id : "economicMonthlyDateMonth"
+					});
+					$("#frmEconoicMonthly")
+							.attr("src",
+									"commonGrid.html?module=economic&dimension=monthly");
 				},
 				init$risk : function() {
 
