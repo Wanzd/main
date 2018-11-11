@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.user.userBase.IUserBaseDao">
+
+	<select id="ra" resultType="VO">
+		<include refid="sql$r"/>
+	</select>
+	
+	<select id="rs" resultType="VO">
+		<include refid="sql$r"/>
+	</select>
+	
+	<update id="us">
+replace into user_base_t(
+	id,
+	name,
+	sex,
+	birthday,
+	father_id,
+	mother_id,
+	birthdayType,
+	profession,
+	job)
+values
+		<foreach item="it" collection="list" 
+			separator=",">
+( 	
+	#{it.id},
+	#{it.name},
+	#{it.sex},
+	str_to_date(#{it.birthday},'%m/%d/%Y'),
+	#{it.fatherId},
+	#{it.motherId},
+	#{it.birthdayType},
+	#{it.profession},
+	#{it.job}
+)
+		</foreach>
+
+	</update>
+	
+	<delete id="ds">
+delete from user_base_t
+where (id) in(
+		<foreach item="it" collection="list" 
+			separator=",">
+	(${it.id})
+		</foreach>
+)
+	</delete>
+	
+	<sql id="sql$r">
+SELECT id as "id",
+	name as "name",
+	sex as "sex",
+	date_format(birthday,'%m/%d/%Y') as "birthday",
+	father_id as "fatherId",
+	mother_id as "motherId",
+	birthdayType as "birthdayType",
+	profession as "profession",
+	job as "job"
+FROM user_base_t
+order by name
+	</sql>
+	
+</mapper>  

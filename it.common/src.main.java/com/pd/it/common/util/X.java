@@ -95,4 +95,8 @@ public class X {
 		return null;
 	}
 
+	public static int int$str(String yearStr) {
+		return Integer.valueOf(yearStr);
+	}
+
 }

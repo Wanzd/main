@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.FO$page;
 import com.pd.it.common.vo.VO;
 
@@ -58,7 +59,7 @@ public class SpringUtil implements ApplicationContextAware {
 
 	public static <In> Method getMethod(String action, Class<In> class1) {
 		try {
-			Method[] methods = class1.getDeclaredMethods();
+			Method[] methods = class1.getMethods();
 			for (Method eachMethod : methods) {
 				if (eachMethod.getName().equals(action)) {
 					return eachMethod;
@@ -92,7 +93,8 @@ public class SpringUtil implements ApplicationContextAware {
 			fo$page.setFo(in);
 			return fo$page;
 		case "ra":
-			return in;
+			FO inVO = new FO(in);
+			return inVO;
 		default:
 			return in;
 		}

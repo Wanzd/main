@@ -10,6 +10,13 @@
 	href="jquery-easyui-1.4.1/themes/icon.css">
 <script data-main="economic.js" src="require.js" charset="utf-8"></script>
 </head>
+<form id="formEconomic" method="post">
+	<div>
+		<label for="month">月份:</label> <input type="text"
+			id="economicDateMonth" name="month" class="easyui-datetimebox">
+	</div>
+</form>
+
 <div id="dEconoic" class="easyui-tabs">
 	<div id="dEconoicDescription" title="描述"
 		style="weight: 100%; height: 3000px;">
@@ -35,21 +42,16 @@
 	<div id="tEconoicDtail" title="详细数据"
 		style="weight: 100%; height: 700px;">
 
-		<form id="formEconomicDetail" method="post">
-			<div>
-				<label for="month">月份:</label> <input type="text" id="economicDetailDateMonth"
-							name="month"
-					class="easyui-datetimebox">
-			</div>
-		</form>
 		<iframe name="frmEconoicDetail" id="frmEconoicDetail" frameborder="0"
-			align="left" width="100%" height="600px" scrolling="yes">
+			align="left" width="100%" height="600px" scrolling="yes"
+			src="commonGrid.html?module=economic&dimension=detail">
 			<p>你的浏览器不支持iframe标签</p>
 		</iframe>
 	</div>
 	<div id="dEconoicConfig" title="参数配置" style="height: 100%;">
 		<iframe name="frmEconoicCfg" id="frmEconoicCfg" frameborder="0"
-			align="left" width="100%" height="600px" scrolling="yes">
+			align="left" width="100%" height="600px" scrolling="yes"
+			src="commonGrid.html?module=economic&dimension=config">
 			<p>你的浏览器不支持iframe标签</p>
 		</iframe>
 	</div>
@@ -59,16 +61,9 @@
 			style="width: 100%; height: 500px;">
 			<div id="dEconomicReportMonthly" title="月报表" iconCls="icon-ok"
 				style="overflow: auto; padding: 10px;">
-				<form id="formEconomicMonthly" method="post">
-					<div>
-						<label for="month">月份:</label> <input type="text" id="economicMonthlyDateMonth"
-							name="month" class="easyui-datetimebox">
-					</div>
-
-				</form>
 				<iframe name="frmEconoicMonthly" id="frmEconoicMonthly"
 					frameborder="0" align="left" width="100%" height="600px"
-					scrolling="yes">
+					scrolling="yes" src="commonGrid.html?module=economic&dimension=monthly">
 					<p>你的浏览器不支持iframe标签</p>
 				</iframe>
 			</div>

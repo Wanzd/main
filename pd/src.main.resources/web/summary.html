@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AI系统</title>
+
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="jquery-easyui-1.4.1/themes/icon.css">
+<script data-main="summary.js" src="require.js" charset="utf-8"></script>
+</head>
+<form id="formEconomic" method="post">
+	<div>
+		<label for="month">月份:</label> <input type="combobox"
+			class="easyui-combobox" id="summaryYear" name="year"
+			data-options="valueField:'value',textField:'text',url:'common/ra/list/year'">
+	</div>
+</form>
+
+<div id="dSummary" title="汇总" style="width: 100%; height: 600px;">
+	<table style="width: 100%;">
+		<tr>
+			<td bgcolor="lightgreen" width="25%">春</td>
+			<td bgcolor="yellow" width="25%">夏</td>
+			<td bgcolor="red" width="25%">秋</td>
+			<td bgcolor="white" width="25%">冬</td>
+		</tr>
+		<tr>
+			<td><div id="month1" width="25%" /></td>
+			<td><div id="month4" /></td>
+			<td><div id="month7" /></td>
+			<td><div id="month10" /></td>
+		</tr>
+		<tr>
+			<td><div id="month2" /></td>
+			<td><div id="month5" /></td>
+			<td><div id="month8" /></td>
+			<td><div id="month11" /></td>
+		</tr>
+		<tr>
+			<td><div id="month3" /></td>
+			<td><div id="month6" /></td>
+			<td><div id="month9" /></td>
+			<td><div id="month12" /></td>
+		</tr>
+	</table>
+
+</div>
+</html>
