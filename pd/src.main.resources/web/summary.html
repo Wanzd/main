@@ -18,33 +18,39 @@
 	</div>
 </form>
 
-<div id="dSummary" style="width: 100%; height: 600px;">
-	<table style="width: 100%;">
-		<tr>
-			<td bgcolor="lightgreen" width="25%">春</td>
-			<td bgcolor="yellow" width="25%">夏</td>
-			<td bgcolor="red" width="25%">秋</td>
-			<td bgcolor="white" width="25%">冬</td>
-		</tr>
-		<tr>
-			<td><div id="month1" width="25%" /></td>
-			<td><div id="month4" /></td>
-			<td><div id="month7" /></td>
-			<td><div id="month10" /></td>
-		</tr>
-		<tr>
-			<td><div id="month2" /></td>
-			<td><div id="month5" /></td>
-			<td><div id="month8" /></td>
-			<td><div id="month11" /></td>
-		</tr>
-		<tr>
-			<td><div id="month3" /></td>
-			<td><div id="month6" /></td>
-			<td><div id="month9" /></td>
-			<td><div id="month12" /></td>
-		</tr>
-	</table>
+<div id="dSummary" class="easyui-tabs">
+	<div id="dSummaryYear" title="月历" style="width: 100%; height: 600px;">
+		<table style="width: 40%;">
+			<tr>
+				<td bgcolor="lightgreen" width="5%">春</td>
+				<td><div id="month1" width="15%" /></td>
+				<td><div id="month2" width="15%" /></td>
+				<td><div id="month3" width="15%" /></td>
+			</tr>
+			<tr>
+				<td bgcolor="yellow">夏</td>
+				<td><div id="month4" /></td>
+				<td><div id="month5" /></td>
+				<td><div id="month6" /></td>
+			</tr>
+			<tr>
+				<td bgcolor="red">秋</td>
+				<td><div id="month7" /></td>
+				<td><div id="month8" /></td>
+				<td><div id="month9" /></td>
+			</tr>
+			<tr>
+				<td bgcolor="white">冬</td>
+				<td><div id="month10" /></td>
+				<td><div id="month11" /></td>
+				<td><div id="month12" /></td>
+			</tr>
+		</table>
+	</div>
 
+	<div id="dSummaryYear$sun" title="年太阳图"
+		style="overflow: auto; padding: 10px;">
+		<div id="chartSummaryYear$sun" style="height: 100%; height: 550px;"></div>
+	</div>
 </div>
 </html>

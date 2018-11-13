@@ -30,7 +30,7 @@ public class VirtualFilter implements Filter
     {
         HttpServletRequest request = (HttpServletRequest)arg0;
         String url = request.getRequestURI();
-        if (url.matches("/.+[.](html|js|png|css|gif)"))
+        if (url.matches("/.+[.](html|js|png|css|gif|jpg)"))
         {
             InputStream in =
                 this.getClass().getClassLoader().getResourceAsStream("/web/" + url.substring("/".length()));

@@ -74,9 +74,11 @@ require(
 						var dateStr = year + "_" + month + "_" + i;
 						var titleStr = this.getTitle$day(year, month, i);
 						var bgColorStr = this.getColor$day(year, month, i);
-						tableHtml += "<td id='d" + dateStr + "' title='"
-								+ titleStr + "' bgcolor='" + bgColorStr + "'>"
-								+ i + "</td>";
+						var backgroundStr = this.getBackground$day(year, month,
+								i);
+						tableHtml += "<td id='d" + dateStr + "'" + titleStr
+								+ bgColorStr + backgroundStr + ">" + i
+								+ "</td>";
 						if ((i + weekDay) % 7 == 1 || i == monthDayCount) {
 							tableHtml += "</tr>";
 							rowCount++;
@@ -89,8 +91,12 @@ require(
 					return tableHtml;
 				},
 				getColor$day : function(y, m, d) {
-					if (new Date() > new Date(y, m - 1, d)) {
-						return "gray";
+					var diff = (new Date() - new Date(y, m - 1, d)) / 86400000;
+					if (diff >= 0 && diff < 1) {
+						return " bgcolor='blue'";
+					}
+					if (diff >= 0) {
+						return " bgcolor='lightgray'";
 					}
 
 					if ($cfg.day.warnLevel[y + "-" + m + "-" + d] != null) {
@@ -100,10 +106,10 @@ require(
 						var warnColor = "white";
 						switch (warnLevel) {
 						case 1:
-							warnColor = "lightgreen";
+							warnColor = "yellow";
 							break;
 						case 2:
-							warnColor = "yellow";
+							warnColor = "orange";
 							break;
 						case 3:
 							warnColor = "red";
@@ -112,26 +118,200 @@ require(
 							warnColor = "white"
 							break;
 						}
-						return warnColor;
+						return " bgcolor='" + warnColor + "'";
 					}
-					return "white";
+					return " bgcolor='white'";
 				},
 				getTitle$day : function(y, m, d) {
 					if ($cfg.day.map[y + "-" + m + "-" + d] != null) {
-						debugger;
 						var todoDayList = $cfg.day.map[y + "-" + m + "-" + d];
 						var titleRs = "";
 						$.each(todoDayList, function(index, value, array) {
-							titleRs += value.detail ;
+							titleRs += value.detail;
 						})
-						return titleRs;
+						return " title='" + titleRs + "'";
 					}
 					return "";
+				},
+				getBackground$day : function(y, m, d) {
+					var diff = (new Date() - new Date(y, m - 1, d)) / 86400000;
+					if (diff >= 0 && diff < 1) {
+						return "";
+					}
+					return "";
+				},
+				initSummaryYear$sun : function() {
+					debugger;
+					var data = common.ajax("common/ra/todo", {
+						year : $cfg.year
+					});
+					var groupArr = common.groupArray(data, "name");
+					var treeMapVO = ai$echart.x$sunBurstVO(groupArr);
+					var data = [ {
+						name : '2018年',
+						value : 365,
+						itemStyle : {
+							color : 'green'
+						},
+						children : [ {
+							name : '2018年1月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年2月',
+							value : 28,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年3月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年4月',
+							value : 30,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年5月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年6月',
+							value : 30,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年7月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年8月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年9月',
+							value : 30,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年10月',
+							value : 31,
+							itemStyle : {
+								color : 'gray'
+							}
+						}, {
+							name : '2018年11月',
+							value : 30,
+							itemStyle : {
+								color : 'red'
+							},
+							children : [ {
+								name : '2018年11月24日',
+								value : 2,
+								itemStyle : {
+									color : 'red'
+								},
+								children : [ {
+									name : '胡翠生日',
+									value : 1,
+									itemStyle : {
+										color : 'red'
+									}
+								} ]
+							}, {
+								name : '2018年11月25日',
+								value : 1,
+								itemStyle : {
+									color : 'gray'
+								}
+							} ]
+						}, {
+							name : '2018年12月',
+							value : 31,
+							itemStyle : {
+								color : 'yellow'
+							}
+						} ]
+					} ];
+					option = {
+						title : {
+							text : 'WORLD COFFEE RESEARCH SENSORY LEXICON',
+							subtext : 'Source: https://worldcoffeeresearch.org/work/sensory-lexicon/',
+							textStyle : {
+								fontSize : 14,
+								align : 'center'
+							},
+							subtextStyle : {
+								align : 'center'
+							},
+							sublink : 'https://worldcoffeeresearch.org/work/sensory-lexicon/'
+						},
+						series : {
+							type : 'sunburst',
+							highlightPolicy : 'ancestor',
+							data : data,
+							radius : [ 0, '95%' ],
+							sort : null,
+							levels : [ {}, {
+								r0 : '1%',
+								r : '15%',
+								itemStyle : {
+									borderWidth : 2
+								},
+								label : {
+									rotate : 'tangential'
+								}
+							}, {
+								r0 : '15%',
+								r : '40%',
+								label : {
+									align : 'right'
+								}
+							}, {
+								r0 : '40%',
+								r : '80%',
+								label : {
+									align : 'right'
+								}
+							}, {
+								r0 : '80%',
+								r : '90%',
+								label : {
+									position : 'outside',
+									padding : 3,
+									silent : false
+								},
+								itemStyle : {
+									borderWidth : 3
+								}
+							} ]
+						}
+					};
+					// 初始化echarts实例
+					var myChart = echarts.init(document
+							.getElementById('chartSummaryYear$sun'));
+
+					// 使用制定的配置项和数据显示图表
+					myChart.setOption(option);
 				}
 			};
 
 			$api = $impl;
 			$impl.init$todo();
 			$impl.init$month();
-			debugger;
+			$impl.initSummaryYear$sun();
 		});
