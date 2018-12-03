@@ -12,26 +12,26 @@
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:rootCfg.properties" />
+		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${driver}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
+		<property name="driverClassName" value="${mysql.driver}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
 		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${initialSize}"></property>
+		<property name="initialSize" value="${mysql.initialSize}"></property>
 		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${maxActive}"></property>
+		<property name="maxActive" value="${mysql.maxActive}"></property>
 		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${maxIdle}"></property>
+		<property name="maxIdle" value="${mysql.maxIdle}"></property>
 		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${minIdle}"></property>
+		<property name="minIdle" value="${mysql.minIdle}"></property>
 		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${maxWait}"></property>
+		<property name="maxWait" value="${mysql.maxWait}"></property>
 	</bean>
 
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
@@ -51,5 +51,35 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 连接池配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="30" />
+		<!-- 最大空闲连接数 -->
+		<property name="maxIdle" value="10" />
+		<!-- 每次释放连接的最大数目 -->
+		<property name="numTestsPerEvictionRun" value="1024" />
+		<!-- 释放连接的扫描间隔（毫秒） -->
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />
+		<!-- 连接最小空闲时间 -->
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<!-- 连接空闲多久后释放, 当空闲时间>该值 且 空闲连接>最大空闲连接数 时直接释放 -->
+		<property name="softMinEvictableIdleTimeMillis" value="10000" />
+		<!-- 获取连接时的最大等待毫秒数,小于零:阻塞不确定的时间,默认-1 -->
+		<property name="maxWaitMillis" value="1500" />
+		<!-- 在获取连接的时候检查有效性, 默认false -->
+		<property name="testOnBorrow" value="true" />
+		<!-- 在空闲时检查有效性, 默认false -->
+		<property name="testWhileIdle" value="true" />
+		<!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
+		<property name="blockWhenExhausted" value="false" />
+	</bean>
+
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="host" value="${redis.ip}"></constructor-arg>
+		<constructor-arg name="port" value="${redis.port}"></constructor-arg>
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
 	</bean>
 </beans>

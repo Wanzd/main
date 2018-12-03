@@ -21,7 +21,7 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 		return getDao().r(fo);
 	}
 
-	default List<_DTO> rs(FO$page<_FO> fo) {
+	default List<_DTO> rs(FO$page fo) {
 		return getDao().rs(fo);
 	}
 

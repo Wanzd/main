@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -26,9 +27,9 @@ public class VO extends HashMap<String, Object> {
 		}
 	}
 
-	public VO(String key, Object value) {
+	public VO(Attr... attrs) {
 		super();
-		put(key, value);
+		p(attrs);
 	}
 
 	public VO(String jsonStr) {
@@ -94,23 +95,18 @@ public class VO extends HashMap<String, Object> {
 		return obj.toString();
 	}
 
-	public static VO newInstance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Map<String, Object> toMap() {
-		return (Map<String, Object>) this;
-	}
-
-	public VO p(String key, Object value) {
-		put(key, value);
+	public VO p(Attr... attrs) {
+		for (Attr attr : attrs) {
+			put(attr.getKey(), attr.getValue());
+		}
 		return this;
 	}
 
-	public VO nvl(String key, Object value) {
-		if (get(key) == null) {
-			put(key, value);
+	public VO nvl(Attr... attrs) {
+		for (Attr attr : attrs) {
+			if (get(attr.getKey()) == null) {
+				p(attr);
+			}
 		}
 		return this;
 	}

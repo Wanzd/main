@@ -1,14 +1,14 @@
 package com.pd.it.common.vo;
 
-public class FO$page<_FO> {
-	private _FO fo;
-	private PageVO page;
+public class FO$page {
+	private FO fo;
+	private PageVO page = new PageVO();
 
-	public _FO getFo() {
+	public FO getFo() {
 		return fo;
 	}
 
-	public void setFo(_FO fo) {
+	public void setFo(FO fo) {
 		this.fo = fo;
 	}
 

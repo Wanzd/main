@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.VO;
 
 public class X {
@@ -17,7 +18,7 @@ public class X {
 	public static <In> List<VO> map2voList(Map<String, In> rsMap, String keyAttrName, String valueAttrName) {
 		List<VO> rsList = new ArrayList<VO>();
 		for (String eachKey : rsMap.keySet()) {
-			rsList.add(new VO(keyAttrName, eachKey).nvl(valueAttrName, rsMap.get(eachKey)));
+			rsList.add(new VO(new Attr(keyAttrName, eachKey), new Attr(valueAttrName, rsMap.get(eachKey))));
 		}
 		return rsList;
 	}

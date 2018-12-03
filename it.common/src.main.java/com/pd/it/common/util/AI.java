@@ -10,9 +10,7 @@ import com.pd.it.common.itf.IBridge;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.itf.ISender;
 import com.pd.it.common.itf.ITask;
-import com.pd.it.common.itf.IValidRule;
 import com.pd.it.common.vo.KV;
-import com.pd.it.common.vo.VO;
 
 public class AI {
 	public static <Out> Out c(Class<Out> outClass, Object... in) {
@@ -36,24 +34,27 @@ public class AI {
 	}
 
 	public static <In, Out> Out bridge(In in, IBuilder<?, ?>... builders) {
-		return BuildUtil.bridge(in, builders);
+		if (builders == null) {
+			return null;
+		}
+		Object out = in;
+		for (IBuilder eachBuilder : builders) {
+			if (eachBuilder == null) {
+				return null;
+			}
+			out = eachBuilder.build(out);
+		}
+		try {
+			Out rs = (Out) out;
+			return rs;
+		} catch (Exception e) {
+			LogUtil.err(e);
+		}
+		return null;
 	}
 
 	public static <In, Out> Out bridge(In in, IBridge<In, Out> bridge) {
-		return BuildUtil.bridge(in, bridge);
-	}
-
-	@SafeVarargs
-	public static <In, Out> Out build(IBuilder<In, Out> builder, In... in) {
-		return BuildUtil.build(builder, in);
-	}
-
-	public static <In> boolean valid(Class<In> inClass, In in, String beansStr) {
-		return ValidUtil.valid(inClass, in, beansStr);
-	}
-
-	public static <In> boolean valid(Class<In> inClass, In in, IValidRule<In>... beans) {
-		return ValidUtil.valid(inClass, in, beans);
+		return bridge(in, bridge.getBuilders());
 	}
 
 	public static <In> In nvl(In in, In defaultValue) {
@@ -134,7 +135,4 @@ public class AI {
 		return 0;
 	}
 
-	public static VO vo(String key, Object value) {
-		return new VO(key, value);
-	}
 }

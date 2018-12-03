@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.pd.it.common.itf.IDao;
 import com.pd.it.common.util.Format;
 import com.pd.it.common.util.X;
+import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.FO$page;
 import com.pd.it.common.vo.VO;
@@ -53,13 +54,13 @@ public class ListYearDao implements IDao<VO, FO, VO> {
 
 	@Override
 	public List<VO> ra(FO vo) {
-		String yearStr = Format.date2Str(new Date(), "yyyy");
+		String yearStr = Format.date(new Date(), "yyyy");
 		int year = X.int$str(yearStr);
 		List<VO> rsList = new ArrayList<VO>();
 		for (int i = 0; i < 10; i++) {
-			VO curVO = new VO().p("value", year - i).p("text", year - i);
+			VO curVO = new VO(new Attr("value", year - i), new Attr("text", year - i));
 			if (i == 0) {
-				curVO.p("selected", true);
+				curVO.p(new Attr("selected", true));
 			}
 			rsList.add(curVO);
 		}
@@ -67,7 +68,7 @@ public class ListYearDao implements IDao<VO, FO, VO> {
 	}
 
 	@Override
-	public List<VO> rs(FO$page<FO> arg0) {
+	public List<VO> rs(FO$page arg0) {
 		return null;
 	}
 

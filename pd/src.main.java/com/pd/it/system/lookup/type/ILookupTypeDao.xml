@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.lookup.type.ILookupTypeDao">
+	<select id="rs" resultType="VO">
+SELECT id as "id",
+	cn as "cn",
+	en as "en",
+	detail as "detail"
+FROM sys_lookuptype_t
+		<where>
+			<if test="fo.lookupType!=null">
+				id like '%'||#{fo.lookupType}||'%'
+				or cn like '%'||#{fo.lookupType}||'%'
+				or en like '%'||#{fo.lookupType}||'%'
+				or detail like '%'||#{fo.lookupType}||'%'
+			</if>
+		</where>
+order by cn
+	</select>
+	<select id="ra" resultType="VO">
+SELECT id as "id",
+	cn as "cn",
+	en as "en",
+	detail as "detail"
+FROM sys_lookuptype_t
+		<where>
+			<if test="lookupType!=null">
+				id like '%'||#{lookupType}||'%'
+				or cn like '%'||#{lookupType}||'%'
+				or en like '%'||#{lookupType}||'%'
+				or detail like '%'||#{lookupType}||'%'
+			</if>
+		</where>
+order by cn
+	</select>
+
+	<update id="us" >
+replace into sys_lookuptype_t(
+	id,
+	cn,
+	en,
+	detail)
+values
+		<foreach collection="list" item="it" separator="," >
+(
+	#{it.id},
+	#{it.cn},
+	#{it.en},
+	#{it.detail}
+)	
+		</foreach>
+	</update>
+	
+</mapper>  

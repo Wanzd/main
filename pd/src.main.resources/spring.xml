@@ -13,12 +13,12 @@
 
 	<!-- bean annotation driven -->
 	<context:annotation-config />
-	<context:property-placeholder location="classpath:rootCfg.properties" />
+	<context:property-placeholder location="classpath:jdbc.properties" />
 	<context:component-scan base-package="com.pd" />
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:rootCfg.properties" />
+		<property name="location" value="classpath:jdbc.properties" />
 	</bean>
 
 	<!-- 定时器开关 -->

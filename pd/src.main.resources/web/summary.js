@@ -84,7 +84,7 @@ require(
 							rowCount++;
 						}
 					}
-					for (var i = rowCount; i <= 6; i++) {
+					for (var i = rowCount; i <= 5; i++) {
 						tableHtml += "<tr><td bgcolor='white' colspan=7>-</td></tr>";
 					}
 					tableHtml += "</table>";
@@ -151,77 +151,77 @@ require(
 						name : '2018年',
 						value : 365,
 						itemStyle : {
-							color : 'green'
+							color : 'en'
 						},
 						children : [ {
-							name : '2018年1月',
+							name : '1月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年2月',
+							name : '2月',
 							value : 28,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年3月',
+							name : '3月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年4月',
+							name : '4月',
 							value : 30,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年5月',
+							name : '5月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年6月',
+							name : '6月',
 							value : 30,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年7月',
+							name : '7月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年8月',
+							name : '8月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年9月',
+							name : '9月',
 							value : 30,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年10月',
+							name : '10月',
 							value : 31,
 							itemStyle : {
 								color : 'gray'
 							}
 						}, {
-							name : '2018年11月',
+							name : '11月',
 							value : 30,
 							itemStyle : {
 								color : 'red'
 							},
 							children : [ {
-								name : '2018年11月24日',
-								value : 2,
+								name : '24日',
+								value : 1,
 								itemStyle : {
 									color : 'red'
 								},
@@ -233,14 +233,14 @@ require(
 									}
 								} ]
 							}, {
-								name : '2018年11月25日',
+								name : '25日',
 								value : 1,
 								itemStyle : {
 									color : 'gray'
 								}
 							} ]
 						}, {
-							name : '2018年12月',
+							name : '12月',
 							value : 31,
 							itemStyle : {
 								color : 'yellow'
@@ -277,18 +277,18 @@ require(
 								}
 							}, {
 								r0 : '15%',
-								r : '40%',
+								r : '30%',
 								label : {
 									align : 'right'
 								}
 							}, {
-								r0 : '40%',
-								r : '80%',
+								r0 : '30%',
+								r : '70%',
 								label : {
 									align : 'right'
 								}
 							}, {
-								r0 : '80%',
+								r0 : '70%',
 								r : '90%',
 								label : {
 									position : 'outside',

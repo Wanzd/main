@@ -21,6 +21,6 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	List<_DTO> ra(_FO vo);
 
-	List<_DTO> rs(FO$page<_FO> fo);
+	List<_DTO> rs(FO$page fo);
 
 }

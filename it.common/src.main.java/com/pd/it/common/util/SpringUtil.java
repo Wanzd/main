@@ -80,17 +80,23 @@ public class SpringUtil implements ApplicationContextAware {
 	 * @return
 	 */
 	public static Object getParams(String action, LinkedHashMap<String, Object> in) {
+		Object rs = null;
 		switch (action) {
 		case "us":
+			VO usVO = new VO(in);
+			String usList = usVO.str("list");
+			usList = usList.replaceAll("'", "''");
+			rs = VO.list$str(usList);
+			break;
 		case "ds":
-			VO vo = new VO(in);
-			String object = vo.str("list");
-			object = object.replaceAll("'", "''");
-			List<VO> list = VO.list$str(object);
-			return list;
+			VO dsVO = new VO(in);
+			String dsList = dsVO.str("list");
+			dsList = dsList.replaceAll("'", "''");
+			List<VO> list = VO.list$str(dsList);
+			break;
 		case "rs":
 			FO$page fo$page = new FO$page();
-			fo$page.setFo(in);
+			fo$page.setFo(new FO(in));
 			return fo$page;
 		case "ra":
 			FO inVO = new FO(in);
@@ -98,6 +104,7 @@ public class SpringUtil implements ApplicationContextAware {
 		default:
 			return in;
 		}
+		return rs;
 	}
 
 	/**
