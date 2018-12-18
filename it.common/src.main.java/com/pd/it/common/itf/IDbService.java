@@ -17,7 +17,7 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 		return getDao().str(fo);
 	}
 
-	default _DTO r(_FO fo) {
+	default Object r(_FO fo) {
 		return getDao().r(fo);
 	}
 
@@ -27,6 +27,10 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 
 	default List<_DTO> ra(_FO fo) {
 		return getDao().ra(fo);
+	}
+
+	default int u(_VO vo) {
+		return getDao().u(vo);
 	}
 
 	default int us(List<_FO> list) {

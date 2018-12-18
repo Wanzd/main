@@ -3,7 +3,7 @@
 <mapper namespace="com.pd.it.module.economic.config.IEconomicConfigDao">
 
 	<select id="rs" parameterType="VO" resultType="VO">
-select * 
+select *
 from sys_lookupitem_t
 where type_id='moduleCfg.economicRate'
 	</select>
@@ -11,9 +11,8 @@ where type_id='moduleCfg.economicRate'
 	<update id="us">
 replace into sys_lookupitem_t(type_id,id,cn,en,value)
 values
-		<foreach item="it" collection="list" 
-			separator=",">
-( 	'moduleCfg.economicRate',
+		<foreach item="it" collection="list" separator=",">
+( 'moduleCfg.economicRate',
 	#{it.id},
 	#{it.cn},
 	#{it.en},
@@ -22,15 +21,14 @@ values
 		</foreach>
 
 	</update>
-	
+
 	<delete id="ds">
 delete from sys_lookupitem_t
 where (type_id,id) in(
-		<foreach item="it" collection="list" 
-			separator=",">
-	('moduleCfg.economicRate',${it.id})
+		<foreach item="it" collection="list" separator=",">
+			('moduleCfg.economicRate',${it.id})
 		</foreach>
 )
 	</delete>
-	
+
 </mapper>  

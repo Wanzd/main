@@ -72,4 +72,10 @@ public class ListYearDao implements IDao<VO, FO, VO> {
 		return null;
 	}
 
+	@Override
+	public int u(VO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

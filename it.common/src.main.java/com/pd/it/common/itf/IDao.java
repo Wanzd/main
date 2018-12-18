@@ -15,6 +15,8 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	List<String> strs(_FO fo);
 
+	int u(_VO vo);
+
 	int us(List<_FO> vo);
 
 	int ds(List<_FO> vo);

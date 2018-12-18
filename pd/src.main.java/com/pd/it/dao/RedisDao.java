@@ -3,6 +3,8 @@ package com.pd.it.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pd.it.common.vo.VO;
+
 import redis.clients.jedis.JedisPool;
 
 @Repository
@@ -25,5 +27,9 @@ public class RedisDao {
 
 	public long hset(String hkey, String key, String value) {
 		return jedisPool.getResource().hset(hkey, key, value);
+	}
+
+	public VO hReadAll(String hkey) {
+		return new VO(jedisPool.getResource().hgetAll(hkey));
 	}
 }
