@@ -11,6 +11,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>4.3.1.RELEASE</spring.version>
+		<jackson.version>2.9.6</jackson.version>
 	</properties>
 	<build>
 		<plugins>
@@ -93,7 +94,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.1.RELEASE</version>
+			<version>${spring.version}</version>
 			<type>jar</type>
 		</dependency>
 
@@ -118,7 +119,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>4.3.1.RELEASE</version>
+			<version>${spring.version}</version>
 			<type>jar</type>
 		</dependency>
 
@@ -200,6 +201,16 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb-log4j</artifactId>
 			<version>1.7.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 	</dependencies>
 </project>
