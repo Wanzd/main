@@ -23,4 +23,8 @@ public class ResultVO extends VO {
 		return new ResultVO(Status.Error, msg, "500");
 	}
 
+	public static ResultVO fail(Object msg) {
+		return new ResultVO(Status.Fail, msg, "200");
+	}
+
 }

@@ -3,7 +3,7 @@ package com.pd.it.common.itf;
 import java.util.List;
 
 import com.pd.it.common.vo.BatchList;
-import com.pd.it.common.vo.FO$page;
+import com.pd.it.common.vo.PageFO;
 
 public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 
@@ -21,7 +21,7 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 		return getDao().r(fo);
 	}
 
-	default List<_DTO> rs(FO$page fo) {
+	default List<_DTO> rs(PageFO fo) {
 		return getDao().rs(fo);
 	}
 

@@ -11,7 +11,7 @@ import com.pd.it.common.util.Format;
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.FO;
-import com.pd.it.common.vo.FO$page;
+import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.VO;
 
 @Repository
@@ -68,7 +68,7 @@ public class ListYearDao implements IDao<VO, FO, VO> {
 	}
 
 	@Override
-	public List<VO> rs(FO$page arg0) {
+	public List<VO> rs(PageFO arg0) {
 		return null;
 	}
 

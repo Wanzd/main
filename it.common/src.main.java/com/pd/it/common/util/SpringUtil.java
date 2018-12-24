@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pd.it.common.vo.FO;
-import com.pd.it.common.vo.FO$page;
+import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.VO;
 
 @Component
@@ -72,11 +72,11 @@ public class SpringUtil implements ApplicationContextAware {
 	}
 
 	/**
-	 * @ription Éú³É±ê×¼Èë²Î
+	 * @ription ï¿½ï¿½ï¿½É±ï¿½×¼ï¿½ï¿½ï¿½
 	 * @param action
-	 *            ²Ù×÷
+	 *            ï¿½ï¿½ï¿½ï¿½
 	 * @param in
-	 *            Èë²Î
+	 *            ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public static Object getParams(String action, LinkedHashMap<String, Object> in) {
@@ -95,7 +95,7 @@ public class SpringUtil implements ApplicationContextAware {
 			List<VO> list = VO.list$str(dsList);
 			break;
 		case "rs":
-			FO$page fo$page = new FO$page();
+			PageFO fo$page = new PageFO();
 			fo$page.setFo(new FO(in));
 			return fo$page;
 		case "ra":
@@ -108,17 +108,17 @@ public class SpringUtil implements ApplicationContextAware {
 	}
 
 	/**
-	 * @Description Í¨¹ýÄ£¿éºÍÎ¬¶È²éÕÒ·þÎñÃû
+	 * @Description Í¨ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Î¬ï¿½È²ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 	 *              <table border='1'>
 	 *              <tr>
-	 *              <td>module:Ä£¿éÃû</td>
+	 *              <td>module:Ä£ï¿½ï¿½ï¿½ï¿½</td>
 	 *              </tr>
 	 *              </table>
 	 * @param module
-	 *            Ä£¿éÃû
+	 *            Ä£ï¿½ï¿½ï¿½ï¿½
 	 * @param dimension
-	 *            Î¬¶ÈÃû
-	 * @return ·þÎñÃû
+	 *            Î¬ï¿½ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String getServiceName(String module, String dimension) {
 		return module + X.str$cap(dimension) + "Service";

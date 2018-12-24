@@ -10,7 +10,6 @@ import com.pd.it.common.itf.IBridge;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.itf.ISender;
 import com.pd.it.common.itf.ITask;
-import com.pd.it.common.vo.KV;
 
 public class AI {
 	public static <Out> Out c(Class<Out> outClass, Object... in) {
@@ -109,14 +108,6 @@ public class AI {
 			}
 		};
 		th.start();
-	}
-
-	public static KV kv(String... kvStr) {
-		KV kv = new KV();
-		for (int i = 0, total = kvStr.length; i < total; i += 2) {
-			kv.put(kvStr[i], kvStr[i + 1]);
-		}
-		return kv;
 	}
 
 	public static <In> List<In> list(In... in) {

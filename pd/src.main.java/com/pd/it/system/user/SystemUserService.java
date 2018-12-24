@@ -6,12 +6,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.common.itf.IDbService;
 import com.pd.it.common.itf.ISimpleDao;
+import com.pd.it.common.itf.ISimpleDbService;
+import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
 
 @Service("systemUserService")
-public class SystemUserService implements IDbService<VO, VO, VO, ISimpleDao<VO>> {
+public class SystemUserService implements ISimpleDbService<VO, ISimpleDao<VO>> {
 
 	@Autowired
 	private MongoTemplate mongo;
@@ -22,7 +23,7 @@ public class SystemUserService implements IDbService<VO, VO, VO, ISimpleDao<VO>>
 	}
 
 	@Override
-	public Object r(VO vo) {
+	public Object r(FO vo) {
 		Criteria criteria = new Criteria();
 		criteria.andOperator(Criteria.where("code").is(vo.str("id")));
 		Query query = new Query();

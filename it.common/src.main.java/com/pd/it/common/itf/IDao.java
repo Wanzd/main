@@ -2,7 +2,7 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
-import com.pd.it.common.vo.FO$page;
+import com.pd.it.common.vo.PageFO;
 
 public interface IDao<_VO, _FO, _DTO> {
 	int c(_VO vo);
@@ -23,6 +23,6 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	List<_DTO> ra(_FO vo);
 
-	List<_DTO> rs(FO$page fo);
+	List<_DTO> rs(PageFO fo);
 
 }

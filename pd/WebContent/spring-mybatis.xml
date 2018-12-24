@@ -108,4 +108,18 @@
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 	</bean>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- bean class="org.springframework.http.converter.StringHttpMessageConverter" 
+				/ -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="jacksonObjectMapper" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<bean id="jacksonObjectMapper" class="com.pd.it.converter.CustomObjectMapper" />
+
+
 </beans>

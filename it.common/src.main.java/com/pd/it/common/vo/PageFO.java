@@ -1,6 +1,6 @@
 package com.pd.it.common.vo;
 
-public class FO$page {
+public class PageFO {
 	private FO fo;
 	private PageVO page = new PageVO();
 
