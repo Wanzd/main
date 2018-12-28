@@ -1,22 +1,19 @@
 package com.pd.it.restService;
 
 import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.common.exception.WebError.NoServiceException;
-import com.pd.it.common.exception.WebError.NoMethodException;
-import com.pd.it.common.exception.WebError.NoParamsException;
 import com.pd.it.common.itf.IDbService;
 import com.pd.it.common.util.SpringUtil;
 import com.pd.it.common.util.X;
+import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.ResultVO;
 import com.pd.it.common.vo.VO;
@@ -35,24 +32,48 @@ public class CommonRestService {
 	@RequestMapping(value = "{action}/{module}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@RequestParam LinkedHashMap<String, Object> in, LinkedHashMap<String, String> json) {
-		return rest(action, module, "", in, json);
+			@RequestBody FO in) {
+		return rest(action, module, "", in);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "{action}/{module}/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@PathVariable("dimension") String dimension, @RequestParam LinkedHashMap<String, Object> in,
-			LinkedHashMap<String, String> json) {
+			@PathVariable("dimension") String dimension, @RequestBody FO in) {
+		Object rs = execute(module, dimension, action, in);
+		return X.jsonStr(rs);
+
+	}
+
+	private Object execute(String module, String dimension, String action, FO in) {
 		try {
 			String serviceName = SpringUtil.getServiceName(module, dimension);
 			IDbService service = SpringUtil.getBean(serviceName, IDbService.class);
 
-			Method method = SpringUtil.getMethod(action, IDbService.class);
-			Object params = SpringUtil.getParams(action, in);
-			Object rs = method.invoke(service, params);
-			return X.jsonStr(rs);
+			switch (action) {
+			case "us":
+				VO usVO = new VO(in);
+				String usList = usVO.str("list");
+				usList = usList.replaceAll("'", "''");
+				List<VO> rs = VO.list$str(usList);
+				return service.us(rs);
+			case "ds":
+				VO dsVO = new VO(in);
+				String dsList = dsVO.str("list");
+				dsList = dsList.replaceAll("'", "''");
+				List<VO> list = VO.list$str(dsList);
+				return service.ds(list);
+			case "rs":
+				PageFO fo$page = new PageFO();
+				fo$page.setFo(new FO(in));
+				return service.rs(fo$page);
+			case "ra":
+				FO inVO = new FO(in);
+				return service.ra(inVO);
+			default:
+				return ResultVO.error("Not support action:" + action);
+			}
 		} catch (Exception e) {
 			return X.jsonStr(ResultVO.error(e));
 		}

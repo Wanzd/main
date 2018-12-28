@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.bdm.news.IBdmNewsDao">
+
+	<select id="ra" resultType="VO">
+SELECT src as "src",
+	dig_date as "digDate",
+	news_idx as "idx",
+	title as "title",
+	body as "body"
+FROM bdm_news_t
+	</select>
+
+
+</mapper>  
