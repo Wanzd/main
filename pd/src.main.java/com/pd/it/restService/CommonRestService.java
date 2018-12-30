@@ -1,6 +1,5 @@
 package com.pd.it.restService;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +31,7 @@ public class CommonRestService {
 	@RequestMapping(value = "{action}/{module}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@RequestBody FO in) {
+			@RequestBody(required = false) FO in) {
 		return rest(action, module, "", in);
 	}
 
@@ -40,7 +39,7 @@ public class CommonRestService {
 	@RequestMapping(value = "{action}/{module}/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@PathVariable("dimension") String dimension, @RequestBody FO in) {
+			@PathVariable("dimension") String dimension, @RequestBody(required = false) FO in) {
 		Object rs = execute(module, dimension, action, in);
 		return X.jsonStr(rs);
 
@@ -70,7 +69,11 @@ public class CommonRestService {
 				return service.rs(fo$page);
 			case "ra":
 				FO inVO = new FO(in);
-				return service.ra(inVO);
+				List rsRa = service.ra(inVO);
+				if (rsRa == null) {
+					return ResultVO.error("Not found data.");
+				}
+				return rsRa;
 			default:
 				return ResultVO.error("Not support action:" + action);
 			}

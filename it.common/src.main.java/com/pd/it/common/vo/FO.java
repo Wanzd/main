@@ -2,6 +2,9 @@ package com.pd.it.common.vo;
 
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 public class FO extends VO<Object> {
 	/**
 	 * 
@@ -9,6 +12,17 @@ public class FO extends VO<Object> {
 	private static final long serialVersionUID = 1L;
 
 	public FO() {
+	}
+
+	public FO(String inStr) {
+		super();
+		if (inStr != null) {
+			JSONObject jsonObj = JSON.parseObject(inStr);
+			for (String eachKey : jsonObj.keySet()) {
+				put(eachKey, jsonObj.get(eachKey));
+			}
+
+		}
 	}
 
 	public FO(Map<String, ?> map) {
