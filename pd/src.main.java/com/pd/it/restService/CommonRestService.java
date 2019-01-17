@@ -69,7 +69,7 @@ public class CommonRestService {
 				return service.rs(fo$page);
 			case "ra":
 				FO inVO = new FO(in);
-				List rsRa = service.ra(inVO);
+				Object rsRa = service.ra(inVO);
 				if (rsRa == null) {
 					return ResultVO.error("Not found data.");
 				}

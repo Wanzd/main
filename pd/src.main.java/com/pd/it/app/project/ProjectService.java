@@ -23,7 +23,7 @@ public class ProjectService {
 	}
 
 	public Object report(FO fo) {
-		List<VO<ProjectReportVO>> rs = reportDao.ra(fo);
+		List<VO> rs = reportDao.ra(fo);
 		if (rs == null || rs.size() == 0) {
 			return ResultVO.error("Not Found");
 		}
