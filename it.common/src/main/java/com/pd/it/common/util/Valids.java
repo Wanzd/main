@@ -1,8 +1,10 @@
 package com.pd.it.common.util;
 
 import com.pd.it.common.itf.IValidRule;
+import com.pd.it.common.vo.Attr;
+import com.pd.it.common.vo.VO;
 
-public class Valid {
+public class Valids {
 	public static boolean eq(Object o1, Object o2) {
 		if (o1 == null && o2 == null) {
 			return true;
@@ -22,7 +24,7 @@ public class Valid {
 	public static <In> boolean valid(Class<In> inClass, In in, String beansStr) {
 		String[] beans = beansStr.split(",");
 		for (String eachBeanName : beans) {
-			boolean capFlag = Valid.eq("!", eachBeanName.substring(0, 1));
+			boolean capFlag = Valids.eq("!", eachBeanName.substring(0, 1));
 			if (capFlag) {
 				eachBeanName = eachBeanName.substring(1);
 			}
@@ -61,5 +63,9 @@ public class Valid {
 			return false;
 		}
 		return tmpStr.matches("[\\da-zA-Z\\u4e00-\\u9fcc]+");
+	}
+
+	public static Object error(String msg) {
+		return new VO(new Attr("status", 500), new Attr("msg", msg));
 	}
 }
