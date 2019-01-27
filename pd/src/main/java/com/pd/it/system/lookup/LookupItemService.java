@@ -1,4 +1,4 @@
-package com.pd.it.module.todo;
+package com.pd.it.system.lookup;
 
 import org.springframework.stereotype.Service;
 
@@ -7,16 +7,17 @@ import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
 
 @Service
-public class TodoSuggestService implements IActionService {
+public class LookupItemService implements IActionService {
 
 	@Override
 	public Object query(FO vo) {
-		return "todoSuggest_query:test";
+
+		return "LookupItem_query:test";
 	}
 
 	@Override
 	public Object update(VO vo) {
-		return "todoSuggest_update:test";
+		return "LookupItem_update:test";
 	}
 
 }

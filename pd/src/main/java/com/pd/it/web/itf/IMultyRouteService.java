@@ -1,18 +1,31 @@
-package com.pd.it.common.itf;
+package com.pd.it.web.itf;
 
 import java.lang.reflect.Field;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.pd.it.base.util.Exceptions;
+import com.pd.it.common.itf.IActionService;
+import com.pd.it.common.util.X;
+import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
 
 public interface IMultyRouteService {
 
-	default Object query(String dimension, VO vo) {
+	@ResponseBody
+	@RequestMapping(value = "/{dimension}/query", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	default Object query(@PathVariable("dimension") String dimension, @RequestBody(required = false) FO fo) {
 		IActionService service = getService(dimension);
 		if (service == null) {
 			return Exceptions.NO_SERVICE;
 		}
-		return service.query(vo);
+		Object ra = service.query(fo);
+		return X.jsonStr(ra);
 	}
 
 	default Object update(String dimension, VO vo) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>pd</name>
+	<name>it.web</name>
 	<comment></comment>
 	<projects>
 		<project>ehr.core</project>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.X;
+import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.FO;
+import com.pd.it.common.vo.VO;
 
 /**
  * 待办rest服务
@@ -23,12 +25,6 @@ public class TodoRestService {
 	@Autowired
 	private TodoService service;
 
-	@ResponseBody
-	@RequestMapping(value = "/query/{dimension}", method = { RequestMethod.GET,
-			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	public Object query(@PathVariable String dimension, @RequestBody(required = false) FO in) {
-		Object ra = service.query(dimension, in);
-		return X.jsonStr(ra);
-	}
+	
 
 }
