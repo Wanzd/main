@@ -3,8 +3,21 @@
 <mapper namespace="com.pd.it.system.lookup.ILookupItemDao">
 
 	<select id="ra" resultType="VO">
-select 'province' "typeCode",
-	'省份' "typeName"
+select id "id",
+		<choose>
+			<when test="language!=null and language=='CHN'">cn "value"</when>
+			<otherwise>en "value"</otherwise>
+		</choose>
+from sys_lookupitem_t
+		<include refid="sql$ra$filter"/>
 	</select>
 	
+	<sql id="sql$ra$filter">
+		<where>
+			<choose>
+				<when test="typeId!=null ||typeId!=''">type_id=#{typeId}</when>
+				<otherwise>1=0</otherwise>
+			</choose>
+		</where>
+	</sql>
 </mapper>  

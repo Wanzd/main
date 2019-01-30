@@ -126,4 +126,8 @@ public class VO extends HashMap<String, Object> {
 	public String toString() {
 		return JSON.toJSONString(this);
 	}
+
+	public void init() {
+		put("language", "CHN");
+	}
 }

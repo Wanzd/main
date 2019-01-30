@@ -12,6 +12,8 @@ public class FO extends VO {
 	private static final long serialVersionUID = 1L;
 
 	public FO() {
+		super();
+		init();
 	}
 
 	public FO(String inStr) {

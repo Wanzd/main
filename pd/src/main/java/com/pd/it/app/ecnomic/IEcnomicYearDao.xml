@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.app.ecnomic.IEcnomicYearDao">
+
+	<select id="ra" resultType="VO">
+select year "year",
+	month "month",
+	income "income",
+	output "output",
+	gap "gap",
+	rest "rest"
+from app_ecnomic_year_v
+		<include refid="sql$r$filter"/>
+order by year,month
+	</select>
+	
+	<sql id="sql$r$filter">
+		<where>
+			<choose>
+				<when test='year!=null ||year!=""'>year=#{year}</when>
+				<otherwise>1=0</otherwise>
+			</choose>
+		</where>
+	</sql>
+</mapper>  
