@@ -3,8 +3,8 @@
 <mapper namespace="com.pd.it.app.ecnomic.IEcnomicYearDao">
 
 	<select id="ra" resultType="VO">
-select year "year",
-	month "month",
+select ifnull(year,'Total') "year",
+	ifnull(month,'Total') "month",
 	income "income",
 	output "output",
 	gap "gap",
@@ -17,6 +17,7 @@ order by year,month
 	<sql id="sql$r$filter">
 		<where>
 			<choose>
+				<when test='"All"==year'>1=1</when>
 				<when test='year!=null ||year!=""'>year=#{year}</when>
 				<otherwise>1=0</otherwise>
 			</choose>
