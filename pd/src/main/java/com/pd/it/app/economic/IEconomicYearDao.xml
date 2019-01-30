@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.app.ecnomic.IEcnomicYearDao">
+<mapper namespace="com.pd.it.app.economic.IEconomicYearDao">
 
 	<select id="ra" resultType="VO">
 select ifnull(year,'Total') "year",
@@ -9,7 +9,7 @@ select ifnull(year,'Total') "year",
 	output "output",
 	gap "gap",
 	rest "rest"
-from app_ecnomic_year_v
+from app_economic_year_v
 		<include refid="sql$r$filter"/>
 order by year,month
 	</select>
