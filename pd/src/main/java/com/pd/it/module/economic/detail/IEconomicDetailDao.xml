@@ -3,26 +3,14 @@
 <mapper namespace="com.pd.it.module.economic.detail.IEconomicDetailDao">
 
 	<select id="rs" parameterType="VO" resultType="VO">
-select 
-	flow_id as "flowId",
-	year as "year",
-	month as "month",
-	day as "day",
-	person as "person",
-	event_type as "eventType",
-	t2.cn as "evenTypeCn",
-	event_class as "eventClass",
-	t3.cn as "evenClassCn",
-	qty as "qty",
-	detail as "detail"
-from economic_detail_t t1
-left join sys_lookupitem_t t2
-	on t2.type_id='economic_eventClass'
-	and t2.id=t1.event_type
-left join sys_lookupitem_t t3
-	on t3.type_id='economic_eventType'
-	and t3.id=t1.event_class
+select event_date as "eventDate",
+	title as "title",
+	detail as "detail",
+	income as "income",
+	output as "output"
+from app_economic_t t1
 		<include refid="rs$filter"/>
+order by event_date
 	</select>
 
 	<update id="us">
@@ -65,16 +53,6 @@ where (flow_id) in(
 	</delete>
 	<sql id="rs$filter">
 		<where>
-			<choose>
-				<when test="fo.month!=null and fo.month !=''">
-					year=left(#{fo.month},4)
-					and month=right(#{fo.month},2)
-				</when>
-				<otherwise>
-					1=0
-				</otherwise>
-			</choose>
-			
 		</where>
 	</sql>
 </mapper>  

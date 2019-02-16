@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.chart.IChartDao">
+	<select id="r" resultType="VO">
+SELECT id as "id",
+	data_source as "dataSource",
+	js_cfg as "jsCfg"
+FROM sys_chart_t
+where id=#{id}
+	</select>
+	
+</mapper>  

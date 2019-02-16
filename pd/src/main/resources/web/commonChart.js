@@ -16,30 +16,10 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 	_common = common;
 	var editIndex = undefined;
 	var curParams = common.parseUrl(location.href);
-	var $pageCfg = {
-		id : "lookupType"
-	};
-	var $pageAtom = {
-		init : function() {
-			$('#dg').datagrid($pageCfg.datagrid.cfg)
-		},
-		action : {
-			search : function() {
-				$('#tt').datagrid('load', {
-							itemid : $('#itemid').val(),
-							productid : $('#productid').val()
-						});
-			},
-			update : function(index) {
-				$('#dg').datagrid('updateRow', {
-							index : index,
-							row : {}
-						});
-			}
-		}
-	};
-	var colSchema = common.ajax("commonRest/str/grid/schema/?gid="
-			+ curParams.module + "$" + curParams.dimension);
+	var chartCfg = common.ajax("system/chartRest/query/" + curParams.id);
+	debugger;
+	var dataSource=common.ajax(chartCfg.dataSource);
+	var jsCfg=chartCfg.jsCfg;
 	var columns = [{
 				width : 80,
 				field : 'ck',

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>AI系统</title>
+<title>Economic</title>
 
 <link rel="stylesheet" type="text/css"
 	href="jquery-easyui-1.4.1/themes/default/easyui.css">
@@ -18,52 +18,43 @@
 </form>
 
 <div id="dEconoic" class="easyui-tabs">
-	<div id="dEconoicDescription" title="描述"
-		style="weight: 100%; height: 3000px;">
-		<table>
-			<tr>
-				<td bgcolor="lightgreen">0，需求标准</td>
-			</tr>
-			<tr>
-				<td bgcolor="lightgreen">1，数据详情</td>
-			</tr>
-			<tr>
-				<td bgcolor="lightgreen">2，参数配置</td>
-			</tr>
-			<tr>
-				<td bgcolor="lightgreen">3，数据统计</td>
-			</tr>
-			<tr>
-				<td>4，数据预警</td>
-			</tr>
-		</table>
+	<div id="dEconoicBaseData" title="经济基础数据" class="easyui-tabs">
+		<div id="tEconoicBaseDtailData" title="经济基础详细数据"
+			style="weight: 100%; height: 700px;">
 
-	</div>
-	<div id="tEconoicDtail" title="详细数据"
-		style="weight: 100%; height: 700px;">
-
-		<iframe name="frmEconoicDetail" id="frmEconoicDetail" frameborder="0"
-			align="left" width="100%" height="600px" scrolling="yes"
-			src="commonGrid.html?module=economic&dimension=detail">
-			<p>你的浏览器不支持iframe标签</p>
-		</iframe>
-	</div>
-	<div id="dEconoicConfig" title="参数配置" style="height: 100%;">
-		<iframe name="frmEconoicCfg" id="frmEconoicCfg" frameborder="0"
-			align="left" width="100%" height="600px" scrolling="yes"
-			src="commonGrid.html?module=economic&dimension=config">
-			<p>你的浏览器不支持iframe标签</p>
-		</iframe>
+			<iframe name="frmEconoicDetail" id="frmEconoicDetail" frameborder="0"
+				align="left" width="100%" height="600px" scrolling="yes"
+				src="commonGrid.html?module=economic&dimension=detail">
+				<p>你的浏览器不支持iframe标签</p>
+			</iframe>
+		</div>
+		<div id="dEconoicConfig" title="参数配置" style="height: 100%;">
+			<iframe name="frmEconoicCfg" id="frmEconoicCfg" frameborder="0"
+				align="left" width="100%" height="600px" scrolling="yes"
+				src="commonGrid.html?module=economic&dimension=config">
+				<p>你的浏览器不支持iframe标签</p>
+			</iframe>
+		</div>
 	</div>
 	<div id="dEconoicReport" title="报表"
 		style="weight: 100%; height: 600px;">
 		<div id="accordionEconomicReport" class="easyui-accordion"
 			style="width: 100%; height: 500px;">
-			<div id="dEconomicReportMonthly" title="月报表" iconCls="icon-ok"
+			<div id="dEconomicReportMonthly" title="月度报表" iconCls="icon-ok"
 				style="overflow: auto; padding: 10px;">
 				<iframe name="frmEconoicMonthly" id="frmEconoicMonthly"
 					frameborder="0" align="left" width="100%" height="600px"
-					scrolling="yes" src="commonGrid.html?module=economic&dimension=monthly">
+					scrolling="yes"
+					src="commonGrid.html?module=economic&dimension=monthly">
+					<p>你的浏览器不支持iframe标签</p>
+				</iframe>
+			</div>
+			<div id="dEconomicReportYearly" title="年度报表" iconCls="icon-ok"
+				style="overflow: auto; padding: 10px;">
+				<iframe name="frmEconoicMonthly" id="frmEconoicMonthly"
+					frameborder="0" align="left" width="100%" height="600px"
+					scrolling="yes"
+					src="commonChart.html?id=economicYearlyReport">
 					<p>你的浏览器不支持iframe标签</p>
 				</iframe>
 			</div>

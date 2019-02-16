@@ -10,22 +10,25 @@
 	href="jquery-easyui-1.4.1/themes/icon.css">
 <script data-main="lookup.js" src="require.js" charset="utf-8"></script>
 </head>
-<form id="formEconomic" method="post">
-	<div>
-		<label for="month">Lookup类型:</label> <input type="text"
-			id="lookupType" name="lookupType">
-	</div>
-</form>
+<div id="filter">
+	<form id="formEconomic" method="post" style="weight: 20%; height: 20%">
+		<div>
+			<label for="month">Lookup类型:</label> <input id="lookupType"
+				class="easyui-combobox" name="lookupType"
+				data-options="valueField:'id',textField:'cn',url:'LOOKUP_TYPE'" />
+		</div>
+	</form>
 
-<div id="dEconoic" class="easyui-tabs">
-	<div id="tLookupType" title="Lookup类型"
-		style="weight: 100%; height: 700px;">
+	<div id="dEconoic" class="easyui-tabs">
+		<div id="tLookupType" title="Lookup类型"
+			style="weight: 100%; height: 700px;">
 
-		<iframe name="frmLookupType" id="frmLookupType" frameborder="0"
-			align="left" width="100%" height="600px" scrolling="yes"
-			src="commonGrid.html?module=lookup&dimension=type">
-			<p>你的浏览器不支持iframe标签</p>
-		</iframe>
+			<iframe name="frmLookupType" id="frmLookupType" frameborder="0"
+				align="left" width="100%" height="600px" scrolling="yes"
+				src="commonGrid.html?module=lookup&dimension=type">
+				<p>你的浏览器不支持iframe标签</p>
+			</iframe>
+		</div>
 	</div>
 </div>
 </html>

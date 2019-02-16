@@ -1,5 +1,6 @@
 package com.pd.it.restService;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,14 +25,14 @@ import com.pd.it.common.vo.VO;
  *
  */
 @RestController
-@RequestMapping("common")
+@RequestMapping("commonRest")
 public class CommonRestService {
 
 	@ResponseBody
 	@RequestMapping(value = "{action}/{module}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@RequestBody(required = false) FO in) {
+			@RequestBody(required = false) LinkedHashMap<String, Object> in) {
 		return rest(action, module, "", in);
 	}
 
@@ -39,13 +40,14 @@ public class CommonRestService {
 	@RequestMapping(value = "{action}/{module}/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("action") String action, @PathVariable("module") String module,
-			@PathVariable("dimension") String dimension, @RequestBody(required = false) FO in) {
+			@PathVariable("dimension") String dimension,
+			@RequestBody(required = false) LinkedHashMap<String, Object> in) {
 		Object rs = execute(module, dimension, action, in);
 		return X.jsonStr(rs);
 
 	}
 
-	private Object execute(String module, String dimension, String action, FO in) {
+	private Object execute(String module, String dimension, String action, LinkedHashMap<String, Object> in) {
 		try {
 			String serviceName = SpringUtil.getServiceName(module, dimension);
 			IDbService service = SpringUtil.getBean(serviceName, IDbService.class);
