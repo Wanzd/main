@@ -7,6 +7,7 @@ public class Reflects {
 		Field field;
 		try {
 			field = bean.getClass().getDeclaredField(attrName);
+			field.setAccessible(true);
 			return (OUT) field.get(bean);
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
