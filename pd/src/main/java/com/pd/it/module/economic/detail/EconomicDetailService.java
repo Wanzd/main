@@ -3,11 +3,10 @@ package com.pd.it.module.economic.detail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.common.itf.ISimpleDbService;
-import com.pd.it.common.vo.VO;
+import com.pd.it.web.itf.IDbDimensionService;
 
-@Service("economicDetailService")
-public class EconomicDetailService implements ISimpleDbService<VO, IEconomicDetailDao> {
+@Service
+public class EconomicDetailService implements IDbDimensionService<IEconomicDetailDao> {
 
 	@Autowired
 	private IEconomicDetailDao dao;

@@ -3,19 +3,16 @@ package com.pd.it.module.menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.common.itf.IDao;
-import com.pd.it.common.itf.IDbService;
-import com.pd.it.common.vo.FO;
-import com.pd.it.common.vo.VO;
+import com.pd.it.web.itf.IDbDimensionService;
 
 @Service("menuTreeService")
-public class MenuTreeService implements IDbService<VO, FO, VO, IDao<VO, FO, VO>> {
+public class MenuTreeService implements IDbDimensionService<IMenuTreeDao> {
 
 	@Autowired
 	private IMenuTreeDao dao;
 
 	@Override
-	public IDao<VO, FO, VO> getDao() {
+	public IMenuTreeDao getDao() {
 		return dao;
 	}
 

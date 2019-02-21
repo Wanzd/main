@@ -1,5 +1,7 @@
 package com.pd.it.common.util;
 
+import java.util.Collection;
+
 import com.pd.it.common.itf.IValidRule;
 import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.VO;
@@ -52,14 +54,14 @@ public class Valids {
 
 	/**
 	 * 
-	 * 判断输入的字符串是否是汉字，数字或字母
+	 * 判断输入的字符串是否是汉字，数字或字�?
 	 * 
 	 * @param tmpStr
 	 * @return
-	 * @see [类、类#方法、类#成员]
+	 * @see [类�?�类#方法、类#成员]
 	 */
 	public static boolean isWordChar(String tmpStr) {
-		if (tmpStr.matches(".*[的是和等有或及与如(其它)(其他)享(熟悉)(岗位)(任职要求)(相关)(发展)(应用)你我他它她].*")) {
+		if (tmpStr.matches(".*[的是和等有或及与�?(其它)(其他)�?(熟悉)(岗位)(任职要求)(相关)(发展)(应用)你我他它她].*")) {
 			return false;
 		}
 		return tmpStr.matches("[\\da-zA-Z\\u4e00-\\u9fcc]+");
@@ -67,5 +69,9 @@ public class Valids {
 
 	public static Object error(String msg) {
 		return new VO(new Attr("status", 500), new Attr("msg", msg));
+	}
+
+	public static boolean notEmpty(Collection csList) {
+		return csList != null && csList.size() > 0;
 	}
 }

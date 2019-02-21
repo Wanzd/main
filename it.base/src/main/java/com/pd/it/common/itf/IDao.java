@@ -27,9 +27,9 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	int u(_VO vo);
 
-	int us(List<_FO> vo);
+	int us(List<_VO> vo);
 
-	int ds(List<_FO> vo);
+	int ds(List<_VO> vo);
 
 	List<_DTO> ra(_FO vo);
 

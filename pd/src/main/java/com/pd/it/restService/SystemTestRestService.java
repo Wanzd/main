@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.Attr;
-import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.ResultVO;
 import com.pd.it.common.vo.VO;
 import com.pd.it.system.user.SystemUserService;
@@ -32,7 +31,7 @@ public class SystemTestRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String rest(@PathVariable("id") String id) {
 		VO vo = new VO(new Attr("id", id));
-		Object rs = systemUserService.r((FO) vo);
+		Object rs = systemUserService.query(vo);
 		if (rs == null) {
 			return X.jsonStr(ResultVO.error("NotFound"));
 		}

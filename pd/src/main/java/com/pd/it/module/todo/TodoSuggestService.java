@@ -2,21 +2,21 @@ package com.pd.it.module.todo;
 
 import org.springframework.stereotype.Service;
 
-import com.pd.it.common.itf.IActionService;
-import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
+import com.pd.it.web.itf.IQueryDimensionService;
 
 @Service
-public class TodoSuggestService implements IActionService {
+public class TodoSuggestService implements IQueryDimensionService {
 
 	@Override
-	public Object query(FO vo) {
-		return "todoSuggest_query:test";
+	public Object validQuery(VO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public Object update(VO vo) {
-		return "todoSuggest_update:test";
+	public Object executeQuery(VO vo) {
+		return "todoSuggest_query:test";
 	}
 
 }

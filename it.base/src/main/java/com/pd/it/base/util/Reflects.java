@@ -3,7 +3,7 @@ package com.pd.it.base.util;
 import java.lang.reflect.Field;
 
 public class Reflects {
-	public static <OUT> OUT get(Object bean, String attrName) {
+	public static <OUT> OUT field(Object bean, String attrName) {
 		Field field;
 		try {
 			field = bean.getClass().getDeclaredField(attrName);

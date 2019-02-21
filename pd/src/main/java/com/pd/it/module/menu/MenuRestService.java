@@ -26,7 +26,7 @@ public class MenuRestService {
 	@RequestMapping(value = "/ra", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object rest(@RequestBody(required = false) FO in) {
-		Object ra = service.ra(in);
+		Object ra = service.query(in);
 		return X.jsonStr(ra);
 	}
 

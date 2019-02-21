@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pd.it.base.util.Exceptions;
-import com.pd.it.common.itf.IActionService;
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
@@ -20,7 +19,7 @@ public interface IMultyRouteService {
 	@RequestMapping(value = "/{dimension}/query", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object query(@PathVariable("dimension") String dimension, @RequestBody(required = false) FO fo) {
-		IActionService service = getService(dimension);
+		IDimensionService service = getService(dimension);
 		if (service == null) {
 			return Exceptions.NO_SERVICE;
 		}
@@ -29,20 +28,20 @@ public interface IMultyRouteService {
 	}
 
 	default Object update(String dimension, VO vo) {
-		IActionService service = getService(dimension);
+		IDimensionService service = getService(dimension);
 		if (service == null) {
 			return Exceptions.NO_SERVICE;
 		}
 		return service.update(vo);
 	}
 
-	default IActionService getService(String dimension) {
+	default IDimensionService getService(String dimension) {
 		try {
 			Field fieldByDimension = this.getClass().getDeclaredField(dimension);
 			fieldByDimension.setAccessible(true);
 			Object object = fieldByDimension.get(this);
-			if (object instanceof IActionService) {
-				return (IActionService) object;
+			if (object instanceof IDimensionService) {
+				return (IDimensionService) object;
 			}
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
