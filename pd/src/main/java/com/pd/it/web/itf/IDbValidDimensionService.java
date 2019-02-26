@@ -3,9 +3,9 @@ package com.pd.it.web.itf;
 import java.util.List;
 
 import com.pd.it.common.itf.IDao;
-import com.pd.it.common.model.BatchVO;
 import com.pd.it.common.util.Valids;
 import com.pd.it.common.util.X;
+import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
 

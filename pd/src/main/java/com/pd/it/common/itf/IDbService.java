@@ -2,7 +2,7 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
-import com.pd.it.common.vo.BatchList;
+import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.PageFO;
 
 public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
@@ -41,7 +41,7 @@ public interface IDbService<_VO, _FO, _DTO, _Dao extends IDao<_VO, _FO, _DTO>> {
 		return getDao().ds(list);
 	}
 
-	default Object batch(BatchList<_FO> vo) {
+	default Object batch(BatchVO<_FO> vo) {
 		return 0;
 	}
 }

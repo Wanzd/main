@@ -1,4 +1,4 @@
-package com.pd.it.common.abs;
+package com.pd.it.common.itf;
 
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.itf.ICheck;

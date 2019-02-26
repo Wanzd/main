@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.pd.it.common.vo.Attr;
+import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
 public class X {
@@ -98,6 +99,11 @@ public class X {
 
 	public static int int$str(String yearStr) {
 		return Integer.valueOf(yearStr);
+	}
+
+	public static BatchVO<VO> transformBatch(VO vo, Class<VO> class1) {
+		
+		return null;
 	}
 
 }

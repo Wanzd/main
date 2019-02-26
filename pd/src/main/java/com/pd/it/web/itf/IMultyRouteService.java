@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pd.it.base.util.Exceptions;
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
@@ -21,7 +20,7 @@ public interface IMultyRouteService {
 	default Object query(@PathVariable("dimension") String dimension, @RequestBody(required = false) FO fo) {
 		IDimensionService service = getService(dimension);
 		if (service == null) {
-			return Exceptions.NO_SERVICE;
+			return "NO_SERVICE";
 		}
 		Object ra = service.query(fo);
 		return X.jsonStr(ra);
@@ -30,7 +29,7 @@ public interface IMultyRouteService {
 	default Object update(String dimension, VO vo) {
 		IDimensionService service = getService(dimension);
 		if (service == null) {
-			return Exceptions.NO_SERVICE;
+			return "NO_SERVICE";
 		}
 		return service.update(vo);
 	}
