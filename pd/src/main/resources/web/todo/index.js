@@ -1,21 +1,25 @@
 require.config({
-			urlArgs : "r=" + (new Date()).getTime(),
-			paths : {
-				jquery : "../jquery.min",
-				easyui : "../jquery.easyui.min",
-				echarts : "../echarts.min",
-				common : "../common"
-			},
-			shim : {
-				"easyui" : {
-					deps : ["jquery"]
-				}
-			}
-		});
+	urlArgs : "r=" + (new Date()).getTime(),
+	paths : {
+		jquery : "../jquery.min",
+		easyui : "../jquery.easyui.min",
+		echarts : "../echarts.min",
+		common : "../common"
+	},
+	shim : {
+		"easyui" : {
+			deps : [ "jquery" ]
+		}
+	}
+});
 var impl = {
+	init : function() {
+
+	},
+	cfg : {},
 	getDayTdHtml : function(year, month, day) {
 		var htmlStr = new Array();
-		var bgColor = "white";
+		var bgColor = "lightyellow";
 		var weekDay = new Date(year, month - 1, day).getDay();
 		if (weekDay == 6 || weekDay == 0) {
 			bgColor = "lightblue";
@@ -26,6 +30,15 @@ var impl = {
 		var title = "d" + month + "_" + day;
 		var id = "d" + month + "_" + day;
 		var dayValue = "";
+		if (weekDay == 6 ) {
+			dayValue = "周六";
+		}
+		if (weekDay == 0) {
+			dayValue = "周日";
+		}
+		if (month == 10 && day==1) {
+			dayValue = "国庆";
+		}
 		htmlStr.push("<td id='" + id + "' title='" + title + "' bgcolor='"
 				+ bgColor + "'>" + dayValue + "</td>");
 		return htmlStr.join();
@@ -42,8 +55,8 @@ var impl = {
 	getMonthTrHtml : function(year, month) {
 		var htmlStr = new Array();
 		var isLeapYear = year % 400 == 0 || (year % 100 != 0 && year % 4 == 0);
-		var monthDays = [31, 28 + (isLeapYear ? 1 : 0), 31, 30, 31, 30, 31, 31,
-				30, 31, 30, 31];
+		var monthDays = [ 31, 28 + (isLeapYear ? 1 : 0), 31, 30, 31, 30, 31,
+				31, 30, 31, 30, 31 ];
 		htmlStr.push("<tr><td colspan=2>" + month + "月</td>");
 		var monthDayCount = monthDays[month - 1];
 		for (var day = 1; day <= monthDayCount; day++) {
@@ -68,7 +81,7 @@ var impl = {
 		$("#dTodoYear").html(yearTableHtml);
 	}
 }
-require(['jquery', 'easyui', 'common', 'echarts'], function(jquery, easyui,
-				common, echarts) {
-			common.init(impl);
-		});
+require([ 'jquery', 'easyui', 'common', 'echarts' ], function(jquery, easyui,
+		common, echarts) {
+	common.init(impl);
+});

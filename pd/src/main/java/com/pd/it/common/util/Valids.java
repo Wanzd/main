@@ -74,4 +74,8 @@ public class Valids {
 	public static boolean notEmpty(Collection csList) {
 		return csList != null && csList.size() > 0;
 	}
+
+	public static boolean notEmpty(String parentId) {
+		return parentId != null && parentId.length() > 0;
+	}
 }

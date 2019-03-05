@@ -73,13 +73,15 @@ public class VO extends HashMap<String, Object> {
 
 	public List<VO> list(String key) {
 		Object object = get(key);
-		if (object instanceof List) {
-			List<VO> rsList = new ArrayList<VO>();
-			for (Object eachObj : (List) object) {
-				rsList.add(new VO((Map) eachObj));
-			}
+		if (object == null) {
+			List<VO> rsList = new ArrayList<>();
+			put(key, rsList);
 			return rsList;
 		}
+		if (object instanceof List) {
+			return (List<VO>) object;
+		}
+
 		return (List<VO>) object;
 	}
 
