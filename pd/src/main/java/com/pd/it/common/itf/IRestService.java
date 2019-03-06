@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pd.it.base.util.Reflects;
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.FO;
+import com.pd.it.web.itf.IQueryDimensionService;
+import com.pd.it.web.itf.IUpdateDimensionService;
 
 /**
  * 通用数据接入对象接口
@@ -20,16 +22,14 @@ import com.pd.it.common.vo.FO;
  * @param <_DTO>
  */
 @RestController
-public interface IRestService<Service extends IService> {
-	default Service getService() {
-		return (Service) Reflects.field(this, "service");
-	};
+public interface IRestService {
 
 	@ResponseBody
 	@RequestMapping(value = "/query", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object query(@RequestBody(required = false) FO in) {
-		Object ra = getService().query(in);
+		IQueryDimensionService service = Reflects.field(this, "service");
+		Object ra = service.query(in);
 		return X.jsonStr(ra);
 	}
 
@@ -37,7 +37,8 @@ public interface IRestService<Service extends IService> {
 	@RequestMapping(value = "/save", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object save(@RequestBody(required = false) FO in) {
-		Object ra = getService().save(in);
+		IUpdateDimensionService service = Reflects.field(this, "service");
+		Object ra = service.update(in);
 		return X.jsonStr(ra);
 	}
 }

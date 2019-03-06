@@ -13,8 +13,8 @@ import com.pd.it.common.itf.IRestService;
  */
 @RestController
 @RequestMapping("/faceRest")
-public class FaceRestService implements IRestService<FaceService> {
+public class FaceRestService implements IRestService {
 	@Autowired
-	private FaceService service;
+	protected FaceService service;
 
 }

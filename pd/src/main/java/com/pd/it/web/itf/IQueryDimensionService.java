@@ -1,16 +1,18 @@
 package com.pd.it.web.itf;
 
-
 import com.pd.it.common.vo.VO;
 
-public interface IQueryDimensionService extends IDimensionService {
+public interface IQueryDimensionService {
 
-	default Object validUpdate(VO vo) {
+	default Object query(VO fo) {
+		Object validRs = validQuery(fo);
+		return validRs != null ? validRs : executeQuery(fo);
+	};
+
+	default Object validQuery(VO vo) {
 		return null;
 	};
 
-	default Object executeUpdate(VO vo) {
-		return null;
-	};
+	Object executeQuery(VO vo);
 
 }
