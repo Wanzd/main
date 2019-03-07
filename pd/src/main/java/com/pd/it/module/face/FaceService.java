@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pd.it.common.vo.VO;
-import com.pd.it.web.itf.IQueryDimensionService;
+import com.pd.it.web.itf.IQueryService;
 
 @Service
-public class FaceService implements IQueryDimensionService {
+public class FaceService implements IQueryService {
 	@Autowired
 	protected IFaceDao dao;
 

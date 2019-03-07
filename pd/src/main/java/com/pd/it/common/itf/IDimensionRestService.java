@@ -1,5 +1,6 @@
 package com.pd.it.common.itf;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,31 +24,31 @@ import com.pd.it.web.itf.IUpdateService;
  * @param <_DTO>
  */
 @RestController
-public interface IRestService {
+public interface IDimensionRestService {
 
 	@ResponseBody
-	@RequestMapping(value = "/query", method = { RequestMethod.GET,
+	@RequestMapping(value = "/query/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object query(@RequestBody(required = false) FO in) {
-		IQueryService service = Reflects.field(this, "service");
+	default Object query(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
+		IQueryService service = Reflects.field(this, dimension + "Service");
 		Object ra = service.query(in);
 		return X.jsonStr(ra);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/update", method = { RequestMethod.GET,
+	@RequestMapping(value = "/update/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object save(@RequestBody(required = false) FO in) {
-		IUpdateService service = Reflects.field(this, "service");
+	default Object save(@RequestBody(required = false) FO in, String dimension) {
+		IUpdateService service = Reflects.field(this, dimension + "Service");
 		Object ra = service.update(in);
 		return X.jsonStr(ra);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/importExcel", method = { RequestMethod.GET,
+	@RequestMapping(value = "/importExcel/{dimension}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object importExcel(@RequestBody(required = false) FO in) {
-		IImportExcelService service = Reflects.field(this, "service");
+	default Object importExcel(@RequestBody(required = false) FO in, String dimension) {
+		IImportExcelService service = Reflects.field(this, dimension + "Service");
 		Object ra = service.importExcel(in);
 		return X.jsonStr(ra);
 	}

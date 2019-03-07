@@ -3,11 +3,11 @@ package com.pd.it.module.todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.web.itf.IMultyRouteService;
+import com.pd.it.web.itf.IQueryService;
 
 @Service
-public class TodoService implements IMultyRouteService {
+public class TodoService implements IQueryService {
 
 	@Autowired
-	protected TodoSuggestService todoSuggest;
+	protected ITodoDao dao;
 }

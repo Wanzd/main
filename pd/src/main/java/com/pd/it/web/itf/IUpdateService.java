@@ -2,7 +2,7 @@ package com.pd.it.web.itf;
 
 import com.pd.it.common.vo.VO;
 
-public interface IUpdateDimensionService {
+public interface IUpdateService {
 
 	default Object update(VO fo) {
 		Object validRs = validUpdate(fo);
@@ -13,6 +13,8 @@ public interface IUpdateDimensionService {
 		return null;
 	};
 
-	Object executeUpdate(VO vo);
+	default Object executeUpdate(VO vo) {
+		return new VO().put("MSG", "Not impl yet");
+	};
 
 }
