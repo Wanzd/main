@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
-import com.pd.it.web.itf.IQueryDimensionService;
+import com.pd.it.web.itf.IQueryService;
 
 @Service
-public class ChartService implements IQueryDimensionService {
+public class ChartService implements IQueryService {
 
 	@Autowired
 	private IChartDao dao;

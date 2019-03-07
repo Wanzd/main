@@ -3,17 +3,12 @@ package com.pd.it.module.menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.web.itf.IDbDimensionService;
+import com.pd.it.web.itf.IQueryService;
 
-@Service("menuTreeService")
-public class MenuTreeService implements IDbDimensionService<IMenuTreeDao> {
+@Service
+public class MenuTreeService implements IQueryService {
 
 	@Autowired
-	private IMenuTreeDao dao;
-
-	@Override
-	public IMenuTreeDao getDao() {
-		return dao;
-	}
+	protected IMenuTreeDao dao;
 
 }

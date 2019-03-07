@@ -6,20 +6,14 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.common.itf.ISimpleDao;
 import com.pd.it.common.vo.VO;
-import com.pd.it.web.itf.IDbDimensionService;
+import com.pd.it.web.itf.IQueryService;
 
 @Service("systemUserService")
-public class SystemUserService implements IDbDimensionService<ISimpleDao<VO>> {
+public class SystemUserService implements IQueryService {
 
 	@Autowired
 	private MongoTemplate mongo;
-
-	@Override
-	public ISimpleDao<VO> getDao() {
-		return null;
-	}
 
 	@Override
 	public Object executeQuery(VO vo) {
