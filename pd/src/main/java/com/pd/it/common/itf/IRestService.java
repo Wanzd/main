@@ -26,11 +26,20 @@ import com.pd.it.web.itf.IUpdateService;
 public interface IRestService {
 
 	@ResponseBody
-	@RequestMapping(value = "/query", method = { RequestMethod.GET,
+	@RequestMapping(value = "/r", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object query(@RequestBody(required = false) FO in) {
+	default Object r(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, "service");
-		Object ra = service.query(in);
+		Object ra = service.r(in);
+		return X.jsonStr(ra);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/ra", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	default Object ra(@RequestBody(required = false) FO in) {
+		IQueryService service = Reflects.field(this, "service");
+		Object ra = service.ra(in);
 		return X.jsonStr(ra);
 	}
 

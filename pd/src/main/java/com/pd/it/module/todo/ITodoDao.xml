@@ -2,15 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.it.module.todo.ITodoDao">
 
-	<select id="ra" resultType="VO">
-select id as "id",
-	date_format(start_date,'%Y-%m-%d') as "startDate",
-	date_format(end_date,'%Y-%m-%d') as "endDate",
-	base_level as "baseLevel",
-	detail as "detail"
-from todo_t t
-where #{year}>=year(t.start_date)
-	and year(t.end_date)>=#{year}
+	<select id="r" resultType="VO">
+		select id as "id",
+			date_format(start_date,'%Y-%m-%d') as "startDate",
+			date_format(end_date,'%Y-%m-%d') as "endDate",
+		base_level as "baseLevel",
+		detail as "detail"
+		from todo_t t
+		where id=#{id}
 	</select>
 	
+	<select id="ra" resultType="VO">
+		select id as "id",
+		date_format(start_date,'%Y-%m-%d') as "startDate",
+		date_format(end_date,'%Y-%m-%d') as "endDate",
+		base_level as "baseLevel",
+		detail as "detail"
+		from todo_t t
+		where #{year}>=year(t.start_date)
+		and year(t.end_date)>=#{year}
+	</select>
+
 </mapper>  

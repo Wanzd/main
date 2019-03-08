@@ -12,7 +12,7 @@ public class FaceService implements IQueryService {
 	protected IFaceDao dao;
 
 	@Override
-	public Object executeQuery(VO vo) {
+	public Object executeR(VO vo) {
 		VO rsVO = new VO();
 		rsVO.put("msg", "test");
 		return rsVO;

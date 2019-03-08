@@ -10,11 +10,19 @@ import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
 public interface ICommonService extends IQueryService, IUpdateService, IImportExcelService {
-	default Object executeQuery(VO vo) {
+	@Override
+	default Object executeRa(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
 		return dao.ra(vo);
 	};
 
+	@Override
+	default Object executeR(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+		return dao.r(vo);
+	};
+
+	@Override
 	default Object executeUpdate(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
 		switch (vo.str("updateType")) {
