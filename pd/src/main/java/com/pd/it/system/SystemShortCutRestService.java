@@ -27,7 +27,7 @@ public class SystemShortCutRestService {
 	protected LookupItemService lookupItem;
 
 	@ResponseBody
-	@RequestMapping(value = "/LOOKUP_TYPE", method = { RequestMethod.GET,
+	@RequestMapping(value = "/LOOKUP", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object listLookupType() {
 		Object ra = lookupType.ra(new FO());
@@ -35,7 +35,7 @@ public class SystemShortCutRestService {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/LOOKUP:{typeId}", method = { RequestMethod.GET,
+	@RequestMapping(value = "/LOOKUP/{typeId}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object listLookupItemByType(@PathVariable("typeId") String typeId) {
 		FO fo = new FO();
