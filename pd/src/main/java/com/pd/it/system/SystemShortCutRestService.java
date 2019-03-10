@@ -1,8 +1,7 @@
-package com.pd.it.system.lookup;
+package com.pd.it.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.FO;
+import com.pd.it.system.lookup.LookupItemService;
+import com.pd.it.system.lookup.LookupTypeService;
 
 /**
  * 待办rest服务
@@ -19,7 +20,7 @@ import com.pd.it.common.vo.FO;
  */
 @RestController
 @RequestMapping("")
-public class ShortLookupRestService {
+public class SystemShortCutRestService {
 	@Autowired
 	protected LookupTypeService lookupType;
 	@Autowired
@@ -29,7 +30,7 @@ public class ShortLookupRestService {
 	@RequestMapping(value = "/LOOKUP_TYPE", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object listLookupType() {
-		Object ra = lookupType.query(new FO());
+		Object ra = lookupType.ra(new FO());
 		return X.jsonStr(ra);
 	}
 
@@ -39,7 +40,7 @@ public class ShortLookupRestService {
 	public Object listLookupItemByType(@PathVariable("typeId") String typeId) {
 		FO fo = new FO();
 		fo.put("typeId", typeId);
-		Object ra = lookupType.query(fo);
+		Object ra = lookupItem.ra(fo);
 		return X.jsonStr(ra);
 	}
 }

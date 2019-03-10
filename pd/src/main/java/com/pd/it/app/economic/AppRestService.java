@@ -1,10 +1,10 @@
-package com.pd.it.system.lookup;
+package com.pd.it.app.economic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.web.itf.IMultyRouteService;
+import com.pd.it.common.itf.IDimensionRestService;
 
 /**
  * 待办rest服务
@@ -13,11 +13,9 @@ import com.pd.it.web.itf.IMultyRouteService;
  *
  */
 @RestController
-@RequestMapping("/system/lookupRest")
-public class LookupRestService implements IMultyRouteService {
+@RequestMapping("/app")
+public class AppRestService implements IDimensionRestService {
 	@Autowired
-	protected LookupTypeService lookupType;
-	@Autowired
-	protected LookupItemService lookupItem;
+	protected EconomicYearService economicYearService;
 
 }
