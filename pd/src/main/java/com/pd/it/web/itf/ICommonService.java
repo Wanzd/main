@@ -10,6 +10,7 @@ import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
 public interface ICommonService extends IQueryService, IUpdateService, IImportExcelService {
+<<<<<<< HEAD
 	@Override
 	default Object executeRa(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
@@ -23,6 +24,13 @@ public interface ICommonService extends IQueryService, IUpdateService, IImportEx
 	};
 
 	@Override
+=======
+	default Object executeQuery(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+		return dao.ra(vo);
+	};
+
+>>>>>>> branch 'dev_20190225' of https://github.com/Wanzd/main.git
 	default Object executeUpdate(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
 		switch (vo.str("updateType")) {

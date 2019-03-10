@@ -28,13 +28,20 @@ public interface IRestService {
 	@ResponseBody
 	@RequestMapping(value = "/r", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+<<<<<<< HEAD
 	default Object r(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, "service");
 		Object ra = service.r(in);
+=======
+	default Object query(@RequestBody(required = false) FO in) {
+		IQueryService service = Reflects.field(this, "service");
+		Object ra = service.query(in);
+>>>>>>> branch 'dev_20190225' of https://github.com/Wanzd/main.git
 		return X.jsonStr(ra);
 	}
 
 	@ResponseBody
+<<<<<<< HEAD
 	@RequestMapping(value = "/ra", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object ra(@RequestBody(required = false) FO in) {
@@ -44,6 +51,8 @@ public interface IRestService {
 	}
 
 	@ResponseBody
+=======
+>>>>>>> branch 'dev_20190225' of https://github.com/Wanzd/main.git
 	@RequestMapping(value = "/update", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object save(@RequestBody(required = false) FO in) {

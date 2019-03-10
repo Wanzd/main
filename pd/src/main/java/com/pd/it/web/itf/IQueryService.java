@@ -1,5 +1,6 @@
 package com.pd.it.web.itf;
 
+<<<<<<< HEAD
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.VO;
 
@@ -43,4 +44,23 @@ public interface IQueryService {
 	default Object executePage(PageFO vo) {
 		return new VO().p("MSG", "Not impl yet");
 	};
+=======
+import com.pd.it.common.vo.VO;
+
+public interface IQueryService {
+
+	default Object query(VO fo) {
+		Object validRs = validQuery(fo);
+		return validRs != null ? validRs : executeQuery(fo);
+	};
+
+	default Object validQuery(VO vo) {
+		return null;
+	};
+
+	default Object executeQuery(VO vo) {
+		return new VO().put("MSG", "Not impl yet");
+	};
+
+>>>>>>> branch 'dev_20190225' of https://github.com/Wanzd/main.git
 }

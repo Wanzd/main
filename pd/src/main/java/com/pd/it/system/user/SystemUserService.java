@@ -16,7 +16,11 @@ public class SystemUserService implements IQueryService {
 	private MongoTemplate mongo;
 
 	@Override
+<<<<<<< HEAD
 	public Object executeR(VO vo) {
+=======
+	public Object executeQuery(VO vo) {
+>>>>>>> branch 'dev_20190225' of https://github.com/Wanzd/main.git
 		Criteria criteria = new Criteria();
 		criteria.andOperator(Criteria.where("code").is(vo.str("id")));
 		Query query = new Query();
