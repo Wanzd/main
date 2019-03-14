@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0 "
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance "
+<project xmlns="http://maven.apache.org/POM/4.0.0 " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance "
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd ">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -30,8 +29,7 @@
 						<contextPath>/</contextPath>
 					</webApp>
 					<connectors>
-						<connector
-							implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 							<port>8080</port>
 							<maxIdleTime>60000</maxIdleTime>
 						</connector>
@@ -101,6 +99,28 @@
 			<version>${spring.version}</version>
 			<type>jar</type>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        
+         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>4.2.2.RELEASE</version>
+        </dependency>
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
@@ -176,7 +196,7 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>2.9.0</version>
+			<version>3.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>gov.nist.math</groupId>
@@ -234,6 +254,11 @@
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>2.3.20</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-redis</artifactId>
+			<version>1.0.0-beta2</version>
 		</dependency>
 	</dependencies>
 </project>

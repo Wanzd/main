@@ -24,7 +24,7 @@ public class SystemRestService implements IDimensionRestService {
 
 	@Autowired
 	protected LookupTypeService lookupType;
-	
+
 	@Autowired
 	protected LookupItemService lookupItem;
 }

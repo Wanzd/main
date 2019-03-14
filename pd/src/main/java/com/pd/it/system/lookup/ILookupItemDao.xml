@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.it.system.lookup.ILookupItemDao">
 
-	<select id="ra" resultType="VO">
+	<cache type="org.mybatis.caches.redis.RedisCache"/>
+	<select id="ra" flushCache="false" useCache="true" resultType="VO">
 select id "id",
 		<choose>
 			<when test="language!=null and language=='CHN'">cn "value"</when>

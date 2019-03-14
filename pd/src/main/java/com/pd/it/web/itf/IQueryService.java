@@ -1,5 +1,7 @@
 package com.pd.it.web.itf;
 
+import com.pd.it.base.util.Reflects;
+import com.pd.it.common.itf.IDao;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.VO;
 
@@ -15,7 +17,8 @@ public interface IQueryService {
 	};
 
 	default Object executeRa(VO vo) {
-		return new VO().p("MSG", "Not impl yet");
+		IDao dao = Reflects.field(this, "dao");
+		return dao.ra(vo);
 	};
 
 	default Object r(VO fo) {
@@ -28,7 +31,8 @@ public interface IQueryService {
 	};
 
 	default Object executeR(VO vo) {
-		return new VO().p("MSG", "Not impl yet");
+		IDao dao = Reflects.field(this, "dao");
+		return dao.r(vo);
 	};
 
 	default Object page(PageFO fo) {
