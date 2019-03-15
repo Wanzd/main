@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -26,8 +28,8 @@
 	</bean>
 
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${mysql.driver}" />
 		<property name="url" value="${mysql.url}" />
 		<property name="username" value="${mysql.username}" />
@@ -44,7 +46,8 @@
 		<property name="maxWait" value="${mysql.maxWait}"></property>
 	</bean>
 	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
@@ -53,7 +56,8 @@
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.pd.it" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory"></property>
 	</bean>
 
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
@@ -62,45 +66,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-
-	<bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${mysql.driver}" />
-		<property name="url" value="${mysql2.url}" />
-		<property name="username" value="${mysql2.username}" />
-		<property name="password" value="${mysql2.password}" />
-		<!-- 初始化连接大小 -->
-		<property name="initialSize" value="${mysql.initialSize}"></property>
-		<!-- 连接池最大数量 -->
-		<property name="maxActive" value="${mysql.maxActive}"></property>
-		<!-- 连接池最大空闲 -->
-		<property name="maxIdle" value="${mysql.maxIdle}"></property>
-		<!-- 连接池最小空闲 -->
-		<property name="minIdle" value="${mysql.minIdle}"></property>
-		<!-- 获取连接最大等待时间 -->
-		<property name="maxWait" value="${mysql.maxWait}"></property>
-	</bean>
-	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
-	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource2" />
-		<!-- 自动扫描mapping.xml文件 -->
-		<property name="configLocation" value="classpath:mybatis.xml"></property>
-	</bean>
-
-	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.pd.bdm" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory2"></property>
-	</bean>
-
-	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
-	<bean id="transactionManager2"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource2" />
-	</bean>
-
 	<!-- 连接池配置 -->
-	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+	<bean id="jedisPoolConfig"
+		class="redis.clients.jedis.JedisPoolConfig">
 		<!-- 最大连接数 -->
 		<property name="maxTotal" value="30" />
 		<!-- 最大空闲连接数 -->
@@ -126,14 +94,19 @@
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
 		<constructor-arg name="host" value="${redis.ip}"></constructor-arg>
 		<constructor-arg name="port" value="${redis.port}"></constructor-arg>
-		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+		<constructor-arg name="poolConfig"
+			ref="jedisPoolConfig"></constructor-arg>
 	</bean>
 
-	<mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}">
-		<mongo:options connections-per-host="${mongo.connectionsPerHost}"
+	<mongo:mongo id="mongo" host="${mongo.host}"
+		port="${mongo.port}">
+		<mongo:options
+			connections-per-host="${mongo.connectionsPerHost}"
 			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
-			connect-timeout="${mongo.connectTimeout}" max-wait-time="${mongo.maxWaitTime}"
-			auto-connect-retry="${mongo.autoConnectRetry}" socket-keep-alive="${mongo.socketKeepAlive}"
+			connect-timeout="${mongo.connectTimeout}"
+			max-wait-time="${mongo.maxWaitTime}"
+			auto-connect-retry="${mongo.autoConnectRetry}"
+			socket-keep-alive="${mongo.socketKeepAlive}"
 			socket-timeout="${mongo.socketTimeout}" slave-ok="${mongo.slaveOk}"
 			write-number="1" write-timeout="0" write-fsync="true" />
 	</mongo:mongo>
@@ -141,8 +114,10 @@
 	<mongo:db-factory id="mongoDbFactory" dbname="test"
 		mongo-ref="mongo" />
 	<!-- mongodb的模板 -->
-	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	<bean id="mongoTemplate"
+		class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory"
+			ref="mongoDbFactory" />
 	</bean>
 
 	<mvc:annotation-driven>
@@ -155,7 +130,8 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	<bean id="jacksonObjectMapper" class="com.pd.it.converter.CustomObjectMapper" />
+	<bean id="jacksonObjectMapper"
+		class="com.pd.it.converter.CustomObjectMapper" />
 
 
 </beans>
