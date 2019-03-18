@@ -1,4 +1,4 @@
-package com.pd.it.web.itf;
+package com.pd.it.web.itf.service;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.pd.it.common.util.X;
 import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
-public interface ICommonService extends IQueryService, IUpdateService, IImportExcelService {
+public interface ICommonService extends IQueryService, ISaveService, IExcelService {
 	@Override
 	default Object executeRa(VO vo) {
 		IDao dao = Reflects.field(this, "dao");

@@ -1,5 +1,7 @@
 package com.pd.it.common.vo;
 
+import com.alibaba.fastjson.JSON;
+
 public class ResultVO extends VO {
 
 	private static final long serialVersionUID = -143398554658907794L;
@@ -25,6 +27,10 @@ public class ResultVO extends VO {
 
 	public static ResultVO fail(Object msg) {
 		return new ResultVO(Status.Fail, msg, "200");
+	}
+
+	public static String json(Object in) {
+		return JSON.toJSONString(in);
 	}
 
 }

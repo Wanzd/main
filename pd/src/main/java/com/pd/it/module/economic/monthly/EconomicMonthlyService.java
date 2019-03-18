@@ -3,7 +3,7 @@ package com.pd.it.module.economic.monthly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pd.it.web.itf.IQueryService;
+import com.pd.it.web.itf.service.IQueryService;
 
 @Service("economicMonthlyService")
 public class EconomicMonthlyService implements IQueryService {

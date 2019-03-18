@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pd.it.base.util.Reflects;
 import com.pd.it.common.util.X;
 import com.pd.it.common.vo.FO;
-import com.pd.it.web.itf.IImportExcelService;
-import com.pd.it.web.itf.IQueryService;
-import com.pd.it.web.itf.IUpdateService;
+import com.pd.it.web.itf.service.IExcelService;
+import com.pd.it.web.itf.service.IQueryService;
+import com.pd.it.web.itf.service.ISaveService;
 
 /**
  * 通用数据接入对象接口
@@ -29,7 +29,7 @@ public interface IRestService {
 	@RequestMapping(value = "/r", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object r(@RequestBody(required = false) FO in) {
-		IQueryService service = Reflects.field(this, "service");
+		IQueryService service = Reflects.field(this, IQueryService.class, "service");
 		Object ra = service.r(in);
 		return X.jsonStr(ra);
 	}
@@ -38,17 +38,17 @@ public interface IRestService {
 	@RequestMapping(value = "/ra", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object ra(@RequestBody(required = false) FO in) {
-		IQueryService service = Reflects.field(this, "service");
+		IQueryService service = Reflects.field(this, IQueryService.class, "service");
 		Object ra = service.ra(in);
 		return X.jsonStr(ra);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/update", method = { RequestMethod.GET,
+	@RequestMapping(value = "/batch", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object save(@RequestBody(required = false) FO in) {
-		IUpdateService service = Reflects.field(this, "service");
-		Object ra = service.update(in);
+	default Object batch(@RequestBody(required = false) FO in) {
+		ISaveService service = Reflects.field(this, ISaveService.class, "service");
+		Object ra = service.batch(in);
 		return X.jsonStr(ra);
 	}
 
@@ -56,7 +56,7 @@ public interface IRestService {
 	@RequestMapping(value = "/importExcel", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object importExcel(@RequestBody(required = false) FO in) {
-		IImportExcelService service = Reflects.field(this, "service");
+		IExcelService service = Reflects.field(this, IExcelService.class, "service");
 		Object ra = service.importExcel(in);
 		return X.jsonStr(ra);
 	}

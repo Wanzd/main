@@ -14,7 +14,7 @@ import com.pd.it.view.common.CommonViewService;
  *
  */
 @RestController
-@RequestMapping("/view")
+@RequestMapping("/viewRest")
 public class ViewRestService implements IDimensionRestService {
 	@Autowired
 	protected CommonViewService commonService;

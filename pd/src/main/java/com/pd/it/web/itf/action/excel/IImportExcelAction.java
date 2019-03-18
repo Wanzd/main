@@ -1,8 +1,8 @@
-package com.pd.it.web.itf;
+package com.pd.it.web.itf.action.excel;
 
 import com.pd.it.common.vo.VO;
 
-public interface IImportExcelService {
+public interface IImportExcelAction {
 
 	default Object importExcel(VO fo) {
 		Object validRs = validImportExcel(fo);

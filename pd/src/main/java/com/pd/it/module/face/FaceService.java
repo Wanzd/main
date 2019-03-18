@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pd.it.common.vo.VO;
-import com.pd.it.web.itf.IQueryService;
+import com.pd.it.web.itf.service.IQueryService;
 
 @Service
 public class FaceService implements IQueryService {

@@ -1,15 +1,17 @@
 package com.pd.it.test;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.app.economic.EconomicYearService;
-import com.pd.it.app.user.PersonRelationService;
-import com.pd.it.common.itf.IDimensionRestService;
-import com.pd.it.test.curInfo.CurInfoService;
+import com.pd.it.common.itf.IDbRestService;
+import com.pd.it.common.util.SpringUtil;
+import com.pd.it.common.vo.FO;
+import com.pd.it.common.vo.ResultVO;
+import com.pd.it.system.lookup.ILookupItemService;
 
 /**
  * 待办rest服务
@@ -18,9 +20,17 @@ import com.pd.it.test.curInfo.CurInfoService;
  *
  */
 @RestController
-@RequestMapping("/test")
-public class TestRestService implements IDimensionRestService {
+@RequestMapping("/testRest")
+public class TestRestService implements IDbRestService {
 	@Autowired
-	protected CurInfoService curInfoService;
+	protected ILookupItemService lookupItem;
 
+	@ResponseBody
+	@RequestMapping(value = "/test", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	public Object test(@RequestBody(required = false) FO in) {
+		ILookupItemService service = SpringUtil.getBean("iLookupItemService", ILookupItemService.class);
+		Object ra = service.ra(in);
+		return ResultVO.json(ra);
+	}
 }

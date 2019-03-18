@@ -1,8 +1,8 @@
-package com.pd.it.web.itf;
+package com.pd.it.web.itf.action.save;
 
 import com.pd.it.common.vo.VO;
 
-public interface IUpdateService {
+public interface IUpdateAction {
 
 	default Object update(VO fo) {
 		Object validRs = validUpdate(fo);

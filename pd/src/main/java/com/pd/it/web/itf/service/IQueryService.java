@@ -1,4 +1,4 @@
-package com.pd.it.web.itf;
+package com.pd.it.web.itf.service;
 
 import com.pd.it.base.util.Reflects;
 import com.pd.it.common.itf.IDao;
