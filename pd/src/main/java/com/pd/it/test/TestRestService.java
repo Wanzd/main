@@ -11,7 +11,7 @@ import com.pd.it.common.itf.IDbRestService;
 import com.pd.it.common.util.SpringUtil;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.ResultVO;
-import com.pd.it.system.lookup.ILookupItemService;
+import com.pd.it.system.lookup.LookupItemService;
 
 /**
  * 待办rest服务
@@ -23,13 +23,13 @@ import com.pd.it.system.lookup.ILookupItemService;
 @RequestMapping("/testRest")
 public class TestRestService implements IDbRestService {
 	@Autowired
-	protected ILookupItemService lookupItem;
+	protected LookupItemService lookupItem;
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object test(@RequestBody(required = false) FO in) {
-		ILookupItemService service = SpringUtil.getBean("iLookupItemService", ILookupItemService.class);
+		LookupItemService service = SpringUtil.getBean("lookupItemService", LookupItemService.class);
 		Object ra = service.ra(in);
 		return ResultVO.json(ra);
 	}
