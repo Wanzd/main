@@ -44,7 +44,6 @@ public class ReflectRestService {
 			rsObj = method.invoke(service, in.obj("data"));
 			return ResultVO.json(rsObj);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			return ResultVO.error(e);
 		}
 	}

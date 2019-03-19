@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.itf.IDbService;
 import com.pd.it.common.util.SpringUtil;
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.ResultVO;
@@ -43,7 +43,7 @@ public class CommonRestService {
 			@PathVariable("dimension") String dimension,
 			@RequestBody(required = false) LinkedHashMap<String, Object> in) {
 		Object rs = execute(module, dimension, action, in);
-		return X.jsonStr(rs);
+		return StringX.json(rs);
 
 	}
 
@@ -80,7 +80,7 @@ public class CommonRestService {
 				return ResultVO.error("Not support action:" + action);
 			}
 		} catch (Exception e) {
-			return X.jsonStr(ResultVO.error(e));
+			return StringX.json(ResultVO.error(e));
 		}
 	}
 

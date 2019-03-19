@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pd.it.common.itf.IDao;
 import com.pd.it.common.itf.IDbService;
-import com.pd.it.common.util.AI;
+import com.pd.it.common.util.ListX;
 import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
@@ -27,7 +27,7 @@ public class ListMonthService implements IDbService<VO, FO, VO, IDao<VO, FO, VO>
 	@Override
 	public List<VO> ra(FO fo) {
 		String string = dao.get(fo.str("key"));
-		return AI.list(new VO(new Attr("a", string)));
+		return ListX.from(new VO(new Attr("a", string)));
 	}
 
 }

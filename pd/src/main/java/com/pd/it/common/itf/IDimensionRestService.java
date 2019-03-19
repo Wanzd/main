@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.base.util.Reflects;
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.PageVO;
@@ -26,7 +26,7 @@ import com.pd.it.web.itf.service.ISaveService;
  * @param <_DTO>
  */
 @RestController
-public interface IDimensionRestService{
+public interface IDimensionRestService {
 
 	@ResponseBody
 	@RequestMapping(value = "/{dimension}/r", method = { RequestMethod.GET,
@@ -34,7 +34,7 @@ public interface IDimensionRestService{
 	default Object r(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
 		Object ra = service.r(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -43,7 +43,7 @@ public interface IDimensionRestService{
 	default Object ra(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
 		Object ra = service.ra(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -53,7 +53,7 @@ public interface IDimensionRestService{
 			@PathVariable PageVO page) {
 		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
 		Object ra = service.page(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -62,7 +62,7 @@ public interface IDimensionRestService{
 	default Object save(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		ISaveService service = Reflects.field(this, ISaveService.class, dimension, dimension + "Service");
 		Object ra = service.update(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -71,6 +71,6 @@ public interface IDimensionRestService{
 	default Object importExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
 		Object ra = service.importExcel(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 }

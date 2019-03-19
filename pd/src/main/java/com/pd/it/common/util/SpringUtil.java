@@ -121,6 +121,6 @@ public class SpringUtil implements ApplicationContextAware {
 	 * @return ������
 	 */
 	public static String getServiceName(String module, String dimension) {
-		return module + X.str$cap(dimension) + "Service";
+		return module + StringX.cap(dimension) + "Service";
 	}
 }

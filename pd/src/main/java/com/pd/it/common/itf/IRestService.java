@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.base.util.Reflects;
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.web.itf.service.IExcelService;
 import com.pd.it.web.itf.service.IQueryService;
@@ -31,7 +31,7 @@ public interface IRestService {
 	default Object r(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, IQueryService.class, "service");
 		Object ra = service.r(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -40,7 +40,7 @@ public interface IRestService {
 	default Object ra(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, IQueryService.class, "service");
 		Object ra = service.ra(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -49,7 +49,7 @@ public interface IRestService {
 	default Object batch(@RequestBody(required = false) FO in) {
 		ISaveService service = Reflects.field(this, ISaveService.class, "service");
 		Object ra = service.batch(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -58,6 +58,6 @@ public interface IRestService {
 	default Object importExcel(@RequestBody(required = false) FO in) {
 		IExcelService service = Reflects.field(this, IExcelService.class, "service");
 		Object ra = service.importExcel(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.system.lookup.LookupItemService;
 import com.pd.it.system.lookup.LookupTypeService;
@@ -31,7 +31,7 @@ public class SystemShortCutRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object listLookupType() {
 		Object ra = lookupType.ra(new FO());
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 	@ResponseBody
@@ -41,6 +41,6 @@ public class SystemShortCutRestService {
 		FO fo = new FO();
 		fo.put("typeId", typeId);
 		Object ra = lookupItem.ra(fo);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 }

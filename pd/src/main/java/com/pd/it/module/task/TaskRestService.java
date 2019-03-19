@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 
 /**
@@ -27,7 +27,7 @@ public class TaskRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object execute(@RequestBody(required = false) FO in) {
 		Object ra = service.execute(in);
-		return X.jsonStr(ra);
+		return StringX.json(ra);
 	}
 
 }

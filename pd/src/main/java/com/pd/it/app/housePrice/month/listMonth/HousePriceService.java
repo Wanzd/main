@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.pd.it.common.util.AI;
+import com.pd.it.common.util.ListX;
 import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.VO;
@@ -30,10 +30,10 @@ public class HousePriceService {
 	}
 
 	public Object save(Object object) {
-		VO vo = new VO(new Attr("id", "3"),new Attr("name","c"));
+		VO vo = new VO(new Attr("id", "3"), new Attr("name", "c"));
 		String jsonStr = JSON.toJSONString(vo);
 		HousePrice newVO = JSON.parseObject(jsonStr, HousePrice.class);
-		List<HousePrice> list = AI.list(newVO);
+		List<HousePrice> list = ListX.from(newVO);
 		mongo.insertAll(list);
 		return 0;
 	}

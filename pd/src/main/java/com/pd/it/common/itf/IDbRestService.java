@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.base.util.Reflects;
-import com.pd.it.common.util.X;
+import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.ResultVO;
 
@@ -37,7 +37,7 @@ public interface IDbRestService {
 			ICommonDbService service = Reflects.field(this, ICommonDbService.class, dimension, dimension + "Service");
 			Method method = Reflects.method(service, action);
 			Object invokeRs = method.invoke(service, in);
-			return X.jsonStr(invokeRs);
+			return StringX.json(invokeRs);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			ResultVO.error(e);
 		}

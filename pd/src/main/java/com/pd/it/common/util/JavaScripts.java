@@ -4,9 +4,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public class JsUtil
+public class JavaScripts
 {
-    
     public static Object js(String string)
     {
         ScriptEngineManager manager = new ScriptEngineManager();

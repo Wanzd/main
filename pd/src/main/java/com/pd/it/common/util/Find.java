@@ -1,5 +1,6 @@
 package com.pd.it.common.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pd.it.common.vo.VO;
@@ -51,7 +52,7 @@ public class Find {
 	public static List<String> strs$between(String msg, String startStr, String endStr) {
 		int startIdx = 0;
 		int endIdx = 0;
-		List<String> rsList = AI.list();
+		List<String> rsList = new ArrayList<>();
 		while (endIdx >= 0) {
 			startIdx = msg.indexOf(startStr, endIdx + 1);
 			if (startIdx == -1) {

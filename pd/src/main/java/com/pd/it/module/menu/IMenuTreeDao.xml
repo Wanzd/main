@@ -2,35 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.it.module.menu.IMenuTreeDao">
 
-	<sql id="sql$ra">
-SELECT id as "id",
-    parent_id as "parentId",
-    parent_id as "pid",
-    cn as "cn",
-    en as "en",
-    cn as "text",
-    index_id as "indexId",
-    url as "url",
-    detail as "detail"
-FROM sys_Menu_t
-		<where>
-			<choose >
-				<when test="id==null">
-			parent_id is null or parent_id=''
-				</when>
-				<otherwise>
-			parent_id =#{id}
-				</otherwise>
-			</choose>
-			and is_active='Y'
-		</where>
-		order by index_id
-	</sql>
+
 	
 	<select id="ra" parameterType="VO" resultType="VO">
-		<include refid="sql$ra"/>
-	</select>
-	<select id="rs" parameterType="VO" resultType="VO">
 		<include refid="sql$ra"/>
 	</select>
 
@@ -59,4 +33,28 @@ where (type_id,id) in(
 )
 	</delete>
 	
+	<sql id="sql$ra">
+SELECT id as "id",
+    parent_id as "parentId",
+    parent_id as "pid",
+    cn as "cn",
+    en as "en",
+    cn as "text",
+    index_id as "indexId",
+    url as "url",
+    detail as "detail"
+FROM sys_Menu_t
+		<where>
+			<choose >
+				<when test="id==null">
+			parent_id is null or parent_id=''
+				</when>
+				<otherwise>
+			parent_id =#{id}
+				</otherwise>
+			</choose>
+			and is_active='Y'
+		</where>
+		order by index_id
+	</sql>
 </mapper>  
