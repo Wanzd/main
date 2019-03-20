@@ -29,7 +29,7 @@ public class RedisDao {
 		return jedisPool.getResource().hset(hkey, key, value);
 	}
 
-	public VO hReadAll(String hkey) {
+	public VO hgetAll(String hkey) {
 		return new VO(jedisPool.getResource().hgetAll(hkey));
 	}
 }

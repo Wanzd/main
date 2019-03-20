@@ -51,6 +51,6 @@ public class RedisBridgeService {
 	@RequestMapping(value = "ha/{hkey}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public String hReadAll(@PathVariable("hkey") String hkey) {
-		return JSON.toJSONString(dao.hReadAll(hkey));
+		return JSON.toJSONString(dao.hgetAll(hkey));
 	}
 }
