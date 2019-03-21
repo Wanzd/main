@@ -13,6 +13,7 @@ import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.PageVO;
 import com.pd.it.web.itf.service.IExcelService;
+import com.pd.it.web.itf.service.IParallelService;
 import com.pd.it.web.itf.service.IQueryService;
 import com.pd.it.web.itf.service.ISaveService;
 
@@ -71,6 +72,15 @@ public interface IDimensionRestService {
 	default Object importExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
 		Object ra = service.importExcel(in);
+		return StringX.json(ra);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/{dimension}/task", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	default Object task(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
+		IParallelService service = Reflects.field(this, IParallelService.class, dimension, dimension + "Service");
+		Object ra = service.task(in);
 		return StringX.json(ra);
 	}
 }

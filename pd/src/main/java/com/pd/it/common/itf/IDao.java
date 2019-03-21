@@ -37,4 +37,6 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	List<_DTO> rs(_FO fo, PageVO page);
 
+	int truncate();
+
 }

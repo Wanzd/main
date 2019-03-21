@@ -138,7 +138,7 @@ public class VO extends HashMap<String, Object> {
 		put("language", "CHN");
 	}
 
-	public Object p(String key, Object value) {
+	public VO p(String key, Object value) {
 		put(key, value);
 		return this;
 	}

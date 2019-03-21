@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.app.economic.EconomicYearService;
+import com.pd.it.app.job.JobCompanyService;
+import com.pd.it.app.job.JobDigService;
+import com.pd.it.app.job.JobTargetService;
 import com.pd.it.app.user.PersonRelationService;
 import com.pd.it.common.itf.IDimensionRestService;
 
@@ -23,5 +26,11 @@ public class AppRestService implements IDimensionRestService {
 	protected EconomicYearService economicYearService;
 	@Inject
 	protected PersonRelationService personRelationService;
+	@Inject
+	protected JobDigService jobDigService;
+	@Inject
+	protected JobCompanyService jobCompany;
+	@Inject
+	protected JobTargetService jobTarget;
 
 }

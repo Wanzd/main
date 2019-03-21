@@ -17,7 +17,7 @@ require(
 		function(jquery, easyui, common, echarts, wordcloud, ai$echart) {
 			var impl = {
 				init$company : function() {
-					var data = common.ajax("rest/ra_51Job$company");
+					var data = common.ajax("app/jobCompany/ra");
 					var companyArr = common.attrArray(data, "company");
 					var salaryAvgArr = common.attrArray(data, "salaryAvg");
 					var salaryMaxArr = common.attrArray(data, "salaryMax");
@@ -67,7 +67,7 @@ require(
 					myChart.setOption(option);
 				},
 				init$salary : function() {
-					var data = common.ajax("rest/ra_51Job$target");
+					var data = common.ajax("app/jobTarget/ra");
 					var salaryData = common.attrArray(data,
 							"salaryStart,salaryEnd,company,job,location,url");
 
@@ -272,14 +272,35 @@ require(
 						series : [ {
 							name : '最大工资',
 							type : 'bar',
+							stack : '总量',
+							label : {
+								normal : {
+									show : true,
+									position : 'insideRight'
+								}
+							},
 							data : salaryEndArr
 						}, {
 							name : '平均工资',
 							type : 'bar',
+							stack : '总量',
+							label : {
+								normal : {
+									show : true,
+									position : 'insideRight'
+								}
+							},
 							data : salaryAvgArr
 						}, {
 							name : '最低工资',
 							type : 'bar',
+							stack : '总量',
+							label : {
+								normal : {
+									show : true,
+									position : 'insideRight'
+								}
+							},
 							data : salaryStartArr
 						} ]
 					};
@@ -294,10 +315,10 @@ require(
 				init : function() {
 					this.init$company();
 					this.init$salary();
-					this.init$skill();
+					// this.init$skill();
 					// this.init$skill$heat();
-					this.init$skill$heat$cloud();
-					this.init$skill$sort();
+					// this.init$skill$heat$cloud();
+					// this.init$skill$sort();
 				}
 			}
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.app.job.IAppJobCompanyDao">
+	<select id="ra" resultType="VO">
+select company as "company",
+	avg((salary_start+salary_end)/2) as "salaryAvg",
+	max(salary_end) as "salaryMax"
+from app_job_t
+where 100000>salary_end
+	and salary_end>=20000
+group by company
+order by salaryMax desc,avg((salary_start+salary_end)/2) desc
+limit 1,100
+	</select>
+	
+</mapper>  
