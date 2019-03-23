@@ -1,5 +1,7 @@
 package com.pd.it.common.itf;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +50,15 @@ public interface IDimensionRestService {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/{dimension}/rs", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	default Object rs(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
+		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
+		Object ra = service.rs(in);
+		return StringX.json(ra);
+	}
+
+	@ResponseBody
 	@RequestMapping(value = "/{dimension}/page", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object page(@RequestBody(required = false) PageFO in, @PathVariable("dimension") String dimension,
@@ -72,6 +83,15 @@ public interface IDimensionRestService {
 	default Object importExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
 		Object ra = service.importExcel(in);
+		return StringX.json(ra);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/{dimension}/exportExcel", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = "application/json;charset=utf-8")
+	default Object exportExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
+		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
+		Object ra = service.exportExcel(in);
 		return StringX.json(ra);
 	}
 

@@ -8,15 +8,29 @@ import com.pd.it.common.vo.VO;
 public interface IQueryService {
 
 	default Object ra(VO fo) {
-		Object validRs = validRa(fo);
-		return validRs != null ? validRs : executeRa(fo);
+		Object validRa = validRa(fo);
+		return validRa != null ? validRa : executeRa(fo);
+	};
+
+	default Object rs(VO fo) {
+		Object validRs = validRs(fo);
+		return validRs != null ? validRs : executeRs(fo);
 	};
 
 	default Object validRa(VO vo) {
 		return null;
 	};
 
+	default Object validRs(VO vo) {
+		return null;
+	};
+
 	default Object executeRa(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+		return dao.ra(vo);
+	};
+
+	default Object executeRs(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
 		return dao.ra(vo);
 	};

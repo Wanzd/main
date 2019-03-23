@@ -3,10 +3,11 @@ package com.pd.it.web.itf.service;
 import java.util.List;
 
 import com.pd.it.base.util.Reflects;
+import com.pd.it.base.util.x.BatchX;
 import com.pd.it.common.itf.IDao;
 import com.pd.it.common.util.Toy;
 import com.pd.it.common.util.Valids;
-import com.pd.it.common.util.x.VO2BatchVO;
+import com.pd.it.common.util.x.BatchVOX;
 import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
@@ -29,7 +30,7 @@ public interface ICommonService extends IQueryService, ISaveService, IExcelServi
 		switch (vo.str("updateType")) {
 		default:
 
-			BatchVO<VO> batchVO = Toy.x(vo, new VO2BatchVO());
+			BatchVO<VO> batchVO = BatchX.vo(vo, VO.class);
 
 			int rs = 0;
 

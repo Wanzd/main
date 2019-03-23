@@ -10,8 +10,14 @@ left join app_person_t t2
 	on t1.from_id=t2.id
 left join app_person_t t3
 	on t1.to_id =t3.id
-where t2.name like concat(#{name},'%')
+		<include refid="sql$ra$filter"/>
 	</select>
 	
-	
+	<sql id="sql$ra$filter">
+		<where>
+			<if test='name!=null'>
+				and t2.name like concat(#{name},'%')
+			</if>
+		</where>
+	</sql>
 </mapper>  

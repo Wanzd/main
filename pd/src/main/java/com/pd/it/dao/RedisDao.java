@@ -1,5 +1,7 @@
 package com.pd.it.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +33,17 @@ public class RedisDao {
 
 	public VO hgetAll(String hkey) {
 		return new VO(jedisPool.getResource().hgetAll(hkey));
+	}
+
+	public List<String> rs(String... keys) {
+		return jedisPool.getResource().mget(keys);
+	}
+
+	public Object exists(String key) {
+		return jedisPool.getResource().exists(key);
+	}
+
+	public Object del(String key) {
+		return jedisPool.getResource().del(key);
 	}
 }

@@ -6,7 +6,7 @@ import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
-public class VO2BatchVO implements IChange<VO, BatchVO<VO>> {
+public class BatchVOX implements IChange<VO, BatchVO<VO>> {
 	@Override
 	public BatchVO<VO> x(VO in) {
 		BatchVO<VO> rsBatchVO = new BatchVO<>();
