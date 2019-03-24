@@ -2,6 +2,7 @@ package com.pd.it.base.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,15 +22,19 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import com.pd.it.common.annotation.ExcelCol;
+import com.pd.it.common.annotation.ExcelSheet;
+
 public class Excels {
 	public static <OUT> HttpServletResponse getTestResponse(HttpServletResponse response, List<OUT> data)
 			throws IOException, IllegalArgumentException, IllegalAccessException {
 		response.reset();
-		String fileName = "test";
-		String time = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(Calendar.getInstance().getTime());
+		Class dataClass = data.get(0).getClass();
+		String fileName = _getSheetName(dataClass);
+		String time = new SimpleDateFormat("yyyyMMdd-HHmmss.SSS").format(Calendar.getInstance().getTime());
 		try {
 			response.setHeader("Content-Disposition",
-					"attachment; filename=" + java.net.URLEncoder.encode(fileName + time + ".xls", "UTF-8"));
+					"attachment; filename=" + java.net.URLEncoder.encode(fileName+ "_"+ time + ".xls", "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,19 +44,13 @@ public class Excels {
 		Sheet sh = wb.createSheet();
 
 		// 写ExcelHeader
-		Field[] fields = data.get(0).getClass().getDeclaredFields();
+		Field[] fields = dataClass.getDeclaredFields();
 		Row trow = sh.createRow(0);
-		CellStyle headerCellStyle = wb.createCellStyle();
-		headerCellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-		headerCellStyle.setFillBackgroundColor(HSSFColor.BLUE.index);
-		HSSFFont font = wb.createFont();
-		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		font.setColor(HSSFColor.WHITE.index);
-		headerCellStyle.setFont(font);
 		for (int i = 0, total = fields.length; i < total; i++) {
 			Cell tcell = trow.createCell(i);
-			tcell.setCellValue(fields[i].getName());
-			tcell.setCellStyle(headerCellStyle);
+			tcell.setCellValue(_getColName(fields[i]));
+			sh.setColumnWidth(i, 100 * _getColWidth(fields[i]));
+			tcell.setCellStyle(_getHeaderCellStyle(wb));
 		}
 		for (int i = 0, total = data.size(); i < total; i++) {
 
@@ -77,7 +76,6 @@ public class Excels {
 				}
 				if (field.getType().equals(Long.class)) {
 					cell.setCellValue((Long) field.get(eachVO));
-					sh.setColumnWidth(j+1, 100*50);
 					continue;
 				}
 
@@ -89,5 +87,44 @@ public class Excels {
 		out.flush();
 		out.close();
 		return response;
+	}
+
+	private static int _getColWidth(Field field) {
+		ExcelCol excelColNameAnnotation = field.getDeclaredAnnotation(ExcelCol.class);
+		if (excelColNameAnnotation != null) {
+			return excelColNameAnnotation.width();
+		}
+		;
+		return 50;
+	}
+
+	private static CellStyle _getHeaderCellStyle(HSSFWorkbook wb) {
+
+		CellStyle headerCellStyle = wb.createCellStyle();
+		headerCellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+		headerCellStyle.setFillBackgroundColor(HSSFColor.BLUE.index);
+		HSSFFont font = wb.createFont();
+		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		font.setColor(HSSFColor.WHITE.index);
+		headerCellStyle.setFont(font);
+		return headerCellStyle;
+	}
+
+	private static String _getSheetName(Class dataClass) {
+		Annotation excelSheetNameAnnotation = dataClass.getDeclaredAnnotation(ExcelSheet.class);
+		if (excelSheetNameAnnotation instanceof ExcelSheet) {
+			return ((ExcelSheet) excelSheetNameAnnotation).sheetName();
+		}
+		;
+		return dataClass.getName();
+	}
+
+	private static String _getColName(Field field) {
+		ExcelCol excelColNameAnnotation = field.getDeclaredAnnotation(ExcelCol.class);
+		if (excelColNameAnnotation != null) {
+			return excelColNameAnnotation.value();
+		}
+		;
+		return field.getName();
 	}
 }

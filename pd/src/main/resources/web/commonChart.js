@@ -18,8 +18,8 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 	var curParams = common.parseUrl(location.href);
 	var chartCfg = common.ajax("system/chartRest/query/" + curParams.id);
 	debugger;
-	var dataSource=common.ajax(chartCfg.dataSource);
-	var jsCfg=chartCfg.jsCfg;
+	var dataSource = common.ajax(chartCfg.dataSource);
+	var jsCfg = chartCfg.jsCfg;
 	var columns = [{
 				width : 80,
 				field : 'ck',
@@ -149,11 +149,12 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 					handler : function() {
 						// 实现刷新栏目中的数据
 						debugger;
-						ajax.setRequestHeader("content-type","application/json");
+						ajax.setRequestHeader("content-type",
+								"application/json");
 						var id = curParams.module.cap();
-						var param =JSON.stringify($("#form" + id, parent.document)
-								.serializeJson());
-						$("#dg").datagrid("load",param);
+						var param = JSON.stringify($("#form" + id,
+								parent.document).serializeJson());
+						$("#dg").datagrid("load", param);
 						$('#dg').datagrid('uncheckAll');
 					}
 				}],

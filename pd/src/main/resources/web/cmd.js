@@ -1,15 +1,15 @@
 require.config({
-	urlArgs : "r=" + (new Date()).getTime(),
-	paths : {
-		jquery : "jquery.min",
-		easyui : "jquery.easyui.min"
-	},
-	shim : {
-		"easyui" : {
-			deps : [ "jquery" ]
-		}
-	}
-});
+			urlArgs : "r=" + (new Date()).getTime(),
+			paths : {
+				jquery : "jquery.min",
+				easyui : "jquery.easyui.min"
+			},
+			shim : {
+				"easyui" : {
+					deps : ["jquery"]
+				}
+			}
+		});
 function keyup_submit(e) {
 	var evt = window.event || e;
 	if (evt.keyCode != 13) {
@@ -29,20 +29,20 @@ function keyup_submit(e) {
 	$("#cmdInput").removeAttr("disabled");
 	$("#cmdInput").focus();
 }
-require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
-		easyui, common, tree, db) {
-	main = {
-		init : function() {
-			main.init$module();
-		},
-		init$module : function() {
-			console.log("init$menu");
-			$('#cbModule').combobox({
-				url : 'rest/ra_cmd$module',
-				valueField : 'id',
-				textField : 'text'
-			});
-		}
-	}
-	main.init();
-});
+require(['jquery', 'easyui', 'common', 'tree', 'db'], function(jquery, easyui,
+				common, tree, db) {
+			main = {
+				init : function() {
+					main.init$module();
+				},
+				init$module : function() {
+					console.log("init$menu");
+					$('#cbModule').combobox({
+								url : 'rest/ra_cmd$module',
+								valueField : 'id',
+								textField : 'text'
+							});
+				}
+			}
+			main.init();
+		});

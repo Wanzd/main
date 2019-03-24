@@ -19,33 +19,3 @@ public class PersonRelationService implements ICommonService {
 	protected Class exportClass = PersonRelationExportVO.class;
 
 }
-
-class PersonRelationExportVO {
-	private String fromPerson;
-	private String toPerson;
-	private String relTag;
-
-	public String getFromPerson() {
-		return fromPerson;
-	}
-
-	public void setFromPerson(String fromPerson) {
-		this.fromPerson = fromPerson;
-	}
-
-	public String getToPerson() {
-		return toPerson;
-	}
-
-	public void setToPerson(String toPerson) {
-		this.toPerson = toPerson;
-	}
-
-	public String getRelTag() {
-		return relTag;
-	}
-
-	public void setRelTag(String relTag) {
-		this.relTag = relTag;
-	}
-}

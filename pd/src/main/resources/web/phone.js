@@ -1,18 +1,18 @@
 require.config({
-	urlArgs : "r=" + (new Date()).getTime(),
-	paths : {
-		jquery : "jquery.min",
-		easyui : "jquery.easyui.min",
-		echarts : "echarts.min"
-	},
-	shim : {
-		"easyui" : {
-			deps : [ "jquery" ]
-		}
-	}
-});
-require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
-		function(jquery, easyui, common, echarts, ai$echart) {
+			urlArgs : "r=" + (new Date()).getTime(),
+			paths : {
+				jquery : "jquery.min",
+				easyui : "jquery.easyui.min",
+				echarts : "echarts.min"
+			},
+			shim : {
+				"easyui" : {
+					deps : ["jquery"]
+				}
+			}
+		});
+require(['jquery', 'easyui', 'common', 'echarts', 'ai$echart'], function(
+				jquery, easyui, common, echarts, ai$echart) {
 			var impl = {
 				init$price$product : function() {
 					var data = common.ajax("rest/ra_phone$price$product");
@@ -42,9 +42,10 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 							}
 						},
 						series : [{
-							type : 'scatter',
-							data : salaryData,
-						} ]
+									type : 'scatter',
+									data : salaryData
+									,
+								}]
 					};
 					// 初始化echarts实例
 					var myChart = echarts.init(document
@@ -83,9 +84,10 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 							}
 						},
 						series : [{
-							type : 'scatter',
-							data : salaryData,
-						} ]
+									type : 'scatter',
+									data : salaryData
+									,
+								}]
 					};
 					// 初始化echarts实例
 					var myChart = echarts.init(document
@@ -111,7 +113,7 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 							}
 						},
 						legend : {
-							data : [ '收入' ]
+							data : ['收入']
 						},
 						grid : {
 							left : '3%',
@@ -121,17 +123,17 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 						},
 						xAxis : {
 							type : 'value',
-							boundaryGap : [ 0, 0.01 ]
+							boundaryGap : [0, 0.01]
 						},
 						yAxis : {
 							type : 'category',
 							data : companyArr
 						},
-						series : [ {
-							name : '收入',
-							type : 'bar',
-							data : incomeArr
-						}]
+						series : [{
+									name : '收入',
+									type : 'bar',
+									data : incomeArr
+								}]
 					};
 
 					// 初始化echarts实例
@@ -158,7 +160,7 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 							}
 						},
 						legend : {
-							data : [ '收入' ]
+							data : ['收入']
 						},
 						grid : {
 							left : '3%',
@@ -168,17 +170,17 @@ require([ 'jquery', 'easyui', 'common', 'echarts', 'ai$echart' ],
 						},
 						xAxis : {
 							type : 'value',
-							boundaryGap : [ 0, 0.01 ]
+							boundaryGap : [0, 0.01]
 						},
 						yAxis : {
 							type : 'category',
 							data : companyArr
 						},
-						series : [ {
-							name : '收入',
-							type : 'bar',
-							data : incomeArr
-						}]
+						series : [{
+									name : '收入',
+									type : 'bar',
+									data : incomeArr
+								}]
 					};
 
 					// 初始化echarts实例

@@ -1,20 +1,19 @@
 require.config({
-	urlArgs : "r=" + (new Date()).getTime(),
-	paths : {
-		jquery : "jquery.min",
-		easyui : "jquery.easyui.min"
-	},
-	shim : {
-		"easyui" : {
-			deps : [ "jquery" ]
-		}
-	}
-});
-var _common=null;
-require(
-		[ 'jquery', 'easyui', 'ai', 'common', 'tree', 'db' ],
-		function(jquery, easyui, ai, common, tree, db) {
-			_common=common;
+			urlArgs : "r=" + (new Date()).getTime(),
+			paths : {
+				jquery : "jquery.min",
+				easyui : "jquery.easyui.min"
+			},
+			shim : {
+				"easyui" : {
+					deps : ["jquery"]
+				}
+			}
+		});
+var _common = null;
+require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
+				easyui, ai, common, tree, db) {
+			_common = common;
 			var editIndex = undefined;
 			var curParams = common.parseUrl(location.href);
 			var $pageCfg = {
@@ -27,29 +26,29 @@ require(
 				action : {
 					search : function() {
 						$('#tt').datagrid('load', {
-							itemid : $('#itemid').val(),
-							productid : $('#productid').val()
-						});
+									itemid : $('#itemid').val(),
+									productid : $('#productid').val()
+								});
 					},
 					update : function(index) {
 						$('#dg').datagrid('updateRow', {
-							index : index,
-							row : {}
-						});
+									index : index,
+									row : {}
+								});
 					}
 				}
 			};
 			var colSchema = common.ajax("rest/str_gridSchema/?gid="
 					+ curParams.m);
-			var columns = [ {
-				width : 80,
-				field : 'ck',
-				checkbox : true
-			} ].concat(colSchema);
+			var columns = [{
+						width : 80,
+						field : 'ck',
+						checkbox : true
+					}].concat(colSchema);
 			var $pageCfg = {
 				datagrid : {
 					cfg : { // 定位到Table标签，Table标签的ID是grid
-						border:1,
+						border : 1,
 						title : "DataSet",
 						width : '100%',
 						height : '100%',
@@ -62,15 +61,15 @@ require(
 						collapsible : true,
 						pagination : true,
 						pageSize : 20,
-						pageList : [ 50, 100, 200 ],
+						pageList : [50, 100, 200],
 						rownumbers : false,
-						fit:true,
+						fit : true,
 						// sortName: 'ID', //根据某个字段给easyUI排序
 						sortOrder : 'asc',
 						remoteSort : false,
 						idField : 'id',
 						// queryParams : queryData, // 异步查询的参数
-						columns : [ columns ],
+						columns : [columns],
 
 						onBeforeEdit : function(index, row) {
 							row.editing = true;
@@ -84,95 +83,95 @@ require(
 							row.editing = false;
 							$pageAtom.action.update(index);
 						},
-						toolbar : [
-								{
-									id : 'btnAdd',
-									text : '添加',
-									iconCls : 'icon-add',
-									handler : function() {
-										$('#dg').datagrid('appendRow', {});
-										editIndex = $('#dg')
-												.datagrid('getRows').length - 1;
-										$('#dg').datagrid('selectRow',
-												editIndex).datagrid(
-												'beginEdit', editIndex);
-									}
-								},
-								'-',
-								{
-									id : 'btnSave',
-									text : '修改',
-									iconCls : 'icon-save',
-									handler : function() {
-										debugger;
-										$('#dg').datagrid('endEdit', editIndex);
-										var rows = $("#dg").datagrid(
-												"getChanges");
+						toolbar : [{
+							id : 'btnAdd',
+							text : '添加',
+							iconCls : 'icon-add',
+							handler : function() {
+								$('#dg').datagrid('appendRow', {});
+								editIndex = $('#dg').datagrid('getRows').length
+										- 1;
+								$('#dg').datagrid('selectRow', editIndex)
+										.datagrid('beginEdit', editIndex);
+							}
+						}, '-', {
+							id : 'btnSave',
+							text : '修改',
+							iconCls : 'icon-save',
+							handler : function() {
+								debugger;
+								$('#dg').datagrid('endEdit', editIndex);
+								var rows = $("#dg").datagrid("getChanges");
 
-										var url = "rest/us_" + curParams.m;
-										var data = {
-											list : JSON.stringify(rows)
-										};
-										var rs = common.ajax(url, data);
-										if (rs) {
-											$("#dg").datagrid("reload");
-											$('#dg').datagrid('uncheckAll');
-										} else {
-											alert("保存失败");
-										}
+								var url = "rest/us_" + curParams.m;
+								var data = {
+									list : JSON.stringify(rows)
+								};
+								var rs = common.ajax(url, data);
+								if (rs) {
+									$("#dg").datagrid("reload");
+									$('#dg').datagrid('uncheckAll');
+								} else {
+									alert("保存失败");
+								}
 
-									}
-								},
-								'-',
-								{
-									id : 'btnDelete',
-									text : '删除',
-									iconCls : 'icon-remove',
-									handler : function() {
-										$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){
-										    if (r){
-										    	debugger;
-												var rows = $("#dg").datagrid(
-														"getSelections");
-												var url = "rest/ds_" + curParams.m;
-												var data = {
-													list : JSON.stringify(rows)
-												};
-												var rs = common.ajax(url, data);
-												if (rs) {
-													$("#dg").datagrid("reload");
-													$('#dg').datagrid('uncheckAll');
-												} else {
-													alert("删除失败");
-												}
-										    }
-										});
-										
-									}
-								},
-								'-',
-								{
-									id : 'btnView',
-									text : '查看',
-									iconCls : 'icon-table',
-									handler : function() {
-										var selectRow = $('#dg').datagrid(
-												'getSelected');
-										var detailObj = common.ajax("rest/"
-												+ curParams.m + ".detail?id="
-												+ selectRow.id);
-										console.debug(detailObj);
-									}
-								}, '-', {
-									id : 'btnReload',
-									text : '刷新',
-									iconCls : 'icon-reload',
-									handler : function() {
-										// 实现刷新栏目中的数据
-										$("#dg").datagrid("reload");
-										$('#dg').datagrid('uncheckAll');
-									}
-								} ],
+							}
+						}, '-', {
+							id : 'btnDelete',
+							text : '删除',
+							iconCls : 'icon-remove',
+							handler : function() {
+								$.messager
+										.confirm(
+												'Confirm',
+												'Are you sure you want to delete record?',
+												function(r) {
+													if (r) {
+														debugger;
+														var rows = $("#dg")
+																.datagrid("getSelections");
+														var url = "rest/ds_"
+																+ curParams.m;
+														var data = {
+															list : JSON
+																	.stringify(rows)
+														};
+														var rs = common.ajax(
+																url, data);
+														if (rs) {
+															$("#dg")
+																	.datagrid("reload");
+															$('#dg')
+																	.datagrid('uncheckAll');
+														} else {
+															alert("删除失败");
+														}
+													}
+												});
+
+							}
+						}, '-', {
+							id : 'btnView',
+							text : '查看',
+							iconCls : 'icon-table',
+							handler : function() {
+								var selectRow = $('#dg')
+										.datagrid('getSelected');
+								var detailObj = common.ajax("rest/"
+										+ curParams.m + ".detail?id="
+										+ selectRow.id);
+								console.debug(detailObj);
+							}
+						}, '-', {
+							id : 'btnReload',
+							text : '刷新',
+							iconCls : 'icon-reload',
+							handler : function() {
+								// 实现刷新栏目中的数据
+								$("#dg").datagrid("reload");
+								$('#dg').datagrid('uncheckAll');
+							}
+						}],
 						onClickRow : function(rowIndex, rowData) {
 							$('#dg').datagrid('uncheckAll');
 							$('#dg').datagrid('checkRow', rowIndex);

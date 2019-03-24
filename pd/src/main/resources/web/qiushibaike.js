@@ -1,19 +1,18 @@
 require.config({
-	urlArgs : "r=" + (new Date()).getTime(),
-	paths : {
-		jquery : "jquery.min",
-		easyui : "jquery.easyui.min",
-		echarts : "echarts.min",
-		wordcloud : "echarts-wordcloud.min"
-	},
-	shim : {
-		"easyui" : {
-			deps : [ "jquery" ]
-		}
-	}
-});
-require(
-		[ 'jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart' ],
+			urlArgs : "r=" + (new Date()).getTime(),
+			paths : {
+				jquery : "jquery.min",
+				easyui : "jquery.easyui.min",
+				echarts : "echarts.min",
+				wordcloud : "echarts-wordcloud.min"
+			},
+			shim : {
+				"easyui" : {
+					deps : ["jquery"]
+				}
+			}
+		});
+require(['jquery', 'easyui', 'common', 'echarts', 'wordcloud', 'ai$echart'],
 		function(jquery, easyui, common, echarts, wordcloud, ai$echart) {
 			var impl = {
 				init$all : function() {
@@ -45,10 +44,11 @@ require(
 								return content;
 							}
 						},
-						series : [ {
-							type : 'scatter',
-							data : salaryData,
-						} ]
+						series : [{
+									type : 'scatter',
+									data : salaryData
+									,
+								}]
 					};
 
 					// 初始化echarts实例
@@ -57,9 +57,10 @@ require(
 
 					// 使用制定的配置项和数据显示图表
 					myChart.on('click', function(params) {
-						window.open("https://www.qiushibaike.com/article/"
-								+ params['data'][3]);
-					});
+								window
+										.open("https://www.qiushibaike.com/article/"
+												+ params['data'][3]);
+							});
 					myChart.setOption(option);
 				},
 				init$thumbsHeatCloud : function() {
@@ -70,9 +71,9 @@ require(
 					for (var i = 0, total = keywords.length; i < total; i++) {
 						var keyword = keywords[i];
 						data.push({
-							name : keyword[0],
-							value : Math.sqrt(keyword[1])
-						})
+									name : keyword[0],
+									value : Math.sqrt(keyword[1])
+								})
 					}
 					var maskImage = new Image();
 					maskImage.src = 'images/word-cloud.png';
@@ -81,28 +82,28 @@ require(
 							text : 'echarts3云图展示'
 						},
 						tooltip : {},
-						series : [ {
+						series : [{
 							type : 'wordCloud', // 类型为字符云
 							shape : 'smooth', // 平滑
 							gridSize : 2, // 网格尺寸
-							size : [ '80%', '80%' ],
+							size : ['80%', '80%'],
 							// sizeRange : [ 50, 100 ],
-							rotationRange : [ 46, 80 ], // 旋转范围
+							rotationRange : [46, 80], // 旋转范围
 							textStyle : {
 								normal : {
 									fontFamily : 'sans-serif',
 									color : function() {
 										return 'rgb('
 												+ [
-														Math
-																.round(Math
-																		.random() * 160),
-														Math
-																.round(Math
-																		.random() * 160),
-														Math
-																.round(Math
-																		.random() * 160) ]
+														Math.round(Math
+																.random()
+																* 160),
+														Math.round(Math
+																.random()
+																* 160),
+														Math.round(Math
+																.random()
+																* 160)]
 														.join(',') + ')';
 									}
 								},
@@ -112,7 +113,7 @@ require(
 								}
 							},
 							data : data
-						} ]
+						}]
 					};
 					debugger;
 					// 初始化echarts实例

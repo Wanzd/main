@@ -169,11 +169,12 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 					handler : function() {
 						// 实现刷新栏目中的数据
 						debugger;
-						ajax.setRequestHeader("content-type","application/json");
+						ajax.setRequestHeader("content-type",
+								"application/json");
 						var id = curParams.module.cap();
-						var param =JSON.stringify($("#form" + id, parent.document)
-								.serializeJson());
-						$("#dg").datagrid("load",param);
+						var param = JSON.stringify($("#form" + id,
+								parent.document).serializeJson());
+						$("#dg").datagrid("load", param);
 						$('#dg').datagrid('uncheckAll');
 					}
 				}],

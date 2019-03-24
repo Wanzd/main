@@ -26,9 +26,11 @@ define(['common'], function() {
 
 	var commonImpl = {
 		ajax : function(url, data) {
+			debugger;
 			var rs = $.ajax({
 						url : url,
-						data : data,
+						data : JSON.stringify(data),
+						contentType : "application/json",
 						async : false,
 						type : "POST"
 					});

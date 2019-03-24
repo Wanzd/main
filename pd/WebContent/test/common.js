@@ -29,8 +29,8 @@ $indexDbU = {
 	},
 	createTable : function(_vo) {
 		$indexDbU.conn.createObjectStore(_vo.id, {
-			keyPath : _vo.cols.key
-		});
+					keyPath : _vo.cols.key
+				});
 	},
 	/** 关闭数据库 */
 	closeDb : function(_vo) {
@@ -48,7 +48,7 @@ $indexDbU = {
 		}
 	},
 	r : function(_vo) {
-		var objectStore = db.transaction([ _vo.table ]).objectStore(_vo.table);
+		var objectStore = db.transaction([_vo.table]).objectStore(_vo.table);
 		var request = objectStore.get(_vo.id);
 		request.onerror = function(event) {
 			alert("Unable to retrieve data from database!");

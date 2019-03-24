@@ -13,10 +13,10 @@ if ($.messager) {
 	$.messager.defaults.ok = '确定';
 	$.messager.defaults.cancel = '取消';
 }
-$.map([ 'validatebox', 'textbox', 'filebox', 'searchbox', 'combo', 'combobox',
-		'combogrid', 'combotree', 'datebox', 'datetimebox', 'numberbox',
-		'spinner', 'numberspinner', 'timespinner', 'datetimespinner' ],
-		function(plugin) {
+$.map(	['validatebox', 'textbox', 'filebox', 'searchbox', 'combo', 'combobox',
+				'combogrid', 'combotree', 'datebox', 'datetimebox',
+				'numberbox', 'spinner', 'numberspinner', 'timespinner',
+				'datetimespinner'], function(plugin) {
 			if ($.fn[plugin]) {
 				$.fn[plugin].defaults.missingMessage = '该输入项为必输项';
 			}
@@ -28,9 +28,9 @@ if ($.fn.validatebox) {
 	$.fn.validatebox.defaults.rules.remote.message = '请修正该字段';
 }
 if ($.fn.calendar) {
-	$.fn.calendar.defaults.weeks = [ '日', '一', '二', '三', '四', '五', '六' ];
-	$.fn.calendar.defaults.months = [ '一月', '二月', '三月', '四月', '五月', '六月', '七月',
-			'八月', '九月', '十月', '十一月', '十二月' ];
+	$.fn.calendar.defaults.weeks = ['日', '一', '二', '三', '四', '五', '六'];
+	$.fn.calendar.defaults.months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月',
+			'八月', '九月', '十月', '十一月', '十二月'];
 }
 if ($.fn.datebox) {
 	$.fn.datebox.defaults.currentText = '今天';
@@ -59,12 +59,12 @@ if ($.fn.datebox) {
 }
 if ($.fn.datetimebox && $.fn.datebox) {
 	$.extend($.fn.datetimebox.defaults, {
-		currentText : $.fn.datebox.defaults.currentText,
-		closeText : $.fn.datebox.defaults.closeText,
-		okText : $.fn.datebox.defaults.okText
-	});
+				currentText : $.fn.datebox.defaults.currentText,
+				closeText : $.fn.datebox.defaults.closeText,
+				okText : $.fn.datebox.defaults.okText
+			});
 }
 if ($.fn.datetimespinner) {
-	$.fn.datetimespinner.defaults.selections = [ [ 0, 4 ], [ 5, 7 ], [ 8, 10 ],
-			[ 11, 13 ], [ 14, 16 ], [ 17, 19 ] ]
+	$.fn.datetimespinner.defaults.selections = [[0, 4], [5, 7], [8, 10],
+			[11, 13], [14, 16], [17, 19]]
 }
