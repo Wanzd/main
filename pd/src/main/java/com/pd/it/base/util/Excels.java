@@ -28,13 +28,12 @@ import com.pd.it.common.annotation.ExcelSheet;
 public class Excels {
 	public static <OUT> HttpServletResponse getTestResponse(HttpServletResponse response, List<OUT> data)
 			throws IOException, IllegalArgumentException, IllegalAccessException {
-		response.reset();
 		Class dataClass = data.get(0).getClass();
 		String fileName = _getSheetName(dataClass);
 		String time = new SimpleDateFormat("yyyyMMdd-HHmmss.SSS").format(Calendar.getInstance().getTime());
 		try {
 			response.setHeader("Content-Disposition",
-					"attachment; filename=" + java.net.URLEncoder.encode(fileName+ "_"+ time + ".xls", "UTF-8"));
+					"attachment; filename=" + java.net.URLEncoder.encode(fileName + "_" + time + ".xls", "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +60,8 @@ public class Excels {
 				field.setAccessible(true);
 				Cell cell = tmpRow.createCell(j);
 				if (field.getType().equals(String.class)) {
-					String cellString = field.get(eachVO).toString();
+					Object object = field.get(eachVO);
+					String cellString = object.toString();
 					cell.setCellValue(cellString);
 					continue;
 				}

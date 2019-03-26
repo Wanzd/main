@@ -27,29 +27,31 @@ public interface ICommonService extends IQueryService, ISaveService, IExcelServi
 	@Override
 	default Object executeUpdate(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
-		switch (vo.str("updateType")) {
-		default:
-
-			BatchVO<VO> batchVO = BatchX.vo(vo, VO.class);
-
-			int rs = 0;
-
-			List<VO> csList = batchVO.getItems2Create();
-			if (Valids.notEmpty(csList)) {
-				rs += dao.cs(csList);
-			}
-
-			List<VO> dsList = batchVO.getItems2Delete();
-			if (Valids.notEmpty(csList)) {
-				rs += dao.ds(dsList);
-			}
-
-			List<VO> usList = batchVO.getItems2Update();
-			if (Valids.notEmpty(csList)) {
-				rs += dao.us(usList);
-			}
-			return rs;
-		}
+		return dao.u(vo);
 	};
 
+	@Override
+	default Object executeBatch(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+
+		BatchVO<VO> batchVO = BatchX.vo(vo, VO.class);
+
+		int rs = 0;
+
+		List<VO> csList = batchVO.getItems2Create();
+		if (Valids.notEmpty(csList)) {
+			rs += dao.cs(csList);
+		}
+
+		List<VO> dsList = batchVO.getItems2Delete();
+		if (Valids.notEmpty(dsList)) {
+			rs += dao.ds(dsList);
+		}
+
+		List<VO> usList = batchVO.getItems2Update();
+		if (Valids.notEmpty(usList)) {
+			rs += dao.us(usList);
+		}
+		return rs;
+	};
 }

@@ -2,6 +2,8 @@ package com.pd.it.common.itf;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.PageVO;
 
@@ -17,7 +19,7 @@ import com.pd.it.common.vo.PageVO;
 public interface IDao<_VO, _FO, _DTO> {
 	int c(_VO vo);
 
-	int cs(List<_VO> vo);
+	int cs(List<_VO> list);
 
 	_DTO r(_FO fo);
 
@@ -27,9 +29,9 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	int u(_VO vo);
 
-	int us(List<_VO> vo);
+	int us(List<_VO> list);
 
-	int ds(List<_VO> vo);
+	int ds(List<_VO> list);
 
 	List<_DTO> ra(_FO vo);
 

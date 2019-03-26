@@ -1,7 +1,5 @@
 package com.pd.it.common.itf;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,11 +67,11 @@ public interface IDimensionRestService {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/{dimension}/update", method = { RequestMethod.GET,
+	@RequestMapping(value = "/{dimension}/save", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object save(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		ISaveService service = Reflects.field(this, ISaveService.class, dimension, dimension + "Service");
-		Object ra = service.update(in);
+		Object ra = service.batch(in);
 		return StringX.json(ra);
 	}
 

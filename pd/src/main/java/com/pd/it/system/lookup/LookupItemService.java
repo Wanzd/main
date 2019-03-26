@@ -7,7 +7,7 @@ import com.pd.it.common.itf.ICommonDbService;
 import com.pd.it.web.itf.service.ICommonService;
 
 @Service
-public class LookupItemService implements ICommonDbService {
+public class LookupItemService implements ICommonService {
 
 	@Autowired
 	private ILookupItemDao dao;
