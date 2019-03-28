@@ -1,4 +1,4 @@
-package com.pd.it.app.job;
+package com.pd.it.app.job.vo;
 
 import com.pd.it.common.annotation.ExcelCol;
 import com.pd.it.common.annotation.ExcelSheet;

@@ -1,4 +1,4 @@
-package com.pd.it.app.job;
+package com.pd.it.app.job.dao;
 
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,12 @@
-package com.pd.it.app.job;
+package com.pd.it.app.job.service;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.pd.it.app.job.dao.IAppJobCompanyDao;
+import com.pd.it.app.job.vo.JobCompanyExportVO;
 import com.pd.it.web.itf.service.IExcelService;
 import com.pd.it.web.itf.service.IQueryService;
 

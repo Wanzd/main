@@ -12,6 +12,7 @@ import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.common.vo.PageFO;
 import com.pd.it.common.vo.PageVO;
+import com.pd.it.common.vo.ResultVO;
 import com.pd.it.web.itf.service.IExcelService;
 import com.pd.it.web.itf.service.IParallelService;
 import com.pd.it.web.itf.service.IQueryService;
@@ -78,10 +79,9 @@ public interface IDimensionRestService {
 	@ResponseBody
 	@RequestMapping(value = "/{dimension}/importExcel", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object importExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
+	default void importExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
-		Object ra = service.importExcel(in);
-		return StringX.json(ra);
+		service.importExcel(in);
 	}
 
 	@ResponseBody
@@ -89,8 +89,8 @@ public interface IDimensionRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object exportExcel(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IExcelService service = Reflects.field(this, IExcelService.class, dimension, dimension + "Service");
-		Object ra = service.exportExcel(in);
-		return StringX.json(ra);
+		service.exportExcel(in);
+		return StringX.json(ResultVO.success("export success!"));
 	}
 
 	@ResponseBody

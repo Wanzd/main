@@ -1,4 +1,4 @@
-package com.pd.it.app.job;
+package com.pd.it.app.job.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.dom4j.Element;
 import org.springframework.stereotype.Service;
 
+import com.pd.it.app.job.dao.IAppJobDao;
 import com.pd.it.base.util.x.DoubleX;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.common.util.Builds;

@@ -2,10 +2,8 @@ package com.pd.it.common.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.pd.it.common.vo.Attr;
 import com.pd.it.common.vo.BatchVO;
 import com.pd.it.common.vo.VO;
 
