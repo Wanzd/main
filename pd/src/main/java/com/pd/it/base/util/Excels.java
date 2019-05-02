@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import com.pd.it.common.annotation.ExcelCol;
 import com.pd.it.common.annotation.ExcelSheet;
+import com.pd.it.common.util.AI;
 
 public class Excels {
 	public static <OUT> HttpServletResponse getTestResponse(HttpServletResponse response, List<OUT> data)
@@ -61,8 +62,7 @@ public class Excels {
 				Cell cell = tmpRow.createCell(j);
 				if (field.getType().equals(String.class)) {
 					Object object = field.get(eachVO);
-					String cellString = object.toString();
-					cell.setCellValue(cellString);
+					cell.setCellValue(object==null?"":object.toString());
 					continue;
 				}
 				if (field.getType().equals(Date.class)) {
