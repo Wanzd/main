@@ -11,7 +11,8 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>4.3.1.RELEASE</spring.version>
-		<jackson.version>2.9.6</jackson.version>
+		<jackson.version>1.9.13</jackson.version>
+		<jackson.core.version>2.4.2</jackson.core.version>
 	</properties>
 	<build>
 		<plugins>
@@ -289,6 +290,21 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.core.version}</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -20,7 +20,6 @@ public class FreeMarkerUtil {
 			template = new Template("", sr);
 			return cal(template, vo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
@@ -33,10 +32,11 @@ public class FreeMarkerUtil {
 		StringWriter sw = new StringWriter();
 		try {
 			template.process(vo, sw);
+			return sw.toString();
 		} catch (TemplateException | IOException e) {
 			e.printStackTrace();
 		}
-		return sw.toString();
+		return "";
 	}
 
 	public static String cal(Template template, Object vo) {
