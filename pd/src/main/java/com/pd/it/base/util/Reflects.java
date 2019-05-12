@@ -35,7 +35,7 @@ public class Reflects {
 	}
 
 	public static Method method(Object obj, String methodName) {
-		Method[] methods = obj.getClass().getMethods();
+		Method[] methods = obj.getClass().getDeclaredMethods();
 		for (Method eachMethod : methods) {
 			if (eachMethod.getName().equals(methodName)) {
 				return eachMethod;
