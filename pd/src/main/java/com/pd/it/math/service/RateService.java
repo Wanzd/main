@@ -41,4 +41,16 @@ public class RateService implements IQueryService {
 		rsVO.p("timesByOneRate", timesByOneRate);
 		return rsVO;
 	}
+
+	private Object getRateByTimes(VO vo) {
+		VO dataVO = vo.vo("data");
+
+		double oneRate = dataVO.num("oneRate");
+		double times = dataVO.num("times");
+		double targetRate = RateUtil.getRateByTime(oneRate, times);
+
+		VO rsVO = new VO();
+		rsVO.p("targetRate", targetRate);
+		return rsVO;
+	}
 }

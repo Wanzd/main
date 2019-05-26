@@ -5,7 +5,7 @@ import com.pd.base.DoubleValid;
 public class RateUtil {
 
 	/**
-	 * 通过每一次尝试的成功概率oneRate和期望成功targetRate概率求需要尝试的平均次数
+	 * 通锟斤拷每一锟轿筹拷锟皆的成癸拷锟斤拷锟斤拷oneRate锟斤拷锟斤拷锟斤拷锟缴癸拷targetRate锟斤拷锟斤拷锟斤拷锟斤拷要锟斤拷锟皆碉拷平锟斤拷锟斤拷锟斤拷
 	 * 
 	 * @param oneRate
 	 * @param targetRate
@@ -16,6 +16,10 @@ public class RateUtil {
 		DoubleValid.match(targetRate, "0<value<1");
 
 		return Math.log(1 - targetRate) / Math.log(1 - oneRate);
+	}
+
+	public static double getRateByTime(double oneRate, double times) {
+		return 1 - (Math.pow(1 - oneRate, times));
 	}
 
 }

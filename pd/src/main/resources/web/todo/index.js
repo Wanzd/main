@@ -1,17 +1,17 @@
 require.config({
-			urlArgs : "r=" + (new Date()).getTime(),
-			paths : {
-				jquery : "../jquery.min",
-				easyui : "../jquery.easyui.min",
-				echarts : "../echarts.min",
-				common : "../common"
-			},
-			shim : {
-				"easyui" : {
-					deps : ["jquery"]
-				}
-			}
-		});
+	urlArgs : "r=" + (new Date()).getTime(),
+	paths : {
+		jquery : "../jquery.min",
+		easyui : "../jquery.easyui.min",
+		echarts : "../echarts.min",
+		common : "../common"
+	},
+	shim : {
+		"easyui" : {
+			deps : [ "jquery" ]
+		}
+	}
+});
 var impl = {
 	init : function() {
 
@@ -55,8 +55,8 @@ var impl = {
 	getMonthTrHtml : function(year, month) {
 		var htmlStr = new Array();
 		var isLeapYear = year % 400 == 0 || (year % 100 != 0 && year % 4 == 0);
-		var monthDays = [31, 28 + (isLeapYear ? 1 : 0), 31, 30, 31, 30, 31, 31,
-				30, 31, 30, 31];
+		var monthDays = [ 31, 28 + (isLeapYear ? 1 : 0), 31, 30, 31, 30, 31,
+				31, 30, 31, 30, 31 ];
 		htmlStr.push("<tr><td colspan=2>" + month + "月</td>");
 		var monthDayCount = monthDays[month - 1];
 		for (var day = 1; day <= monthDayCount; day++) {
@@ -75,13 +75,26 @@ var impl = {
 		htmlStr.push("</table>");
 		return htmlStr.join();
 	},
+	refreshTime : function() {
+		var htmlStr = new Array();
+		htmlStr.push("2019年还有：<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/1000 + "秒<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/1000/60 + "分<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/1000/60/60 + "时<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/1000/60/60/24 + "天<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/1000/60/60/24/7 + "周<p/>");
+		htmlStr.push((11-new Date().getMonth())+(new Date(2020, 0, 1) - new Date())/1000/60/60/24/7 + "月<p/>");
+		htmlStr.push((new Date(2020, 0, 1) - new Date())/10/60/60/24/365 + "%");
+		$("#dRestYear").html(htmlStr.join(""));
+	},
 	init : function() {
 		var year = new Date().getFullYear();
 		yearTableHtml = this.getYearTableHtml(year);
 		$("#dTodoYear").html(yearTableHtml);
+		setInterval(this.refreshTime, 1000);
 	}
 }
-require(['jquery', 'easyui', 'common', 'echarts'], function(jquery, easyui,
-				common, echarts) {
-			common.init(impl);
-		});
+require([ 'jquery', 'easyui', 'common', 'echarts' ], function(jquery, easyui,
+		common, echarts) {
+	common.init(impl);
+});
