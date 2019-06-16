@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pd.it.common.itf.IDimensionRestService;
 import com.pd.it.module.menu.MenuTreeService;
 import com.pd.it.system.chart.ChartService;
+import com.pd.it.system.datasource.DataSourceTableService;
 import com.pd.it.system.lookup.LookupItemService;
 import com.pd.it.system.lookup.LookupTypeService;
 
@@ -31,4 +32,6 @@ public class SystemRestService implements IDimensionRestService {
 
 	@Autowired
 	protected MenuTreeService menuTree;
+	@Autowired
+	protected DataSourceTableService dsTable;
 }
