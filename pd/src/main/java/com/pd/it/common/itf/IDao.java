@@ -19,7 +19,7 @@ import com.pd.it.common.vo.PageVO;
 public interface IDao<_VO, _FO, _DTO> {
 	int c(_VO vo);
 
-	int cs(List<_VO> list);
+	int cs(@Param("list") List<_VO> list);
 
 	_DTO r(_FO fo);
 
@@ -29,9 +29,9 @@ public interface IDao<_VO, _FO, _DTO> {
 
 	int u(_VO vo);
 
-	int us(List<_VO> list);
+	int us(@Param("list") List<_VO> list);
 
-	int ds(List<_VO> list);
+	int ds(@Param("list") List<_VO> list);
 
 	List<_DTO> ra(_FO vo);
 

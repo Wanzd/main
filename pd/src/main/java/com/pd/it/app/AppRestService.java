@@ -13,6 +13,7 @@ import com.pd.it.app.job.service.JobTargetService;
 import com.pd.it.app.job.task.JobDigService;
 import com.pd.it.app.user.PersonRelationService;
 import com.pd.it.common.itf.IDimensionRestService;
+import com.pd.it.system.rest.AppDataStageService;
 
 /**
  * 待办rest服务
@@ -35,5 +36,8 @@ public class AppRestService implements IDimensionRestService {
 	protected JobCompanyService jobCompany;
 	@Inject
 	protected JobTargetService jobTarget;
+
+	@Inject
+	protected AppDataStageService appDataStage;
 
 }

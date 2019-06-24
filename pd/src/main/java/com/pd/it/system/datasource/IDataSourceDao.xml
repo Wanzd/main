@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.datasource.IDataSourceDao">
+	<select id="ra" resultType="VO">
+select id as "id" ,
+	name as "name" ,
+	database_type as "databaseType" ,
+	url as "url" ,
+	username as "username" ,
+	'******' as "password" 
+from sys_datasource_t
+	</select>
+	
+	<insert id="cs" >
+begin
+		<foreach collection="list" item="it">
+	insert into sys_datasource_t(
+		id,
+		name,
+		database_type,
+		url,
+		username,
+		password)
+	values(
+		#{it.id,jdbcType=VARCHAR},
+		#{it.name,jdbcType=VARCHAR},
+		#{it.databaseType,jdbcType=VARCHAR},
+		#{it.url,jdbcType=VARCHAR},
+		#{it.username,jdbcType=VARCHAR},
+		#{it.password,jdbcType=VARCHAR}
+	);
+		</foreach>
+end;
+	</insert>
+	
+	<update id="us" >
+begin
+		<foreach collection="list" item="it">
+	update sys_datasource_t
+	set name=#{it.name,jdbcType=VARCHAR},
+		database_type=#{it.databaseType,jdbcType=VARCHAR},
+		url=#{it.url,jdbcType=VARCHAR},
+		username=#{it.username,jdbcType=VARCHAR},
+		password=#{it.password,jdbcType=VARCHAR}
+	where id=#{it.id,jdbcType=VARCHAR};
+		</foreach>
+end;
+	</update>
+	
+	<delete id="ds" >
+delete from sys_datasource_t
+where id in
+		<foreach collection="list" item="it" open="(" separator="," close=")">
+	#{it.id,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+	
+	
+</mapper>  

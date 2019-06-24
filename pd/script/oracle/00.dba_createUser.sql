@@ -15,3 +15,4 @@ TEMPORARY TABLESPACE dev_tableSpace_temp;
 -- 授权
 grant create session to dev;
 grant create table to dev;
+grant unlimited tablespace to dev;

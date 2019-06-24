@@ -1,12 +1,14 @@
 package com.pd.it.system;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.itf.IDimensionRestService;
 import com.pd.it.module.menu.MenuTreeService;
 import com.pd.it.system.chart.ChartService;
+import com.pd.it.system.datasource.DataSourceService;
 import com.pd.it.system.datasource.DataSourceTableService;
 import com.pd.it.system.lookup.LookupItemService;
 import com.pd.it.system.lookup.LookupTypeService;
@@ -21,17 +23,19 @@ import com.pd.it.system.lookup.LookupTypeService;
 @RequestMapping("/system")
 public class SystemRestService implements IDimensionRestService {
 
-	@Autowired
+	@Inject
 	protected ChartService chart;
 
-	@Autowired
+	@Inject
 	protected LookupTypeService lookupType;
 
-	@Autowired
+	@Inject
 	protected LookupItemService lookupItem;
 
-	@Autowired
+	@Inject
 	protected MenuTreeService menuTree;
-	@Autowired
+	@Inject
 	protected DataSourceTableService dsTable;
+	@Inject
+	protected DataSourceService dataSource;
 }
