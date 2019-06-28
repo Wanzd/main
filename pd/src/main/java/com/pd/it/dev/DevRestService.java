@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.itf.IDimensionRestService;
-import com.pd.it.dev.genCode.GenCodeService;
-import com.pd.it.dev.genModel.GenModelService;
+import com.pd.it.dev.request.RequestService;
 
 /**
- * 开发者rest服务
+ * 报表rest服务
  * 
  * @author thinkpad
  *
@@ -18,9 +17,7 @@ import com.pd.it.dev.genModel.GenModelService;
 @RestController
 @RequestMapping("/dev")
 public class DevRestService implements IDimensionRestService {
-	@Inject
-	protected GenModelService genModel;
-	@Inject
-	protected GenCodeService genCode;
 
+	@Inject
+	protected RequestService request;
 }

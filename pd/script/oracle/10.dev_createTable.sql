@@ -28,3 +28,19 @@ create table app_datastage_t(
 	to_ds varchar2(30),
 	to_sql varchar2(1000)
 );
+
+create table dev_request_t(
+	id varchar2(30),
+	name varchar2(30)
+);
+
+create table APP_PERSON_T
+(
+  id          VARCHAR2(30),
+  name        VARCHAR2(30),
+  sex         VARCHAR2(10),
+  birthday    DATE,
+  father_id   VARCHAR2(30),
+  mother_id   VARCHAR2(30),
+  description VARCHAR2(300)
+);
