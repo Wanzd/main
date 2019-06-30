@@ -34,6 +34,15 @@ create table dev_request_t(
 	name varchar2(30)
 );
 
+create table APP_PERSON_INFO_T
+(
+  id          VARCHAR2(30) not null,
+  name        VARCHAR2(30) not null,
+  sex         VARCHAR2(10),
+  birthday    DATE,
+  description VARCHAR2(300)
+);
+
 create table APP_PERSON_T
 (
   id          VARCHAR2(30),

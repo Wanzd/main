@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.app.person.dao.IPersonDao">
+	<select id="ra" resultType="VO">
+select id as "id",
+	name as "name",
+	father_id as "father.id",
+	(select name from app_person_t where id=t1.father_id) as "father.name",
+	mother_id as "mother.id",
+	(select name from app_person_t where id=t1.mother_id) as "mother.name"
+from app_person_t t1
+	</select>
+	
+</mapper>  

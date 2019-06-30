@@ -11,8 +11,9 @@ import com.pd.it.app.job.service.JobCompanyService;
 import com.pd.it.app.job.service.JobService;
 import com.pd.it.app.job.service.JobTargetService;
 import com.pd.it.app.job.task.JobDigService;
-import com.pd.it.app.user.PersonRelationService;
-import com.pd.it.app.user.PersonService;
+import com.pd.it.app.person.Person.PersonBaseInfoService;
+import com.pd.it.app.person.Person.PersonRelationService;
+import com.pd.it.app.person.Person.PersonService;
 import com.pd.it.common.itf.IDimensionRestService;
 import com.pd.it.system.rest.AppDataStageService;
 
@@ -29,6 +30,8 @@ public class AppRestService implements IDimensionRestService {
 	protected EconomicYearService economicYearService;
 	@Inject
 	protected PersonService person;
+	@Inject
+	protected PersonBaseInfoService personBaseInfo;
 	@Inject
 	protected PersonRelationService personRelationService;
 	@Inject

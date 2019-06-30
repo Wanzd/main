@@ -26,7 +26,6 @@ define(['common'], function() {
 
 	var commonImpl = {
 		ajax : function(url, data) {
-			debugger;
 			var rs = $.ajax({
 						url : url,
 						data : JSON.stringify(data),
@@ -40,6 +39,9 @@ define(['common'], function() {
 		parseUrl : function(url) {
 			var result = {};
 			var query = url.split("?")[1];
+			if(query==null){
+				return new Object();
+			}
 			var queryArr = query.split("&");
 			queryArr.forEach(function(item) {
 						var obj = {};
