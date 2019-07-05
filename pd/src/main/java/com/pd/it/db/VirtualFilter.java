@@ -26,7 +26,7 @@ public class VirtualFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		String url = request.getRequestURI();
-		if (url.matches("/.+[.](html|js|png|css|gif|jpg)")) {
+		if (url.matches("/.+[.](html|js|png|css|gif|jpg|json)")) {
 			InputStream in = this.getClass().getClassLoader()
 					.getResourceAsStream("/web/" + url.substring("/".length()));
 			try {

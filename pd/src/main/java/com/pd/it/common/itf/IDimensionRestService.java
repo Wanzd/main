@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pd.it.base.util.Actions;
 import com.pd.it.base.util.Reflects;
 import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
@@ -31,12 +32,16 @@ import com.pd.it.web.itf.service.ISaveService;
 public interface IDimensionRestService {
 
 	@ResponseBody
-	@RequestMapping(value = "/{dimension}/r", method = { RequestMethod.GET,
+	@RequestMapping(value = "/action/{dimension}/{action}", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	default Object r(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
-		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
-		Object ra = service.r(in);
-		return StringX.json(ra);
+	default Object doAction(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension,
+			@PathVariable("action") String action) {
+		IAction actionImpl = Actions.getAction(this, dimension, action);
+		if (actionImpl == null) {
+			return "Not support this service";
+		}
+		Object result = actionImpl.execute(in);
+		return StringX.json(result);
 	}
 
 	@ResponseBody
@@ -44,7 +49,7 @@ public interface IDimensionRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object ra(@RequestBody(required = false) FO in, @PathVariable("dimension") String dimension) {
 		IQueryService service = Reflects.field(this, IQueryService.class, dimension, dimension + "Service");
-		Object ra = service.ra(in);
+		Object ra = null;
 		return StringX.json(ra);
 	}
 

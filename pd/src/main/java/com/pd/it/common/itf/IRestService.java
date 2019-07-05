@@ -30,7 +30,8 @@ public interface IRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object r(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, IQueryService.class, "service");
-		Object ra = service.r(in);
+		// Object ra = service.r(in);
+		Object ra = null;
 		return StringX.json(ra);
 	}
 
@@ -39,7 +40,8 @@ public interface IRestService {
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	default Object ra(@RequestBody(required = false) FO in) {
 		IQueryService service = Reflects.field(this, IQueryService.class, "service");
-		Object ra = service.ra(in);
+		// Object ra = service.ra(in);
+		Object ra = null;
 		return StringX.json(ra);
 	}
 

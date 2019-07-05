@@ -80,11 +80,7 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 				width : '100%',
 				height : '100%',
 				singleSelect : false,
-				url : "/commonRest/rs/"
-						+ curParams.module
-						+ (curParams.dimension == null
-								? ""
-								: ("/" + curParams.dimension)), // 指向后台的Action来获取当前菜单的信息的Json格式的数据
+				url : "/app/personBaseInfo/get", // 指向后台的Action来获取当前菜单的信息的Json格式的数据
 				iconCls : 'icon-edit',
 				nowrap : true,
 				autoRowHeight : true,

@@ -7,34 +7,6 @@ import com.pd.it.common.vo.VO;
 
 public interface IQueryService {
 
-	default Object ra(VO fo) {
-		Object validRa = validRa(fo);
-		return validRa != null ? validRa : executeRa(fo);
-	};
-
-	default Object rs(VO fo) {
-		Object validRs = validRs(fo);
-		return validRs != null ? validRs : executeRs(fo);
-	};
-
-	default Object validRa(VO vo) {
-		return null;
-	};
-
-	default Object validRs(VO vo) {
-		return null;
-	};
-
-	default Object executeRa(VO vo) {
-		IDao dao = Reflects.field(this, "dao");
-		return dao.ra(vo);
-	};
-
-	default Object executeRs(VO vo) {
-		IDao dao = Reflects.field(this, "dao");
-		return dao.ra(vo);
-	};
-
 	default Object r(VO fo) {
 		Object validRs = validR(fo);
 		return validRs != null ? validRs : executeR(fo);
@@ -49,6 +21,34 @@ public interface IQueryService {
 		return dao.r(vo);
 	};
 
+	default Object ra(VO fo) {
+		Object validRs = validRa(fo);
+		return validRs != null ? validRs : executeRa(fo);
+	};
+
+	default Object validRa(VO vo) {
+		return null;
+	};
+
+	default Object executeRa(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+		return dao.ra(vo);
+	};
+
+	default Object rs(VO fo) {
+		Object validRs = validRs(fo);
+		return validRs != null ? validRs : executeRs(fo);
+	};
+
+	default Object validRs(VO vo) {
+		return null;
+	};
+
+	default Object executeRs(VO vo) {
+		IDao dao = Reflects.field(this, "dao");
+		return dao.ra(vo);
+	};
+
 	default Object page(PageFO fo) {
 		Object validRs = validPage(fo);
 		return validRs != null ? validRs : executePage(fo);
@@ -60,5 +60,6 @@ public interface IQueryService {
 
 	default Object executePage(PageFO vo) {
 		return new VO().p("MSG", "Not impl yet");
-	};
+	}
+
 }
