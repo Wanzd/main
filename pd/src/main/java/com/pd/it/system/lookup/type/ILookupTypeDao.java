@@ -1,4 +1,4 @@
-package com.pd.it.system.lookup;
+package com.pd.it.system.lookup.type;
 
 import org.springframework.stereotype.Repository;
 

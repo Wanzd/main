@@ -17,7 +17,7 @@ public interface ISaveService extends IBatchAction, ICreateAction, IDeleteAction
 	@Override
 	default Object executeUpdate(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.u(vo);
+		return dao.update(vo);
 	};
 
 	@Override
@@ -30,17 +30,17 @@ public interface ISaveService extends IBatchAction, ICreateAction, IDeleteAction
 
 		List<VO> csList = batchVO.getItems2Create();
 		if (Valids.notEmpty(csList)) {
-			rs += dao.cs(csList);
+			rs += dao.insertList(csList);
 		}
 
 		List<VO> dsList = batchVO.getItems2Delete();
 		if (Valids.notEmpty(dsList)) {
-			rs += dao.ds(dsList);
+			rs += dao.deleteList(dsList);
 		}
 
 		List<VO> usList = batchVO.getItems2Update();
 		if (Valids.notEmpty(usList)) {
-			rs += dao.us(usList);
+			rs += dao.updateList(usList);
 		}
 		return rs;
 	};

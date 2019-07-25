@@ -27,8 +27,8 @@ public interface IExportExcelAction {
 		HttpServletResponse response = Reflects.field(this, HttpServletResponse.class, "response");
 		Class exportClass = Reflects.field(this, Class.class, "exportClass");
 
-		List list = Trans.list(dao.ra(vo),exportClass);
-		
+		List list = Trans.list(dao.queryList(vo), exportClass);
+
 		try {
 			return Excels.getTestResponse(response, list);
 		} catch (IOException e) {

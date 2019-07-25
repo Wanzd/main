@@ -24,17 +24,17 @@ public interface IBatchAction {
 		List<VO> createList = ListX.<VO>list(vo.get("items2Create"), VO.class);
 		if (createList != null && createList.size() > 0) {
 
-			dao.cs(createList);
+			dao.insertList(createList);
 			rsVO.put("insertCount", createList.size());
 		}
 		List<VO> deleteList = ListX.<VO>list(vo.get("items2Delete"), VO.class);
 		if (deleteList != null && deleteList.size() > 0) {
-			dao.ds(deleteList);
+			dao.deleteList(deleteList);
 			rsVO.put("deleteCount", deleteList.size());
 		}
 		List<VO> updateList = ListX.<VO>list(vo.get("items2Update"), VO.class);
 		if (updateList != null && updateList.size() > 0) {
-			dao.us(updateList);
+			dao.updateList(updateList);
 			rsVO.put("updateCount", updateList.size());
 		}
 

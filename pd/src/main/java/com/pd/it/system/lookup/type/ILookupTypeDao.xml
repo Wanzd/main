@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.system.lookup.ILookupTypeDao">
-	<select id="rs" resultType="VO">
+<mapper namespace="com.pd.it.system.lookup.type.ILookupTypeDao">
+	<select id="queryPagedList" resultType="VO">
 SELECT id as "id",
 	cn as "cn",
 	en as "en",
@@ -17,7 +17,7 @@ FROM sys_lookuptype_t
 		</where>
 order by cn
 	</select>
-	<select id="ra" resultType="VO">
+	<select id="queryList" resultType="VO">
 SELECT id as "id",
 	cn as "cn",
 	en as "en",
@@ -34,7 +34,7 @@ FROM sys_lookuptype_t
 order by cn
 	</select>
 
-	<update id="us" >
+	<update id="updateList" >
 replace into sys_lookuptype_t(
 	id,
 	cn,

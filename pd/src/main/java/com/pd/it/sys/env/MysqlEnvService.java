@@ -14,7 +14,7 @@ public class MysqlEnvService {
 
 	public Object init() {
 		VO vo = new VO(new Attr("op", "init"));
-		return mysqlEnvDao.u(vo);
+		return mysqlEnvDao.update(vo);
 	}
 
 }

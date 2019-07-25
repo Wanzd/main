@@ -18,7 +18,7 @@ public interface IQueryService {
 
 	default Object executeR(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.r(vo);
+		return dao.query(vo);
 	};
 
 	default Object ra(VO fo) {
@@ -32,7 +32,7 @@ public interface IQueryService {
 
 	default Object executeRa(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.ra(vo);
+		return dao.queryList(vo);
 	};
 
 	default Object rs(VO fo) {
@@ -46,7 +46,7 @@ public interface IQueryService {
 
 	default Object executeRs(VO vo) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.ra(vo);
+		return dao.queryList(vo);
 	};
 
 	default Object page(PageFO fo) {

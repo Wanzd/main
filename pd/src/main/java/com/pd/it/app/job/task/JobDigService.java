@@ -48,7 +48,7 @@ public class JobDigService implements IParallelService {
 				flag = false;
 				break;
 			}
-			dao.cs(rsList);
+			dao.insertList(rsList);
 			curPage++;
 		}
 		return null;

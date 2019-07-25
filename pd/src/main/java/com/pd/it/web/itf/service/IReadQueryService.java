@@ -8,7 +8,7 @@ public interface IReadQueryService extends IActionService {
 	@Override
 	default Object run(Object vo) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.r(vo);
+		return dao.query(vo);
 	};
 
 }

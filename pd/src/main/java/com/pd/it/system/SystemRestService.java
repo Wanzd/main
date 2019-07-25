@@ -11,7 +11,6 @@ import com.pd.it.system.chart.ChartService;
 import com.pd.it.system.datasource.DataSourceService;
 import com.pd.it.system.datasource.DataSourceTableService;
 import com.pd.it.system.lookup.LookupItemService;
-import com.pd.it.system.lookup.LookupTypeService;
 
 /**
  * 报表rest服务
@@ -25,9 +24,6 @@ public class SystemRestService implements IDimensionRestService {
 
 	@Inject
 	protected ChartService chart;
-
-	@Inject
-	protected LookupTypeService lookupType;
 
 	@Inject
 	protected LookupItemService lookupItem;

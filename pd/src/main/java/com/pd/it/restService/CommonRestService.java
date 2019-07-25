@@ -58,20 +58,20 @@ public class CommonRestService {
 				String usList = usVO.str("list");
 				usList = usList.replaceAll("'", "''");
 				List<VO> rs = VO.list$str(usList);
-				return service.us(rs);
+				return service.updateList(rs);
 			case "ds":
 				VO dsVO = new VO(in);
 				String dsList = dsVO.str("list");
 				dsList = dsList.replaceAll("'", "''");
 				List<VO> list = VO.list$str(dsList);
-				return service.ds(list);
+				return service.deleteList(list);
 			case "rs":
 				PageFO fo$page = new PageFO();
 				fo$page.setFo(new FO(in));
-				return service.rs(fo$page);
+				return service.queryList(fo$page);
 			case "ra":
 				FO inVO = new FO(in);
-				Object rsRa = service.ra(inVO);
+				Object rsRa = service.queryList(inVO);
 				if (rsRa == null) {
 					return ResultVO.error("Not found data.");
 				}

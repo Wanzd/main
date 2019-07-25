@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
 import com.pd.it.system.lookup.LookupItemService;
-import com.pd.it.system.lookup.LookupTypeService;
+import com.pd.it.system.lookup.type.LookupTypeService;
 
 /**
  * 待办rest服务
@@ -30,7 +30,7 @@ public class SystemShortCutRestService {
 	@RequestMapping(value = "/LOOKUP", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
 	public Object listLookupType() {
-		Object ra = lookupType.ra(new FO());
+		Object ra = lookupType.queryList(new FO());
 		return StringX.json(ra);
 	}
 

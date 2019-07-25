@@ -9,7 +9,7 @@ public class ReadAllQueryAction implements IAction {
 	@Override
 	public Object execute(Object in) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.ra(in);
+		return dao.queryList(in);
 	};
 
 }

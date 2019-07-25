@@ -9,7 +9,7 @@ public class ReadSingleQueryAction implements IAction {
 	@Override
 	public Object execute(Object in) {
 		IDao dao = Reflects.field(this, "dao");
-		return dao.r(in);
+		return dao.query(in);
 	};
 
 }

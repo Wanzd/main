@@ -19,11 +19,11 @@ public class ProjectService {
 	private IProjectReportDao reportDao;
 
 	public Object list(PageFO fo) {
-		return dao.rs(fo);
+		return dao.queryPagedList(fo);
 	}
 
 	public Object report(FO fo) {
-		List<VO> rs = reportDao.ra(fo);
+		List<VO> rs = reportDao.queryList(fo);
 		if (rs == null || rs.size() == 0) {
 			return ResultVO.error("Not Found");
 		}
