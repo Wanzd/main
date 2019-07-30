@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.system.lookup.item.ILookupItemDao">
+
+	<select id="queryList" resultType="VO">
+SELECT item_id as "id",
+	value as "value",
+	attr1 as "attr1"
+FROM sys_lookup_item_t
+where type_id=#{typeId}
+	and is_active='Y'
+order by value
+	</select>
+
+	<update id="updateList" >
+replace into sys_lookuptype_t(
+	id,
+	cn,
+	en,
+	detail)
+values
+		<foreach collection="list" item="it" separator="," >
+(
+	#{it.id},
+	#{it.cn},
+	#{it.en},
+	#{it.detail}
+)	
+		</foreach>
+	</update>
+	
+</mapper>  

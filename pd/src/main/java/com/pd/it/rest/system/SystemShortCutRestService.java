@@ -1,4 +1,4 @@
-package com.pd.it.system;
+package com.pd.it.rest.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.common.util.StringX;
 import com.pd.it.common.vo.FO;
-import com.pd.it.system.lookup.LookupItemService;
+import com.pd.it.service.system.lookup.item.LookupItemService;
 import com.pd.it.system.lookup.type.LookupTypeService;
 
 /**
@@ -40,7 +40,8 @@ public class SystemShortCutRestService {
 	public Object listLookupItemByType(@PathVariable("typeId") String typeId) {
 		FO fo = new FO();
 		fo.put("typeId", typeId);
-		Object ra = lookupItem.ra(fo);
+//		Object ra = lookupItem.ra(fo);
+		Object ra=null;
 		return StringX.json(ra);
 	}
 }
