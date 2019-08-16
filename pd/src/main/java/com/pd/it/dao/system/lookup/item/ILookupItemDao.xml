@@ -9,7 +9,7 @@ SELECT item_id as "id",
 FROM sys_lookup_item_t
 where type_id=#{typeId}
 	and is_active='Y'
-order by value
+order by sort_index,value
 	</select>
 
 	<update id="updateList" >
