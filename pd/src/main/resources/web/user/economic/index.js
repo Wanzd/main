@@ -1,10 +1,11 @@
 require.config({
 			urlArgs : "r=" + (new Date()).getTime(),
 			paths : {
-				jquery : "jquery.min",
-				easyui : "jquery.easyui.min",
-				echarts : "echarts.min",
-				wordcloud : "echarts-wordcloud.min"
+				jquery : "/jquery.min",
+				easyui : "/jquery.easyui.min",
+				common:"/common",
+				echarts : "/echarts.min",
+				wordcloud : "/echarts-wordcloud.min"
 			},
 			shim : {
 				"easyui" : {

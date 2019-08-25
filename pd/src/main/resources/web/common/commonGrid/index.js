@@ -1,8 +1,9 @@
 require.config({
 			urlArgs : "r=" + (new Date()).getTime(),
 			paths : {
-				jquery : "jquery.min",
-				easyui : "jquery.easyui.min"
+				jquery : "/jquery.min",
+				easyui : "/jquery.easyui.min",
+					common : "/common"
 			},
 			shim : {
 				"easyui" : {
@@ -13,9 +14,11 @@ require.config({
 var _common = null;
 require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 		easyui, ai, common, tree, db) {
-	_common = common;
-	var editIndex = undefined;
 	var curParams = common.parseUrl(location.href);
+	var gridCfg = common.ajax("/common/commonGrid/cfg/" + curParams.dimension+".json");
+	debugger;
+	
+	var editIndex = undefined;
 	var $pageCfg = {
 		id : "lookupType"
 	};
@@ -38,8 +41,6 @@ require(['jquery', 'easyui', 'ai', 'common', 'tree', 'db'], function(jquery,
 			}
 		}
 	};
-	var colSchema = common.ajax("commonRest/str/grid/schema/?gid="
-			+ curParams.module + "$" + curParams.dimension);
 	var columns = [{
 				width : 80,
 				field : 'ck',
