@@ -1,5 +1,8 @@
 package com.pd.it.common.vo;
 
+import lombok.Data;
+
+@Data
 public class RsVO
 {
     private String errorMsg;
