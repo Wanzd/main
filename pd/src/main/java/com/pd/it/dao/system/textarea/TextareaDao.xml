@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.system.menu.MenuDao">
+
+	<select id="queryList" resultType="VO">
+		<include refid="sql$ra"/>
+	</select>
+
+	<update id="us">
+begin
+		<foreach collection="list" item="it" separator=",">
+	update 
+			<include refid="tableName"/>
+	set text=#{it.text}
+	where url=#{it.url};
+		</foreach>
+end;
+	</update>
+	
+	<delete id="ds">
+delete from
+		<include refid="tableName"/>
+where url in
+		<foreach item="it" collection="list" separator=",">${it.url}</foreach>
+	</delete>
+	
+	<sql id="sql$ra">
+SELECT url as "url",
+    text as "text",
+    created_by as "createdBy"
+FROM 
+		<include refid="tableName"/>
+		<where>
+			<if test='url!=null and url!=""'> and url like #{url}||'%'</if>
+			<if test='createdBy!=null and createdBy!=""'> and createdBy = #{createdBy}</if>
+		</where>
+order by url
+	</sql>
+	
+	<sql id="tableName"> sys_textarea_t	</sql>
+</mapper>  
