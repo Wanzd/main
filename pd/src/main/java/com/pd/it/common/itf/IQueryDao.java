@@ -1,5 +1,6 @@
 package com.pd.it.common.itf;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.pd.it.common.vo.PageFO;
@@ -34,7 +35,7 @@ public interface IQueryDao<_VO, _FO, _DTO> {
 
 	List<String> queryStrList(_FO fo);
 
-	List<_DTO> queryList(_FO vo);
+	List<_DTO> queryList(_FO vo) throws SQLException;
 
 	List<_DTO> queryPagedList(PageFO fo);
 

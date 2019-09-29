@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.it.business.system.menu.MenuBusiness;
+import com.pd.it.common.exception.AppException;
 import com.pd.it.common.util.StringX;
 import com.pd.it.model.system.menu.MenuFO;
 
@@ -28,7 +29,7 @@ public class MenuRest {
 	@ResponseBody
 	@RequestMapping(value = "/queryList", method = { RequestMethod.GET,
 			RequestMethod.POST }, produces = "application/json;charset=utf-8")
-	public Object queryList(@RequestBody(required = false) MenuFO in) {
+	public Object queryList(@RequestBody(required = false) MenuFO in) throws AppException {
 		Object ra = business.queryList(in);
 		return StringX.json(ra);
 	}
