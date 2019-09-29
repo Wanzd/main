@@ -39,7 +39,7 @@ public class RedisDao {
 		return jedisPool.getResource().mget(keys);
 	}
 
-	public Object exists(String key) {
+	public Boolean exists(String key) {
 		return jedisPool.getResource().exists(key);
 	}
 

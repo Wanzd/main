@@ -15,6 +15,11 @@ public class RedisKVService implements ICommonService {
 	@Inject
 	protected RedisDao dao;
 
+	public boolean exists(VO fo) {
+		RedisFO redisFO = Trans.obj(fo, RedisFO.class);
+		return dao.exists(redisFO.getKey());
+	}
+
 	@Override
 	public Object executeR(VO fo) {
 		RedisFO redisFO = Trans.obj(fo, RedisFO.class);
