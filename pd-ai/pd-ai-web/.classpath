@@ -27,5 +27,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/pd-ai-api"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pd-ai-common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pd-ai-dao"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/pd-ai-model"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
