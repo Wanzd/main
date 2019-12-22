@@ -12,19 +12,7 @@
 		<artifactId>pd-ai</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.pd.ai</groupId>
-			<artifactId>pd-ai-api</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.pd.ai</groupId>
-			<artifactId>pd-ai-dao</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>

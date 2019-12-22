@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
 import com.pd.base.model.Attr;
-import com.pd.base.model.VO;
+import com.pd.base.model.ValueObject;
 
 /**
  * 通用rest服务
@@ -29,7 +29,7 @@ public class SystemMenuRestService {
 
 	@RequestMapping(value = "ra")
 	public String rest() {
-		VO vo = new VO(new Attr("a", "1"), new Attr("now", new Date()));
+		ValueObject vo = new ValueObject(new Attr("a", "1"), new Attr("now", new Date()));
 
 		return JSON.toJSONString(vo, mapping);
 	}

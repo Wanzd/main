@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pd.ai.dao.IEntitySupposeDao;
-import com.pd.it.web.api.ISimpleRest;
+import com.pd.ai.dao.impl.IEntitySupposeDao;
+import com.pd.it.rest.api.IRest;
 
 /**
  * 实体联想rest服务
@@ -16,8 +16,7 @@ import com.pd.it.web.api.ISimpleRest;
  */
 @RestController
 @RequestMapping("/supposeRest")
-public class SupposeRestService implements ISimpleRest {
-
+public class SupposeRestService implements IRest {
 	@Inject
 	protected IEntitySupposeDao dao;
 }
