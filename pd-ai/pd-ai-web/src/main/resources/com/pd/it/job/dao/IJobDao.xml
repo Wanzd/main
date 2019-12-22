@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.it.job.dao.IJobDao">
 	<select id="queryList" resultType="com.pd.it.job.model.JobDTO">
-select '1' as "id",
-	'a' as "job"
+select job_id as "id",
+	job as "job",
+	company as "company",
+	location as "location",
+	detail as "detail",
+	url as "url",
+	salary as "salary",
+	salary_from as "salaryFrom",
+	salary_to as "salaryTo"
+from app_job_t
+		<include refid="filter"/>
 	</select>
+	
+	<sql id="filter">
+		<where>
+			<if test='job!=null and job !=""'> and job like concat('%',#{job},'%')</if>
+			<if test='company!=null and company !=""'> and company like concat('%',#{company},'%')</if>
+		</where>
+	</sql>
 </mapper>  

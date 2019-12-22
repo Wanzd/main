@@ -10,7 +10,7 @@ public class Reflects {
 		if (in == null) {
 			return null;
 		}
-		List<Method> rsList = ListX.array(in.getClass().getDeclaredMethods());
+		List<Method> rsList = ListX.array(in.getClass().getMethods());
 		return rsList;
 	}
 
@@ -18,9 +18,8 @@ public class Reflects {
 		if (in == null) {
 			return null;
 		}
-		List<Method> rsList = ListX.array(in.getClass().getDeclaredMethods());
+		List<Method> rsList = ListX.array(in.getClass().getMethods());
 		rsList = rsList.stream().filter(b -> b.getName().equals(methodName)).collect(Collectors.toList());
-
 		return rsList;
 	}
 

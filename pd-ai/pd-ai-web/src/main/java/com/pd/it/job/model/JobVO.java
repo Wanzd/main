@@ -8,7 +8,7 @@ public class JobVO {
 	private String job;
 	private String company;
 	private String salary;
-	private String salryFrom;
-	private String salaryTo;
+	private Double salaryFrom;
+	private Double salaryTo;
 	private String location;
 }
