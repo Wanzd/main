@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.job.dao.IBigDataDao">
+	<select id="queryList" resultType="com.pd.it.job.model.BigDataDTO">
+select type_id as "typeId",
+	src as "src",
+	s0 as "s0",
+	s1 as "s1",
+	s2 as "s2",
+	s3 as "s3",
+	s4 as "s4",
+	s5 as "s5",
+	s6 as "s6",
+	s7 as "s7"
+from bigdata_t
+		<include refid="filter"/>
+limit 1,100
+	</select>
+	
+	<sql id="filter">
+		<where>
+			<choose>
+				<when test='typeId!=null'> and type_id=#{typeId}</when>
+				<otherwise> and 1=0</otherwise>
+			</choose>
+		</where>
+	</sql>
+</mapper>  

@@ -34,7 +34,9 @@ define(
 				ajax : function(url, data) {
 					var rs = $.ajax({
 						url : url,
-						data : data,
+						contentType: 'application/json',
+						data : JSON.stringify(data),
+						dataType : "json",
 						async : false,
 						type : "POST"
 					});

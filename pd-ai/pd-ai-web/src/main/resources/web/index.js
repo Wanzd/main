@@ -19,11 +19,21 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		init$menu : function() {
 			console.log("init$menu");
 			$("#menu").tree({
-				id : "id",
-				text : "cn",
-				pIdKey : "parentId",
-				url : "common/ra/menu/tree",
-				onClick : main.tabMenu
+				id:"id",
+				parentField  : "parentId",
+				url : "rest/system/menu/root",
+				onClick : main.tabMenu,
+				formatter:function(node){
+                    var s = node.text;
+                    if (node.children){
+                        s += ' <span style=\'color:blue\'>(' + node.children.length + ')</span>';
+                    }
+                    return s;
+                },
+                onSelect: function(node){ 
+        　　　　　　　　　　　　console.log('选中的树的节点信息'); 
+        　　　　　　　　　　　　console.log(node); 
+        　　　　　　　　　　 }
 			});
 		},
 		tabMenu : function() {
@@ -41,18 +51,25 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				return;
 			}
 			$.ajax({
-				type : "POST",
-				url : "common/ra/menu/tree",
+				type : "post",
+				url : "rest/system/menu/sub",
 				data : {
-					id : treeItem.id
+					parentId : treeItem.id
 				},
-				dataType : "JSON",
+				dataType : "json",
 				success : function(data) {
-					tree.refresh({
-						treeId : "menu",
-						parent : treeItem.target,
-						data : data,
-						onClickF : main.tabMenu
+					var selected = $('#menu').tree('getSelected');
+					var children=selected.children;
+					if(children!=null){
+						for(var i=0,total=selected.children.length;i<total;i++){
+							var item=selected.children[total-i-1];
+							var node = $('#menu').tree('find', item.id);
+							$("#menu").tree("remove",node.target);
+						}
+					}
+					$("#menu").tree("append",{
+						parent:selected.target,
+						data:data
 					});
 				}
 			});

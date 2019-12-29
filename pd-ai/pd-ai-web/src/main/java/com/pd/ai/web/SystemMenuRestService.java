@@ -1,43 +1,48 @@
 package com.pd.ai.web;
 
-import java.util.Date;
+import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializeConfig;
-import com.alibaba.fastjson.serializer.SimpleDateFormatSerializer;
-import com.pd.base.model.Attr;
-import com.pd.base.model.ValueObject;
+import com.pd.ai.dao.ISystemMenuDao;
+import com.pd.ai.model.SystemMenuDTO;
+import com.pd.ai.model.SystemMenuFO;
+import com.pd.it.common.Reflects;
+import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.IRest;
 
 /**
- * 通用rest服务
+ * 系统菜单rest服务
  * 
  * @author thinkpad
  *
  */
 @RestController
-@RequestMapping("systemMenu")
-public class SystemMenuRestService {
+@RequestMapping("/rest/system/menu")
+public class SystemMenuRestService implements IRest, IQueryRest<SystemMenuFO, SystemMenuDTO> {
+	@Inject
+	private ISystemMenuDao dao;
 
-	private static SerializeConfig mapping = new SerializeConfig();
-	{
-		mapping.put(Date.class, new SimpleDateFormatSerializer("yyyy-MM-dd HH:mm:ss"));
-	}
-
-	@RequestMapping(value = "ra")
-	public String rest() {
-		ValueObject vo = new ValueObject(new Attr("a", "1"), new Attr("now", new Date()));
-
-		return JSON.toJSONString(vo, mapping);
-	}
-
-	@RequestMapping(value = "date")
+	@RequestMapping(value = "/root")
 	@ResponseBody
-	public Date date() {
-		return new Date();
+	public List<SystemMenuDTO> root() {
+		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, "dao,service,business",
+				IQueryOperation.class);
+		return operation.queryList(null);
 	}
 
+	@RequestMapping(value = "/sub", method = { RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public List<SystemMenuDTO> root(SystemMenuFO fo) {
+		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, "dao,service,business",
+				IQueryOperation.class);
+		return operation.queryList(fo);
+	}
 }

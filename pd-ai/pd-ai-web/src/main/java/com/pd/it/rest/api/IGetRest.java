@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pd.it.common.Reflects;
-import com.pd.it.job.model.BigDataDTO;
-import com.pd.it.job.model.BigDataFO;
 import com.pd.it.operation.api.IQueryOperation;
 
-public interface IQueryRest<FO, DTO> {
+public interface IGetRest<FO, DTO> {
 
-	@RequestMapping(value = "/queryList")
+	@RequestMapping(value = "/get")
 	@ResponseBody
 	default List<DTO> queryList(@RequestBody JSONObject fo) {
 		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, "dao,service,business",
