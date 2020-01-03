@@ -60,13 +60,15 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 				success : function(data) {
 					var selected = $('#menu').tree('getSelected');
 					var children=selected.children;
+					
 					if(children!=null){
-						for(var i=0,total=selected.children.length;i<total;i++){
-							var item=selected.children[total-i-1];
-							var node = $('#menu').tree('find', item.id);
-							$("#menu").tree("remove",node.target);
-						}
+						return;
 					}
+// for(var i=0,total=selected.children.length;i<total;i++){
+// var item=selected.children[total-i-1];
+// var node = $('#menu').tree('find', item.id);
+// $("#menu").tree("remove",node.target);
+// }
 					$("#menu").tree("append",{
 						parent:selected.target,
 						data:data

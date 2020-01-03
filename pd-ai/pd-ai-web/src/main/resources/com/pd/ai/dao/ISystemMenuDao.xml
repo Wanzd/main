@@ -38,16 +38,15 @@ order by index_id
 	</delete>
 	
 	<sql id="cols$select">
-id as "id",
-parent_id as "parentId",
-parent_id as "pid",
-cn as
-"cn",
-en as "en",
-cn as "text",
-index_id as "indexId",
-url as "url",
-detail as "detail"
+	id as "id",
+	parent_id as "parentId",
+	parent_id as "pid",
+	cn as "cn",
+	en as "en",
+	cn as "text",
+	index_id as "indexId",
+	url as "url",
+	detail as "detail"
 	</sql>
 	
 </mapper>  
