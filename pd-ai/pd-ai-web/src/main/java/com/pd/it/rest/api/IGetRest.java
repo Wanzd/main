@@ -15,8 +15,8 @@ public interface IGetRest<FO, DTO> {
 	@RequestMapping(value = "/get")
 	@ResponseBody
 	default List<DTO> queryList(@RequestBody JSONObject fo) {
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, "dao,service,business",
-				IQueryOperation.class);
+		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+				"dao,service,business");
 		return operation.queryList((FO) fo);
 	}
 

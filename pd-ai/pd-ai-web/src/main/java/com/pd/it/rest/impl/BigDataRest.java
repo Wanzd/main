@@ -30,8 +30,8 @@ public class BigDataRest implements IRest, IQueryRest<BigDataFO, BigDataDTO> {
 	@ResponseBody
 	public List<BigDataDTO> queryList(@RequestBody JSONObject jo) {
 		BigDataFO fo = ObjectX.x(jo, BigDataFO.class);
-		IQueryOperation<BigDataFO, BigDataDTO> operation = Reflects.firstExistField(this, "dao,service,business",
-				IQueryOperation.class);
+		IQueryOperation<BigDataFO, BigDataDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+				"dao,service,business");
 		return operation.queryList(fo);
 	}
 }

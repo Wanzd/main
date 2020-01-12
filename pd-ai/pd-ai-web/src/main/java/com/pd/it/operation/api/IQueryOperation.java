@@ -2,13 +2,16 @@ package com.pd.it.operation.api;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.pd.base.model.PageVO;
-import com.pd.base.model.PagedResult;
 
 public interface IQueryOperation<FO, DTO> {
-	DTO query(FO in);
+	DTO query(@Param("fo") FO in);
 
-	List<DTO> queryList(FO in);
+	List<DTO> queryList(@Param("fo") FO in);
 
-	PagedResult<DTO> queryPagedList(FO in, PageVO page);
+	List<DTO> queryPagedList(@Param("fo") FO in, @Param("page") PageVO page);
+
+	int queryCount(@Param("fo") FO fo);
 }

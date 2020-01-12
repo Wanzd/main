@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.ai.dao.ISystemMenuDao">
-	<select id="queryList" resultType="com.pd.ai.model.SystemMenuDTO">
-select 
-		<include refid='cols$select'/>
+	<select id="queryPagedList" resultType="com.pd.ai.model.SystemMenuDTO">
+		<include refid="t$data"/>
+		limit #{page.startIdx},#{page.endIdx}
+	</select>
+	
+	<select id="queryCount" resultType="int">
+select count(1)
 from sys_Menu_t
-where 1=1
-		<choose>
-			<when test="parentId==null"> and parent_id is null or parent_id=''</when>
-			<otherwise> and parent_id =#{parentId}</otherwise>
-		</choose> 
-order by index_id
+		<include refid="filter"/>
+	</select>
+	
+	<select id="queryList" resultType="com.pd.ai.model.SystemMenuDTO">
+		<include refid="t$data"/>
 	</select>
 	
 	<update id="us">
@@ -36,6 +39,22 @@ order by index_id
 		</foreach>
 		)
 	</delete>
+	
+	<sql id="t$data">
+select 
+		<include refid='cols$select'/>
+from sys_Menu_t
+		<include refid="filter"/>
+order by index_id		
+	</sql>
+	
+	<sql id="filter">
+where 1=1
+		<choose>
+			<when test="fo.parentId!=null"> and parent_id =#{fo.parentId}</when>
+			<otherwise> and parent_id is null or parent_id=''</otherwise>
+		</choose> 		
+	</sql>
 	
 	<sql id="cols$select">
 	id as "id",

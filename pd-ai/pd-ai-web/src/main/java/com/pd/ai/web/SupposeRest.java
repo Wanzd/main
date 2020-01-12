@@ -16,7 +16,7 @@ import com.pd.it.rest.api.IRest;
  */
 @RestController
 @RequestMapping("/supposeRest")
-public class SupposeRestService implements IRest {
+public class SupposeRest implements IRest {
 	@Inject
 	protected IEntitySupposeDao dao;
 }

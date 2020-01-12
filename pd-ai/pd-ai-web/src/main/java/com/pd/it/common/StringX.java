@@ -16,4 +16,18 @@ public class StringX {
 		}
 		return in.toString();
 	}
+
+	public static String cap(String dimension) {
+		if (dimension == null || dimension.length() == 0) {
+			return dimension;
+		}
+		return dimension.substring(0, 1).toUpperCase() + dimension.substring(1);
+	}
+
+	public static String decap(String dimension) {
+		if (dimension == null || dimension.length() == 0) {
+			return dimension;
+		}
+		return dimension.substring(0, 1).toLowerCase() + dimension.substring(1);
+	}
 }

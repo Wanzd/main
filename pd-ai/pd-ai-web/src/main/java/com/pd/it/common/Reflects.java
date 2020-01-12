@@ -34,7 +34,7 @@ public class Reflects {
 		return null;
 	}
 
-	public static <IN, OUT> OUT field(IN in, String attrName, Class<OUT> outClass) {
+	public static <IN, OUT> OUT field(IN in, Class<OUT> outClass, String attrName) {
 		try {
 			Field field = in.getClass().getDeclaredField(attrName);
 			field.setAccessible(true);
@@ -45,10 +45,20 @@ public class Reflects {
 		return null;
 	}
 
-	public static <IN, OUT> OUT firstExistField(IN in, String attrNames, Class<OUT> outClass) {
+	public static <IN, OUT> OUT firstExistField(IN in, Class<OUT> outClass, String attrNames) {
 		String[] attrArray = attrNames.split(",");
 		for (String eachAttr : attrArray) {
-			OUT field = field(in, eachAttr, outClass);
+			OUT field = field(in, outClass, eachAttr);
+			if (field != null) {
+				return field;
+			}
+		}
+		return null;
+	}
+
+	public static <IN, OUT> OUT firstExistField(IN in, Class<OUT> outClass, String... attrNames) {
+		for (String eachAttr : attrNames) {
+			OUT field = field(in, outClass, eachAttr);
 			if (field != null) {
 				return field;
 			}

@@ -5,7 +5,13 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class PagedResult<T> {
+public class PagedResult<DTO> {
+
+	public PagedResult(List<DTO> list, PageVO page) {
+		this.page=page;
+		this.list=list;
+	}
+
 	private PageVO page;
-	private List<T> list;
+	private List<DTO> list;
 }

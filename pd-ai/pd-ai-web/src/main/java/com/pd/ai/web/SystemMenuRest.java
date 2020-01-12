@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,23 +25,23 @@ import com.pd.it.rest.api.IRest;
  */
 @RestController
 @RequestMapping("/rest/system/menu")
-public class SystemMenuRestService implements IRest, IQueryRest<SystemMenuFO, SystemMenuDTO> {
+public class SystemMenuRest implements IRest, IQueryRest<SystemMenuFO, SystemMenuDTO> {
 	@Inject
 	private ISystemMenuDao dao;
 
 	@RequestMapping(value = "/root")
 	@ResponseBody
 	public List<SystemMenuDTO> root() {
-		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, "dao,service,business",
-				IQueryOperation.class);
-		return operation.queryList(null);
+		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+				"dao,service,business");
+		return operation.queryList(new SystemMenuFO());
 	}
 
 	@RequestMapping(value = "/sub", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public List<SystemMenuDTO> root(SystemMenuFO fo) {
-		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, "dao,service,business",
-				IQueryOperation.class);
+		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+				"dao,service,business");
 		return operation.queryList(fo);
 	}
 }
