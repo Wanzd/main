@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.ISarsCityDao">
+	<update id="updateList">
+declare
+begin
+		<foreach item="it" collection="list" >
+	insert into app_sars_city_t(
+		province,
+		city,
+		qty_type,
+		qty,
+		creation_date
+	)
+	values
+	(
+		#{it.province,jdbcType=VARCHAR},
+		#{it.city,jdbcType=VARCHAR},
+		#{it.qtyType,jdbcType=VARCHAR},
+		#{it.qty,jdbcType=INTEGER},
+		trunc(#{it.creationDate,jdbcType=DATE})
+	);
+		</foreach>
+	commit;
+end;
+	</update>
+	
+	<update id="delete">
+delete from app_sars_city_t
+where creation_date=trunc(#{date})
+	</update>
+</mapper>  

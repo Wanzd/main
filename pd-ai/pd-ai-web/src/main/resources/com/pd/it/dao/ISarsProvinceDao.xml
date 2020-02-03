@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.ISarsProvinceDao">
+	
+	
+	<update id="updateList">
+replace into app_sars_province_t(
+	name,
+	cnt,
+	doubt,
+	death,
+	heal,
+	creation_date
+)
+values
+		<foreach item="it" collection="list" separator=",">
+(
+			#{it.name,jdbcType=VARCHAR},
+			#{it.cnt,jdbcType=INTEGER},
+			#{it.doubt,jdbcType=INTEGER},
+			#{it.death,jdbcType=INTEGER},
+			#{it.heal,jdbcType=INTEGER},
+			#{it.creationDate,jdbcType=VARCHAR}
+)
+		</foreach>
+	</update>
+	
+	<update id="delete">
+delete from app_sars_province_t
+where creation_date=#{date}
+	</update>
+</mapper>  

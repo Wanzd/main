@@ -1,17 +1,17 @@
 require.config({
-	urlArgs : "r=" + (new Date()).getTime(),
-	paths : {
-		jquery : "jquery.min",
-		easyui : "jquery.easyui.min"
-	},
-	shim : {
-		"easyui" : {
-			deps : [ "jquery" ]
-		}
-	}
-});
-require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
-		easyui, common, tree, db) {
+			urlArgs : "r=" + (new Date()).getTime(),
+			paths : {
+				jquery : "jquery.min",
+				easyui : "jquery.easyui.min"
+			},
+			shim : {
+				"easyui" : {
+					deps : ["jquery"]
+				}
+			}
+		});
+require(['jquery', 'easyui', 'common', 'tree', 'db'], function(jquery, easyui,
+		common, tree, db) {
 	main = {
 		init : function() {
 			main.init$menu();
@@ -19,21 +19,22 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 		init$menu : function() {
 			console.log("init$menu");
 			$("#menu").tree({
-				id:"id",
-				parentField  : "parentId",
-				url : "rest/system/menu/root",
+				id : "id",
+				parentField : "parentId",
+				url : "ai/system/menu/default/queryList",
 				onClick : main.tabMenu,
-				formatter:function(node){
-                    var s = node.text;
-                    if (node.children){
-                        s += ' <span style=\'color:blue\'>(' + node.children.length + ')</span>';
-                    }
-                    return s;
-                },
-                onSelect: function(node){ 
-        　　　　　　　　　　　　console.log('选中的树的节点信息'); 
-        　　　　　　　　　　　　console.log(node); 
-        　　　　　　　　　　 }
+				formatter : function(node) {
+					var s = node.text;
+					if (node.children) {
+						s += ' <span style=\'color:blue\'>('
+								+ node.children.length + ')</span>';
+					}
+					return s;
+				},
+				onSelect : function(node) {
+					console.log('选中的树的节点信息');
+					console.log(node);
+				}
 			});
 		},
 		tabMenu : function() {
@@ -52,27 +53,26 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 			$.ajax({
 				type : "post",
-				url : "rest/system/menu/sub",
-				data : {
-					parentId : treeItem.id
-				},
+				contentType : "application/json",
+				url : "ai/system/menu/default/queryList",
+				data : JSON.stringify({
+							parentId : treeItem.id
+						}),
 				dataType : "json",
 				success : function(data) {
 					var selected = $('#menu').tree('getSelected');
-					var children=selected.children;
-					
-					if(children!=null){
-						return;
+					var children = selected.children;
+					if (children != null && children.length > 0) {
+						for (var i = 0, total = selected.children.length; i < total; i++) {
+							var item = selected.children[total - i - 1];
+							var node = $('#menu').tree('find', item.id);
+							$("#menu").tree("remove", node.target);
+						}
 					}
-// for(var i=0,total=selected.children.length;i<total;i++){
-// var item=selected.children[total-i-1];
-// var node = $('#menu').tree('find', item.id);
-// $("#menu").tree("remove",node.target);
-// }
-					$("#menu").tree("append",{
-						parent:selected.target,
-						data:data
-					});
+					$("#menu").tree("append", {
+								parent : selected.target,
+								data : data
+							});
 				}
 			});
 		},
@@ -86,11 +86,11 @@ require([ 'jquery', 'easyui', 'common', 'tree', 'db' ], function(jquery,
 			}
 			if (!$("#tt").tabs("exists", treeItem.cn)) {
 				$('#tt').tabs('add', {
-					title : treeItem.cn,
-					href : treeItem.url,
-					selected : true,
-					closable : true
-				});
+							title : treeItem.cn,
+							href : treeItem.url,
+							selected : true,
+							closable : true
+						});
 			}
 			$("#tt").tabs("select", treeItem.cn);
 			setTimeout('$build("db.addEvent")', 500);

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.IAppSarsCityIncrRateDao">
+	<select id="queryList" resultType="com.pd.base.model.MapVO">
+with 
+today_t as(
+	select distinct province,city
+    from app_sars_city_t
+   	where creation_date = (
+   			select max(creation_date) today 
+   			from app_sars_city_t
+   		)
+     	and qty_type='cnt'
+),
+data_t as(
+	select t1.province,
+		t1.city,
+		max(qty) maxQty,
+		min(qty) minQty,
+		max(creation_date)-min(creation_date) passDays
+	from app_sars_city_t t1
+	join today_t t2
+		on t1.province=t2.province
+		and t1.city=t2.city
+    	and t1.qty_type='cnt'
+    group by t1.province,t1.city
+),
+cal_t as(
+	select province,
+     	city,
+     	minQty,
+     	maxQty,
+     	passDays,
+       	case when passDays = 0 then
+            	0
+           	else
+            	power(maxQty / minQty, 1 / passDays) - 1
+         	end incrRate
+	from data_t
+)
+select province,
+      city,
+      passDays,
+      maxQty,
+      minQty,
+      round(incrRate,2)*100||'%' avgRate
+from cal_t
+where maxQty>10
+order by incrRate desc
+	</select>
+</mapper>  

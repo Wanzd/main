@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.IAppSarsProvinceWeekCntDao">
+	<select id="queryList" resultType="com.pd.base.model.MapVO">
+with 
+today_t as(
+	select distinct province
+    from app_sars_city_t
+   	where creation_date = (
+   			select max(creation_date) today 
+   			from app_sars_city_t
+   		)
+     	and qty_type='cnt'
+),
+bucket_t as(
+	select trunc(sysdate-7+level) bucket,
+		'd'||level d,
+		trunc(sysdate) cur
+	from dual
+	connect by 7>=level
+),
+data_t as(
+	select t1.province,
+		t1.qty,
+		t3.d,
+		t3.cur
+	from (
+		select province,
+			creation_date,
+			sum(qty) qty
+		from app_sars_city_t 
+		where qty_type='cnt'
+		group by province,creation_date
+	)t1
+	join today_t t2
+		on t1.province=t2.province
+	join bucket_t t3
+		on t1.creation_date=t3.bucket
+),
+pivot_t as(
+	select *
+	from data_t
+	pivot(
+		sum(qty) for d in(
+			'd1' as "d1",
+			'd2' as "d2",
+			'd3' as "d3",
+			'd4' as "d4",
+			'd5' as "d5",
+			'd6' as "d6",
+			'd7' as "d7"
+		)
+	)
+)
+select * 
+from pivot_t
+order by "d7" desc
+	</select>
+</mapper>  

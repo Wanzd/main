@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.IAppSarsCityQtyDao">
+	<select id="queryList" resultType="com.pd.base.model.MapVO">
+with 
+today_t as(
+	select max(creation_date) creation_date 
+   	from app_sars_city_t
+),
+data_t as(
+	select t1.province,
+		t1.city,
+		sum(decode(qty_type,'cnt',qty,0)) cnt,
+		sum(decode(qty_type,'heal',qty,0)) heal,
+		sum(decode(qty_type,'death',qty,0)) death
+	from app_sars_city_t t1
+	join today_t t2
+		on t1.creation_date=t2.creation_date
+    group by t1.province,t1.city
+)
+select province "province",
+	city "city",
+	cnt "cnt",
+	heal "heal",
+	death "death"
+from data_t
+order by cnt desc,heal desc,death desc
+	</select>
+</mapper>  
