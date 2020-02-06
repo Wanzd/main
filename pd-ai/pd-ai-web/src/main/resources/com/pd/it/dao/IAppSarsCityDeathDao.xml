@@ -5,7 +5,7 @@
 with 
 today_t as(
 	select max(creation_date) creation_date 
-   	from app_sars_city_t
+   	from app_sari_city_t
 ),
 data_t as(
 	select t1.province,

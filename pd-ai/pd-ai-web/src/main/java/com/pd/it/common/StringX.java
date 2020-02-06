@@ -1,9 +1,13 @@
 package com.pd.it.common;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.sql.Clob;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +20,8 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 public class StringX {
+	public final static String BLANK = "";
+
 	public static <IN> String attr(IN in, String attrName) {
 		if (in instanceof Map) {
 			return str(((Map) in).get(attrName));
@@ -65,5 +71,25 @@ public class StringX {
 
 	public static String file(File file) {
 		return FileUtil.readAll(file);
+	}
+
+	public static String clob(Clob clob) {
+		String reString = "";
+		Reader is;
+		try {
+			is = clob.getCharacterStream();
+			// 得到流
+			BufferedReader br = new BufferedReader(is);
+			String tmp = null;
+			StringBuffer sb = new StringBuffer();
+			while ((tmp=br.readLine()) != null) {// 执行循环将字符串全部取出付值给StringBuffer由StringBuffer转成STRING
+				sb.append(tmp);
+			}
+			reString = sb.toString();
+			return reString;
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+		return BLANK;
 	}
 }

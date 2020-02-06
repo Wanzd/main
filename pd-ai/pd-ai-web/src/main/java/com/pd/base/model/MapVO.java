@@ -1,6 +1,8 @@
 package com.pd.base.model;
 
+import java.sql.Clob;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pd.it.common.StringX;
 
 public class MapVO extends HashMap<String, Object> {
 	private static final long serialVersionUID = 8344639996353937629L;
@@ -98,6 +101,9 @@ public class MapVO extends HashMap<String, Object> {
 		if (obj == null) {
 			return "";
 		}
+		if(obj instanceof Clob) {
+			return StringX.clob((Clob)obj);
+		}
 		return obj.toString();
 	}
 
@@ -141,5 +147,17 @@ public class MapVO extends HashMap<String, Object> {
 	public MapVO p(String key, Object value) {
 		put(key, value);
 		return this;
+	}
+
+	public Date date(String key) {
+		Object v = get(key);
+		if (v != null) {
+			try {
+				return (Date) v;
+			} catch (Exception e) {
+
+			}
+		}
+		return null;
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pd.base.model.MapVO;
-import com.pd.it.business.impl.SarsBusiness;
+import com.pd.it.business.impl.SariBusiness;
 import com.pd.it.common.StringX;
 
 /**
@@ -24,11 +24,11 @@ import com.pd.it.common.StringX;
  *
  */
 @RestController
-@RequestMapping("/sars")
-public class SarsRest {
-	private static final String UPLDAD_PATH = "F:/uploadFile/sars/";
+@RequestMapping("/sari")
+public class SariRest {
+	private static final String UPLDAD_PATH = "F:/uploadFile/sari/";
 	@Inject
-	private SarsBusiness business;
+	private SariBusiness business;
 
 	@RequestMapping(value = "/parse")
 	@ResponseBody

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.dao.ISarsCityDao">
+<mapper namespace="com.pd.it.dao.Sari$ICityDao">
 	<update id="updateList">
 declare
 begin
 		<foreach item="it" collection="list" >
-	insert into app_sars_city_t(
+	insert into app_sari_city_t(
 		province,
 		city,
 		qty_type,
@@ -25,8 +25,7 @@ begin
 end;
 	</update>
 	
-	<update id="delete">
-delete from app_sars_city_t
-where creation_date=trunc(#{date})
+	<update id="truncate">
+truncate table app_sari_city_t
 	</update>
 </mapper>  

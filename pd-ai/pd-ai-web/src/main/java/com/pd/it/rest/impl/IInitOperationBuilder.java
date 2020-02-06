@@ -1,7 +1,5 @@
 package com.pd.it.rest.impl;
 
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 
 import com.pd.base.model.MapVO;
@@ -9,18 +7,20 @@ import com.pd.it.common.ObjectX;
 import com.pd.it.common.SpringUtil;
 import com.pd.it.common.StringX;
 import com.pd.it.common.itf.IBuilder;
-import com.pd.it.dao.api.IQueryDao;
+import com.pd.it.operation.api.IInitOperation;
 
-public class IQueryListOperationBuilder implements IBuilder<Object, Object> {
+public class IInitOperationBuilder implements IBuilder<Object, Object> {
 
 	@Override
 	public Object build(Object in) {
 		ApplicationContext ctx = SpringUtil.getContext();
 		MapVO mapVO = ObjectX.x(in, MapVO.class);
-		String beanName = mapVO.str("beanName");
-		IQueryDao bean = ctx.getBean(beanName, IQueryDao.class);
-		List rs = bean.queryList(in);
-		return rs;
+		String beanName = StringX.cap(mapVO.str("domain")) + StringX.cap(mapVO.str("module"))
+				+ StringX.cap(mapVO.str("dimension"));
+		IInitOperation bean = ctx.getBean("I"+beanName + "Dao", IInitOperation.class);
+		bean.initTable();
+		bean.initData();
+		return 0;
 	}
 
 }

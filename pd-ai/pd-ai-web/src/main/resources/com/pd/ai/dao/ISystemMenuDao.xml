@@ -1,71 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.ai.dao.ISystemMenuDao">
-	<select id="queryPagedList" resultType="com.pd.ai.model.SystemMenuDTO">
-		<include refid="t$data"/>
-		limit #{page.startIdx},#{page.endIdx}
-	</select>
-	
-	<select id="queryCount" resultType="int">
-select count(1)
-from sys_Menu_t
-		<include refid="filter"/>
-	</select>
-	
 	<select id="queryList" resultType="com.pd.ai.model.SystemMenuDTO">
 		<include refid="t$data"/>
 	</select>
-	
-	<update id="us">
-		replace into sys_lookupitem_t(type_id,id,cn,en,value)
-		values
-		<foreach item="it" collection="list" separator=",">
-			(
-			'moduleCfg.economicRate',
-			#{it.id},
-			#{it.cn},
-			#{it.en},
-			#{it.value}
-			)
-		</foreach>
-
-	</update>
-
-	<delete id="ds">
-		delete from sys_lookupitem_t
-		where (type_id,id) in(
-		<foreach item="it" collection="list" separator=",">
-			('moduleCfg.economicRate',${it.id})
-		</foreach>
-		)
-	</delete>
 	
 	<sql id="t$data">
 select 
 		<include refid='cols$select'/>
 from sys_Menu_t
 		<include refid="filter"/>
-order by index_id		
+order by sort_id		
 	</sql>
 	
 	<sql id="filter">
 where 1=1
 		<choose>
-			<when test="fo.parentId!=null"> and parent_id =#{fo.parentId}</when>
-			<otherwise> and parent_id is null or parent_id=''</otherwise>
+			<when test="fo.pid!=null"> and pid =#{fo.pid}</when>
+			<otherwise> and pid is null or pid=''</otherwise>
 		</choose> 		
 	</sql>
 	
 	<sql id="cols$select">
 	id as "id",
-	parent_id as "parentId",
-	parent_id as "pid",
-	cn as "cn",
-	en as "en",
-	cn as "text",
-	index_id as "indexId",
+	pid as "pid",
+	name as "text",
 	url as "url",
 	detail as "detail"
 	</sql>
 	
+	<update id="initTable">
+create table sys_Menu_t(
+	pid varchar2(30),
+	id varchar2(30),
+	name varchar2(50),
+	language varchar2(10),
+	sort_id number,
+	url varchar2(200),
+	active_flag varchar2(1),
+	detail varchar2(100)
+)
+	</update>
+	
+	<update id="initData">
+delete from sys_Menu_t
+	</update>
 </mapper>  

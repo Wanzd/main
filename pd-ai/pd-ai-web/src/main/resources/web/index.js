@@ -20,7 +20,7 @@ require(['jquery', 'easyui', 'common', 'tree', 'db'], function(jquery, easyui,
 			console.log("init$menu");
 			$("#menu").tree({
 				id : "id",
-				parentField : "parentId",
+				parentField : "pid",
 				url : "ai/system/menu/default/queryList",
 				onClick : main.tabMenu,
 				formatter : function(node) {
@@ -56,7 +56,7 @@ require(['jquery', 'easyui', 'common', 'tree', 'db'], function(jquery, easyui,
 				contentType : "application/json",
 				url : "ai/system/menu/default/queryList",
 				data : JSON.stringify({
-							parentId : treeItem.id
+							pid : treeItem.id
 						}),
 				dataType : "json",
 				success : function(data) {
