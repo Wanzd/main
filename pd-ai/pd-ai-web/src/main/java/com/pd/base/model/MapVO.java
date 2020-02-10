@@ -101,8 +101,8 @@ public class MapVO extends HashMap<String, Object> {
 		if (obj == null) {
 			return "";
 		}
-		if(obj instanceof Clob) {
-			return StringX.clob((Clob)obj);
+		if (obj instanceof Clob) {
+			return StringX.clob((Clob) obj);
 		}
 		return obj.toString();
 	}
@@ -154,6 +154,18 @@ public class MapVO extends HashMap<String, Object> {
 		if (v != null) {
 			try {
 				return (Date) v;
+			} catch (Exception e) {
+
+			}
+		}
+		return null;
+	}
+
+	public MapVO map(String key) {
+		Object v = get(key);
+		if (v != null) {
+			try {
+				return (MapVO) v;
 			} catch (Exception e) {
 
 			}

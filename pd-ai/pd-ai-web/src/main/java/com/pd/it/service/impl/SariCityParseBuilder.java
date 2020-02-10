@@ -7,7 +7,7 @@ import com.pd.base.model.MapVO;
 import com.pd.it.common.IntX;
 import com.pd.it.common.itf.IBuilder;
 
-public class SarsHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> {
+public class SariCityParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 
 	@Override
 	public List<MapVO> build(MapVO in) {
@@ -20,8 +20,8 @@ public class SarsHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 			if (eachStr.contains(" 确诊 ")) {
 				provinceName = parseAttr("provinceName", eachStr);
 			} else {
-				eachStr = eachStr.replaceAll("市", "市 ").replaceAll("县", "县 ").replaceAll("区", "区 ")
-						.replaceAll("（.*区.*）", "");
+				eachStr = eachStr.replaceAll("市", " ").replaceAll("县", "县 ").replaceAll("区", "区 ").replaceAll("（.*区.*）",
+						"");
 				String[] cityStrArr = eachStr.split("、");
 				String[] attrNames = new String[] { "cnt", "heal", "death", "doubt" };
 				for (String eachCityStr : cityStrArr) {
@@ -29,7 +29,7 @@ public class SarsHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 						MapVO vo = new MapVO();
 						vo.put("province", provinceName);
 						vo.put("city", parseAttr("city", eachCityStr));
-						vo.put("qtyType", "cnt");
+						vo.put("qtyType", eachAttrName);
 						vo.put("qty", parseAttr(eachAttrName, eachCityStr));
 						vo.put("creationDate", in.date("creationDate"));
 						rsList.add(vo);
@@ -82,15 +82,22 @@ public class SarsHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 			}
 			eachStr = eachStr.substring(start + 1);
 			end = eachStr.indexOf("例");
-			attrValue = IntX.str(eachStr.substring(0, end));
+			if (end < 0) {
+				attrValue = null;
+			}
+			try {
+				attrValue = IntX.str(eachStr.substring(0, end));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 		case "city":
 			try {
 				attrValue = eachStr.substring(0, eachStr.indexOf(" "));
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				attrValue=eachStr.split("[\\d]")[0];
 			}
-			attrValue = "";
 			break;
 		}
 		return attrValue;

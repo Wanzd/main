@@ -28,4 +28,16 @@ end;
 	<update id="truncate">
 truncate table app_sari_city_t
 	</update>
+	
+	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
+select distinct city "id",
+	city "text"
+from app_sari_city_t
+where 1=0
+		<choose>
+			<when test='province!=null and province!=""'> or province=#{province,jdbcType=VARCHAR}</when>
+			<otherwise></otherwise>
+		</choose>
+order by nlssort(city,'NLS_SORT=SCHINESE_PINYIN_M')
+	</select>
 </mapper>  

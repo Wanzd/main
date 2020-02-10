@@ -2,6 +2,7 @@ package com.pd.it.rest.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -30,9 +31,17 @@ public class SariRest {
 	@Inject
 	private SariBusiness business;
 
-	@RequestMapping(value = "/parse")
+	@RequestMapping(value = "/parseAll")
 	@ResponseBody
-	public Object parse(@RequestBody(required = false) MapVO fo) {
+	public Object parseAll(@RequestBody(required = false) MapVO fo) {
+		business.process(fo);
+		return 0;
+	}
+
+	@RequestMapping(value = "/parseToday")
+	@ResponseBody
+	public Object parseToday(@RequestBody(required = false) MapVO fo) {
+		fo.put("creationDate", new Date());
 		business.process(fo);
 		return 0;
 	}

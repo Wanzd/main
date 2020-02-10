@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.dao.Sari$IQtyTypeDao">
+	
+	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
+select distinct qty_type "id",
+	qty_type "text"
+from app_sari_city_t
+order by nlssort(qty_type,'NLS_SORT=SCHINESE_PINYIN_M')
+	</select>
+</mapper>  

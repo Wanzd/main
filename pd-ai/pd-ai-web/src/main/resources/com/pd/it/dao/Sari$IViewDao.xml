@@ -4,5 +4,27 @@
 	<select id="queryList" resultType="com.pd.base.model.MapVO">
 select *
 from ${fo.viewName}
+		<where>
+			<if test='fo.qtyType!=null and fo.qtyType!=""'> and "qtyType"=#{fo.qtyType,jdbcType=VARCHAR}</if>
+			<if test='fo.province!=null and fo.province!=""'> and "province"=#{fo.province,jdbcType=VARCHAR}</if>
+			<if test='fo.city!=null '>
+				and "city"=#{fo.city.class,jdbcType=VARCHAR}
+				<choose>
+					<when test='fo.city.class=="class java.lang.String" and fo.city!=""'> and "city"=#{fo.city,jdbcType=VARCHAR}</when>
+					<otherwise> 
+						and "city" in
+						<foreach item="it" collection="fo.city" open="(" separator="," close=")">#{it}</foreach>
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+	</select>
+	
+	<select id="queryCombo" resultType="com.pd.base.model.ComboVO">
+select view_name "id",
+	view_name "text"
+from user_views
+where view_name like 'SARI_%'
+order by view_name
 	</select>
 </mapper>  

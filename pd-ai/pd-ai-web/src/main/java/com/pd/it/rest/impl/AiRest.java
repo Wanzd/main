@@ -3,7 +3,6 @@ package com.pd.it.rest.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.base.model.MapVO;
-import com.pd.it.common.SpringUtil;
 import com.pd.it.common.StringX;
 import com.pd.it.common.itf.IBuilder;
-import com.pd.it.dao.api.IQueryDao;
 
 /**
  * AI系统
@@ -38,10 +35,10 @@ public class AiRest {
 		fo.put("domain", domain);
 		fo.put("module", module.equals("default") ? "" : module);
 		fo.put("dimension", dimension.equals("default") ? "" : dimension);
-		String beanName = "I"+StringX.cap(fo.str("domain")) + StringX.cap(fo.str("module"))
-				+ StringX.cap(fo.str("dimension")+"Dao");
+		String beanName = "I" + StringX.cap(fo.str("domain")) + StringX.cap(fo.str("module"))
+				+ StringX.cap(fo.str("dimension") + "Dao");
 		fo.put("beanName", beanName);
-		
+
 		IBuilder<Object, Object> opBuilder = builderMap.get(operation);
 		return opBuilder.build(fo);
 	}
@@ -54,7 +51,6 @@ public class AiRest {
 			fo = new MapVO();
 		}
 		fo.put("beanName", dimension.equals("default") ? "" : dimension);
-
 		IBuilder<Object, Object> opBuilder = builderMap.get(operation);
 		return opBuilder.build(fo);
 	}
@@ -69,6 +65,8 @@ public class AiRest {
 		opMap.put("init", new IInitOperationBuilder());
 		opMap.put("query", new IQueryOperationBuilder());
 		opMap.put("queryList", new IQueryListOperationBuilder());
+		opMap.put("queryCombo", new QueryComboOperationBuilder());
+		opMap.put("queryTreeList", new IQueryTreeListOperationBuilder());
 		opMap.put("queryPagedList", new IQueryPagedListOperationBuilder());
 		return opMap;
 	}

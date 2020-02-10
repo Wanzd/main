@@ -12,6 +12,7 @@ import org.apache.commons.collections4.ListUtils;
 import com.pd.base.model.MapVO;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.dao.Sari.ICityDao;
+import com.pd.it.dao.Sari.ICityResultDao;
 import com.pd.it.service.api.ITruncateService;
 
 @Named
@@ -19,24 +20,33 @@ public class SariCityService implements ITruncateService {
 
 	@Inject
 	private ICityDao dao;
+	@Inject
+	private ICityResultDao cityResultDao;
 
 	public void process(MapVO fo) {
 		List<MapVO> list = parse(fo);
-		refreshDb(list);
+		insertList(list);
+		//calResult();
+	}
+
+	private void calResult() {
+		cityResultDao.drop();
+		cityResultDao.initData();
 	}
 
 	private List<MapVO> parse(MapVO fo) {
 		IBuilder<MapVO, List<MapVO>> parseBean = null;
 		switch (fo.str("parseBean")) {
 		case "html":
-			parseBean = new SarsHtmlParseBuilder();
+			parseBean = new SariCityHtmlParseBuilder();
+			break;
 		default:
-			parseBean = new SarsParseBuilder();
+			parseBean = new SariCityParseBuilder();
 		}
 		return parseBean.build(fo);
 	}
 
-	private void refreshDb(List<MapVO> rsMap) {
+	private void insertList(List<MapVO> rsMap) {
 		List<MapVO> map = rsMap.stream().filter(vo -> vo.num("qty") > 0).collect(Collectors.toList());
 		MapVO dto = new MapVO();
 		dto.put("date", new Date());

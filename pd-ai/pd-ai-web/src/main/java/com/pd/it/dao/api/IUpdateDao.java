@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Param;
 public interface IUpdateDao<DTO> {
 	int insertList(@Param("list") List<DTO> list) throws SQLException;
 
-	int updateList(@Param("list")List<DTO> list) throws SQLException;
+	int updateList(@Param("list") List<DTO> list) throws SQLException;
 
-	int deleteList(@Param("list")List<DTO> list) throws SQLException;
+	int deleteList(@Param("list") List<DTO> list) throws SQLException;
 
 	int delete(DTO dto) throws SQLException;
 }

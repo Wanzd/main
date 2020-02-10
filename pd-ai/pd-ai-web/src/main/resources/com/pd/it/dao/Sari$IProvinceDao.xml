@@ -27,4 +27,11 @@ end;
 	<update id="truncate">
 truncate table app_sari_province_t
 	</update>
+	
+	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
+select distinct province "id",
+	province "text"
+from app_sari_city_t
+order by nlssort(province,'NLS_SORT=SCHINESE_PINYIN_M')
+	</select>
 </mapper>  

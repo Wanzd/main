@@ -82,7 +82,7 @@ public class StringX {
 			BufferedReader br = new BufferedReader(is);
 			String tmp = null;
 			StringBuffer sb = new StringBuffer();
-			while ((tmp=br.readLine()) != null) {// 执行循环将字符串全部取出付值给StringBuffer由StringBuffer转成STRING
+			while ((tmp = br.readLine()) != null) {// 执行循环将字符串全部取出付值给StringBuffer由StringBuffer转成STRING
 				sb.append(tmp);
 			}
 			reString = sb.toString();
@@ -91,5 +91,12 @@ public class StringX {
 			e.printStackTrace();
 		}
 		return BLANK;
+	}
+
+	public static String nvl(String str, String defaultValue) {
+		if (str == null ||str.length()==0) {
+			return defaultValue;
+		}
+		return str;
 	}
 }

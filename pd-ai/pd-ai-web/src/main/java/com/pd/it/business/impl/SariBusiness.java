@@ -20,7 +20,7 @@ public class SariBusiness {
 	private SariBaseService baseService;
 
 	public void process(MapVO fo) {
-		List<MapVO> sariNews = baseService.queryList(new MapVO());
+		List<MapVO> sariNews = baseService.queryList(fo);
 
 		//provinceService.truncate();
 		cityService.truncate();

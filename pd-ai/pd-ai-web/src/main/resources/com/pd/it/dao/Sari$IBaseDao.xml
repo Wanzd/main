@@ -7,5 +7,6 @@ select creation_date "creationDate",
 	parse_bean "parseBean"
 from base_news_t
 where type='sari'
+		<if test='fo.creationDate != null'> and creation_date =trunc(#{fo.creationDate,jdbcType=DATE})</if>
 	</select>
 </mapper>  
