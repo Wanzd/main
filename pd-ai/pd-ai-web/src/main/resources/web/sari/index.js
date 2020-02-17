@@ -21,7 +21,7 @@ require(['jquery', 'easyui', 'common', 'echarts', 'echartsgl', 'wordcloud',
 			this.search = function() {
 				var myChart = echarts.init(document.getElementById('myChart'));
 				data2 = $("#fSari").serializeJson();
-				url = '../ai/Sari$IViewDao/queryList';
+				url = '../ai/IViewDao/queryList';
 				result = common.ajax(url, data2);
 				var symbolSize = 2.5;
 				option = {
@@ -52,7 +52,7 @@ require(['jquery', 'easyui', 'common', 'echarts', 'echartsgl', 'wordcloud',
 				myChart.setOption(option);
 			}
 			$("#viewName").combobox({
-						url : '../ai/Sari$IViewDao/queryCombo',
+						url : '../ai/IViewDao/queryCombo',
 						valueField : 'id',
 						textField : 'text'
 					});

@@ -12,7 +12,7 @@ import com.pd.base.model.PageVO;
 import com.pd.base.model.PagedResult;
 import com.pd.it.common.Reflects;
 import com.pd.it.common.StringX;
-import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.operation.api.IQueryPagedListOperation;
 
 public interface IDimensionQueryPagedListRest<FO, DTO> {
 
@@ -21,8 +21,8 @@ public interface IDimensionQueryPagedListRest<FO, DTO> {
 	default PagedResult<DTO> queryDimensionPagedList(@RequestBody JSONObject fo, @PathVariable String dimension,
 			PageVO pageVO) {
 		dimension = StringX.decap(dimension);
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class, dimension + "Dao",
-				dimension + "Service", dimension + "Business");
+		IQueryPagedListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryPagedListOperation.class,
+				dimension + "Dao", dimension + "Service", dimension + "Business");
 		List<DTO> pagedList = operation.queryPagedList((FO) fo, pageVO);
 		int count = operation.queryCount((FO) fo);
 		pageVO.setTotal(count);

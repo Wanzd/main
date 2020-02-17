@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SARI</title>
+
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.4.1/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="../jquery-easyui-1.4.1/themes/icon.css">
+<script data-main="./index.js" src="../require.js" charset="utf-8"></script>
+</head>
+<form id="form" method="post">
+	<div>
+		<label for="dataSource">数据源:</label> <input id="dataSource"
+			name="dataSource" /> <label for="chartType">展示类型:</label> <input
+			id="chartType" name="chartType" /> <input id="search" name="search"
+			type="button" value="查询" />
+	</div>
+</form>
+<div id="myChart" title="详细数据" style="weight: 100%; height: 500px;" />
+</html>

@@ -46,6 +46,15 @@ define([ 'ai$echart' ], function() {
 				rsVO.push(curVO);
 			}
 			return rsVO;
+		},
+		x$option : function(data) {
+			var option = null;
+			fMap = {
+				"line" : this.X$option$line,
+				"scatter3D" : this.X$option$scatter3D
+			}
+			f = fMap[data.echartType]
+			return f != null ? f(data) : null;
 		}
 	};
 });

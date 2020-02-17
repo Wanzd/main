@@ -1,5 +1,6 @@
-package com.pd.it.service.impl;
+package com.pd.it.app.sari.service;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,38 +11,31 @@ import javax.inject.Named;
 import org.apache.commons.collections4.ListUtils;
 
 import com.pd.base.model.MapVO;
+import com.pd.it.app.sari.builder.SariProvinceHtmlParseBuilder;
+import com.pd.it.app.sari.builder.SariProvinceParseBuilder;
+import com.pd.it.app.sari.dao.IAppSariProvinceDao;
 import com.pd.it.common.itf.IBuilder;
-import com.pd.it.dao.Sari.ICityDao;
-import com.pd.it.dao.Sari.ICityResultDao;
 import com.pd.it.service.api.ITruncateService;
 
 @Named
-public class SariCityService implements ITruncateService {
+public class SariProvinceService implements ITruncateService {
 
 	@Inject
-	private ICityDao dao;
-	@Inject
-	private ICityResultDao cityResultDao;
+	private IAppSariProvinceDao dao;
 
 	public void process(MapVO fo) {
 		List<MapVO> list = parse(fo);
 		insertList(list);
-		//calResult();
-	}
-
-	private void calResult() {
-		cityResultDao.drop();
-		cityResultDao.initData();
 	}
 
 	private List<MapVO> parse(MapVO fo) {
 		IBuilder<MapVO, List<MapVO>> parseBean = null;
 		switch (fo.str("parseBean")) {
 		case "html":
-			parseBean = new SariCityHtmlParseBuilder();
+			parseBean = new SariProvinceHtmlParseBuilder();
 			break;
 		default:
-			parseBean = new SariCityParseBuilder();
+			parseBean = new SariProvinceParseBuilder();
 		}
 		return parseBean.build(fo);
 	}
@@ -57,6 +51,15 @@ public class SariCityService implements ITruncateService {
 			} catch (Exception e) {
 				System.out.println(subList);
 			}
+		}
+	}
+
+	public void delete(MapVO fo) {
+		try {
+			dao.delete(fo);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

@@ -22,7 +22,7 @@ import com.pd.it.common.itf.IBuilder;
 @RestController
 @RequestMapping("/ai")
 public class AiRest {
-	private Map<String, IBuilder> builderMap = initBuilderMap();
+	private static Map<String, IBuilder> builderMap = initBuilderMap();
 
 	@RequestMapping(value = "/{domain}/{module}/{dimension}/{operation}", produces = {
 			"application/json;charset=UTF-8" })
@@ -60,7 +60,7 @@ public class AiRest {
 	 * 
 	 * @return
 	 */
-	private Map<String, IBuilder> initBuilderMap() {
+	private static Map<String, IBuilder> initBuilderMap() {
 		Map<String, IBuilder> opMap = new HashMap<>();
 		opMap.put("init", new IInitOperationBuilder());
 		opMap.put("query", new IQueryOperationBuilder());

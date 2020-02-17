@@ -13,7 +13,7 @@ import com.pd.ai.dao.ISystemMenuDao;
 import com.pd.ai.model.SystemMenuDTO;
 import com.pd.ai.model.SystemMenuFO;
 import com.pd.it.common.Reflects;
-import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.operation.api.IQueryListOperation;
 import com.pd.it.rest.api.IQueryRest;
 import com.pd.it.rest.api.IRest;
 
@@ -32,16 +32,16 @@ public class SystemMenuRest implements IRest, IQueryRest<SystemMenuFO, SystemMen
 	@RequestMapping(value = "/root")
 	@ResponseBody
 	public List<SystemMenuDTO> root() {
-		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
-				"dao,service,business");
+		IQueryListOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this,
+				IQueryListOperation.class, "dao,service,business");
 		return operation.queryList(new SystemMenuFO());
 	}
 
 	@RequestMapping(value = "/sub", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public List<SystemMenuDTO> root(SystemMenuFO fo) {
-		IQueryOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
-				"dao,service,business");
+		IQueryListOperation<SystemMenuFO, SystemMenuDTO> operation = Reflects.firstExistField(this,
+				IQueryListOperation.class, "dao,service,business");
 		return operation.queryList(fo);
 	}
 }

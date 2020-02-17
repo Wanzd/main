@@ -1,4 +1,4 @@
-package com.pd.it.service.impl;
+package com.pd.it.app.sari.builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,36 +7,11 @@ import com.pd.base.model.MapVO;
 import com.pd.it.common.IntX;
 import com.pd.it.common.itf.IBuilder;
 
-public class SariCityParseBuilder implements IBuilder<MapVO, List<MapVO>> {
+public class SariNationParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 
 	@Override
 	public List<MapVO> build(MapVO in) {
 		List<MapVO> rsList = new ArrayList<>();
-		String inStr = in.str("value");
-		String[] strArr = inStr.split(";");
-		Object provinceName = "";
-		for (int i = 0, total = strArr.length; i < total; i++) {
-			String eachStr = strArr[i];
-			if (eachStr.contains(" 确诊 ")) {
-				provinceName = parseAttr("provinceName", eachStr);
-			} else {
-				eachStr = eachStr.replaceAll("市", " ").replaceAll("县", "县 ").replaceAll("区", "区 ").replaceAll("（.*区.*）",
-						"");
-				String[] cityStrArr = eachStr.split("、");
-				String[] attrNames = new String[] { "cnt", "heal", "death", "doubt" };
-				for (String eachCityStr : cityStrArr) {
-					for (String eachAttrName : attrNames) {
-						MapVO vo = new MapVO();
-						vo.put("province", provinceName);
-						vo.put("city", parseAttr("city", eachCityStr));
-						vo.put("qtyType", eachAttrName);
-						vo.put("qty", parseAttr(eachAttrName, eachCityStr));
-						vo.put("creationDate", in.date("creationDate"));
-						rsList.add(vo);
-					}
-				}
-			}
-		}
 		return rsList;
 	}
 
@@ -95,8 +70,8 @@ public class SariCityParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 			try {
 				attrValue = eachStr.substring(0, eachStr.indexOf(" "));
 			} catch (Exception e) {
-				//e.printStackTrace();
-				attrValue=eachStr.split("[\\d]")[0];
+				// e.printStackTrace();
+				attrValue = eachStr.split("[\\d]")[0];
 			}
 			break;
 		}

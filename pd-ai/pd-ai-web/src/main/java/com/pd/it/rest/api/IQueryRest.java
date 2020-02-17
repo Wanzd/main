@@ -12,14 +12,15 @@ import com.pd.base.model.PageVO;
 import com.pd.base.model.PagedResult;
 import com.pd.it.common.Reflects;
 import com.pd.it.common.StringX;
-import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.operation.api.IQueryListOperation;
+import com.pd.it.operation.api.IQueryPagedListOperation;
 
 public interface IQueryRest<FO, DTO> {
 
 	@RequestMapping(value = "/queryList")
 	@ResponseBody
 	default List<DTO> queryList(@RequestBody JSONObject fo) {
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+		IQueryListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryListOperation.class,
 				"dao,service,business");
 		return operation.queryList((FO) fo);
 	}
@@ -27,7 +28,7 @@ public interface IQueryRest<FO, DTO> {
 	@RequestMapping(value = "/queryPagedList/{pageSize}/{curPage}")
 	@ResponseBody
 	default PagedResult<DTO> queryPagedList(@RequestBody JSONObject fo, PageVO pageVO) {
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+		IQueryPagedListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryPagedListOperation.class,
 				"dao,service,business");
 		List<DTO> pagedList = operation.queryPagedList((FO) fo, pageVO);
 		int count = operation.queryCount((FO) fo);
@@ -39,8 +40,8 @@ public interface IQueryRest<FO, DTO> {
 	@ResponseBody
 	default List<DTO> queryDimensionList(@RequestBody JSONObject fo, @PathVariable String dimension) {
 		dimension = StringX.decap(dimension);
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class, dimension + "Dao",
-				dimension + "Service", dimension + "Business");
+		IQueryListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryListOperation.class,
+				dimension + "Dao", dimension + "Service", dimension + "Business");
 		return operation.queryList((FO) fo);
 	}
 
@@ -49,8 +50,8 @@ public interface IQueryRest<FO, DTO> {
 	default PagedResult<DTO> queryDimensionPagedList(@RequestBody JSONObject fo, @PathVariable String dimension,
 			PageVO pageVO) {
 		dimension = StringX.decap(dimension);
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class, dimension + "Dao",
-				dimension + "Service", dimension + "Business");
+		IQueryPagedListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryPagedListOperation.class,
+				dimension + "Dao", dimension + "Service", dimension + "Business");
 		List<DTO> pagedList = operation.queryPagedList((FO) fo, pageVO);
 		int count = operation.queryCount((FO) fo);
 		pageVO.setTotal(count);

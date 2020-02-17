@@ -15,7 +15,7 @@ import com.pd.it.common.Reflects;
 import com.pd.it.job.dao.IBigDataDao;
 import com.pd.it.job.model.BigDataDTO;
 import com.pd.it.job.model.BigDataFO;
-import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.operation.api.IQueryListOperation;
 import com.pd.it.rest.api.IQueryRest;
 import com.pd.it.rest.api.IRest;
 
@@ -30,7 +30,7 @@ public class BigDataRest implements IRest, IQueryRest<BigDataFO, BigDataDTO> {
 	@ResponseBody
 	public List<BigDataDTO> queryList(@RequestBody JSONObject jo) {
 		BigDataFO fo = ObjectX.x(jo, BigDataFO.class);
-		IQueryOperation<BigDataFO, BigDataDTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+		IQueryListOperation<BigDataFO, BigDataDTO> operation = Reflects.firstExistField(this, IQueryListOperation.class,
 				"dao,service,business");
 		return operation.queryList(fo);
 	}

@@ -10,14 +10,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.pd.base.model.PageVO;
 import com.pd.base.model.PagedResult;
 import com.pd.it.common.Reflects;
-import com.pd.it.operation.api.IQueryOperation;
+import com.pd.it.operation.api.IQueryPagedListOperation;
 
 public interface IQueryPagedListRest<FO, DTO> {
 
 	@RequestMapping(value = "/queryPagedList/{pageSize}/{curPage}")
 	@ResponseBody
 	default PagedResult<DTO> queryPagedList(@RequestBody JSONObject fo, PageVO pageVO) {
-		IQueryOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryOperation.class,
+		IQueryPagedListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryPagedListOperation.class,
 				"dao,service,business");
 		List<DTO> pagedList = operation.queryPagedList((FO) fo, pageVO);
 		int count = operation.queryCount((FO) fo);
