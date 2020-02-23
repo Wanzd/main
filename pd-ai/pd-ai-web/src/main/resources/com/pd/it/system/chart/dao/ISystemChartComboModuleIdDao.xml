@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.chart.dao.ISystemChartComboModuleIdDao">
+	
+	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
+select * from(
+	select distinct module_id "id",
+		module_id "text"
+	from SYS_CHART_T
+	order by nlssort("text",'NLS_SORT=SCHINESE_PINYIN_M')
+)
+where 100>=rownum
+	</select>
+</mapper>  

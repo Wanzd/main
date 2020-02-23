@@ -18,10 +18,14 @@ where id=#{fo.id,jdbcType=VARCHAR}
 	
 	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
 select * from(
-select distinct id "id",
-	title "text"
-from SYS_CHART_T
-order by nlssort(title,'NLS_SORT=SCHINESE_PINYIN_M')
+	select distinct id "id",
+		title "text"
+	from SYS_CHART_T
+		<where>
+			<if test='fo.moduleId!=null and fo.moduleId !=""'> and module_id =#{fo.moduleId,jdbcType=VARCHAR}</if>
+			<if test='fo.chartType!=null and fo.chartType !=""'> and chart_type =#{fo.chartType,jdbcType=VARCHAR}</if>
+		</where>
+	order by nlssort(title,'NLS_SORT=SCHINESE_PINYIN_M')
 )
 where 100>=rownum
 	</select>

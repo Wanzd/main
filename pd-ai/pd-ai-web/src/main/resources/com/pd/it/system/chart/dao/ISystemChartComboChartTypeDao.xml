@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.chart.dao.ISystemChartComboChartTypeDao">
+	
+	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
+select * from(
+	select distinct chart_type "id",
+		chart_type "text"
+	from SYS_CHART_T
+		<where>
+			<if test='fo.moduleId!=null and fo.moduleId !=""'> and module_id =#{fo.moduleId,jdbcType=VARCHAR}</if>
+		</where>
+	order by nlssort("text",'NLS_SORT=SCHINESE_PINYIN_M')
+)
+where 100>=rownum
+	</select>
+</mapper>  
