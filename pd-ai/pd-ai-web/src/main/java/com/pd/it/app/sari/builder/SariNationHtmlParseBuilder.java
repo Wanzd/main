@@ -15,16 +15,14 @@ public class SariNationHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> 
 	public List<MapVO> build(MapVO in) {
 		List<MapVO> rsList = new ArrayList<>();
 		String inStr = in.str("value");
-		String startStr = "<script id=\"js-initialData\" type=\"text/json\">";
+		String startStr = "<script id=\"redux-init-state\" type=\"text/json\">";
 		int start = inStr.indexOf(startStr);
 		inStr = inStr.substring(start + startStr.length());
 		int end = inStr.indexOf("</script>");
 		inStr = inStr.substring(0, end);
 		JSONObject jo = JSON.parseObject(inStr);
-		JSONObject initialState = jo.getJSONObject("initialState");
-		JSONObject nCoV2019 = initialState.getJSONObject("nCoV2019");
-		JSONObject trends = nCoV2019.getJSONObject("trends");
-		JSONArray overseasList = trends.getJSONArray("overseasList");
+		JSONObject nCoV2019 = jo.getJSONObject("nCoV2019");
+		JSONArray overseasList = nCoV2019.getJSONArray("overseasList");
 		String[] attrNames = new String[] { "cnt", "heal", "death", "doubt" };
 		for (int nationIdx = 0, provinceTotal = overseasList.size(); nationIdx < provinceTotal; nationIdx++) {
 			JSONObject nation = (JSONObject) overseasList.get(nationIdx);

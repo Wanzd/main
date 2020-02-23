@@ -22,11 +22,11 @@ public class DataSourceRest {
 	@Inject
 	private DataSourceBusiness business;
 
-	@RequestMapping(value = "/DS:{dsId}", produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = "/DS:{dataSourceId}", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public Object query(@PathVariable String dsId) {
+	public Object query(@PathVariable String dataSourceId) {
 		MapVO fo = new MapVO();
-		fo.put("id", dsId);
-		return business.query(fo);
+		fo.put("dataSourceId", dataSourceId);
+		return business.queryList(fo);
 	}
 }

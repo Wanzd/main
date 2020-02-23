@@ -15,6 +15,6 @@ select id "id",
 	type "type",
 	detail "detail"
 from sys_datasource_t
-where id= #{fo.id,jdbcType=VARCHAR}
+where id= #{fo.dataSourceId,jdbcType=VARCHAR}
 	</select>
 </mapper>  

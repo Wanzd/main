@@ -67,7 +67,7 @@ require(['jquery', 'easyui', 'common', 'echarts', 'echartsgl', 'wordcloud',
 						textField : 'text',
 						onSelect : function(rec) {
 							$("#city").combobox("clear");
-							var url = '../ai/Sari$ICityDao/queryCombo';
+							var url = '../ai/IAppSariCityDao/queryCombo';
 							var data = {
 								"province" : rec.id
 							};

@@ -13,9 +13,17 @@ import com.pd.base.model.PagedResult;
 import com.pd.it.common.Reflects;
 import com.pd.it.common.StringX;
 import com.pd.it.operation.api.IQueryListOperation;
+import com.pd.it.operation.api.IQueryOperation;
 import com.pd.it.operation.api.IQueryPagedListOperation;
 
 public interface IQueryRest<FO, DTO> {
+
+	@RequestMapping(value = "/query")
+	@ResponseBody
+	default DTO query(@RequestBody JSONObject fo) {
+		IQueryOperation<FO, DTO> op = Reflects.firstExistField(this, IQueryOperation.class, "dao,service,business");
+		return op.query((FO) fo);
+	}
 
 	@RequestMapping(value = "/queryList")
 	@ResponseBody
