@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pd.base.model.ComboVO;
+import com.pd.base.model.MapVO;
 import com.pd.base.model.PageVO;
 import com.pd.base.model.PagedResult;
+import com.pd.it.common.ObjectX;
 import com.pd.it.common.Reflects;
 import com.pd.it.common.StringX;
+import com.pd.it.operation.api.IQueryComboOperation;
 import com.pd.it.operation.api.IQueryListOperation;
 import com.pd.it.operation.api.IQueryOperation;
 import com.pd.it.operation.api.IQueryPagedListOperation;
@@ -27,10 +31,18 @@ public interface IQueryRest<FO, DTO> {
 
 	@RequestMapping(value = "/queryList")
 	@ResponseBody
-	default List<DTO> queryList(@RequestBody JSONObject fo) {
-		IQueryListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryListOperation.class,
+	default List<DTO> queryList(@RequestBody JSONObject in) {
+		IQueryListOperation<FO, DTO> op = Reflects.firstExistField(this, IQueryListOperation.class,
 				"dao,service,business");
-		return operation.queryList((FO) fo);
+		FO fo=(FO) in;
+		return op.queryList(fo);
+	}
+
+	@RequestMapping(value = "/queryCombo")
+	@ResponseBody
+	default List<ComboVO> queryCombo(@RequestBody(required=false) JSONObject fo) {
+		IQueryComboOperation op = Reflects.firstExistField(this, IQueryComboOperation.class, "dao,service,business");
+		return op.queryCombo(ObjectX.x(fo, MapVO.class));
 	}
 
 	@RequestMapping(value = "/queryPagedList/{pageSize}/{curPage}")

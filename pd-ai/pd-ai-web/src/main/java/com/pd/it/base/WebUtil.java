@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WebUtil {
-	public static String post(String urlStr, String data) {
+	public static String post(String urlStr, String data, String encode) {
 		// 装饰器 缓存读取
 		BufferedReader bReader = null;
 		// 输入流
@@ -18,7 +18,7 @@ public class WebUtil {
 		URL url;
 		try {
 			url = new URL(urlStr);
-			myReader = new InputStreamReader(url.openStream(), "utf-8");
+			myReader = new InputStreamReader(url.openStream(), encode);
 			bReader = new BufferedReader(myReader);
 			String s = null;
 			while ((s = bReader.readLine()) != null) {
@@ -43,5 +43,9 @@ public class WebUtil {
 			}
 		}
 		return sbuf.toString();
+	}
+
+	public static String post(String urlStr, String data) {
+		return post(urlStr, data, "utf-8");
 	}
 }

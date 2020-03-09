@@ -27,6 +27,6 @@ public class DataSourceRest {
 	public Object query(@PathVariable String dataSourceId) {
 		MapVO fo = new MapVO();
 		fo.put("dataSourceId", dataSourceId);
-		return business.queryList(fo);
+		return business.query(fo);
 	}
 }

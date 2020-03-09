@@ -94,9 +94,10 @@ public class StringX {
 	}
 
 	public static String nvl(String str, String defaultValue) {
-		if (str == null ||str.length()==0) {
+		if (str == null || str.length() == 0) {
 			return defaultValue;
 		}
 		return str;
 	}
+
 }

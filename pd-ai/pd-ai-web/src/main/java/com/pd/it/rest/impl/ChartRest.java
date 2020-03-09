@@ -1,6 +1,5 @@
 package com.pd.it.rest.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pd.base.model.MapVO;
-import com.pd.it.app.sari.builder.ChartStackLineBuilder;
 import com.pd.it.common.ObjectX;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.rest.api.IQueryRest;
@@ -29,7 +27,6 @@ import com.pd.it.system.datasource.business.DataSourceBusiness;
 @RestController
 @RequestMapping("")
 public class ChartRest implements IQueryRest<MapVO, MapVO> {
-	private static Map<String, IBuilder<List<MapVO>, List<MapVO>>> builderMap = initBuilderMap();
 	@Inject
 	private ISystemChartDao dao;
 	@Inject
@@ -45,24 +42,9 @@ public class ChartRest implements IQueryRest<MapVO, MapVO> {
 		if (rs == null) {
 			return rs;
 		}
-		List<MapVO> list = dataSourceBusiness.queryList(rs);
-		IBuilder<List<MapVO>, List<MapVO>> chartBuilder = builderMap.get(rs.str("chartType"));
-		if (chartBuilder != null) {
-			chartBuilder.init(rs);
-			list = chartBuilder.build(list);
-		}
+		Object list = dataSourceBusiness.query(rs);
 		rs.put("list", list);
 		return rs;
 	}
 
-	/**
-	 * 初始化执行器地图
-	 * 
-	 * @return
-	 */
-	private static Map<String, IBuilder<List<MapVO>, List<MapVO>>> initBuilderMap() {
-		Map<String, IBuilder<List<MapVO>, List<MapVO>>> opMap = new HashMap<>();
-		opMap.put("stackLine", new ChartStackLineBuilder());
-		return opMap;
-	}
 }

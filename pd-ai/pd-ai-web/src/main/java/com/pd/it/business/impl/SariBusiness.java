@@ -69,8 +69,13 @@ public class SariBusiness {
 	private void init(List<MapVO> list) {
 		for (MapVO eachVO : list) {
 			eachVO.put("value", eachVO.str("value").replaceAll("\r\n", ";").replaceAll("人、", "例、")
-					.replaceAll("确诊", " 确诊 ").replaceAll("州", "州 "));
+					.replaceAll("确诊", " 确诊 ").replaceAll("州", "州 ").replaceAll("省", " "));
 		}
+	}
+
+	public void init(MapVO fo) {
+		fo.put("type", "sari");
+		baseService.delete(fo);
 	}
 
 }

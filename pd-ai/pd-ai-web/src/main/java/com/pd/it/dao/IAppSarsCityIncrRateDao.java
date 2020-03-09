@@ -7,5 +7,5 @@ import com.pd.it.dao.api.IQueryDao;
 import com.pd.it.dao.api.IUpdateDao;
 
 @Repository
-public interface IAppSarsCityIncrRateDao extends IQueryDao<MapVO, MapVO>, IUpdateDao<MapVO> {
+public interface IAppSarsCityIncrRateDao extends IQueryDao<MapVO, MapVO>, IUpdateDao<MapVO, MapVO> {
 }

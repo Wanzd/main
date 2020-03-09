@@ -6,5 +6,6 @@ import com.pd.it.dao.api.IQueryDao;
 import com.pd.it.dao.api.ITruncateDao;
 import com.pd.it.dao.api.IUpdateDao;
 
-public interface IAppSariNationDao extends IQueryDao<MapVO, MapVO>, IUpdateDao<MapVO>, ITruncateDao, IQueryComboDao {
+public interface IAppSariNationDao
+		extends IQueryDao<MapVO, MapVO>, IUpdateDao<MapVO, MapVO>, ITruncateDao, IQueryComboDao {
 }

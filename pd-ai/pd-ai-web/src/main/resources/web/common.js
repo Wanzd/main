@@ -36,6 +36,9 @@ define(['common'], function() {
 						async : false,
 						type : "POST"
 					});
+			if (rs.responseText.length == 0) {
+				return null;
+			}
 			var rsJson = eval("(" + rs.responseText + ")");
 			console.log(rsJson);
 			return rsJson;

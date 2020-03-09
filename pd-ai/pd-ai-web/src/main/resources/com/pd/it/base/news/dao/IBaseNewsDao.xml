@@ -43,4 +43,10 @@ begin
 	commit;
 end;
 	</update>
+	
+	<delete id="delete">
+delete from base_news_t
+where type=#{fo.type,jdbcType=VARCHAR}
+		<if test='fo.creationDate != null'> and creation_date =trunc(#{fo.creationDate,jdbcType=DATE})</if>
+	</delete>
 </mapper>  

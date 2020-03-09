@@ -1,6 +1,5 @@
 package com.pd.it.app.sari.service;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,11 +54,6 @@ public class SariProvinceService implements ITruncateService {
 	}
 
 	public void delete(MapVO fo) {
-		try {
-			dao.delete(fo);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.delete(fo);
 	}
 }

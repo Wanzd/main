@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pd.it.system.echart.dao.ISystemEchartTypeDao">
-	<select id="queryCombo" resultType="com.pd.base.model.ComboVO">
-select 'line' "id",
-	'折线图' "text"
-from dual
-	</select>
-</mapper>  

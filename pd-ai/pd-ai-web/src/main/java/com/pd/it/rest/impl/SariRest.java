@@ -41,7 +41,11 @@ public class SariRest {
 	@RequestMapping(value = "/parseToday")
 	@ResponseBody
 	public Object parseToday(@RequestBody(required = false) MapVO fo) {
+		if (fo == null) {
+			fo = new MapVO();
+		}
 		fo.put("creationDate", new Date());
+		business.init(fo);
 		business.process(fo);
 		return 0;
 	}
