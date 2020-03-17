@@ -561,10 +561,41 @@ define(['ai$echart'], function() {
 				},
 				x$option$stackLine : function(data) {
 					var list = data.list;
+					var tmpMap = new Object();
+					var xCol = data.xCol;
+					var yCol = data.yCol;
+					var zCol = data.zCol;
+					$.each(list, function(i, it) {
+								var lv2Map = tmpMap[it[zCol]];
+								if (lv2Map == null) {
+									lv2Map = new Object();
+									lv2Map[zCol] = it[zCol];
+									tmpMap[it[zCol]] = lv2Map;
+								}
+								var lv2List = lv2Map.list;
+								if (lv2List == null) {
+									lv2List = [];
+									lv2Map['list'] = lv2List;
+								}
+								var maxX = lv2Map['maxX'];
+								var curX = it[xCol];
+								if (!maxX || curX > maxX) {
+									lv2Map['maxX'] = curX;
+									lv2Map['lastX'] = it[yCol];
+								}
+								lv2List.push(it);
+							});
+					var list2 = [];
+					for (var key in tmpMap) {
+						list2.push(tmpMap[key]);
+					}
+					list2 = list2.sort(function(v1, v2) {
+								return v2.lastX - v1.lastX;
+							});
 					var zDatas = [];
 					var xDatas = [];
 					var yDatas = [];
-					$.each(list, function(i, it) {
+					$.each(list2, function(i, it) {
 								if (i == 0) {
 									$.each(it.list, function(i2, it2) {
 												xDatas.push(it2[data.xCol]);

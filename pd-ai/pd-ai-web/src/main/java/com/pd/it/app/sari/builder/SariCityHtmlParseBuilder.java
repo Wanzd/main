@@ -35,6 +35,7 @@ public class SariCityHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> {
 				String cityName = city.getString("name").replace("市", "").trim();
 				for (String eachAttrName : attrNames) {
 					MapVO vo = new MapVO();
+					vo.put("nation", "中国");
 					vo.put("province", provinceName);
 					vo.put("city", cityName);
 					vo.put("qtyType", eachAttrName);

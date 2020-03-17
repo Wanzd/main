@@ -22,10 +22,14 @@ require(['jquery', 'easyui', 'common', 'echarts', 'echartsgl', 'ai$echart'],
 				var data = $("#form").serializeJson();
 				var perspectiveJson = common.ajax(
 						'../perspectiveRest/queryList', data);
+				for (var i = 0; i < 20; i++) {
+					var myChart = echarts.init(document
+							.getElementById('myChart' + i));
+					myChart.clear();
+				}
 				$.each(perspectiveJson, function(idx, it) {
 							var myChart = echarts.init(document
 									.getElementById('myChart' + idx));
-							myChart.clear();
 							var chartUrl = '../CHART:' + it.id;
 							var chartJson = common.ajax(chartUrl);
 							if (chartJson != null) {

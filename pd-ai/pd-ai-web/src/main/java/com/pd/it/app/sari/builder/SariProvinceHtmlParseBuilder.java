@@ -30,7 +30,9 @@ public class SariProvinceHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>
 			JSONArray cities = province.getJSONArray("cities");
 			for (String eachAttrName : attrNames) {
 				MapVO vo = new MapVO();
+				vo.put("nation", "中国");
 				vo.put("province", provinceName);
+				vo.put("city", null);
 				vo.put("qtyType", eachAttrName);
 				vo.put("qty", parseAttr(eachAttrName, province));
 				vo.put("creationDate", in.date("creationDate"));

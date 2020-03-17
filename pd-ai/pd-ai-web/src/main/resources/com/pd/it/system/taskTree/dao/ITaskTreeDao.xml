@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pd.it.system.taskTree.dao.ITaskTreeDao">
+	<select id="queryList" resultType="com.pd.base.model.MapVO">
+with t1 as(
+	select decode(pid,#{fo.id},null,pid) pid,
+		id
+	from sys_rel_t
+	start with type='taskTree'
+		and pid=#{fo.id,jdbcType=VARCHAR}
+	connect by type='taskTree'
+		and prior id=pid
+)
+select t1.pid "pid",
+	t2.id "id",
+	t2.json_data "jsonData"
+from t1
+left join sys_obj_t t2
+	on t1.id=t2.id
+	</select>
+	
+</mapper>  

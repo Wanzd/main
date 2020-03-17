@@ -6,24 +6,21 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.collections4.ListUtils;
+
 import com.pd.base.model.MapVO;
+import com.pd.it.app.sari.builder.SariInsertListBuilder;
+import com.pd.it.app.sari.dao.IAppSariDao;
 import com.pd.it.app.sari.service.SariBaseService;
-import com.pd.it.app.sari.service.SariCityService;
-import com.pd.it.app.sari.service.SariNationService;
-import com.pd.it.app.sari.service.SariProvinceService;
 import com.pd.it.base.WebUtil;
 import com.pd.it.common.ListX;
 
 @Named
 public class SariBusiness {
 	@Inject
-	private SariNationService nationService;
-	@Inject
-	private SariProvinceService provinceService;
-	@Inject
-	private SariCityService cityService;
-	@Inject
 	private SariBaseService baseService;
+	@Inject
+	private IAppSariDao dao;
 
 	public void process(MapVO fo) {
 		fo.put("type", "sari");
@@ -40,30 +37,16 @@ public class SariBusiness {
 			list = baseService.queryList(fo);
 		}
 		init(list);
-		processNation(fo, list);
-		processProvince(fo, list);
-		processCity(fo, list);
-	}
+		dao.delete(fo);// 初始化今日数据
 
-	private void processCity(MapVO fo, List<MapVO> list) {
-		cityService.delete(fo);
-		for (MapVO eachVO : list) {
-			cityService.process(eachVO);
-		}
-	}
-
-	private void processProvince(MapVO fo, List<MapVO> list) {
-		provinceService.delete(fo);
-		for (MapVO eachVO : list) {
-			provinceService.process(eachVO);
-		}
-	}
-
-	private void processNation(MapVO fo, List<MapVO> list) {
-		nationService.delete(fo);
-		for (MapVO eachVO : list) {
-			nationService.process(eachVO);
-		}
+		List<MapVO> insertList = new SariInsertListBuilder().build(list);
+		ListUtils.partition(insertList, 500).forEach(subList -> {
+			try {
+				dao.updateList(subList);
+			} catch (Exception e) {
+				System.out.println(subList);
+			}
+		});// 分页插入数据库
 	}
 
 	private void init(List<MapVO> list) {

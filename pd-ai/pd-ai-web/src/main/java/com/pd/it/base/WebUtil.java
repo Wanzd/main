@@ -7,7 +7,32 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+import org.apache.http.util.EntityUtils;
+
 public class WebUtil {
+	public static String get(String urlStr, String encode) {
+		HttpClient instance = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
+		HttpResponse response;
+		try {
+			response = instance.execute(new HttpGet(urlStr));
+			String html = EntityUtils.toString(response.getEntity(), encode);
+			return html;
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+
 	public static String post(String urlStr, String data, String encode) {
 		// 装饰器 缓存读取
 		BufferedReader bReader = null;
@@ -17,6 +42,7 @@ public class WebUtil {
 		// URL对象
 		URL url;
 		try {
+			System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,SSLv3");
 			url = new URL(urlStr);
 			myReader = new InputStreamReader(url.openStream(), encode);
 			bReader = new BufferedReader(myReader);
@@ -32,12 +58,16 @@ public class WebUtil {
 			e.printStackTrace();
 		} finally {
 			try {
-				bReader.close();
+				if (bReader != null) {
+					bReader.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			try {
-				myReader.close();
+				if (myReader != null) {
+					myReader.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

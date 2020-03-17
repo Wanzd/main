@@ -30,11 +30,12 @@ public class SariNationHtmlParseBuilder implements IBuilder<MapVO, List<MapVO>> 
 			for (String eachAttrName : attrNames) {
 				MapVO vo = new MapVO();
 				vo.put("nation", nationName);
+				vo.put("province", null);
+				vo.put("city", null);
 				vo.put("qtyType", eachAttrName);
 				vo.put("qty", parseAttr(eachAttrName, nation));
 				vo.put("creationDate", in.date("creationDate"));
 				rsList.add(vo);
-
 			}
 		}
 

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pd.it.system.chart.dao.ISystemChartDao">
-	<select id="query" resultType="com.pd.base.model.MapVO">
+	<select id="queryJson" resultType="java.lang.String">
+select json_data "jsonData"
+from sys_chart_t
+where id=#{fo.id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="query" resultType="java.lang.String">
 select id "id",
 	datasource_id "dataSourceId",
 	chart_type "chartType",
@@ -15,18 +21,29 @@ select id "id",
 from sys_chart_t
 where id=#{fo.id,jdbcType=VARCHAR}
 	</select>
-	
-	<select id="queryCombo" resultType="com.pd.base.model.MapVO">
-select * from(
-	select distinct id "id",
-		title "text"
-	from SYS_CHART_T
-		<where>
-			<if test='fo.moduleId!=null and fo.moduleId !=""'> and module_id =#{fo.moduleId,jdbcType=VARCHAR}</if>
-			<if test='fo.chartType!=null and fo.chartType !=""'> and chart_type =#{fo.chartType,jdbcType=VARCHAR}</if>
-		</where>
-	order by nlssort(title,'NLS_SORT=SCHINESE_PINYIN_M')
-)
-where 100>=rownum
+	<select id="queryList" resultType="com.pd.base.model.MapVO">
+select id "id",
+	datasource_id "dataSourceId",
+	chart_type "chartType",
+	title "title",
+	x_title "xTitle",
+	x_col "xCol",
+	y_title "yTitle",
+	y_col "yCol",
+	z_title "zTitle",
+	z_col "zCol"
+from sys_chart_t
 	</select>
+	
+	<update id="updateList">
+begin
+	
+		<foreach item="it" collection="list" >
+	update sys_chart_t
+	set json_data=#{it.jsonData}
+	where id=#{it.id};
+		</foreach>
+	commit;
+end;
+	</update>
 </mapper>  

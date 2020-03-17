@@ -29,18 +29,23 @@ public interface IQueryRest<FO, DTO> {
 		return op.query((FO) fo);
 	}
 
+	default String queryJson(@RequestBody JSONObject fo) {
+		IQueryOperation<FO, DTO> op = Reflects.firstExistField(this, IQueryOperation.class, "dao,service,business");
+		return op.queryJson((FO) fo);
+	}
+
 	@RequestMapping(value = "/queryList")
 	@ResponseBody
-	default List<DTO> queryList(@RequestBody JSONObject in) {
+	default List<DTO> queryList(@RequestBody(required = false) JSONObject in) {
 		IQueryListOperation<FO, DTO> op = Reflects.firstExistField(this, IQueryListOperation.class,
 				"dao,service,business");
-		FO fo=(FO) in;
+		FO fo = (FO) in;
 		return op.queryList(fo);
 	}
 
 	@RequestMapping(value = "/queryCombo")
 	@ResponseBody
-	default List<ComboVO> queryCombo(@RequestBody(required=false) JSONObject fo) {
+	default List<ComboVO> queryCombo(@RequestBody(required = false) JSONObject fo) {
 		IQueryComboOperation op = Reflects.firstExistField(this, IQueryComboOperation.class, "dao,service,business");
 		return op.queryCombo(ObjectX.x(fo, MapVO.class));
 	}
