@@ -25,6 +25,23 @@ define(['common'], function() {
 	};
 
 	var commonImpl = {
+		html : function(url, data) {
+			console.log("html:" + url);
+			console.log(data);
+			var rs = $.ajax({
+						url : url,
+						contentType : 'application/json',
+						data : JSON.stringify(data),
+						dataType : "json",
+						async : false,
+						type : "POST"
+					});
+			if (rs.responseText.length == 0) {
+				return null;
+			}
+			console.log(rs.responseText);
+			return rs.responseText;
+		},
 		ajax : function(url, data) {
 			console.log("ajax:" + url);
 			console.log(data);

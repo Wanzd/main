@@ -9,6 +9,7 @@ import javax.inject.Named;
 import com.pd.base.model.MapVO;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.sys.datasource.builder.DataSourceObjBuilder;
+import com.pd.it.sys.datasource.builder.DataSourceTreeGridBuilder;
 import com.pd.it.sys.datasource.builder.DataSourceViewBuilder;
 import com.pd.it.system.datasource.service.SystemDataSourceService;
 
@@ -36,6 +37,7 @@ public class DataSourceBusiness {
 		Map<String, IBuilder<MapVO, Object>> opMap = new HashMap<>();
 		opMap.put("view", new DataSourceViewBuilder());
 		opMap.put("obj", new DataSourceObjBuilder());
+		opMap.put("treeGrid", new DataSourceTreeGridBuilder());
 		return opMap;
 	}
 }

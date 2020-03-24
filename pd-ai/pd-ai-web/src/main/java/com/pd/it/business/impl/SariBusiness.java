@@ -26,7 +26,7 @@ public class SariBusiness {
 		fo.put("type", "sari");
 		List<MapVO> list = baseService.queryList(fo);
 		if (list.size() == 0) {
-			String httpStr = WebUtil.post("https://www.zhihu.com/2019-nCoV/trends", null);
+			String httpStr = WebUtil.post("https://www.zhihu.com/special/19681091/trends", null);
 			MapVO vo = new MapVO();
 			vo.put("type", "sari");
 			vo.put("creationDate", new Date());
@@ -47,6 +47,8 @@ public class SariBusiness {
 				System.out.println(subList);
 			}
 		});// 分页插入数据库
+		
+		dao.initChinaData();
 	}
 
 	private void init(List<MapVO> list) {

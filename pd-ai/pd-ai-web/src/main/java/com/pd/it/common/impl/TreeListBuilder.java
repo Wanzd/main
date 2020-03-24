@@ -16,12 +16,16 @@ public class TreeListBuilder implements IBuilder<MapVO, List<MapVO>> {
 	 */
 	@Override
 	public List<MapVO> build(MapVO in) {
-		String pidStr = StringX.nvl(in.str("pid"), "pid");
-		String idStr = StringX.nvl(in.str("id"), "id");
+		// String pidStr = StringX.nvl(in.str("pid"), "pid");
+		String pidStr = "pid";
+		// String idStr = StringX.nvl(in.str("id"), "id");
+		String idStr = "id";
 		List<MapVO> list = in.list("list");
+		System.out.println(list);
 
 		List<MapVO> rsList = new ArrayList<MapVO>();
 		Map<String, MapVO> idMap = list.stream().collect(Collectors.toMap(vo -> vo.str(idStr), vo -> vo));
+		System.out.println(list);
 		for (MapVO eachVO : list) {
 			String curPid = eachVO.str(pidStr);
 			if (curPid.length() == 0) {

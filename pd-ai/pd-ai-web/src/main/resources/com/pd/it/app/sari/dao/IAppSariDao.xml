@@ -37,4 +37,16 @@ delete from app_sari_t
 where creation_date=trunc(#{fo.creationDate,jdbcType=DATE})
 	</update>
 	
+	<update id="initChinaData">
+insert into app_sari_t(nation,qty_type,qty,creation_date)
+select '中国',
+	qty_type,
+	nvl(sum(qty),0),
+	creation_date
+from app_sari_t
+where city is not null
+	and creation_date=trunc(sysdate)
+group by qty_type,creation_date
+	</update>
+	
 </mapper>  

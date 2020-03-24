@@ -5,4 +5,5 @@ import com.pd.it.dao.api.IQueryDao;
 import com.pd.it.dao.api.IUpdateDao;
 
 public interface IAppSariDao extends IQueryDao<MapVO, MapVO>, IUpdateDao<MapVO, MapVO> {
+	void initChinaData();
 }
