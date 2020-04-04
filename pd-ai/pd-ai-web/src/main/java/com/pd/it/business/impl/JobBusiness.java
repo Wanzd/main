@@ -12,7 +12,7 @@ public class JobBusiness {
 	private Job51Service service;
 
 	public void init(MapVO fo) {
-
+		service.init(fo);
 	}
 
 	public void process(MapVO fo) {

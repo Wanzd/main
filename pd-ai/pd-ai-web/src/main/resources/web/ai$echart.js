@@ -45,6 +45,34 @@ define(['ai$echart'], function() {
 					}
 					return rsVO;
 				},
+				x$option$scatterSimple : function(data) {
+					var symbolSize = 2.5;
+					var xCol = data["xCol"];
+					var yCol = data["yCol"];
+					var tooltip = null;
+					eval(data["tooltip"]);
+					debugger;
+					var list = [];
+					$.each(data.list, function(idx, it) {
+								list.push([it[xCol], it[yCol]]);
+							})
+					var option = {
+						xAxis : {},
+						yAxis : {},
+						tooltip : {
+							formatter : function(list,vo) {
+								debugger;
+								return vo.location;
+							}
+						},
+						series : [{
+									symbolSize : 20,
+									data : list,
+									type : 'scatter'
+								}]
+					};
+					return option;
+				},
 				x$option$scatter3D : function(data) {
 					var symbolSize = 2.5;
 					var option = {
@@ -881,6 +909,7 @@ define(['ai$echart'], function() {
 				fMap = {
 					"line" : impl.x$option$line,
 					"stackLine" : impl.x$option$stackLine,
+					"scatterSimple" : impl.x$option$scatterSimple,
 					"scatter3D" : impl.x$option$scatter3D,
 					"treeMap" : impl.x$option$treeMap,
 					"bMap" : impl.x$option$bMap2,

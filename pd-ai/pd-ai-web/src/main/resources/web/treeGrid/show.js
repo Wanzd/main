@@ -27,7 +27,10 @@ require(['jquery', 'easyui', 'common', 'echarts', 'echartsgl', 'ai$echart'],
 							data : jsonData.list,
 							idField : 'id',
 							treeField : 'text',
-							columns : treeGridCols
+							columns : treeGridCols,
+							onClickRow : function() {
+								console.log("onClickRow");
+							}
 						});
 				$.each(jsonData, function(i, val) {
 							$('#taskTree').treegrid('collapseAll', val.id);

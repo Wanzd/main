@@ -4,7 +4,6 @@
 
 	<groupId>com.pd.ai</groupId>
 	<artifactId>pd-ai-web</artifactId>
-	<packaging>jar</packaging>
 
 	<name>pd-ai-web</name>
 	<parent>
@@ -12,6 +11,30 @@
 		<artifactId>pd-ai</artifactId>
 		<version>0.0.1</version>
 	</parent>
+	<profiles>
+		<!--dev默认激活，使用idea Spring Boot 配置启动工程，需要dev的配置 -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profileActive>dev</profileActive>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profileActive>test</profileActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profileActive>prod</profileActive>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -61,6 +84,10 @@
 					<!-- 此处的名字是项目发布的工程名 -->
 					<path>/</path>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

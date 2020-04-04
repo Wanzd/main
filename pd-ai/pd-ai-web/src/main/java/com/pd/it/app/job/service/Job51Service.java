@@ -12,10 +12,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.pd.base.model.MapVO;
+import com.pd.it.app.job.dao.IAppJobDao;
 import com.pd.it.base.WebUtil;
-import com.pd.it.base.news.dao.IBaseNewsDao;
 import com.pd.it.common.DoubleX;
-import com.pd.it.common.IntX;
 import com.pd.it.common.itf.IBuilder;
 import com.pd.it.service.api.IDeleteService;
 import com.pd.it.service.api.IInsertListService;
@@ -24,7 +23,11 @@ import com.pd.it.service.api.IQueryListService;
 @Named
 public class Job51Service implements IQueryListService<MapVO, MapVO>, IInsertListService<MapVO>, IDeleteService<MapVO> {
 	@Inject
-	private IBaseNewsDao dao;
+	private IAppJobDao dao;
+
+	public void init(MapVO fo) {
+		dao.delete(fo);
+	}
 
 	public void process(MapVO fo) {
 		String keyword = "java";
@@ -35,9 +38,9 @@ public class Job51Service implements IQueryListService<MapVO, MapVO>, IInsertLis
 		Element resultList = doc.getElementById("resultList");
 		Elements divs = resultList.getElementsByClass("el");
 		divs.remove(0);
-		List<MapVO> collect = divs.stream().map(vo -> new VoBuilder().build(vo)).collect(Collectors.toList());
+		List<MapVO> list = divs.stream().map(vo -> new VoBuilder().build(vo)).collect(Collectors.toList());
 
-		System.out.println(collect);
+		dao.insertList(list);
 	}
 
 	private static class VoBuilder implements IBuilder<Element, MapVO> {

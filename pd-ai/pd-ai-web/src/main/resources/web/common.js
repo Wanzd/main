@@ -39,7 +39,6 @@ define(['common'], function() {
 			if (rs.responseText.length == 0) {
 				return null;
 			}
-			console.log(rs.responseText);
 			return rs.responseText;
 		},
 		ajax : function(url, data) {
