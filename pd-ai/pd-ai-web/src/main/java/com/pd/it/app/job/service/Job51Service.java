@@ -31,16 +31,19 @@ public class Job51Service implements IQueryListService<MapVO, MapVO>, IInsertLis
 
 	public void process(MapVO fo) {
 		String keyword = "java";
-		String url = "https://search.51job.com/list/180200,000000,0000,00,9,99," + keyword
-				+ ",2,1.html?lang=c&stype=&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&providesalary=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=";
-		String httpStr = WebUtil.post(url, null, "GB2312");
-		Document doc = Jsoup.parse(httpStr);
-		Element resultList = doc.getElementById("resultList");
-		Elements divs = resultList.getElementsByClass("el");
-		divs.remove(0);
-		List<MapVO> list = divs.stream().map(vo -> new VoBuilder().build(vo)).collect(Collectors.toList());
+		for (int i = 1, total = 50; i <= total; i++) {
+			String url = "https://search.51job.com/list/180200,000000,0000,00,9,99," + keyword + ",2," + i
+					+ ".html?lang=c&stype=&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&providesalary=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=";
+			String httpStr = WebUtil.post(url, null, "GB2312");
+			Document doc = Jsoup.parse(httpStr);
+			Element resultList = doc.getElementById("resultList");
+			Elements divs = resultList.getElementsByClass("el");
+			divs.remove(0);
+			List<MapVO> list = divs.stream().map(vo -> new VoBuilder().build(vo)).collect(Collectors.toList());
 
-		dao.insertList(list);
+			dao.insertList(list);
+		}
+
 	}
 
 	private static class VoBuilder implements IBuilder<Element, MapVO> {

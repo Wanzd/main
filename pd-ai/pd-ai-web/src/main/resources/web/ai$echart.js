@@ -51,19 +51,27 @@ define(['ai$echart'], function() {
 					var yCol = data["yCol"];
 					var tooltip = null;
 					eval(data["tooltip"]);
-					debugger;
 					var list = [];
 					$.each(data.list, function(idx, it) {
-								list.push([it[xCol], it[yCol]]);
+								list.push([it[xCol], it[yCol], it]);
 							})
 					var option = {
 						xAxis : {},
 						yAxis : {},
 						tooltip : {
-							formatter : function(list,vo) {
-								debugger;
-								return vo.location;
+							confine : true,
+							enterable1 : true,
+							triggerOn1 : 'click',
+							formatter : function(list, vo) {
+								title = list.value[2]['location'] + "<p/>"
+										+ list.value[2]['company'] + "<p/>"
+										+ list.value[2]['jobName'] + "<p/>";
+								url = list.value[2]['url'];
+								return title;
 							}
+						},
+						onclick : function(e) {
+							window.open(e.data[2]['url']);
 						},
 						series : [{
 									symbolSize : 20,
