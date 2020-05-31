@@ -28,7 +28,7 @@ import com.pd.base.model.MapVO;
  *
  */
 @RestController
-@RequestMapping("/sql")
+@RequestMapping("/sqlRest")
 public class SqlRest {
 	@Inject
 	private SqlSessionFactory factory;

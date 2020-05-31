@@ -15,12 +15,12 @@ import com.pd.it.business.impl.SariBusiness;
 import com.pd.it.job.dao.IJobDao;
 import com.pd.it.job.model.JobDTO;
 import com.pd.it.job.model.JobFO;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.rest.api.IRest;
 
 @RestController
 @RequestMapping("/job")
-public class JobRest implements IRest, IQueryRest<JobFO, JobDTO> {
+public class JobRest implements IRest, ICustomsQueryRest<JobFO, JobDTO> {
 	@Inject
 	private JobBusiness business;
 

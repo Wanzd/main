@@ -2,23 +2,25 @@ package com.pd.it.rest.api;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pd.it.common.Reflects;
+import com.pd.it.common.StringX;
 import com.pd.it.common.constants.RestPathConst;
 import com.pd.it.operation.api.IQueryListOperation;
 
-public interface IQueryListRest<FO, DTO> {
+public interface IQueryDimensionListRest<FO, DTO> {
 
-	@RequestMapping(value = RestPathConst.QUERY_LIST)
+	@RequestMapping(value = RestPathConst.QUERY_DIMENSION_LIST)
 	@ResponseBody
-	default List<DTO> queryList(@RequestBody JSONObject fo) {
+	default List<DTO> queryDimensionList(@RequestBody JSONObject fo, @PathVariable String dimension) {
+		dimension = StringX.decap(dimension);
 		IQueryListOperation<FO, DTO> operation = Reflects.firstExistField(this, IQueryListOperation.class,
-				"dao,service,business");
+				dimension + "Dao", dimension + "Service", dimension + "Business");
 		return operation.queryList((FO) fo);
 	}
-
 }

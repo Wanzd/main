@@ -16,12 +16,12 @@ import com.pd.it.job.dao.IBigDataDao;
 import com.pd.it.job.model.BigDataDTO;
 import com.pd.it.job.model.BigDataFO;
 import com.pd.it.operation.api.IQueryListOperation;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.rest.api.IRest;
 
 @RestController
 @RequestMapping("/rest/bigData")
-public class BigDataRest implements IRest, IQueryRest<BigDataFO, BigDataDTO> {
+public class BigDataRest implements IRest, ICustomsQueryRest<BigDataFO, BigDataDTO> {
 	@Inject
 	private IBigDataDao dao;
 

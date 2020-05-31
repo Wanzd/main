@@ -60,13 +60,12 @@ define(['ai$echart'], function() {
 						yAxis : {},
 						tooltip : {
 							confine : true,
-							enterable1 : true,
-							triggerOn1 : 'click',
 							formatter : function(list, vo) {
+								debugger;
 								title = list.value[2]['location'] + "<p/>"
 										+ list.value[2]['company'] + "<p/>"
-										+ list.value[2]['jobName'] + "<p/>";
-								url = list.value[2]['url'];
+										+ list.value[2]['jobName'] + "<p/>"
+										+ list.value[2]['salary'] + "<p/>";
 								return title;
 							}
 						},
@@ -74,7 +73,7 @@ define(['ai$echart'], function() {
 							window.open(e.data[2]['url']);
 						},
 						series : [{
-									symbolSize : 20,
+									symbolSize : 10,
 									data : list,
 									type : 'scatter'
 								}]

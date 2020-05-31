@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.base.model.MapVO;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.system.perspective.dao.ISystemPerspectiveDao;
 
 /**
@@ -19,7 +19,7 @@ import com.pd.it.system.perspective.dao.ISystemPerspectiveDao;
  */
 @RestController
 @RequestMapping("perspectiveRest")
-public class PerspectiveRest implements IQueryRest<MapVO, MapVO> {
+public class PerspectiveRest implements ICustomsQueryRest<MapVO, MapVO> {
 	@Inject
 	private ISystemPerspectiveDao dao;
 }

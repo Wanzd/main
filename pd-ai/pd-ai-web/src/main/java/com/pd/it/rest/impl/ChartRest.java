@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pd.base.model.MapVO;
 import com.pd.it.common.ObjectX;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.system.chart.dao.ISystemChartDao;
 import com.pd.it.system.datasource.business.DataSourceBusiness;
 
@@ -26,7 +26,7 @@ import com.pd.it.system.datasource.business.DataSourceBusiness;
  */
 @RestController
 @RequestMapping("")
-public class ChartRest implements IQueryRest<MapVO, MapVO> {
+public class ChartRest implements ICustomsQueryRest<MapVO, MapVO> {
 	@Inject
 	private ISystemChartDao dao;
 	@Inject

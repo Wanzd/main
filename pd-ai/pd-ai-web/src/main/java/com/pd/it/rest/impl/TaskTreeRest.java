@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pd.base.model.MapVO;
 import com.pd.it.common.ListX;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.system.taskTree.dao.ITaskTreeDao;
 
 /**
@@ -22,7 +22,7 @@ import com.pd.it.system.taskTree.dao.ITaskTreeDao;
  */
 @RestController
 @RequestMapping("taskTreeRest")
-public class TaskTreeRest implements IQueryRest<MapVO, MapVO> {
+public class TaskTreeRest implements ICustomsQueryRest<MapVO, MapVO> {
 	@Inject
 	private ITaskTreeDao dao;
 

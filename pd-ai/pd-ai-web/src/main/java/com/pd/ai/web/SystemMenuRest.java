@@ -14,7 +14,7 @@ import com.pd.ai.model.SystemMenuDTO;
 import com.pd.ai.model.SystemMenuFO;
 import com.pd.it.common.Reflects;
 import com.pd.it.operation.api.IQueryListOperation;
-import com.pd.it.rest.api.IQueryRest;
+import com.pd.it.rest.api.ICustomsQueryRest;
 import com.pd.it.rest.api.IRest;
 
 /**
@@ -25,7 +25,7 @@ import com.pd.it.rest.api.IRest;
  */
 @RestController
 @RequestMapping("/rest/system/menu")
-public class SystemMenuRest implements IRest, IQueryRest<SystemMenuFO, SystemMenuDTO> {
+public class SystemMenuRest implements IRest, ICustomsQueryRest<SystemMenuFO, SystemMenuDTO> {
 	@Inject
 	private ISystemMenuDao dao;
 
